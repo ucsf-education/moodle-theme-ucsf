@@ -1017,11 +1017,11 @@ font-family: "Open Sans",sans-serif;
 }
 
 #ilios_block body {
-	padding: 0;
-	margin: 5px 0 0 0;
+    padding: 0;
+    margin: 5px 0 0 0;
 }
 
-@media ( max-width: 400px ) {
+@media ( max-width: 420px ) {
     #ilios_block {
         display: none!important;
     }
@@ -1062,7 +1062,7 @@ font-family: "Open Sans",sans-serif;
     color: #000000;
 }
 
-/********** LATEST CHANGES 16. 01. 2015 - Sasa Prsir *************************************************/
+/***************************27.01.2015****************************/
 
 /* icons editing buttons */
 .weeks li:first-of-type .content .summary a img.iconsmall {
@@ -1085,8 +1085,8 @@ div.summary a img.iconsmall {
 }
 
 .navbar .nav.pull-right {
-    margin-top: 2px;
-    line-height: 40px;
+    margin-top: 16px;
+    line-height: 20px;
     font-size: 11px;
 }
 
@@ -1131,7 +1131,6 @@ body {
     background: none;
 }
 
-
 /* block fixed */
 @media (min-width: 1200px) {
     #block-region-side-pre.span4 {
@@ -1164,7 +1163,7 @@ body {
 }
 
 /* show menu from 779px to 979px */
-@media (min-width: 779px) and (max-width: 979px)  {
+@media (min-width: 780px) and (max-width: 979px)  {
     a.btn.btn-navbar {
         display: none;
     }
@@ -1193,6 +1192,9 @@ body {
         background: none; 
     }
     
+    .menu-left, .menu-right {
+        background: none;
+    }
 }
 
 /* show responsive button on 779px */
@@ -1203,5 +1205,34 @@ body {
     
     .navbar .nav > li {
         background: none;
-    }   
+    }
+    
+    .menu-left, .menu-right, .menu-background {
+        background: none;
+    }
+}
+
+/* reduce the line height between login info and help link on small screens */
+@media ( max-width: 449px) {
+    .navbar .nav.pull-right {
+        margin: 0!important;
+        padding: 10px;
+    }
+    
+    .navbar .brand {
+        padding-bottom: 0!important;
+    }
+}
+
+/* full screen block on tablet after the content */
+@media ( max-width: 769px) {
+    .row-fluid .span3,
+    .row-fluid .span4,
+    .row-fluid .span8,
+    .row-fluid .span9,
+    .row-fluid .span12, 
+    #page-site-index .row-fluid #block-region-side-pre.span4 {
+        width: 100%!important;
+        margin: 0 auto!important;
+    }
 }
