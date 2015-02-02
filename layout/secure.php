@@ -32,6 +32,7 @@
  */
  
 $html = theme_ucsf_get_html_for_settings($OUTPUT, $PAGE);
+$globalsettings = theme_ucsf_get_global_settings($OUTPUT, $PAGE);
 
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
@@ -51,23 +52,44 @@ echo $OUTPUT->doctype() ?>
 
 <?php echo $OUTPUT->standard_top_of_body_html() ?>
 
-<header role="banner" class="navbar navbar-fixed-top moodle-has-zindex">
+<header role="banner" class="navbar moodle-has-zindex">
     <nav role="navigation" class="navbar-inner">
         <div class="container-fluid">
-            <a class="brand pull-left" href="http://courses.ucsf.edu"><?php echo $globalsettings->logo;?></a>
-            <div class="menu-left pull-left"></div>
-            <div class="menu-right pull-right"></div>
-            
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <div class="nav-collapse collapse">
+            <div class="container-fluid top-header">
+                
+                <a class="brand pull-left" href="http://courses.ucsf.edu"><?php echo $globalsettings->logo;?></a>               
                 <ul class="nav pull-right">
                     <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
+                    <div class="login_user">
+                        <?php
+                            if(isloggedin()) { 
+                                echo $OUTPUT->login_info(); echo $globalsettings->helpfeedbacklink;   
+                            } else {
+                                echo $OUTPUT->login_info();  
+                            }
+                        ?>
+                    </div> 
                 </ul>
+                <div class="cle-text">Collaborative Learning Environment</div>
             </div>
+            
+            <div class="container-fluid menu-background <?php echo $globalsettings->menubackgroundcleen; ?>">
+                <div class="menu-left pull-left"></div>
+                <div class="menu-right pull-right"></div>
+                
+                <div class="category-label-container pull-left">
+                    <?php echo $globalsettings->categorylabel; ?>
+                </div>
+                <a class="btn btn-navbar pull-right" data-toggle="workaround-collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="nav-collapse collapse ucsf-custom-menu">
+                    <?php echo $globalsettings->displaycustommenu; ?>
+                </div>
+            </div>
+            
         </div>
     </nav>
 </header>
