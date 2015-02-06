@@ -1224,15 +1224,29 @@ body {
     }
 }
 
-/* full screen block on tablet after the content */
+
 @media ( max-width: 769px) {
     .row-fluid .span3,
-    .row-fluid .span4,
     .row-fluid .span8,
     .row-fluid .span9,
     .row-fluid .span12, 
     #page-site-index .row-fluid #block-region-side-pre.span4 {
         width: 100%!important;
-        margin: 0 auto!important;
+        margin: 0 auto;
+        clear: both;
+    }
+    
+    .row-fluid .span4{
+        width: 100%!important;
+    }
+    
+    .pagelayout-frontpage .row-fluid .span8 {
+        width: 100%!important;
+    }
+}
+
+@media (min-width: 779px) and (max-width: 979px)  {
+    #page-site-index .row-fluid .span4 {
+        width: 31.3%!important;
     }
 }

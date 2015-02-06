@@ -56,50 +56,16 @@ echo $OUTPUT->doctype() ?>
     <nav role="navigation" class="navbar-inner">
         <div class="container-fluid">
             <div class="container-fluid top-header">
-                
                 <a class="brand pull-left" href="http://courses.ucsf.edu"><?php echo $globalsettings->logo;?></a>               
-                <ul class="nav pull-right">
-                    <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
-                    <div class="login_user">
-                        <?php
-                            if(isloggedin()) { 
-                                echo $OUTPUT->login_info(); echo $globalsettings->helpfeedbacklink;   
-                            } else {
-                                echo $OUTPUT->login_info();  
-                            }
-                        ?>
-                    </div> 
-                </ul>
                 <div class="cle-text">Collaborative Learning Environment</div>
             </div>
-            
-            <div class="container-fluid menu-background <?php echo $globalsettings->menubackgroundcleen; ?>">
-                <div class="menu-left pull-left"></div>
-                <div class="menu-right pull-right"></div>
-                
-                <div class="category-label-container pull-left">
-                    <?php echo $globalsettings->categorylabel; ?>
-                </div>
-                <a class="btn btn-navbar pull-right" data-toggle="workaround-collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="nav-collapse collapse ucsf-custom-menu">
-                    <?php echo $globalsettings->displaycustommenu; ?>
-                </div>
-            </div>
-            
         </div>
     </nav>
 </header>
-
 <div id="page" class="container-fluid">
-
     <header id="page-header" class="clearfix">
         <?php echo $html->heading; ?>
     </header>
-
     <div id="page-content" class="row-fluid">
         <div id="region-bs-main-and-pre" class="span9">
             <div class="row-fluid">
