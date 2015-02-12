@@ -1250,3 +1250,10 @@ body {
         width: 31.3%!important;
     }
 }
+/* 12022015 changes added based of off jira issue CDP-20 */
+.course-content ul.topics li.section .left .section-handle img.icon {
+    margin-left: -7px;
+    margin-top: -11px;
+    padding: 0;
+    vertical-align: top;
+}
