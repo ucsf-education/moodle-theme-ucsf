@@ -840,11 +840,15 @@ body#page-site-index.has_dock #page {
 }
 
 .block.list_block .unlist > li > .column {
-    margin-left: 23px;
+    /* margin-left: 23px; */
+    position: relative;
+    padding-left: 23px;
 }
 
 .block.list_block .unlist > li > .column a img {
-    margin-left: -23px;   
+    /* margin-left: -23px;    */
+    left: 0;
+    position: absolute;
 }
 
 /*------------------------------------------------------------------------------------*/
