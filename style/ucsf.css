@@ -843,6 +843,7 @@ body#page-site-index.has_dock #page {
     /* margin-left: 23px; */
     position: relative;
     padding-left: 23px;
+    width: auto;
 }
 
 .block.list_block .unlist > li > .column > a > img {
