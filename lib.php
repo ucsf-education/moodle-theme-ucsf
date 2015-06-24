@@ -318,7 +318,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
     }
 
     // logo
-    $return->logo = '<img title="UCSF | CLE" src="'.$output->pix_url('ucsf-logo', 'theme_ucsf').'"/>';
+    $return->logo = '<img title="UCSF | CLE" alt="UCSF | CLE" src="'.$output->pix_url('ucsf-logo', 'theme_ucsf').'"/>';
 
     // menu background clean css
     $menubackgroundcleen = ""; 
