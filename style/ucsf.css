@@ -93,28 +93,30 @@ body {
 	
 	/* ----- Control the width of the blocks -----*/
 
-	/* the main center content area */
+	/* the main center content area 
 	.row-fluid .span8 {
             width: 65.812% !important;
 	}
-
-	/* the left block */
+*/
+	/* the left block 
 	.row-fluid .span4 {
             width: 31.6239% !important;
-	}
+	}*/
 
-	/* the right block */
+	/* the right block 
 
         .row-fluid .span3 {
             width: 24.0769% !important;
-	}
+	}*/
 
 	/* pre (left) and main */
-
+        
+        /* This is commented line because of new settings for tablet layout
+            Erase this line if the client except the new setting.
 	.row-fluid .span9 {
     	width: 73% !important;
 	}
-
+        */
 
 	/* docked padding fix */
 
@@ -567,6 +569,10 @@ hr { background-color:#b3becb; height:1px; border:none }
     width: 100%;
 }
 
+.tile-even table{
+    height: 150px;
+}
+
 .banner-image-container {
     width: 100%;
 }
@@ -718,26 +724,26 @@ hr { background-color:#b3becb; height:1px; border:none }
 
 /* ----- Control the width of the blocks -----*/
 
-/* the main center content area */
+/* the main center content area *//*
 .row-fluid .span8 {
     width: 70.812%;
 }
-
-/* the left block */
+*/
+/* the left block *//*
 .row-fluid .span4 {
     width: 26.6239%;
 }
-
-/* the right block */
+*/
+/* the right block *//*
 .row-fluid .span3 {
     width: 18.0769%;
 }
-
+*/
 /* pre (left) and main */
-
+/*
 .row-fluid .span9 {
     width: 79.359%;
-}
+}*/
 
 /* the left block but only on the front page*/
 
@@ -1137,7 +1143,42 @@ body {
     background: none;
 }
 
-/* block fixed */
+/*@media (min-width: 1200px) {
+    .pagelayout-frontpage #block-region-side-pre.span4 {
+        width: 21.6239%!important;
+    }
+
+    .empty-region-side-post.used-region-side-pre #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
+        width: 75.812% !important
+    }
+    .pagelayout-frontpage #regionmain {
+        padding: 0 !important;
+    }
+}
+
+@media (min-width: 1440px) {
+    .pagelayout-frontpage #block-region-side-pre.span4 {
+        width: 20.6239%!important;
+    }
+    
+    .pagelayout-frontpage #region-main.span8 {
+        width: 76.812%!important;
+    }
+}
+
+@media (min-width: 1680px) {
+    
+    
+    .pagelayout-frontpage #block-region-side-pre.span4 {
+        width: 18.6239%!important;
+    }
+    
+    .pagelayout-frontpage #region-main.span8 {
+        width: 78.812%!important;
+    }
+}*/
+
+ /*block fixed 
 @media (min-width: 1200px) {
     #block-region-side-pre.span4 {
         width: 21.6239%!important;
@@ -1157,8 +1198,9 @@ body {
         width: 76.812%!important;
     }
 }
-
 @media (min-width: 1680px) {
+    
+    
     #block-region-side-pre.span4 {
         width: 18.6239%!important;
     }
@@ -1166,7 +1208,9 @@ body {
     #region-main.span8 {
         width: 78.812%!important;
     }
-}
+    
+    
+}*/
 
 /* show menu from 779px to 979px */
 @media (min-width: 780px) and (max-width: 979px)  {
@@ -1216,6 +1260,10 @@ body {
     .menu-left, .menu-right, .menu-background {
         background: none;
     }
+
+    .login_user {
+        margin-right: 50px;
+    }
 }
 
 /* reduce the line height between login info and help link on small screens */
@@ -1262,4 +1310,358 @@ body {
     margin-top: -11px;
     padding: 0;
     vertical-align: top;
+}
+
+/*------------------------------------------------------------------------------------*/
+/* BLOCK WIDTH SETTINGS FOR DIFFERENT LAYOUT SIZES */
+/* Large desktop */
+@media (min-width: 1200px) { 
+    .empty-region-side-post.used-region-side-pre #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
+        width: calc(100% - [[setting:block_width_desktop]]px - 20px);
+    }
+    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4 {
+        width: [[setting:block_width_desktop]]px;
+    }
+    #page-mod-quiz-view  #block-region-side-pre.span4,
+    #page-mod-quiz-edit #block-region-side-pre.span4,
+    #page-course-index #block-region-side-pre.span4, 
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-standard #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .editing #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-coursecategory #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .path-course-view.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-mydashboard #block-region-side-pre.span4 {
+        width: [[setting:block_width_desktop]]px;
+    }
+    
+    #page-mod-quiz-view #region-main.span8,
+    #page-mod-quiz-edit #region-main.span8,
+    #page-course-index #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-standard #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .editing #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-coursecategory #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .path-course-view #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-mydashboard #region-main.span8 {
+        width: calc(100% - [[setting:block_width_desktop]]px - 20px);
+    }
+    
+    #page-mod-quiz-view .row-fluid .span9,
+    #page-mod-quiz-edit .row-fluid .span9,
+    .two-column .row-fluid .span9,
+    .pagelayout-standard .row-fluid .span9,
+    .path-course-view .row-fluid .span9,
+    .pagelayout-coursecategory .row-fluid .span9,
+    .pagelayout-mydashboard .row-fluid .span9 {
+        width: calc(100% - [[setting:block_width_desktop]]px - 20px);
+        padding-right: 20px;
+    }
+    
+    #page-mod-quiz-view .row-fluid .span8,
+    #page-mod-quiz-edit .row-fluid .span8,
+    #page-course-index .row-fluid .span8,
+    .two-column .row-fluid .span8, 
+    .pagelayout-standard .row-fluid .span8, 
+    .path-course-view .row-fluid .span8, 
+    .pagelayout-coursecategory .row-fluid .span8,
+    .pagelayout-mydashboard .row-fluid .span8 {
+        width: calc(100% - [[setting:block_width_desktop]]px - 20px);
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+    
+    #page-mod-quiz-view .row-fluid .span4,
+    #page-mod-quiz-edit .row-fluid .span4,
+    .pagelayout-standard .row-fluid .span4,
+    .path-course-view .row-fluid .span4,
+    .pagelayout-coursecategory .row-fluid .span4,
+    .pagelayout-mydashboard .row-fluid .span4 {
+        width: [[setting:block_width_desktop]]px;
+    }
+    
+    #page-mod-quiz-view .row-fluid .span9,
+    #page-mod-quiz-edit .row-fluid .span9,
+    .two-column .row-fluid .span9,
+    .pagelayout-standard .row-fluid .span9,
+    .path-course-view .row-fluid .span9,
+    .pagelayout-coursecategory .row-fluid .span9,
+    .pagelayout-mydashboard .row-fluid .span9 {
+        width: calc(100% - [[setting:block_width_desktop]]px);
+    }
+    
+    #region-main {padding:0 20px;}
+    
+    #page-mod-quiz-view .row-fluid .span3,
+    #page-mod-quiz-edit .row-fluid .span3,
+    #page-course-index .row-fluid .span3,
+    .two-column .row-fluid .span3,
+    .pagelayout-standard .row-fluid .span3, 
+    .path-course-view .row-fluid .span3,
+    .pagelayout-coursecategory .row-fluid .span3,
+    .pagelayout-mydashboard .row-fluid .span3 {
+        width: [[setting:block_width_desktop]]px;
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 770px) and (max-width: 1199px) { 
+    
+    .empty-region-side-post.used-region-side-pre #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
+        width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
+    }
+    
+    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4 {
+        width: [[setting:block_width_portrait_tablet]]px;
+    }
+    
+    #page-mod-quiz-view  #block-region-side-pre.span4,
+    #page-mod-quiz-edit #block-region-side-pre.span4,
+    #page-course-index #block-region-side-pre.span4, 
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-standard #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .editing #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-coursecategory #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .path-course-view.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-mydashboard #block-region-side-pre.span4 {
+        width: [[setting:block_width_portrait_tablet]]px;
+    }
+    
+    #page-mod-quiz-view #region-main.span8,
+    #page-mod-quiz-edit #region-main.span8,
+    #page-course-index #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-standard #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .editing #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-coursecategory #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .path-course-view #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-mydashboard #region-main.span8 {
+        width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
+    }
+    
+    #page-mod-quiz-view .row-fluid .span9,
+    #page-mod-quiz-edit .row-fluid .span9,
+    #page-course-index .row-fluid .span9,
+    .two-column .row-fluid .span9,
+    .pagelayout-standard .row-fluid .span9,
+    .path-course-view .row-fluid .span9,
+    .pagelayout-coursecategory .row-fluid .span9,
+    .pagelayout-mydashboard .row-fluid .span9 {
+        width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
+        padding-right: 20px;
+    }
+    
+    #page-mod-quiz-view .row-fluid .span8,
+    #page-mod-quiz-edit .row-fluid .span8,
+    #page-course-index .row-fluid .span8,
+    .two-column .row-fluid .span8, 
+    .pagelayout-standard .row-fluid .span8, 
+    .path-course-view .row-fluid .span8, 
+    .pagelayout-coursecategory .row-fluid .span8,
+    .pagelayout-mydashboard .row-fluid .span8 {
+        width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+    
+    #page-mod-quiz-view .row-fluid .span4,
+    #page-mod-quiz-edit .row-fluid .span4,
+    #page-course-index .row-fluid .span4,
+    .two-column .row-fluid .span4, 
+    .pagelayout-standard .row-fluid .span4,
+    .path-course-view .row-fluid .span4,
+    .pagelayout-coursecategory .row-fluid .span4,
+    .pagelayout-mydashboard .row-fluid .span4 {
+        width: [[setting:block_width_portrait_tablet]]px;
+    }
+    
+    #page-mod-quiz-view .row-fluid .span9,
+    #page-mod-quiz-edit .row-fluid .span9,
+    #page-course-index .row-fluid .span9,
+    .two-column .row-fluid .span9,
+    .pagelayout-standard .row-fluid .span9,
+    .path-course-view .row-fluid .span9,
+    .pagelayout-coursecategory .row-fluid .span9,
+    .pagelayout-mydashboard .row-fluid .span9 {
+        width: calc(100% - [[setting:block_width_portrait_tablet]]px);
+    }
+    
+    #region-main {padding:0 20px;}
+    
+    #page-mod-quiz-view .row-fluid .span3,
+    #page-mod-quiz-edit .row-fluid .span3,
+    #page-course-index .row-fluid .span3,
+    .two-column .row-fluid .span3,
+    .pagelayout-standard .row-fluid .span3, 
+    .path-course-view .row-fluid .span3,
+    .pagelayout-coursecategory .row-fluid .span3,
+    .pagelayout-mydashboard .row-fluid .span3 {
+        width: [[setting:block_width_portrait_tablet]]px;
+        margin-left: 0;
+    }
+}
+
+/* Spacing Above Labels LCD-19 */
+.section .activity .contentafterlink p {
+    margin: 0;
+}
+
+.modtype_label {
+    padding: 0 !important;
+    padding-left: 0.2em !important;
+}
+
+.modtype_label p{
+    margin: 0;
+}
+.modtype_label p:first-child {
+    margin-top: 6px;
+}
+
+/*------------------------------------------------------------------------------------*/
+/* HELP/FEEDBACK FEATURE*/
+
+
+.help-feedback {
+    margin-top: 4px;
+}
+
+.help-feedback:before {
+    position: absolute;
+    top: -7px;
+    right: 10px;
+    display: inline-block;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-left: 7px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
+}
+
+.help-feedback:after {
+    position: absolute;
+    top: -6px;
+    right: 10px;
+    display: inline-block;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #ffffff;
+    border-left: 6px solid transparent;
+    content: '';
+}
+
+.helpfeedback-box {
+    float: left;
+    margin-right: 15px;
+}
+
+.helpfeedback-box a {
+    background-color: #af8e31;
+    padding: 5px 10px;
+    margin-top: 9px;
+    margin-left: 10px;
+    color: #fff;
+    font-weight: 600;
+}
+.helpfeedback-box a:hover {
+    background-color: #e4edf4;
+    padding: 5px 10px;
+    margin-top: 9px;
+    margin-left: 10px;
+    color: #af8e31;
+    font-weight: 600;
+    text-decoration: none;
+}
+.helpfeedback-box a:active, .helpfeedback-box .open .dropdown-toggle  {
+    background-color: #e4edf4;
+    padding: 5px 10px;
+    margin-top: 9px;
+    margin-left: 10px;
+    color: #af8e31;
+    font-weight: 600;
+    text-decoration: none;
+}
+.helpfeedback-box a:active, .helpfeedback-box .open .caret  {
+    border-top-color: #af8e31 !important;
+    border-bottom-color: #af8e31 !important;
+}
+
+.helpfeedback-box a:hover .caret {
+    border-top-color: #af8e31 !important;
+    border-bottom-color: #af8e31 !important;
+}
+
+.help-feedback li a {
+    padding: 3px 20px 3px 8px;
+    background-color: #fff !important;
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+    padding-left: 10px !important;
+}
+
+.help-feedback li a:hover {
+    background-color: #af8e31 !important;
+    color: #fff !important;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.help-feedback--devider {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+.help-feedback li:last-child {
+    display: none;
+}
+
+.help-feedback .divider {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.navbar .nav .dropdown-toggle .caret {
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+
+/*------------------------------------------------------------------------------------*/
+/* ---------------------------- Styles for help page. ---------------------------- */
+.recurring_alerts_document {border-top: 1px solid #777;}
+
+/* Front page fix LCD-83 */
+@media (min-width: 1200px) {
+    .pagelayout-frontpage #block-region-side-pre.span4 {
+        width: 21.6239%!important;
+    }
+    .pagelayout-frontpage #region-main.span8 {
+        width: 75.812% !important
+    }
+    .pagelayout-frontpage #region-main {
+        padding: 0 !important;
+    }
+}
+
+@media (min-width: 1440px) {
+    .pagelayout-frontpage #block-region-side-pre.span4 {
+        width: 20.6239%!important;
+    }
+    .pagelayout-frontpage #region-main.span8 {
+        width: 76.812%!important;
+    }
+    .pagelayout-frontpage #region-main {
+        padding: 0 !important;
+    }
+}
+
+@media (min-width: 1680px) {
+    
+    
+    .pagelayout-frontpage #block-region-side-pre.span4 {
+        width: 18.6239%!important;
+    }
+    .pagelayout-frontpage #region-main.span8 {
+        width: 78.812%!important;
+    }
+    .pagelayout-frontpage #region-main {
+        padding: 0 !important;
+    }
 }

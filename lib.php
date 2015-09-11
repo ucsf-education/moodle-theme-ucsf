@@ -54,7 +54,33 @@ function theme_ucsf_process_css($css, $theme) {
         $customcss = null;
     }
     $css = theme_ucsf_set_customcss($css, $customcss);
+    
+    // Block settings
+    // Set block width for large desktop
+    if (!empty($theme->settings->block_width_desktop)) {
+        $block_width = $theme->settings->block_width_desktop;
+    } else {
+        $block_width = '';
+    }
+    $css = theme_ucsf_block_width($css, '[[setting:block_width_desktop]]', $block_width);
+    
+    // Block width for portrait tablet to landscape and desktop
+    if (!empty($theme->settings->block_width_portrait_tablet)) {
+        $block_width_portrait_tablet = $theme->settings->block_width_portrait_tablet;
+    } else {
+        $block_width_portrait_tablet = '';
+    }
+    $css = theme_ucsf_block_width($css, '[[setting:block_width_portrait_tablet]]', $block_width_portrait_tablet);
 
+    return $css;
+}
+
+function theme_ucsf_block_width($css, $tag, $block_width) {
+    $replacement = $block_width;
+    if (is_null($replacement)) {
+        $replacement = '';
+    }
+    $css = str_replace($tag, $replacement, $css);
     return $css;
 }
 
@@ -120,7 +146,15 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
             return $theme->setting_file_serve('tile5image', $args, $forcedownload, $options);
         } else if ($filearea === 'tile6image') {
             return $theme->setting_file_serve('tile6image', $args, $forcedownload, $options);
-        } else if (in_array($filearea,  $CATEGORILABELIMAGE)) {
+        }else if ($filearea === 'tile7image') {
+            return $theme->setting_file_serve('tile7image', $args, $forcedownload, $options);
+        }else if ($filearea === 'tile8image') {
+            return $theme->setting_file_serve('tile8image', $args, $forcedownload, $options);
+        }else if ($filearea === 'tile9image') {
+            return $theme->setting_file_serve('tile9image', $args, $forcedownload, $options);
+        }else if ($filearea === 'tile10image') {
+            return $theme->setting_file_serve('tile10image', $args, $forcedownload, $options);
+        }else if (in_array($filearea,  $CATEGORILABELIMAGE)) {
             return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
         } else {
             send_file_not_found();
@@ -187,6 +221,22 @@ function theme_ucsf_get_html_for_settings(renderer_base $output, moodle_page $pa
     return $return;
 }
 
+function theme_ucsf_get_setting($setting, $format = false)
+{
+    static $theme;
+    if (empty($theme)) {
+        $theme = theme_config::load('ucsf');
+    }
+    if (empty($theme->settings->$setting)) {
+        return false;
+    } else if (!$format) {
+        return $theme->settings->$setting;
+    } else if ($format === 'format_text') {
+        return format_text($theme->settings->$setting);
+    } else {
+        return format_string($theme->settings->$setting);
+    }
+}
 
 /**
  * Returns an object containing HTML for the areas affected by category customization settings.
@@ -208,19 +258,50 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
     $return->coursetitle = '';
     $return->displaycustommenu = $output->custom_menu();
 
-    // help/feedback link
-    $pipeseparator = "";
-    if(isloggedin()){
-        $pipeseparator = '<div class="pipe-separator">|</div>';
-    }
-    $helpfeedbacklinklabel = get_string('helpfeedbacklinklabel', 'theme_ucsf');
+    /* 
+    *   Help/Feedback Links
+    *   Pulling the number of links dynamically from the Help/Feedback Settings inside Theme Settings
+    */
 
     $target = '';
-    if($page->theme->settings->helpfeedbacklinktarget==1)
-        $target = 'target = \"_blank\"';
     
-    if (!empty($page->theme->settings->helpfeedbacklink)) {
-        $return->helpfeedbacklink = $pipeseparator.'<div class="help-feedback"><a href="'.$page->theme->settings->helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklinklabel.'</a></div>';
+
+    $helpfeedbacktitle = null;
+
+    if(!isset($page->theme->settings->helpfeedbacktitle) || $page->theme->settings->helpfeedbacktitle == "") {
+
+        $helpfeedbacktitle = 'Help/Feedback';
+
+    } else {
+        $helpfeedbacktitle = $page->theme->settings->helpfeedbacktitle;
+    }
+    $helpfeedback = null;
+    
+    for ($i = 1; $i <= $page->theme->settings->numberoflinks; $i++ ) {
+        $helpfeedbacklink = theme_ucsf_get_setting('helpfeedback' . $i . 'link');
+        $helpfeedbacklinklabel = theme_ucsf_get_setting('helpfeedback' . $i . 'linklabel');
+        $helpfeedbacklinktarget = theme_ucsf_get_setting('helpfeedback' . $i . 'linktarget');
+
+        if (!empty($helpfeedbacklink)) {
+            if(!empty($helpfeedbacklinklabel)) {
+                if ($helpfeedbacklinktarget == true) {
+                    $target = 'target = "_blank"';
+                    $helpfeedback .= '<li role="presentation"><a title="'.$helpfeedbacklinklabel.'" href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklinklabel.'</a></li>
+                    <li class="divider"></li>';
+                }else{
+                    $target = 'target = "_self"';
+                    $helpfeedback .= '<li role="presentation"><a title="'.$helpfeedbacklinklabel.'" href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklinklabel.'</a></li><li class="divider">';
+                }
+            }else{
+                $helpfeedback .=  '<li role="presentation"><a href="' . $helpfeedbacklink . '" ' . $target . '>'.$helpfeedbacklink.'</a></li><li class="divider">';
+            }
+        }
+    }
+    if ($page->theme->settings->enablehelpfeedback == 1 && $helpfeedback != false) {
+        $return->helpfeedbacklink = '<div class="dropdown helpfeedback-box"><a class="dropdown-toggle" data-toggle="dropdown">'.$helpfeedbacktitle.'<span class="caret"></span></a>'
+                . '<ul class="dropdown-menu help-feedback pull-right" role="menu">'
+                . $helpfeedback
+                . '</ul></div>';
     } else {
         $return->helpfeedbacklink ='';
     }
@@ -231,21 +312,68 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         $return->enablecustomization = true;
     }
 
+
+
     // category customization enabled
     if($return->enablecustomization) {
 
         // set toplevel category label
         $return->categorylabel = '';
         if (!empty($page->theme->settings->toplevelcategorylabel)) {
-            $return->categorylabel = '<div class="category-label pull-left"><div class="category-label-text">'.$page->theme->settings->toplevelcategorylabel.'</div></div>';;
+            $return->categorylabel = '<div class="category-label pull-left"><div class="category-label-text">'.$page->theme->settings->toplevelcategorylabel.'</div></div>';
         }
-
         // get course category id
         $COURSECATEGORY = 0;
         if ($page->pagelayout=="coursecategory" && isset($_REQUEST["categoryid"]))
             $COURSECATEGORY = $_REQUEST["categoryid"];
         else
             $COURSECATEGORY = $COURSE->category;
+
+        // Help/Feedback Links
+        if ($COURSECATEGORY != 0) {
+
+            $target = '';
+
+            if(theme_ucsf_get_setting('cathelpfeedbacktitle'.$COURSECATEGORY) == null || theme_ucsf_get_setting('cathelpfeedbacktitle'.$COURSECATEGORY) == "") {
+
+                $helpfeedbacktitle = 'Help/Feedback';
+
+            } else {
+                $helpfeedbacktitle = theme_ucsf_get_setting('cathelpfeedbacktitle'.$COURSECATEGORY);
+            }
+
+            $cathelpfeedback = null;
+            $catnumberoflinks = theme_ucsf_get_setting('catnumberoflinks'.$COURSECATEGORY);
+            
+            for ($i = 1; $i <= $page->theme->settings->numberoflinks; $i++ ) {
+                $helpfeedbacklink = theme_ucsf_get_setting('cathelpfeedback' . $i . 'link' . $COURSECATEGORY);
+                $helpfeedbacklinklabel = theme_ucsf_get_setting('cathelpfeedback' . $i . 'linklabel' . $COURSECATEGORY);
+                $helpfeedbacklinktarget = theme_ucsf_get_setting('cathelpfeedback' . $i . 'linktarget' . $COURSECATEGORY);
+
+                if (!empty($helpfeedbacklink)) {
+                    if(!empty($helpfeedbacklinklabel)) {
+                        if ($helpfeedbacklinktarget == true) {
+                            $target = 'target = "_blank"';
+                            $cathelpfeedback .= '<li role="presentation"><a title="'.$helpfeedbacklinklabel.'" href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklinklabel.'</a></li><li class="divider">';
+                        }else{
+                            $target = 'target = "_self"';
+                            $cathelpfeedback .= '<li role="presentation"><a title="'.$helpfeedbacklinklabel.'" href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklinklabel.'</a></li><li class="divider">';}
+                    }else{
+                        $cathelpfeedback .=  '<li role="presentation"><a href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklink.'</a></li><li class="divider">';
+                    }
+                }
+            }
+            if($cathelpfeedback != null){
+                if (theme_ucsf_get_setting('catenablehelpfeedback'.$COURSECATEGORY) == 1) {
+                    $return->helpfeedbacklink = '<div class="dropdown helpfeedback-box"><a class="dropdown-toggle" data-toggle="dropdown">'.$helpfeedbacktitle.'<span class="caret"></span></a>'
+                            . '<ul class="dropdown-menu help-feedback pull-right" role="menu">'
+                            . $cathelpfeedback
+                            . '</ul></div>';
+                } else {
+                    $return->helpfeedbacklink;
+                }
+            }
+        }
 
         // set course title
         $return->coursetitle = '';
@@ -396,27 +524,247 @@ function theme_ucsf_get_first_category_customization_menu(moodle_page $page) {
     return 0;
 }
 
-
-
 function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
-    global $CFG;
+    global $CFG, $COURSE;
+    
     $hasalert1 = false;
     $hasalert2 = false;
     $hasalert3 = false;
+    $hasalert4 = false;
+    $hasalert5 = false;
+    $hasalert6 = false;
+    $hasalert7 = false;
+    $hasalert8 = false;
+    $hasalert9 = false;
+    $hasalert10 = false;
+    
+    $number_of_alerts = isset($page->theme->settings->number_of_alerts) ? intval($page->theme->settings->number_of_alerts) : '';
+    
+    for ($i = 0; $i <= $number_of_alerts; $i++) {
+        
+        $category = theme_ucsf_get_setting('categories_list_alert'.$i);
+        // get theme comfiguration
+        $COURSECATEGORY = 0;
+        if ($page->pagelayout=="coursecategory" && isset($_REQUEST["categoryid"]))
+            $COURSECATEGORY = $_REQUEST["categoryid"];
+        else
+            $COURSECATEGORY = $COURSE->category;
 
-    if($page->theme->settings->enable1alert &&(!isset($_SESSION["alerts"]["alert1"]) || $_SESSION["alerts"]["alert1"] != 0)) {
-        $_SESSION["alerts"]["alert1"] = 1;
-        $hasalert1 = true;
-    }
+        // ALERTS
+        // Creating start date.
+        $start_date     = (null !== (theme_ucsf_get_setting('start_date'.$i))) ? theme_ucsf_get_setting('start_date'.$i) : ''; 
+        $start_hour     = (null !== (theme_ucsf_get_setting('start_hour'.$i))) ? theme_ucsf_get_setting('start_hour'.$i) : '';  
+        $start_minute   = (null !== (theme_ucsf_get_setting('start_minute'.$i))) ? theme_ucsf_get_setting('start_minute'.$i) : ''; 
+        // Creating a timestamp.
+       
+        
+        // Do not set false if the value is 0.
+        if ($start_minute == false) {
+            $start_minute = '00';
+        }
+        
+        $start_date_format = date($start_date .' '.$start_hour.':'.$start_minute.':00');
+        $start_date_timestamp   = strtotime($start_date_format);
+        // Setting start hour and minute.
+            
+        // Creating end date.
+        $end_date   = (null !== (theme_ucsf_get_setting('end_date'.$i))) ? theme_ucsf_get_setting('end_date'.$i) : ''; 
+        $end_hour     = (null !== (theme_ucsf_get_setting('end_hour'.$i))) ? theme_ucsf_get_setting('end_hour'.$i) : '';  
+        $end_minute   = (null !== (theme_ucsf_get_setting('end_minute'.$i))) ? theme_ucsf_get_setting('end_minute'.$i) : ''; 
+        
+        // Do not set false if the value is 0.
+        if ($end_minute == false) {
+            $end_minute = '00';
+        }
+        
+        $end_date_format = date($end_date .' '.$end_hour.':'.$end_minute.':00');
+        
+        // Creating a timestamp.
+        $end_date_timestamp = strtotime($end_date_format);
+        
+        // Do not set false if the value is 0.
+        if ($end_minute == false) {
+            $end_minute = '00';
+        }
+        
+         // Get end hours and minutes from settings and put them into timestamp.
+        $end_hour_and_minute = $end_hour. ":" .$end_minute;
+        $end_hour_and_minute_timestamp = strtotime($end_hour_and_minute);
+        
+        // Start creating current date format.
+        $date_class = new DateTime();
+        // Final result in timestamp for currnet date.
+        $current_date_timestamp = $date_class->getTimestamp();
+        
+        // Get current hours and minutes from settings and put them into timestamp.
+        $current_hour = date('G');
+        $current_minute = date('i');
+        $currnet_hour_and_minute = $current_hour. ":" .$current_minute;
+        $currnet__hour_and_minute_timestamp = strtotime($currnet_hour_and_minute);
+        
+        $recurring_alert = theme_ucsf_get_setting('recurring_alert'.$i);
 
-    if($page->theme->settings->enable2alert && (!isset($_SESSION["alerts"]["alert2"]) || $_SESSION["alerts"]["alert2"] != 0)) {
-        $_SESSION["alerts"]["alert2"] = 1;
-        $hasalert2 = true;
-    }
+        $enable_alert = theme_ucsf_get_setting('enable'.$i.'alert');
+        
+        if ($COURSECATEGORY == $category || $category == 0) {
+            if((!isset($_SESSION["alerts"]["alert".$i]) || $_SESSION["alerts"]["alert".$i] != 0)) {
+                
+                // Never end alerts
+                if ($recurring_alert == '1') {
+                    if ($enable_alert == 1) {
+                        $_SESSION["alerts"]["alert".$i] = 1;
+                        for($j = 0; $j <= 5; $j ++) {
+                            ${'hasalert'.$i} = true;
+                        }
+                    }
+                }
+                
+                // One time alert.
+                if ($recurring_alert == '2') {
+                    if ($enable_alert == 1) {
+                        $_SESSION["alerts"]["alert".$i] = 1;
+                        for($j = 0; $j <= 5; $j ++) {
+                            if ($start_date_timestamp <= $currnet__hour_and_minute_timestamp && $end_date_timestamp >= $current_date_timestamp) {
+                                    ${'hasalert'.$i} = true;
+                            }
+                        }
+                    }
+                
+            // Daily alert.
+            } elseif ($recurring_alert == '3') {
+                
+                // Creating start date.
+                $start_date = (null !== (theme_ucsf_get_setting('start_date_daily'.$i))) ? theme_ucsf_get_setting('start_date_daily'.$i) : ''; 
+                $start_date_timestamp = strtotime($start_date);
 
-    if($page->theme->settings->enable3alert && (!isset($_SESSION["alerts"]["alert3"]) || $_SESSION["alerts"]["alert3"] != 0)) {
-        $_SESSION["alerts"]["alert3"] = 1;
-        $hasalert3 = true;
+                // Creating end date.
+                $end_date   = (null !== (theme_ucsf_get_setting('end_date_daily'.$i))) ? theme_ucsf_get_setting('end_date_daily'.$i) : ''; 
+                
+                // Final result in timestamp for end date.
+                $end_date_timestamp = strtotime($end_date);
+                
+                // Start hour and minute for daily settings.
+                $start_daily_hour   = (null !== (theme_ucsf_get_setting('start_only_hour_daily'.$i))) ? theme_ucsf_get_setting('start_only_hour_daily'.$i) : ''; 
+                
+                $start_daily_minute   = (null !== (theme_ucsf_get_setting('start_only_minute_daily'.$i))) ? theme_ucsf_get_setting('start_only_minute_daily'.$i) : ''; 
+                if ($start_daily_minute == false) {
+                    $start_daily_minute = '00';
+                }
+                
+                // End hour and minute for daily settings.
+                $end_daily_hour   = (null !== (theme_ucsf_get_setting('end_only_hour_daily'.$i))) ? theme_ucsf_get_setting('end_only_hour_daily'.$i) : ''; 
+                $end_daily_minute   = (null !== (theme_ucsf_get_setting('end_only_minute_daily'.$i))) ? theme_ucsf_get_setting('end_only_minute_daily'.$i) : ''; 
+                if ($end_daily_minute == false) {
+                    $end_daily_minute = '00';
+                }
+                
+                // Get start hours and minutes from settings and put them into timestamp.
+                $start_hour_and_minute = $start_daily_hour. ":" .$start_daily_minute;
+                $start_hour_and_minute_timestamp = strtotime($start_hour_and_minute);
+                
+                // Get end hours and minutes from settings and put them into timestamp.
+                $end_hour_and_minute = $end_daily_hour. ":" .$end_daily_minute;
+                $end_hour_and_minute_timestamp = strtotime($end_hour_and_minute);
+                
+                // Get current hours and minutes from settings and put them into timestamp.
+                $current_hour = date('G');
+                $current_minute = date('i');
+                $currnet_hour_and_minute = $current_hour. ":" .$current_minute;
+                $currnet__hour_and_minute_timestamp = strtotime($currnet_hour_and_minute);
+                
+                $enable_alert = theme_ucsf_get_setting('enable'.$i.'alert');
+                if ($enable_alert == 1) {
+                    if ($start_date_timestamp < $current_date_timestamp || $end_date_timestamp > $current_date_timestamp || $end_date_timestamp == $current_date_timestamp) {
+                        if ($start_hour_and_minute_timestamp <= $currnet__hour_and_minute_timestamp && $end_hour_and_minute_timestamp >= $currnet__hour_and_minute_timestamp) {
+                        
+                                    ${'hasalert'.$i} = true;
+                        }
+                    }
+                }
+            // Weekly alert.
+            } elseif ($recurring_alert == '4') {
+                
+                // Get settings for weekday and put them into timestamp.
+                if (theme_ucsf_get_setting('show_week_day'.$i) == '0') {
+                    $weekday = 'Sunday';
+                    $weekday_timestamp = strtotime($weekday);
+                } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '1') {
+                    $weekday = 'Monday';
+                    $weekday_timestamp = strtotime($weekday);
+                } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '2') {
+                    $weekday = 'Tuesday';
+                    $weekday_timestamp = strtotime($weekday);
+                } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '3') {
+                    $weekday = 'Wednesday';
+                    $weekday_timestamp = strtotime($weekday);
+                } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '4') {
+                    $weekday = 'Thursday';
+                    $weekday_timestamp = strtotime($weekday);
+                } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '5') {
+                    $weekday = 'Friday';
+                    $weekday_timestamp = strtotime($weekday);
+                } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '6') {
+                    $weekday = 'Saturday';
+                    $weekday_timestamp = strtotime($weekday);
+                } 
+                // Current weekday converted to the timestamp.
+                $current_weekday = date('D');
+                $current_weekday_timestamp = strtotime($current_weekday);
+                
+                $start_date     = (null !== (theme_ucsf_get_setting('start_date_weekly'.$i))) ? theme_ucsf_get_setting('start_date_weekly'.$i) : '';   
+                $start_date_timestamp   = strtotime($start_date);
+                
+                 // Setting start hour and minute.
+                $start_hour     = (null !== (theme_ucsf_get_setting('start_hour_weekly'.$i))) ? theme_ucsf_get_setting('start_hour_weekly'.$i) : '';  
+                $start_minute   = (null !== (theme_ucsf_get_setting('start_minute_weekly'.$i))) ? theme_ucsf_get_setting('start_minute_weekly'.$i) : ''; 
+                
+                // Do not set false if the value is 0.
+                if ($start_minute == false) {
+                    $start_minute = '00';
+                }
+                
+                 // Get start hours and minutes from settings and put them into timestamp.
+                $start_hour_and_minute = $start_hour. ":" .$start_minute;
+                $start_hour_and_minute_timestamp = strtotime($start_hour_and_minute);
+                
+                // Creating end date.
+                $end_date     = (null !== (theme_ucsf_get_setting('end_date_weekly'.$i))) ? theme_ucsf_get_setting('end_date_weekly'.$i) : '';
+                $end_date_timestamp = strtotime($end_date);
+        
+                // Get current hours and minutes from settings and put them into timestamp.
+                $current_hour = date('G');
+                $current_minute = date('i');
+                $currnet_hour_and_minute = $current_hour. ":" .$current_minute;
+                $currnet__hour_and_minute_timestamp = strtotime($currnet_hour_and_minute);
+                
+                 // Setting end hour and minute.
+                $end_hour     = (null !== (theme_ucsf_get_setting('end_hour_weekly'.$i))) ? theme_ucsf_get_setting('end_hour_weekly'.$i) : '';  
+                $end_minute   = (null !== (theme_ucsf_get_setting('end_minute_weekly'.$i))) ? theme_ucsf_get_setting('end_minute_weekly'.$i) : ''; 
+                
+                // Do not set false if the value is 0.
+                if ($end_minute == false) {
+                    $end_minute = '00';
+                }
+                
+                 // Get end hours and minutes from settings and put them into timestamp.
+                $end_hour_and_minute = $end_hour. ":" .$end_minute;
+                $end_hour_and_minute_timestamp = strtotime($end_hour_and_minute);
+                
+                $enable_alert = theme_ucsf_get_setting('enable'.$i.'alert');
+                if ($enable_alert == 1) {
+                    if ($weekday_timestamp == $current_weekday_timestamp) {
+                        if ($start_date_timestamp < $current_date_timestamp && $end_date_timestamp > $current_date_timestamp) {
+                            $_SESSION["alerts"]["alert".$i] = 1;
+                            for($j = 0; $j <= 5; $j ++) {
+                                if ($start_hour_and_minute_timestamp < $currnet__hour_and_minute_timestamp && $end_hour_and_minute_timestamp > $currnet__hour_and_minute_timestamp) {
+                                    ${'hasalert'.$i} = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     $alert=null;
@@ -442,14 +790,68 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
         $alert.='</div>';
     }
 
-    if( $hasalert1 || $hasalert2 || $hasalert3 ) {
+    if ($hasalert4) {
+        $alert.= '<div class="useralerts alert alert-'.$page->theme->settings->alert4type.' alert3">';
+        $alert.='<a class="close" data-dismiss="alert" data-target-url="'.$CFG->wwwroot.'" href="#">×</a>';
+        $alert.='<span class="title">'.$page->theme->settings->alert4title.'</span>'.$page->theme->settings->alert4text;
+        $alert.='</div>';
+    }
+
+    if ($hasalert5) {
+        $alert.= '<div class="useralerts alert alert-'.$page->theme->settings->alert5type.' alert3">';
+        $alert.='<a class="close" data-dismiss="alert" data-target-url="'.$CFG->wwwroot.'" href="#">×</a>';
+        $alert.='<span class="title">'.$page->theme->settings->alert5title.'</span>'.$page->theme->settings->alert5text;
+        $alert.='</div>';
+    }
+
+    if ($hasalert6) {
+        $alert.= '<div class="useralerts alert alert-'.$page->theme->settings->alert6type.' alert3">';
+        $alert.='<a class="close" data-dismiss="alert" data-target-url="'.$CFG->wwwroot.'" href="#">×</a>';
+        $alert.='<span class="title">'.$page->theme->settings->alert6title.'</span>'.$page->theme->settings->alert6text;
+        $alert.='</div>';
+    }
+
+    if ($hasalert7) {
+        $alert.= '<div class="useralerts alert alert-'.$page->theme->settings->alert7type.' alert3">';
+        $alert.='<a class="close" data-dismiss="alert" data-target-url="'.$CFG->wwwroot.'" href="#">×</a>';
+        $alert.='<span class="title">'.$page->theme->settings->alert7title.'</span>'.$page->theme->settings->alert7text;
+        $alert.='</div>';
+    }
+
+    if ($hasalert8) {
+        $alert.= '<div class="useralerts alert alert-'.$page->theme->settings->alert8type.' alert3">';
+        $alert.='<a class="close" data-dismiss="alert" data-target-url="'.$CFG->wwwroot.'" href="#">×</a>';
+        $alert.='<span class="title">'.$page->theme->settings->alert8title.'</span>'.$page->theme->settings->alert8text;
+        $alert.='</div>';
+    }
+
+    if ($hasalert9) {
+        $alert.= '<div class="useralerts alert alert-'.$page->theme->settings->alert9type.' alert3">';
+        $alert.='<a class="close" data-dismiss="alert" data-target-url="'.$CFG->wwwroot.'" href="#">×</a>';
+        $alert.='<span class="title">'.$page->theme->settings->alert9title.'</span>'.$page->theme->settings->alert9text;
+        $alert.='</div>';
+    }
+
+    if ($hasalert10) {
+        $alert.= '<div class="useralerts alert alert-'.$page->theme->settings->alert10type.' alert3">';
+        $alert.='<a class="close" data-dismiss="alert" data-target-url="'.$CFG->wwwroot.'" href="#">×</a>';
+        $alert.='<span class="title">'.$page->theme->settings->alert10title.'</span>'.$page->theme->settings->alert10text;
+        $alert.='</div>';
+    }
+
+    if( $hasalert1 || $hasalert2 || $hasalert3 || $hasalert4 || $hasalert5  || $hasalert6  || $hasalert7  || $hasalert8  || $hasalert9 || $hasalert10) {
         $alert = '<div class="alerts">'. $alert . '</div>';
     } else if ($page->pagelayout=="frontpage") {
         $alert = '<div class="alerts"></div>';
     }
 
-    return $alert;
 }
+return $alert;
+}
+
+
+
+
 
 function theme_ucsf_get_category_label_image(renderer_base $output, moodle_page $page) {
     $categorylabelimage = "";
@@ -480,71 +882,92 @@ function theme_ucsf_get_banner(renderer_base $output, moodle_page $page) {
 
 function theme_ucsf_get_tiles(renderer_base $output, moodle_page $page) {
     $tiles = null;
+    $tilesinnerfirst = null;
+    $tilesinnersecond = null;
+    $myarr = [null, null, null, null, null, null];
 
-    $setting = 'tile1image';
-    $tile1image = $page->theme->setting_file_url($setting, $setting);
+    for ($i = 1; $i <= $page->theme->settings->numberoftiles; $i++){
+    $test = theme_ucsf_get_setting('positionoftile'. $i) - 1;
+        if (theme_ucsf_get_setting('tile' . $i . 'select') == 1){
 
-    $tile1image = "";
-    if(!empty($page->theme->settings->tile1image))
-        $tile1image = '<img src="'.$page->theme->setting_file_url('tile1image', 'tile1image').'" alt="'.$page->theme->settings->tile1imagealt.'" title="'.$page->theme->settings->tile1imagetitle.'" class="tile-image">';
+            if(theme_ucsf_get_setting('positionoftile'. $i) != false){
+                $myarr[$test] = $i;
+            }else if(theme_ucsf_get_setting('positionoftile'. $i) == false) {
+                array_push($myarr, $i);
+            }
+        }
+    }
 
-    $tile2image = "";
-    if(!empty($page->theme->settings->tile2image))
-        $tile2image = '<img src="'.$page->theme->setting_file_url('tile2image', 'tile2image').'" alt="'.$page->theme->settings->tile2imagealt.'" title="'.$page->theme->settings->tile2imagetitle.'" class="tile-image">';
+    foreach($myarr as $key=>$val) {
+        if ($val === null)
+            unset($myarr[$key]);
+    }
 
-    $tile3image = "";
-    if(!empty($page->theme->settings->tile3image))
-        $tile3image = '<img src="'.$page->theme->setting_file_url('tile3image', 'tile3image').'" alt="'.$page->theme->settings->tile3imagealt.'" title="'.$page->theme->settings->tile3imagetitle.'" class="tile-image">';
+    if(count($myarr) == 4 || count($myarr) == 2){
+        foreach($myarr as $index => $arr){
+            if ($index < 2) {
+                ${'tile' . $arr . 'image'} = "";
+                if(!empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
+                    ${'tile' . $arr . 'image'} = '<img src="'.$page->theme->setting_file_url('tile' . $arr . 'image', 'tile' . $arr . 'image').'" alt="'.theme_ucsf_get_setting('tile' . $arr . 'imagealt').'" title="'.theme_ucsf_get_setting('tile' . $arr . 'imagetitle').'" class="tile-image">'; 
+                }
+                if(!empty(theme_ucsf_get_setting('tile' . $arr . 'content')) || !empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
+                    $tileborder = 'tile-border';
+                }
+                if($arr == null) {
+                    $tileborder = '';
+                }
+                $tilesinnerfirst .='<div class="span6 tile '.$tileborder.' tile-even">'.theme_ucsf_get_setting('tile' . $arr . 'content').'<div class="tile-image-container">'.${'tile' . $arr . 'image'}.'</div></div>';
+            } else if($index >1){
+                ${'tile' . $arr . 'image'} = "";
+                if(!empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
+                    ${'tile' . $arr . 'image'} = '<img src="'.$page->theme->setting_file_url('tile' . $arr . 'image', 'tile' . $arr . 'image').'" alt="'.theme_ucsf_get_setting('tile' . $arr . 'imagealt').'" title="'.theme_ucsf_get_setting('tile' . $arr . 'imagetitle').'" class="tile-image">';
+                }
+                if(!empty(theme_ucsf_get_setting('tile' . $arr . 'content')) || !empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
+                    $tileborder = 'tile-border';
+                }
+                if($arr == null) {
+                    $tileborder = '';
+                }
 
-    $tile4image = "";
-    if(!empty($page->theme->settings->tile4image))
-        $tile4image = '<img src="'.$page->theme->setting_file_url('tile4image', 'tile4image').'" alt="'.$page->theme->settings->tile4imagealt.'" title="'.$page->theme->settings->tile4imagetitle.'" class="tile-image">';
+                $tilesinnersecond .='<div class="span6 tile '.$tileborder.' tile-even">'.theme_ucsf_get_setting('tile' . $arr . 'content').'<div class="tile-image-container">'.${'tile' . $arr . 'image'}.'</div></div>';
+            }
+        }
+    }else{
+        foreach($myarr as $index => $arr) {
+            if($index < 3){
+                ${'tile' . $arr . 'image'} = "";
+                if(!empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
+                    ${'tile' . $arr . 'image'} = '<img src="'.$page->theme->setting_file_url('tile' . $arr . 'image', 'tile' . $arr . 'image').'" alt="'.theme_ucsf_get_setting('tile' . $arr . 'imagealt').'" title="'.theme_ucsf_get_setting('tile' . $arr . 'imagetitle').'" class="tile-image">';
+                }
+                if(!empty(theme_ucsf_get_setting('tile' . $arr . 'content')) || !empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
+                    $tileborder = 'tile-border';
+                }
+                if($arr == null) {
+                    $tileborder = '';
+                }
 
-    $tile5image = "";
-    if(!empty($page->theme->settings->tile5image))
-        $tile5image = '<img src="'.$page->theme->setting_file_url('tile5image', 'tile5image').'" alt="'.$page->theme->settings->tile5imagealt.'" title="'.$page->theme->settings->tile5imagetitle.'" class="tile-image">';
+                $tilesinnerfirst .='<div class="span4 tile '.$tileborder.'">'.theme_ucsf_get_setting('tile' . $arr . 'content').'<div class="tile-image-container">'.${'tile' . $arr . 'image'}.'</div></div>';
+            } else if($index < 6) {
+                ${'tile' . $arr . 'image'} = "";
+                if(!empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
+                    ${'tile' . $arr . 'image'} = '<img src="'.$page->theme->setting_file_url('tile' . $arr . 'image', 'tile' . $arr . 'image').'" alt="'.theme_ucsf_get_setting('tile' . $arr . 'imagealt').'" title="'.theme_ucsf_get_setting('tile' . $arr . 'imagetitle').'" class="tile-image">';
+                }
+                if(!empty(theme_ucsf_get_setting('tile' . $arr . 'content')) || !empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
+                    $tileborder = 'tile-border';
+                }
+                if($arr == null) {
+                    $tileborder = '';
+                }
 
-    $tile6image = "";
-    if(!empty($page->theme->settings->tile6image))
-        $tile6image = '<img src="'.$page->theme->setting_file_url('tile6image', 'tile6image').'" alt="'.$page->theme->settings->tile6imagealt.'" title="'.$page->theme->settings->tile6imagetitle.'" class="tile-image">';
+                $tilesinnersecond .='<div class="span4 tile '.$tileborder.'">'.theme_ucsf_get_setting('tile' . $arr . 'content').'<div class="tile-image-container">'.${'tile' . $arr . 'image'}.'</div></div>';
+            }
+        }
+    }
 
-    // empty tiles borderless
-    $tile1border = "";
-    if(!empty($page->theme->settings->tile1content) || !empty($page->theme->settings->tile1image))
-        $tile1border = "tile-border";
+        $tiles .= '<div class="row-fluid">'.$tilesinnerfirst.'</div>';
+        $tiles .= '<div class="row-fluid">'.$tilesinnersecond.'</div>';
 
-    $tile2border = "";
-    if(!empty($page->theme->settings->tile2content) || !empty($page->theme->settings->tile2image))
-        $tile2border = "tile-border";
-
-    $tile3border = "";
-    if(!empty($page->theme->settings->tile3content) || !empty($page->theme->settings->tile3image))
-        $tile3border = "tile-border";
-
-    $tile4border = "";
-    if(!empty($page->theme->settings->tile4content) || !empty($page->theme->settings->tile4image))
-        $tile4border = "tile-border";
-
-    $tile5border = "";
-    if(!empty($page->theme->settings->tile5content) || !empty($page->theme->settings->tile5image))
-        $tile5border = "tile-border";
-
-    $tile6border = "";
-    if(!empty($page->theme->settings->tile6content) || !empty($page->theme->settings->tile6image))
-        $tile6border = "tile-border";
-
-    $tiles.='<div class="row-fluid">
-        <div class="span4 tile '.$tile1border.'">'.$page->theme->settings->tile1content.'<div class="tile-image-container">'.$tile1image.'</div></div>
-        <div class="span4 tile '.$tile2border.'">'.$page->theme->settings->tile2content.'<div class="tile-image-container">'.$tile2image.'</div></div>
-        <div class="span4 tile '.$tile3border.'">'.$page->theme->settings->tile3content.'<div class="tile-image-container">'.$tile3image.'</div></div>
-    </div>
-    <div class="row-fluid">                    
-        <div class="span4 tile '.$tile4border.'">'.$page->theme->settings->tile4content.'<div class="tile-image-container">'.$tile4image.'</div></div>
-        <div class="span4 tile '.$tile5border.'">'.$page->theme->settings->tile5content.'<div class="tile-image-container">'.$tile5image.'</div></div>
-        <div class="span4 tile '.$tile6border.'">'.$page->theme->settings->tile6content.'<div class="tile-image-container">'.$tile6image.'</div></div>
-    </div>';
-
-    return $tiles;
+        return $tiles;
 }
 
 

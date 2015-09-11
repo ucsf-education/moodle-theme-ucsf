@@ -39,7 +39,7 @@ $THEME->name = 'ucsf';
 //
 $THEME->doctype = 'html5';
 $THEME->parents = array('bootstrapbase');
-$THEME->sheets = array('custom','ucsf');
+$THEME->sheets = array('custom', 'datepicker', 'ucsf');
 $THEME->supportscssoptimisation = false;
 $THEME->yuicssmodules = array();
 $THEME->enable_dock = true;
@@ -93,4 +93,7 @@ $THEME->layouts = array(
         'options' => array('langmenu'=>true),
     ),
 
+);
+$THEME->javascripts_footer = array(
+    'datepicker'
 );

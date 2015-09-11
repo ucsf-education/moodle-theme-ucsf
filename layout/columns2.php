@@ -66,7 +66,7 @@ echo $OUTPUT->doctype() ?>
                 <div class="login_user">
                     <?php
                         if(isloggedin()) { 
-                            echo $OUTPUT->login_info(); echo $globalsettings->helpfeedbacklink;   
+                            echo $globalsettings->helpfeedbacklink; echo $OUTPUT->login_info();
                         } else {
                             echo $OUTPUT->login_info();  
                         }
@@ -96,7 +96,6 @@ echo $OUTPUT->doctype() ?>
         </div>
     </nav>
 </header>
-
 <div id="page" class="container-fluid">
 
     <?php echo $alerts ?>

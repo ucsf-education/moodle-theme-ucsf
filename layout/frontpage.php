@@ -71,11 +71,13 @@ echo $OUTPUT->doctype() ?>
             <a class="brand pull-left" href="http://courses.ucsf.edu"><?php echo $globalsettings->logo;?></a>               
             <ul class="nav pull-right">
                 <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
+                
+                
                 <div class="login_user">
                     <?php
                         if(isloggedin()) { 
-                            echo $OUTPUT->login_info(); echo $globalsettings->helpfeedbacklink;   
-                        } else {
+                            echo $globalsettings->helpfeedbacklink; echo $OUTPUT->login_info(); 
+                        } else { 
                             echo $OUTPUT->login_info();  
                         }
                     ?>

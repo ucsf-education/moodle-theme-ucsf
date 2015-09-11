@@ -79,10 +79,27 @@ $string['displaycoursetitledesc'] = 'If checked, the course title will appear on
 $string['hidecustommenuwhenloggedout'] = 'Hide custom menu when logged out';
 $string['hidecustommenuwhenloggedoutdesc'] = 'Hide custom menu when logged out.';
 
+
+/* Help/Feedback */
+
+$string['helpfeedback'] = 'Help/Feedback';
+
+$string['helpfeedbacktitle'] = 'Enter Help/Feedback title';
+$string['helpfeedbacktitledesc'] = 'Enter desired text for Help/Feedback button';
+
+$string['numberoflinks'] = 'Select number of links';
+
+$string['enablehelpfeedback'] = 'Enable Help/Feedback menu';
+$string['enablehelpfeedbackdesc'] = ' Click to enable Help/Feedback menu';
+
+$string['helpfeedbackno'] = 'Help/Feedback {$a->help}';
+$string['cathelpfeedbackno'] = 'Category Help/Feedback {$a->cathelp}';
+
+$string['helpfeedbacklinklabel'] = "Enter label name";
+$string['helpfeedbacklinklabeldesc'] = "Custom label name";
+
 $string['helpfeedbacklink'] = 'Help/Feedback link to a static page';
 $string['helpfeedbacklinkdesc'] = 'Help/Feedback link to a static page. Example: http://www.ucsf.edu/static/help.html';
-
-$string['helpfeedbacklinklabel'] = 'Help/Feedback';
 $string['helpfeedbacklinktarget'] = 'Open Help/Feedback link in new window';
 $string['helpfeedbacklinktargetdesc'] = 'Should Help/Feedback link opens in a new window';
 
@@ -90,6 +107,14 @@ $string['copyright'] = 'Copyright';
 $string['copyrightdesc'] = 'UCSF Copyright.';
 
 
+/* General settings */
+$string['blockheading'] = 'Block settings';
+$string['block_width_desktop_heading'] = 'Block width settings for large desktop.';
+$string['block_width_desktop'] = 'Desktop';
+$string['block_width_desktopdesc'] = 'Set the width of block for screens over 1200px width. Please enter only width number.';
+$string['block_width_tablet_heading'] = 'Block width for portrait tablet to landscape and desktop.';
+$string['block_width_portrait_tablet'] = 'Tablet';
+$string['block_width_portrait_tabletdesc'] = 'Set the width of block for tablet screen resolution (770px - 1199px). Please enter only width number.';
 
 /* Category Customizations */
 $string['addcategorycustomizationheading'] = 'Add category';
@@ -113,9 +138,16 @@ $string['alertsdesc'] = 'This will display an alert (or multiple) in three diffe
 $string['enablealert'] = 'Enable Alert';
 $string['enablealertdesc'] = 'Enable or disable alerts';
 
-$string['alert1'] = 'First Alert';
-$string['alert2'] = 'Second Alert';
-$string['alert3'] = 'Third Alert';
+$string['alert1'] = 'Alert One';
+$string['alert2'] = 'Alert Two';
+$string['alert3'] = 'Alert Three';
+$string['alert4'] = 'Alert Four';
+$string['alert5'] = 'Alert Five';
+$string['alert6'] = 'Alert Six';
+$string['alert7'] = 'Alert Seven';
+$string['alert8'] = 'Alert Eight';
+$string['alert9'] = 'Alert Nine';
+$string['alert10'] = 'Alert Ten';
 
 $string['alerttitle'] = 'Title';
 $string['alerttitledesc'] = 'Main title/heading for your alert';
@@ -132,6 +164,56 @@ $string['alert_general'] = 'Announcement';
 
 $string['alertbgcolor'] = 'Alert Background Color';
 $string['alertbgcolordesc'] = 'Set the custom alert background color';
+$string['categories_list_alert'] = 'Category';
+$string['categories_list_alertdesc'] = 'Select which category/subcategory does this alert belongs. If you set "Site wide" value, the alert will be set through entire site.';
+
+$string['start_date'] = 'Start date';
+$string['start_datedesc'] = 'Set start date when you want this alert to show.';
+$string['end_date'] = 'End date';
+$string['end_datedesc'] = 'Set end date when you want this alert to stop showing.';
+
+$string['recurring_alert'] = 'Recurring alert';
+$string['recurring_alertdesc'] = 'Select which type alert do you want to use.';
+$string['none'] = 'None';
+$string['one_time'] = 'One time';
+$string['daily'] = 'Daily';
+$string['weekly'] = 'Weekly';
+$string['monthly'] = 'Monthly';
+$string['timezone_alerts'] = 'Timezone settings';
+$string['timezone_alertsdesc'] = 'Alerts are using UTC time. Set the time that you need for your alert settings.';
+
+
+$string['start_date_daily'] = 'Start date: ';
+$string['start_datedailydesc'] = 'Set start date when you want your alert to show up once a day.';
+
+$string['end_date_daily'] = 'End date: ';
+$string['end_date_dailydesc'] = 'Set time when you want your daily alert to end.';
+
+$string['start_date_weekly'] = 'Start date: ';
+$string['end_date_weekly'] = 'End date: ';
+$string['start_dateweeklydesc'] = 'Set date and time when you want your weekly alert to start.';
+$string['end_weeklydesc'] = 'Set date and time when you want your weekly alert to end.';
+$string['start_date_monthly'] = 'Set monthly alert: ';
+$string['end_date_monthly'] = 'End monthly alert: ';
+$string['start_datemonthlydesc'] = 'Set time when you want your monthly alert to start.';
+$string['end_monthlydesc'] = 'Set time when you want your monthly alert to end.';
+
+$string['start_hour_and_minute_daily'] = 'Start time: ';
+$string['start_hour_and_minute_dailydesc'] = 'Set hour and minutes when you want your daily alert to start.';
+$string['end_hour_and_minute_daily'] = 'End time: ';
+$string['end_hour_and_minute_dailydesc'] = 'Set hour and minutes when you want your daily alert to end.';
+$string['only_hour'] = 'Hour';
+$string['only_minute'] = 'Minute';
+
+$string['show_week_day'] = 'Set day';
+$string['show_week_daydesc'] = 'Set day in a week when you want your alert to show.';
+$string['show_month'] = 'Set month';
+$string['show_monthdesc'] = 'Set month that you want your alert to show.';
+
+
+$string['never_end'] = 'Never end';
+$string['number_of_alerts'] = 'Number of alerts';
+$string['number_of_alertsdesc'] = 'Set number of alert you want to have.';
 /* end of alerts */
 
 
@@ -142,12 +224,14 @@ $string['tileheadingsub'] = 'Six locations on the front page to add information 
 $string['tilecontent'] = 'Content';
 $string['tilecontentdesc'] = 'Content to display in the marketing box. Keep it short and sweet.';
 
-$string['tile1'] = 'Tile One';
-$string['tile2'] = 'Tile Two';
-$string['tile3'] = 'Tile Three';
-$string['tile4'] = 'Tile Four';
-$string['tile5'] = 'Tile Five';
-$string['tile6'] = 'Tile Six';
+$string['tile'] = 'Tile {$a->help}';
+$string['numberoftiles'] = 'Select number of tiles';
+
+$string['positionoftile'] = 'Select Tile Position';
+$string['positionoftiledesc'] = 'Put tile to desirable spot';
+
+$string['tileselect'] = 'Show this tile';
+$string['tileselectdesc'] = 'When selected, tile is going to show';
 
 $string['tileimage'] = 'Tile image';
 $string['tileimagedesc'] = 'Tile image to display in the tile box at the homepage';
