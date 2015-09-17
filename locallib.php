@@ -32,12 +32,12 @@
 class theme_ucsf_add_category_customization extends admin_setting_configselect {
 
     public function write_setting ($data) {
-        
-        $categories = get_config('theme_ucsf');            
 
-        if(!empty($categories->all_categories)) 
+        $categories = get_config('theme_ucsf');
+
+        if(!empty($categories->all_categories))
             set_config('all_categories', $categories->all_categories . ',' . $data, 'theme_ucsf');
-        else 
+        else
             set_config('all_categories', $data, 'theme_ucsf');
 
         return parent::write_setting(0);
@@ -49,7 +49,7 @@ class theme_ucsf_remove_category_customization extends admin_setting_configselec
 
     public function write_setting ($data) {
 
-    	$categories = get_config('theme_ucsf');            
+    	$categories = get_config('theme_ucsf');
 
         if(!empty($categories->all_categories)) {
             $temp_array = explode(",", $categories->all_categories);
@@ -60,286 +60,11 @@ class theme_ucsf_remove_category_customization extends admin_setting_configselec
 
                 set_config('all_categories', $fin, 'theme_ucsf');
             }
-        } 
+        }
 
         return parent::write_setting(0);
     }
 }
-
-
-/**
- * YEAR, MONTH, DATE, HOUR AND MINUTE selector
- *
- * Class that stores selected year, month, date, hour and minute
- * in a database.
- *
- * @author Sasa Prsir <sasa.prsir@lambdasolutions.net>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-class admin_setting_configdatetime extends admin_setting {
-    /** @var string Used for setting year, month, date, out and minut select. */
-    public $name2;
-    public $name3;
-    public $name4;
-    public $name5;
-    public $name6;
-
-    /**
-     * Constructor
-     * @param string $name setting for component name
-     * @param string $year setting for year
-     * @param string $month setting for month
-     * @param string $date setting for date
-     * @param string $hour setting for hour
-     * @param string $minute setting for minute
-     * @param string $visiblename localised
-     * @param string $description long localised info
-     * @param array $defaultsetting array representing null
-     */
-    public function __construct($name, $year, $month, $date, $hour, $minute, $visiblename, $description, $defaultsetting) {
-        $this->name2 = $year;
-        $this->name3 = $month;
-        $this->name4 = $date;
-        $this->name5 = $hour;
-        $this->name6 = $minute;
-        parent::__construct($name, $visiblename, $description, $defaultsetting);
-    }
-
-    /**
-     * Get the selected yera, month, date, hour and minute.
-     *
-     * @return mixed An array containing 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx, or null if not set
-     */
-    public function get_setting() {
-        $result2 = $this->config_read($this->name2);
-        $result3 = $this->config_read($this->name3);
-        $result4 = $this->config_read($this->name4);
-        $result5 = $this->config_read($this->name5);
-        $result6 = $this->config_read($this->name6);
-        if (
-                is_null($result2) 
-                or is_null($result3) 
-                or is_null($result4)
-                or is_null($result5)
-                or is_null($result6)) {
-            return NULL;
-        }
-
-        return array(
-            'year'      => $result2, 
-            'month'     => $result3,
-            'date'      => $result4,
-            'hour'      => $result5,
-            'minute'    => $result6
-        );
-    }
-    
-    /**
-     * Store the time (Year, month, date, hour and minute)
-     *
-     * @param array $data Must be form 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx
-     * @return bool true if success, false if not
-     */
-    public function write_setting($data) {
-        
-        if (!is_array($data)) {
-            return '';
-        }
-
-        $result = $this->config_write($this->name2, (int)$data['year']) 
-                && $this->config_write($this->name3, (int)$data['month'])
-                && $this->config_write($this->name4, (int)$data['date'])
-                && $this->config_write($this->name5, (int)$data['hour'])
-                && $this->config_write($this->name6, (int)$data['minute']);
-        return ($result ? '' : get_string('errorsetting', 'admin'));
-        
-    }
-
-    /**
-     * Returns XHTML time select fields
-     *
-     * @param array $data Must be form 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx
-     * @param string $query
-     * @return string XHTML time select fields and wrapping div(s)
-     */
-    public function output_html($data, $query='') {
-        $default = $this->get_defaultsetting();
-
-        // Start form for date input.
-        $return  = '<div class="form-time defaultsnext">'; 
-        //$return .= '<p>Date: <input type="text" id="datepicker"></p>';   
-        
-        // Start output for year select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'year">' . get_string('year') . '</label>';
-        $return .= 'Year: <select id="' . $this->get_id() . 'year" name="' . $this->get_full_name() . '[year]">';
-        $i = date('Y');
-        $return .= '<option value="' . $i . '"' . ($i == $data['year'] ? ' selected="selected"' : '') . '>' . $i . '</option>';
-        $j = date('Y', strtotime('+1 year'));
-        $return .= '<option value="' . $j . '"' . ($j == $data['year'] ? ' selected="selected"' : '') . '>' . $j . '</option>';
-        $k = date('Y', strtotime('+2 years'));
-        $return .= '<option value="' . $k . '"' . ($k == $data['year'] ? ' selected="selected"' : '') . '>' . $k . '</option>';
-        $return .= '</select>';
-        
-        // Start output for month select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'month">' . get_string('month') . '</label>';
-        $return .= ' Month: <select id="' . $this->get_id() . 'month" name="' . $this->get_full_name() . '[month]">';
-        for ($m = 1; $m <= 12; $m++) {
-            $return .= '<option value="' . $m . '"' . ($m == $data['month'] ? ' selected="selected"' : '') . '>' . $m . '</option>';
-        }
-        $return .= '</select>';
-        
-        // Start output for date select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'date">' . get_string('date') . '</label>';
-        $return .= ' Date: <select id="' . $this->get_id() . 'date" name="' . $this->get_full_name() . '[date]">';
-        for ($i = 1; $i <= 31; $i++) { 
-            $return .= '<option value="' . $i . '"' . ($i == $data['date'] ? ' selected="selected"' : '') . '>' . $i . '</option>';
-        }
-        $return .= '</select>';
-        
-        // Start output for hour select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'hour">' . get_string('hours') . '</label>';
-        $return .= ' Hour: <select id="' . $this->get_id() . 'hour" name="' . $this->get_full_name() . '[hour]">';
-        for ($i = 1; $i <= 24; $i++) {
-            $return .= '<option value="' . $i . '"' . ($i == $data['hour'] ? ' selected="selected"' : '') . '>' . $i . '</option>';
-        } 
-        $return .= '</select>';
-        
-        // Start output for minute select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'minute">' . get_string('minutes') . '</label>';
-        $return .= ' Minute: <select id="' . $this->get_id() . 'minute" name="' . $this->get_full_name() . '[minute]">';
-        for ($i = 0; $i < 60; $i += 5) {
-            $return .= '<option value="' . $i . '"' . ($i == $data['minute'] ? ' selected="selected"' : '') . '>' . $i . '</option>';
-        }
-        $return .= '</select>';
-        $return .= '</div>';
-        
-        return format_admin_setting($this, $this->visiblename, $return, $this->description, false, '', $default, $query);
-    }
-
-}
-
-
-/**
- * YEAR, MONTH, DATE, HOUR AND MINUTE selector
- *
- * Class that stores selected year, month, date, hour and minute
- * in a database.
- *
- * @author Sasa Prsir <sasa.prsir@lambdasolutions.net>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-
-class theme_ucsf_admin_setting_configonlytime extends admin_setting {
-    /** @var string Used for setting year, month, date, out and minut select. */
-    public $name5;
-    public $name6;
-
-    /**
-     * Constructor
-     * @param string $name setting for component name
-     * @param string $year setting for year
-     * @param string $month setting for month
-     * @param string $date setting for date
-     * @param string $hour setting for hour
-     * @param string $minute setting for minute
-     * @param string $visiblename localised
-     * @param string $description long localised info
-     * @param array $defaultsetting array representing null
-     */
-    public function __construct($name, $hour, $minute, $visiblename, $description, $defaultsetting) {
-        $this->name5 = $hour;
-        $this->name6 = $minute;
-        parent::__construct($name, $visiblename, $description, $defaultsetting);
-    }
-
-    /**
-     * Get the selected yera, month, date, hour and minute.
-     *
-     * @return mixed An array containing 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx, or null if not set
-     */
-    public function get_setting() {
-        $result5 = $this->config_read($this->name5);
-        $result6 = $this->config_read($this->name6);
-        if (
-                is_null($result5) 
-                or is_null($result6)) {
-            return NULL;
-        }
-        
-        return array(
-            'only_hour'      => $result5,
-            'only_minute'    => $result6
-        );
-        
-    }
-    
-    /**
-     * Store the time (Year, month, date, hour and minute)
-     *
-     * @param array $data Must be form 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx
-     * @return bool true if success, false if not
-     */
-    public function write_setting($data) {
-        
-        if (!is_array($data)) {
-            return '';
-        }
-
-        $result = $this->config_write($this->name5, (int)$data['only_hour']) 
-                && $this->config_write($this->name6, (int)$data['only_minute']);
-        return ($result ? '' : get_string('errorsetting', 'admin'));
-        
-    }
-
-    /**
-     * Returns XHTML time select fields
-     *
-     * @param array $data Must be form 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx
-     * @param string $query
-     * @return string XHTML time select fields and wrapping div(s)
-     */
-    public function output_html($data, $query='') {
-        $default = $this->get_defaultsetting();
-
-        // Start form for date input.
-        $return  = '<div class="form-time defaultsnext">'; 
-        
-        // Start output for hour select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'only_hour">' . get_string('only_hour', 'theme_ucsf') . '</label>';
-        $return .= ' Hour: <select id="' . $this->get_id() . 'only_hour" name="' . $this->get_full_name() . '[only_hour]">';
-        for ($i = 0; $i <= 23; $i++) {
-            if ($i < 10) {
-                $writeHour = "0".$i;
-            }
-            if ($i >= 10) {
-                $writeHour = "".$i;
-            }
-            $return .= '<option value="' . $i . '"' . ($i == $data['only_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
-        } 
-        $return .= '</select>';
-        
-        // Start output for minute select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'only_minute">' . get_string('only_minute', 'theme_ucsf') . '</label>';
-        $return .= ' Minute: <select id="' . $this->get_id() . 'only_minute" name="' . $this->get_full_name() . '[only_minute]">';
-        for ($i = 0; $i < 60; $i += 5) {
-            if ($i < 10) {
-                $writeminute = "0".$i;
-            }
-            if ($i >= 10) {
-                $writeminute = "".$i;
-            }
-            $return .= '<option value="' . $i . '"' . ($i == $data['only_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
-        }
-        $return .= '</select>';
-        $return .= '</div>';
-        
-        return format_admin_setting($this, $this->visiblename, $return, $this->description, false, '', $default, $query);
-    }
-
-}
-
-
 
 /**
  * YEAR, MONTH, DATE, HOUR AND MINUTE jquery selector
@@ -352,9 +77,8 @@ class theme_ucsf_admin_setting_configonlytime extends admin_setting {
  */
 class theme_ucsf_datepicker extends admin_setting {
     /** @var string Used for setting year, month, date, out and minut select. */
-    public $name4;
-    public $name5;
-    public $name6;
+    public $start_date;
+    public $end_date;
 
     /**
      * Constructor
@@ -368,10 +92,9 @@ class theme_ucsf_datepicker extends admin_setting {
      * @param string $description long localised info
      * @param array $defaultsetting array representing null
      */
-    public function __construct($name, $datepicker, $hour,$minute,$visiblename, $description, $defaultsetting) {
-        $this->name4 = $datepicker;
-        $this->name5 = $hour;
-        $this->name6 = $minute;
+    public function __construct($name, $datepicker, $end_datepicker, $visiblename, $description, $defaultsetting) {
+        $this->start_date = $datepicker;
+        $this->end_date = $end_datepicker;
         parent::__construct($name, $visiblename, $description, $defaultsetting);
     }
 
@@ -381,25 +104,21 @@ class theme_ucsf_datepicker extends admin_setting {
      * @return mixed An array containing 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx, or null if not set
      */
     public function get_setting() {
-        $result4 = $this->config_read($this->name4);
-        $result5 = $this->config_read($this->name5);
-        $result6 = $this->config_read($this->name6);
-        
-         if (is_null($result4) 
-                or is_null($result5)
-                or is_null($result6)) {
+        $start_date = $this->config_read($this->start_date);
+        $end_date   = $this->config_read($this->end_date);
+
+         if (is_null($start_date)
+                or is_null($end_date)) {
             return NULL;
         }
-        
 
         return array(
-            'datepicker'      => $result4,
-            'only_hour'      => $result5,
-            'only_minute'    => $result6
+            'datepicker'          => $start_date,
+            'end_datepicker'      => $end_date
         );
-        
+
     }
-    
+
     /**
      * Store the time (Year, month, date, hour and minute)
      *
@@ -407,13 +126,164 @@ class theme_ucsf_datepicker extends admin_setting {
      * @return bool true if success, false if not
      */
     public function write_setting($data) {
-        
-        $result = $this->config_write($this->name4, $data['datepicker'])
-                && $this->config_write($this->name5, $data['only_hour'])
-                && $this->config_write($this->name6, $data['only_minute']);
-        return ($result ? '' : get_string('errorsetting', 'admin'));
-        
-        
+
+        $validate = $this->validate($data);
+        if ($validate === true){
+            $result = $this->config_write($this->start_date, isset($data['datepicker']) ? $data['datepicker'] : '')
+                && $this->config_write($this->end_date, isset($data['end_datepicker']) ? $data['end_datepicker'] : '');
+            return ($result ? '' : get_string('errorsetting', 'admin'));
+        } else {
+            if (is_null($data['datepicker']) || is_null($data['end_datepicker']) || $data['datepicker'] == "" || $data['end_datepicker'] ==""){
+                return (get_string('empdyDateFieldError', 'theme_ucsf'));
+            } else {
+                return (get_string('oneTimeStartEndDateError', 'theme_ucsf'));
+            }
+        }
+
+    }
+
+    /**
+     * Validate data before storage
+     * @param string data
+     * @return mixed true if ok string if error found
+     */
+    public function validate($data) {
+        $time_start = strtotime($data['datepicker']);
+        $time_end = strtotime($data['end_datepicker']);
+
+        if($data['datepicker'] == null || $data['datepicker'] == ''){
+            return false;
+        } elseif ($time_start > $time_end) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    /**
+     * Returns XHTML time select fields
+     *
+     * @param array $data Must be form 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx
+     * @param string $query
+     * @return string XHTML time select fields and wrapping div(s)
+     */
+    public function output_html($data, $query='') {
+
+        $default = $this->get_defaultsetting();
+
+        // Start form for date input.
+        $return  = '<div class="form-time defaultsnext">';
+        // Datepicker.
+        $return .= '<input type="text" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="datepicker" value="'.s( $data['datepicker']).'"><br />';
+
+        // Datepicker.
+        $return .= '<input type="text" id="' . $this->get_id() . 'end_datepicker" name="' . $this->get_full_name() . '[end_datepicker]" class="datepicker" value="'.s( $data['end_datepicker']).'">';
+
+        $return .= '</div>';
+
+        return format_admin_setting($this, $this->visiblename, $return, $this->description, false, '', $default, $query);
+    }
+
+}
+
+/**
+ * HOUR AND MINUTE jquery selector
+ *
+ * Class that stores selected year, month, date, hour and minute
+ * in a database.
+ *
+ * @author Dusan Sparavalo <dusan.sparavalo@lambdasolutions.net>
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+class theme_ucsf_datepicker_time extends admin_setting {
+    public $start_hour;
+    public $start_minute;
+
+    /**
+     * Constructor
+     * @param string $name setting for component name
+     * @param string $year setting for year
+     * @param string $month setting for month
+     * @param string $date setting for date
+     * @param string $hour setting for hour
+     * @param string $minute setting for minute
+     * @param string $visiblename localised
+     * @param string $description long localised info
+     * @param array $defaultsetting array representing null
+     */
+
+    public function __construct($name, $hour, $minute, $end_hour, $end_minute, $visiblename, $description, $defaultsetting) {
+        $this->start_hour = $hour;
+        $this->start_minute = $minute;
+
+        $this->end_hour = $end_hour;
+        $this->end_minute = $end_minute;
+        parent::__construct($name, $visiblename, $description, $defaultsetting);
+    }
+
+    /**
+     * Get the selected yera, month, date, hour and minute.
+     *
+     * @return mixed An array containing 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx, or null if not set
+     */
+    public function get_setting() {
+        $start_hour = $this->config_read($this->start_hour);
+        $start_minute = $this->config_read($this->start_minute);
+
+        $end_hour = $this->config_read($this->end_hour);
+        $end_minute = $this->config_read($this->end_minute);
+
+        if (is_null($start_hour)
+                or is_null($start_minute)
+                or is_null($end_hour)
+                or is_null($end_minute)) {
+            return NULL;
+        }
+
+        return array(
+            'start_hour'    => $start_hour,
+            'start_minute'  => $start_minute,
+            'end_hour'      => $end_hour,
+            'end_minute'    => $end_minute
+            );
+    }
+
+    /**
+     * Store the time (Year, month, date, hour and minute)
+     *
+     * @param array $data Must be form 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx
+     * @return bool true if success, false if not
+     */
+    public function write_setting($data) {
+
+        $validate = $this->validate($data);
+        if ($validate === true) {
+            $result = $this->config_write($this->start_hour, isset($data['start_hour']) ? $data['start_hour'] : '')
+                && $this->config_write($this->start_minute, isset($data['start_minute']) ? $data['start_minute'] : '')
+                && $this->config_write($this->end_hour, isset($data['end_hour']) ? $data['end_hour'] : '')
+                && $this->config_write($this->end_minute, isset($data['end_minute']) ? $data['end_minute'] : '');
+            return ($result ? '' : get_string('errorsetting', 'admin'));
+        } else {
+            $result = false;
+            return (get_string('oneTimeStartEndTimeError', 'theme_ucsf'));
+        }
+
+    }
+
+    /**
+     * Validate data before storage
+     * @param string data
+     * @return mixed true if ok and false if error found
+     */
+    public function validate($data) {
+        $time_start = $data['start_hour'] * 3600 + $data['start_minute'] * 60;
+        $time_end = $data['end_hour'] * 3600 + $data['end_minute'] * 60;
+
+        if($time_start < $time_end) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -424,16 +294,14 @@ class theme_ucsf_datepicker extends admin_setting {
      * @return string XHTML time select fields and wrapping div(s)
      */
     public function output_html($data, $query='') {
-        
+
         $default = $this->get_defaultsetting();
-        
-        // Start form for date input.
-        $return  = '<div class="form-time defaultsnext">'; 
-        
-        // Datepicker.
-        $return .= '<input required type="text" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="datepicker" value="'.s( $data['datepicker']).'">';          // Start output for hour select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'only_hour">' . get_string('only_hour', 'theme_ucsf') . '</label>';
-        $return .= ' Hour: <select id="' . $this->get_id() . 'only_hour" name="' . $this->get_full_name() . '[only_hour]">';
+
+        $return = '<div class="form-time defaultsnext">';
+
+        // Start output for hour select box.
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_hour">' . get_string('only_hour', 'theme_ucsf') . '</label>';
+        $return .= ' Hour: <select id="' . $this->get_id() . 'start_hour" name="' . $this->get_full_name() . '[start_hour]">';
         for ($i = 0; $i <= 23; $i++) {
             if ($i < 10) {
                 $writeHour = "0".$i;
@@ -441,33 +309,59 @@ class theme_ucsf_datepicker extends admin_setting {
             if ($i >= 10) {
                 $writeHour = "".$i;
             }
-            $return .= '<option value="' . $i . '"' . ($i == $data['only_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
-        } 
+            $return .= '<option value="' . $i . '"' . ($i == $data['start_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
+        }
         $return .= '</select>';
-        
+
         // Start output for minute select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'only_minute">' . get_string('only_minute', 'theme_ucsf') . '</label>';
-        $return .= ' Minute: <select id="' . $this->get_id() . 'only_minute" name="' . $this->get_full_name() . '[only_minute]">';
-        for ($i = 0; $i < 60; $i += 5) { 
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_minute">' . get_string('only_minute', 'theme_ucsf') . '</label>';
+        $return .= ' Minute: <select id="' . $this->get_id() . 'start_minute" name="' . $this->get_full_name() . '[start_minute]">';
+        for ($i = 0; $i < 60; $i += 5) {
             if ($i < 10) {
                 $writeminute = "0".$i;
             }
             if ($i >= 10) {
                 $writeminute = "".$i;
             }
-            $return .= '<option value="' . $i . '"' . ($i == $data['only_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
+            $return .= '<option value="' . $i . '"' . ($i == $data['start_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
         }
         $return .= '</select>';
-        
-        
+        $return .= '</br>';
+
+        // End output for hour select box.
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_hour">' . get_string('end_hour', 'theme_ucsf') . '</label>';
+        $return .= ' Hour: <select id="' . $this->get_id() . 'end_hour" name="' . $this->get_full_name() . '[end_hour]">';
+        for ($i = 0; $i <= 23; $i++) {
+            if ($i < 10) {
+                $writeHour = "0".$i;
+            }
+            if ($i >= 10) {
+                $writeHour = "".$i;
+            }
+            $return .= '<option value="' . $i . '"' . ($i == $data['end_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
+        }
+        $return .= '</select>';
+
+        // End output for minute select box.
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_minute">' . get_string('end_minute', 'theme_ucsf') . '</label>';
+        $return .= ' Minute: <select id="' . $this->get_id() . 'end_minute" name="' . $this->get_full_name() . '[end_minute]">';
+        for ($i = 0; $i < 60; $i += 5) {
+            if ($i < 10) {
+                $writeminute = "0".$i;
+            }
+            if ($i >= 10) {
+                $writeminute = "".$i;
+            }
+            $return .= '<option value="' . $i . '"' . ($i == $data['end_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
+        }
+        $return .= '</select>';
+
+
         $return .= '</div>';
-        
+
         return format_admin_setting($this, $this->visiblename, $return, $this->description, false, '', $default, $query);
     }
-
 }
-
-
 
 /**
  * YEAR, MONTH, DATE, HOUR AND MINUTE jquery selector
@@ -478,9 +372,11 @@ class theme_ucsf_datepicker extends admin_setting {
  * @author Sasa Prsir <sasa.prsir@lambdasolutions.net>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class theme_ucsf_jquery_datepicker extends admin_setting {
+class theme_ucsf_datepicker_with_validation extends admin_setting {
     /** @var string Used for setting year, month, date, out and minut select. */
-    public $name4;
+    public $start_date;
+    public $start_hour;
+    public $start_minute;
 
     /**
      * Constructor
@@ -494,8 +390,15 @@ class theme_ucsf_jquery_datepicker extends admin_setting {
      * @param string $description long localised info
      * @param array $defaultsetting array representing null
      */
-    public function __construct($name, $datepicker, $visiblename, $description, $defaultsetting) {
-        $this->name4 = $datepicker;
+    public function __construct($name, $datepicker, $hour, $minute, $end_datepicker,  $end_hour, $end_minute, $visiblename,$description, $defaultsetting) {
+        $this->start_date = $datepicker;
+        $this->start_hour = $hour;
+        $this->start_minute = $minute;
+
+
+        $this->end_date = $end_datepicker;
+        $this->end_hour = $end_hour;
+        $this->end_minute = $end_minute;
         parent::__construct($name, $visiblename, $description, $defaultsetting);
     }
 
@@ -505,16 +408,36 @@ class theme_ucsf_jquery_datepicker extends admin_setting {
      * @return mixed An array containing 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx, or null if not set
      */
     public function get_setting() {
-        $result = $this->config_read($this->name4);
-        
-        if (is_null($result)) {
-            return NULL;
-         }
 
-        return $result;
-        
+        $start_date = $this->config_read($this->start_date);
+        $start_hour = $this->config_read($this->start_hour);
+        $start_minute = $this->config_read($this->start_minute);
+
+
+        $end_date = $this->config_read($this->end_date);
+        $end_hour = $this->config_read($this->end_hour);
+        $end_minute = $this->config_read($this->end_minute);
+
+         if (is_null($start_date)
+                or is_null($start_hour)
+                or is_null($start_minute)
+                or is_null($end_date)
+                or is_null($end_hour)
+                or is_null($end_minute)) {
+            return NULL;
+        }
+
+        return array(
+            'datepicker'            => $start_date,
+            'only_hour'             => $start_hour,
+            'only_minute'           => $start_minute,
+            'end_datepicker'        => $end_date,
+            'end_hour'              => $end_hour,
+            'end_minute'            => $end_minute
+        );
+
     }
-    
+
     /**
      * Store the time (Year, month, date, hour and minute)
      *
@@ -522,11 +445,45 @@ class theme_ucsf_jquery_datepicker extends admin_setting {
      * @return bool true if success, false if not
      */
     public function write_setting($data) {
-        
-        $result = $this->config_write($this->name4, $data['datepicker']);
-        return ($result ? '' : get_string('errorsetting', 'admin'));
-        
-        
+        global $CFG;
+
+        $validate = $this->validate($data);
+        if ($validate === true){
+            $result = $this->config_write($this->start_date,  isset($data['datepicker']) ? $data['datepicker'] : '')
+                && $this->config_write($this->start_hour, isset($data['only_hour']) ? $data['only_hour'] : '')
+                && $this->config_write($this->start_minute, isset($data['only_minute']) ? $data['only_minute'] : '')
+                && $this->config_write($this->end_date, isset($data['end_datepicker']) ? $data['end_datepicker'] : '')
+                && $this->config_write($this->end_hour, isset($data['end_hour']) ? $data['end_hour'] : '')
+                && $this->config_write($this->end_minute, isset($data['end_minute']) ? $data['end_minute'] : '');
+
+            return ($result ? '' : get_string('errorsetting', 'admin'));
+        } else {
+            if (is_null($data['datepicker']) || is_null($data['end_datepicker']) || $data['datepicker'] == "" || $data['end_datepicker'] ==""){
+                return (get_string('empdyDateFieldError', 'theme_ucsf'));
+            } else {
+                return (get_string('oneTimeStartEndDateError', 'theme_ucsf'));
+            }
+        }
+
+    }
+
+    /**
+     * Validate data before storage
+     * @param string data
+     * @return mixed true if ok string if error found
+     */
+    public function validate($data) {
+
+        $time_start = strtotime($data['datepicker']) + $data['only_hour'] * 3600 + $data['only_minute'] * 60;
+        $time_end = strtotime($data['end_datepicker']) + $data['end_hour']* 3600 + $data['end_minute'] * 60;
+
+        if($data['datepicker'] == null || $data['datepicker'] == ''){
+            return false;
+        } elseif ($time_start > $time_end) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -540,15 +497,73 @@ class theme_ucsf_jquery_datepicker extends admin_setting {
         $default = $this->get_defaultsetting();
 
         // Start form for date input.
-        $return  = '<div class="form-time defaultsnext">'; 
-        
+        $return  = '<div class="form-time defaultsnext">';
         // Datepicker.
-        $return .= '<input required type="text" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="datepicker" value="'.s($data).'">';   
-        
-        
+        $return .= '<input type="text" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="datepicker" value="'.s( $data['datepicker']).'">';
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'only_hour">' . get_string('only_hour', 'theme_ucsf') . '</label>';
+        $return .= ' Hour: <select id="' . $this->get_id() . 'only_hour" name="' . $this->get_full_name() . '[only_hour]">';
+        for ($i = 0; $i <= 23; $i++) {
+            if ($i < 10) {
+                $writeHour = "0".$i;
+            }
+            if ($i >= 10) {
+                $writeHour = "".$i;
+            }
+            $return .= '<option value="' . $i . '"' . ($i == $data['only_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
+        }
+        $return .= '</select>';
+
+        // Start output for minute select box.
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'only_minute">' . get_string('only_minute', 'theme_ucsf') . '</label>';
+        $return .= ' Minute: <select id="' . $this->get_id() . 'only_minute" name="' . $this->get_full_name() . '[only_minute]">';
+        for ($i = 0; $i < 60; $i += 5) {
+            if ($i < 10) {
+                $writeminute = "0".$i;
+            }
+            if ($i >= 10) {
+                $writeminute = "".$i;
+            }
+            $return .= '<option value="' . $i . '"' . ($i == $data['only_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
+        }
+        $return .= '</select>';
+        $return .= '</br>';
+
+
+        // Start form for date input.
+        // Datepicker.
+        $return .= '<input type="text" id="' . $this->get_id() . 'end_datepicker" name="' . $this->get_full_name() . '[end_datepicker]" class="datepicker" value="'.s( $data['end_datepicker']).'">';
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_hour">' . get_string('end_hour', 'theme_ucsf') . '</label>';
+        $return .= ' Hour: <select id="' . $this->get_id() . 'end_hour" name="' . $this->get_full_name() . '[end_hour]">';
+        for ($i = 0; $i <= 23; $i++) {
+            if ($i < 10) {
+                $writeHour = "0".$i;
+            }
+            if ($i >= 10) {
+                $writeHour = "".$i;
+            }
+            $return .= '<option value="' . $i . '"' . ($i == $data['end_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
+        }
+        $return .= '</select>';
+
+        // Start output for minute select box.
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_minute">' . get_string('end_minute', 'theme_ucsf') . '</label>';
+        $return .= ' Minute: <select id="' . $this->get_id() . 'end_minute" name="' . $this->get_full_name() . '[end_minute]">';
+        for ($i = 0; $i < 60; $i += 5) {
+            if ($i < 10) {
+                $writeminute = "0".$i;
+            }
+            if ($i >= 10) {
+                $writeminute = "".$i;
+            }
+            $return .= '<option value="' . $i . '"' . ($i == $data['end_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
+        }
+        $return .= '</select>';
+
+
         $return .= '</div>';
-        
+
         return format_admin_setting($this, $this->visiblename, $return, $this->description, false, '', $default, $query);
     }
 
 }
+?>

@@ -138,6 +138,11 @@ $string['alertsdesc'] = 'This will display an alert (or multiple) in three diffe
 $string['enablealert'] = 'Enable Alert';
 $string['enablealertdesc'] = 'Enable or disable alerts';
 
+$string['oneTimeStartEndDateError'] = 'Could not update the alert! It is set to end before it starts!';
+$string['oneTimeStartEndTimeError'] = 'Could not update the alert! It is set to end before it starts!';
+$string['empdyDateFieldError'] = 'Could not update the alert! The date field cannot be empty!';
+
+
 $string['alert1'] = 'Alert One';
 $string['alert2'] = 'Alert Two';
 $string['alert3'] = 'Alert Three';
@@ -167,8 +172,8 @@ $string['alertbgcolordesc'] = 'Set the custom alert background color';
 $string['categories_list_alert'] = 'Category';
 $string['categories_list_alertdesc'] = 'Select which category/subcategory does this alert belongs. If you set "Site wide" value, the alert will be set through entire site.';
 
-$string['start_date'] = 'Start date';
-$string['start_datedesc'] = 'Set start date when you want this alert to show.';
+$string['start_date'] = 'Start/End date';
+$string['start_datedesc'] = 'Set start date when you want this alert to show and end date when you want this alert to stop.';
 $string['end_date'] = 'End date';
 $string['end_datedesc'] = 'Set end date when you want this alert to stop showing.';
 
@@ -190,20 +195,23 @@ $string['end_date_daily'] = 'End date: ';
 $string['end_date_dailydesc'] = 'Set time when you want your daily alert to end.';
 
 $string['start_date_weekly'] = 'Start date: ';
-$string['end_date_weekly'] = 'End date: ';
+$string['end_date_weekly'] = 'Start/End time: ';
 $string['start_dateweeklydesc'] = 'Set date and time when you want your weekly alert to start.';
-$string['end_weeklydesc'] = 'Set date and time when you want your weekly alert to end.';
+$string['end_weeklydesc'] = 'Set time when you want your weekly alert to start/end.';
 $string['start_date_monthly'] = 'Set monthly alert: ';
 $string['end_date_monthly'] = 'End monthly alert: ';
 $string['start_datemonthlydesc'] = 'Set time when you want your monthly alert to start.';
 $string['end_monthlydesc'] = 'Set time when you want your monthly alert to end.';
 
 $string['start_hour_and_minute_daily'] = 'Start time: ';
-$string['start_hour_and_minute_dailydesc'] = 'Set hour and minutes when you want your daily alert to start.';
+$string['start_hour_and_minute_dailydesc'] = 'Set hour and minutes when you want your daily alert to start/end.';
 $string['end_hour_and_minute_daily'] = 'End time: ';
 $string['end_hour_and_minute_dailydesc'] = 'Set hour and minutes when you want your daily alert to end.';
 $string['only_hour'] = 'Hour';
 $string['only_minute'] = 'Minute';
+
+$string['end_hour'] = 'End hour';
+$string['end_minute'] = 'End minute';
 
 $string['show_week_day'] = 'Set day';
 $string['show_week_daydesc'] = 'Set day in a week when you want your alert to show.';
