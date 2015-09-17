@@ -34,14 +34,14 @@ $settings=null;
 require_once($CFG->dirroot.'/theme/ucsf/locallib.php');
 
 defined('MOODLE_INTERNAL') || die;
-    
+
     // Get all categories
     $categories = get_config('theme_ucsf');
     $all_categories = '';
     if(!empty($categories->all_categories))
         $all_categories = $categories->all_categories;
     $all_categories_array = explode(",", $all_categories);
-    
+
     // Get all categories
     $get_recurring_alerts = get_config('theme_ucsf');
     $all_categories = '';
@@ -49,19 +49,19 @@ defined('MOODLE_INTERNAL') || die;
         $all_categories = $get_recurring_alerts->all_categories;
     $all_categories_array = explode(",", $all_categories);
 
-    $sql = "SELECT cc.id, cc.name 
-            FROM {course_categories} cc            
-            WHERE cc.parent = 0             
+    $sql = "SELECT cc.id, cc.name
+            FROM {course_categories} cc
+            WHERE cc.parent = 0
             ORDER BY cc.sortorder";
     $course_categories =  $DB->get_records_sql($sql);
 
     $sql2 = "SELECT ccp.id, cc.name, ccp.name as parentname
-            FROM {course_categories} cc  
+            FROM {course_categories} cc
             INNER JOIN {course_categories} ccp
-            WHERE ccp.parent = cc.id            
+            WHERE ccp.parent = cc.id
             ORDER BY cc.sortorder";
     $course_subcategories =  $DB->get_records_sql($sql2);
-    
+
     $choices = array();
     $choices[0]="None";
 
@@ -70,12 +70,11 @@ defined('MOODLE_INTERNAL') || die;
 
     $alert_category_array = array();
     $alert_category_array[0]="None";
-    
+
     foreach ($course_categories as $alert_category_arrays) {
         $alert_category_array[$alert_category_arrays->id]=$alert_category_arrays->name;
     }
-    
-    
+
     foreach ($course_subcategories as $alert_category_arrays) {
         foreach ($all_categories_array as $all_cats) {
             if ($all_cats == $alert_category_arrays->id) {
@@ -85,8 +84,7 @@ defined('MOODLE_INTERNAL') || die;
         if(!in_array($alert_category_arrays->id, $all_categories_array))
             $alert_category_array[$alert_category_arrays->id]=$alert_category_arrays->name . ' / ' .$alert_category_arrays->parentname;
     }
-    
-    
+
     foreach ($course_categories as $cat) {
         foreach ($all_categories_array as $all_cats) {
             if ($all_cats == $cat->id) {
@@ -110,7 +108,7 @@ defined('MOODLE_INTERNAL') || die;
     $ADMIN->add('themes', new admin_category('theme_ucsf', 'UCSF'));
 
     $settings_lr = new admin_settingpage('theme_ucsf_helpfeedback_settings', get_string('helpfeedback', 'theme_ucsf'));
-    
+
     // Enable/Disable Help/Feedback links;.
     $name = 'theme_ucsf/enablehelpfeedback';
     $title = get_string('enablehelpfeedback', 'theme_ucsf');
@@ -129,7 +127,7 @@ defined('MOODLE_INTERNAL') || die;
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings_lr->add($setting);
 
-    // Select the number of links 
+    // Select the number of links
     $name = 'theme_ucsf/numberoflinks';
     $title = get_string('numberoflinks', 'theme_ucsf');
     $description = '';
@@ -147,7 +145,7 @@ defined('MOODLE_INTERNAL') || die;
         9 => '9',
         10 => '10'
     );
-    
+
     $setting = new admin_setting_configselect($name, $title, $description, $default, $helpfeedbackchoices);
     $settings_lr->add($setting);
 
@@ -160,7 +158,7 @@ defined('MOODLE_INTERNAL') || die;
         $information = "";
         $setting = new admin_setting_heading($name, $heading, $information);
         $settings_lr->add($setting);
-        
+
         $name = 'theme_ucsf/helpfeedback' . $i . 'link';
         $title = get_string('helpfeedbacklink', 'theme_ucsf');
         $description = get_string('helpfeedbacklinkdesc', 'theme_ucsf');
@@ -189,7 +187,7 @@ defined('MOODLE_INTERNAL') || die;
     }
 
     $ADMIN->add('theme_ucsf', $settings_lr);
-    
+
     /* GENERAL SETTINGS
     -------------------------------------------------------------------------------*/
     $settings_lr = new admin_settingpage('theme_ucsf_general_settings', get_string('generalheading', 'theme_ucsf'));
@@ -199,7 +197,7 @@ defined('MOODLE_INTERNAL') || die;
     $heading = get_string('generalsettings', 'theme_ucsf');
     $information = get_string('generalsettingsdesc', 'theme_ucsf');
     $setting = new admin_setting_heading($name, $heading, $information);
-    $settings_lr->add($setting);    
+    $settings_lr->add($setting);
 
     //Enable category customizations
     $name = 'theme_ucsf/enablecustomization';
@@ -252,8 +250,6 @@ defined('MOODLE_INTERNAL') || die;
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings_lr->add($setting);
 
-    
-
     $ADMIN->add('theme_ucsf', $settings_lr);
 
 
@@ -261,14 +257,14 @@ defined('MOODLE_INTERNAL') || die;
     -------------------------------------------------------------------------------*/
 
     $settings_lr = new admin_settingpage('theme_ucsf_block_settings', get_string('blockheading', 'theme_ucsf'));
-    
+
     // Block width for large desktop
     $name = 'theme_ucsf/block_width_desktop_heading';
     $heading = get_string('block_width_desktop_heading', 'theme_ucsf');
     $information = "";
     $setting = new admin_setting_heading($name, $heading, $information);
     $settings_lr->add($setting);
-    
+
     // Block width settings
     $name = 'theme_ucsf/block_width_desktop';
     $title = get_string('block_width_desktop', 'theme_ucsf');
@@ -277,14 +273,14 @@ defined('MOODLE_INTERNAL') || die;
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings_lr->add($setting);
-    
+
     // Block width for large desktop
     $name = 'theme_ucsf/block_width_tablet_heading';
     $heading = get_string('block_width_tablet_heading', 'theme_ucsf');
     $information = "";
     $setting = new admin_setting_heading($name, $heading, $information);
     $settings_lr->add($setting);
-    
+
     // Block width settings
     $name = 'theme_ucsf/block_width_portrait_tablet';
     $title = get_string('block_width_portrait_tablet', 'theme_ucsf');
@@ -293,14 +289,14 @@ defined('MOODLE_INTERNAL') || die;
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings_lr->add($setting);
-    
+
     $ADMIN->add('theme_ucsf', $settings_lr);
 
-    /* ALERTS SETTINGS 
+    /* ALERTS SETTINGS
     -------------------------------------------------------------------------------*/
-    
+
     $settings_lr = new admin_settingpage('theme_ucsf_alerts', get_string('alertsheading', 'theme_ucsf'));
-    
+
     $name = 'theme_ucsf/number_of_alerts';
     $title = get_string('number_of_alerts' , 'theme_ucsf');
     $description = get_string('number_of_alertsdesc', 'theme_ucsf');
@@ -321,10 +317,9 @@ defined('MOODLE_INTERNAL') || die;
     $setting = new admin_setting_configselect($name, $title, $description, $default, $number_of_alerts);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings_lr->add($setting);
-    
-    
+
+
     $numberofalerts = get_config('theme_ucsf', 'number_of_alerts');
-    
     for ($i = 1; $i <= $numberofalerts; $i++) {
         // This is the descriptor for Alert One
         $name = 'theme_ucsf/alert'.$i.'info';
@@ -348,16 +343,16 @@ defined('MOODLE_INTERNAL') || die;
         $description = get_string('recurring_alertdesc', 'theme_ucsf');
         $default = '2';
         $recurring_alerts = array(
-        '1'=> get_string('never_end', 'theme_ucsf'), 
-        '2'=> get_string('one_time', 'theme_ucsf'), 
+        '1'=> get_string('never_end', 'theme_ucsf'),
+        '2'=> get_string('one_time', 'theme_ucsf'),
         '3'=> get_string('daily', 'theme_ucsf'),
         '4'=> get_string('weekly', 'theme_ucsf'));
         $setting = new admin_setting_configselect($name, $title, $description, $default, $recurring_alerts);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $settings_lr->add($setting);
-        
+
         $alert_settings = 'recurring_alert'.$i;
-        
+
         if (isset($get_recurring_alerts->$alert_settings)) {
             $alert_choice = $get_recurring_alerts->$alert_settings;
         } else {
@@ -374,93 +369,63 @@ defined('MOODLE_INTERNAL') || die;
             $date = 'start_date'.$i;
             $hour = 'start_hour'.$i;
             $minute = 'start_minute'.$i;
+            $enddate = 'end_date'.$i;
+            $endhour = 'end_hour'.$i;
+            $endminute = 'end_minute'.$i;
             $description = get_string('start_datedesc', 'theme_ucsf');
-            $default = '';
-            $setting = new theme_ucsf_datepicker($name, $date, $hour, $minute, $title, $description, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // End date
-            $name = 'theme_ucsf/end_date'.$i;
-            $title = get_string('end_date', 'theme_ucsf');
-            $date = 'end_date'.$i;
-            $hour = 'end_hour'.$i;
-            $minute = 'end_minute'.$i;
-            $description = get_string('end_datedesc', 'theme_ucsf');
-            $default = '';
-            $setting = new theme_ucsf_datepicker($name, $date, $hour, $minute, $title, $description, $default);
+            $default = null;
+            $setting = new theme_ucsf_datepicker_with_validation($name, $date, $hour, $minute, $enddate, $endhour, $endminute, $title,  $description, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
         } elseif ($alert_choice == '3') {
 
-            // Start date daily.
+            // Start/end daily date picker
             $name = 'theme_ucsf/start_date_daily'.$i;
-            $title = get_string('start_date_daily', 'theme_ucsf');
-            $date = 'start_date_daily'.$i;
-            $hour = 'start_hour_daily'.$i;
-            $minute = 'start_minute_daily'.$i;
+            $title = get_string('start_date', 'theme_ucsf');
+            $date_start = 'start_date_daily'.$i;
+            $date_end = 'end_date_daily'.$i;
             $default = '';
-            $description = get_string('start_datedailydesc', 'theme_ucsf');
-            $setting = new theme_ucsf_jquery_datepicker($name, $date, $title, $description, $default);
+            $description = get_string('start_datedesc', 'theme_ucsf');
+            $setting = new theme_ucsf_datepicker($name, $date_start, $date_end, $title, $description, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
-            // End date
-            $name = 'theme_ucsf/end_date_daily'.$i;
-            $title = get_string('end_date_daily', 'theme_ucsf');
-            $date = 'end_date_daily'.$i;
-            $hour = 'end_hour_daily'.$i;
-            $minute = 'end_minute_daily'.$i;
-            $default = '';
-            $description = get_string('end_datedesc', 'theme_ucsf');
-            $setting = new theme_ucsf_jquery_datepicker($name, $date, $title, $description, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-            
-            // Start hour and minute once a day.
+            //Start/end daily time picker
             $name = 'theme_ucsf/start_hour_and_minute_daily'.$i;
-            $title = get_string('start_hour_and_minute_daily', 'theme_ucsf');
-            $hour = 'start_only_hour_daily'.$i;
-            $minute = 'start_only_minute_daily'.$i;
+            $title = get_string('end_date_weekly', 'theme_ucsf');
+            $hour_start = 'start_only_hour_daily'.$i;
+            $minute_start = 'start_only_minute_daily'.$i;
+            $hour_end = 'end_only_hour_daily'.$i;
+            $minute_end = 'end_only_minute_daily'.$i;
             $description = get_string('start_hour_and_minute_dailydesc', 'theme_ucsf');
-            $setting = new theme_ucsf_admin_setting_configonlytime($name, $hour, $minute, $title, $description, $default);
+            $setting = new theme_ucsf_datepicker_time($name, $hour_start, $minute_start, $hour_end, $minute_end, $title, $description, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
-            
-            // End hour and minute once a day.
-            $name = 'theme_ucsf/end_hour_and_minute_daily'.$i;
-            $title = get_string('end_hour_and_minute_daily', 'theme_ucsf');
-            $hour = 'end_only_hour_daily'.$i;
-            $minute = 'end_only_minute_daily'.$i;
-            $description = get_string('end_hour_and_minute_dailydesc', 'theme_ucsf');
-            $setting = new theme_ucsf_admin_setting_configonlytime($name, $hour, $minute, $title, $description, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-            
+
         } elseif ($alert_choice == '4') {
 
-            // Start weekly daily.
+            // Start/end weekly date picker
             $name = 'theme_ucsf/start_date_weekly'.$i;
-            $title = get_string('start_date_weekly', 'theme_ucsf');
+            $title = get_string('start_date', 'theme_ucsf');
             $date = 'start_date_weekly'.$i;
-            $hour = 'start_hour_weekly'.$i;
-            $minute = 'start_minute_weekly'.$i;
-            $default = '';
-            $description = get_string('start_dateweeklydesc', 'theme_ucsf');
-            $setting = new theme_ucsf_datepicker($name, $date, $hour, $minute, $title, $description, $default);
+            $enddate = 'end_date_weekly'.$i;
+            $default = null;
+            $description = get_string('start_datedesc', 'theme_ucsf');
+            $setting = new theme_ucsf_datepicker($name, $date, $enddate, $title, $description, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
-            // End date
-            $name = 'theme_ucsf/end_date_weekly'.$i;
+            // Start/end weekly date picker
+            $name = 'theme_ucsf/set_weekly_time'.$i;
             $title = get_string('end_date_weekly', 'theme_ucsf');
-            $date = 'end_date_weekly'.$i;
             $hour = 'end_hour_weekly'.$i;
             $minute = 'end_minute_weekly'.$i;
+            $start_hour = 'start_hour_weekly'.$i;
+            $start_minute = 'start_minute_weekly'.$i;
             $default = '';
             $description = get_string('end_weeklydesc', 'theme_ucsf');
-            $setting = new theme_ucsf_datepicker($name, $date, $hour, $minute, $title, $description, $default);
+            $setting = new theme_ucsf_datepicker_time($name, $start_hour, $start_minute, $hour, $minute, $title, $description, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
@@ -524,14 +489,14 @@ defined('MOODLE_INTERNAL') || die;
         $setting->set_updatedcallback('theme_reset_all_caches');
         $settings_lr->add($setting);
     }
-    
+
     $ADMIN->add('theme_ucsf', $settings_lr);
-    
-    /* TILES SETTINGS 
+
+    /* TILES SETTINGS
     -------------------------------------------------------------------------------*/
-    
+
     $settings_lr = new admin_settingpage('theme_ucsf_tiles', get_string('tileheading', 'theme_ucsf'));
-    
+
     // This is the descriptor for Tile
     $name = 'theme_ucsf/tileheadingsub';
     $heading = get_string('tileheadingsub', 'theme_ucsf');
@@ -658,7 +623,7 @@ defined('MOODLE_INTERNAL') || die;
 
     $ADMIN->add('theme_ucsf', $settings_lr);
 
-    /* CATEGORY CUSTOMIZATION 
+    /* CATEGORY CUSTOMIZATION
     -------------------------------------------------------------------------------*/
     $settings_lr = new admin_settingpage('theme_ucsf_category_customizations', get_string('categorycustomizationheading', 'theme_ucsf'));
 
@@ -695,8 +660,6 @@ defined('MOODLE_INTERNAL') || die;
     $settings_lr->add($setting);
 
     $ADMIN->add('theme_ucsf', $settings_lr);
-    
-
 
     /* CATEGORIES & SUBCATEGORIES
     -------------------------------------------------------------------------------*/
@@ -714,7 +677,7 @@ defined('MOODLE_INTERNAL') || die;
                 $setting = new admin_setting_configtext($name, $title, $description, $default);
                 $setting->set_updatedcallback('theme_reset_all_caches');
                 $settings_lr->add($setting);
-                
+
                 //Category label image
                 $name = 'theme_ucsf/categorylabelimage'.$cats->id;
                 $title = get_string('categorylabelimage', 'theme_ucsf');
@@ -793,7 +756,7 @@ defined('MOODLE_INTERNAL') || die;
                 $setting->set_updatedcallback('theme_reset_all_caches');
                 $settings_lr->add($setting);
 
-                // Select the number of links 
+                // Select the number of links
                 $name = 'theme_ucsf/catnumberoflinks'.$cats->id;
                 $title = get_string('numberoflinks', 'theme_ucsf');
                 $description = '';
@@ -811,7 +774,7 @@ defined('MOODLE_INTERNAL') || die;
                     9 => '9',
                     10 => '10'
                 );
-                
+
                 $setting = new admin_setting_configselect($name, $title, $description, $default, $helpfeedbackchoices);
                 $settings_lr->add($setting);
 
@@ -824,7 +787,7 @@ defined('MOODLE_INTERNAL') || die;
                     $information = "";
                     $setting = new admin_setting_heading($name, $heading, $information);
                     $settings_lr->add($setting);
-                    
+
                     $name = 'theme_ucsf/cathelpfeedback' . $i . 'link' . $cats->id;
                     $title = get_string('helpfeedbacklink', 'theme_ucsf');
                     $description = get_string('helpfeedbacklinkdesc', 'theme_ucsf');
@@ -855,7 +818,7 @@ defined('MOODLE_INTERNAL') || die;
                 $ADMIN->add('theme_ucsf', $settings_lr);
             }
         }
-        
+
         foreach ($course_subcategories as $cats) {
             if($allcats == $cats->id) {
                 $settings_lr = new admin_settingpage('theme_ucsf_'.$cats->id, 'Cat - '. $cats->name . ' / ' .$cats->parentname);
@@ -947,7 +910,7 @@ defined('MOODLE_INTERNAL') || die;
                 $setting->set_updatedcallback('theme_reset_all_caches');
                 $settings_lr->add($setting);
 
-                // Select the number of links 
+                // Select the number of links
                 $name = 'theme_ucsf/catnumberoflinks'.$cats->id;
                 $title = get_string('numberoflinks', 'theme_ucsf');
                 $description = '';
@@ -965,7 +928,7 @@ defined('MOODLE_INTERNAL') || die;
                     9 => '9',
                     10 => '10'
                 );
-                
+
                 $setting = new admin_setting_configselect($name, $title, $description, $default, $helpfeedbackchoices);
                 $settings_lr->add($setting);
 
@@ -978,7 +941,7 @@ defined('MOODLE_INTERNAL') || die;
                     $information = "";
                     $setting = new admin_setting_heading($name, $heading, $information);
                     $settings_lr->add($setting);
-                    
+
                     $name = 'theme_ucsf/cathelpfeedback' . $i . 'link' . $cats->id;
                     $title = get_string('helpfeedbacklink', 'theme_ucsf');
                     $description = get_string('helpfeedbacklinkdesc', 'theme_ucsf');
@@ -1007,8 +970,7 @@ defined('MOODLE_INTERNAL') || die;
                 }
 
                 $ADMIN->add('theme_ucsf', $settings_lr);
-                
-                
-            }            
-        }        
+
+            }
+        }
     }
