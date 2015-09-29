@@ -26,21 +26,21 @@ body {
 /* styles for when the page size is reduce to fit large custom menus */
 
 @media ( max-width: 1199px ) {
-	
-	/* the left block but only on the front page*/
+    
+    /* the left block but only on the front page*/
 
-	
-	/* the main but only on the front page*/
+    
+    /* the main but only on the front page*/
 
-	#page-site-index .row-fluid .span4 {
-    	width: 31.9149% !important;
-	}
-	
-	/* the left block but only on the front page*/
+    #page-site-index .row-fluid .span4 {
+        width: 31.9149% !important;
+    }
+    
+    /* the left block but only on the front page*/
 
-	#page-site-index .row-fluid #block-region-side-pre.span4 {
-    	width: 23.4043% !important;
-	}
+    #page-site-index .row-fluid #block-region-side-pre.span4 {
+        width: 23.4043% !important;
+    }
 }
 
 @media ( max-width: 1105px ) {
@@ -54,7 +54,7 @@ body {
     
     .category-label {
         display: block;
-		padding-left: 5px !important;
+        padding-left: 5px !important;
     }
     
     .navbar .nav > li {
@@ -68,7 +68,7 @@ body {
     .main-footer {
         padding: 0 10px!important;
     }
-	
+    
     /* the left block but only on the front page*/
 
     #page-site-index .row-fluid #block-region-side-pre.span4 {
@@ -78,85 +78,85 @@ body {
     body#page-site-index.has_dock #page {
         padding-left: 0 !important;
    }
-	
+    
 }
 
 @media ( max-width: 1030px ) {
-	
-	/* the left block but only on the front page*/
+    
+    /* the left block but only on the front page*/
 
-	/* docked padding fix front page*/
+    /* docked padding fix front page*/
 
-	body#page-site-index.has_dock #page {
+    body#page-site-index.has_dock #page {
             padding-left: 50px !important;
-	}
-	
-	/* ----- Control the width of the blocks -----*/
+    }
+    
+    /* ----- Control the width of the blocks -----*/
 
-	/* the main center content area 
-	.row-fluid .span8 {
+    /* the main center content area 
+    .row-fluid .span8 {
             width: 65.812% !important;
-	}
+    }
 */
-	/* the left block 
-	.row-fluid .span4 {
+    /* the left block 
+    .row-fluid .span4 {
             width: 31.6239% !important;
-	}*/
+    }*/
 
-	/* the right block 
+    /* the right block 
 
         .row-fluid .span3 {
             width: 24.0769% !important;
-	}*/
+    }*/
 
-	/* pre (left) and main */
+    /* pre (left) and main */
         
         /* This is commented line because of new settings for tablet layout
             Erase this line if the client except the new setting.
-	.row-fluid .span9 {
-    	width: 73% !important;
-	}
+    .row-fluid .span9 {
+        width: 73% !important;
+    }
         */
 
-	/* docked padding fix */
+    /* docked padding fix */
 
-	body.has_dock #page {
+    body.has_dock #page {
             padding-left: 60px !important;
-	}
+    }
 
-	/* pre (left and main when all right blocks docked */
-	
-	.empty-region-side-post .row-fluid .span9 {
+    /* pre (left and main when all right blocks docked */
+    
+    .empty-region-side-post .row-fluid .span9 {
             width: 100% !important;
-	}
-	
-	/* main when all blocks docked */
-	
-	.empty-region-side-pre #region-bs-main-and-pre.span9 #region-main, .jsenabled.docked-region-side-pre #region-bs-main-and-pre.span9 #region-main {
+    }
+    
+    /* main when all blocks docked */
+    
+    .empty-region-side-pre #region-bs-main-and-pre.span9 #region-main, .jsenabled.docked-region-side-pre #region-bs-main-and-pre.span9 #region-main {
             width: 100% !important;
-	}
-	
-	/* the main center content area */
-	.pagelayout-frontpage .row-fluid .span8 {
+    }
+    
+    /* the main center content area */
+    .pagelayout-frontpage .row-fluid .span8 {
             width: 74% !important;
-	}
-	
-	/* the left block but only on the front page*/
+    }
+    
+    /* the left block but only on the front page*/
 
-	#page-site-index .row-fluid .span4 {
+    #page-site-index .row-fluid .span4 {
             width: 31.8% !important;
-	}
+    }
 
-	/* front page */
-	
-	.pagelayout-frontpage .container-fluid {
+    /* front page */
+    
+    .pagelayout-frontpage .container-fluid {
             max-width: 100% !important;
-	}
+    }
 }
 
 
 @media ( max-width: 1010px) {
-	
+    
     body{
             background: #FFF!important;
     }
@@ -167,7 +167,7 @@ body {
     
     .category-label {
         display: block;
-		padding-left: 5px !important;
+        padding-left: 5px !important;
     }
     
     .navbar .nav {
@@ -177,7 +177,7 @@ body {
     .navbar .nav > li {
        /* background: none!important;*/
     }
-	
+    
     .navbar .nav > li > a {
             font-size: 11px !important;
             padding: 10px 7px 10px 7px !important;
@@ -225,9 +225,9 @@ body {
     .main-footer {
         padding: 0 10px!important;
     }
-	
-	
-	
+    
+    
+    
     /* the main but only on the front page*/
 
     #page-site-index .row-fluid .span4 {
@@ -266,7 +266,7 @@ body {
     .navbar-inner {
         padding: 0px 5px 0 5px !important;
     }
-	
+    
     /* ----- Control the width of the blocks -----*/
 
     /* the main center content area */
@@ -310,23 +310,25 @@ body {
     .navbar-text {
         display: none;
     }
-    
+
     .navbar-text-responsive {
         display: block!important;
     }
-    
+
     .logininfo-box {
-        margin-top: 5px!important;
-        margin-bottom: 5px!important;
         float: right;
     }
-    
+
     .logininfo-box a {
         margin-left: 0px!important;
     }
-    
+
     .logininfo-box a:hover {
         background-color: #FFF!important;
+    }
+
+    .login_user {
+        margin-right: 0px;
     }
 }
 
@@ -356,7 +358,7 @@ hr { background-color:#b3becb; height:1px; border:none }
 
 .pagelayout-frontpage .container-fluid {
     max-width: 940px;
-	
+    
 }
 
 #page {
@@ -384,9 +386,9 @@ hr { background-color:#b3becb; height:1px; border:none }
     float: left;
 }
 
-.logininfo-box {
+/*.logininfo-box {
     float: left;
-}
+}*/
 
 .logininfo-box a {
     background-color: #af8e31;
@@ -629,12 +631,11 @@ hr { background-color:#b3becb; height:1px; border:none }
 .topmenu_user {
     font-weight: 600;
     float: left;
-    margin-right: 10px;
 }
 
 .navbar .nav > li > a {
     padding: 10px 10px;
-	font-size: 11px;
+    font-size: 11px;
 }
 
 /*------------------------------------------------------------------------------------*/
@@ -715,7 +716,7 @@ hr { background-color:#b3becb; height:1px; border:none }
 
 .block hr {
     border-color: #FFFFFF !important;
-	background: #FFFFFF !important;
+    background: #FFFFFF !important;
 }
 
 .block .footer {
@@ -754,13 +755,13 @@ hr { background-color:#b3becb; height:1px; border:none }
 /* docked padding fix */
 body.has_dock #page {
     padding-left: 60px !important;
-	
+    
 }
 
 /* docked padding fix front page*/
 body#page-site-index.has_dock #page {
     padding-left: 0;
-	
+    
 }
 
 /*------------------------------------------------------------------------------------*/
@@ -1037,11 +1038,11 @@ font-family: "Open Sans",sans-serif;
     #ilios_block {
         display: none!important;
     }
-    
+
     #ilios_block_link {
         display: block!important;
     }
-    
+
     .login_user {
         font-size: 11px;
     }
@@ -1218,14 +1219,14 @@ body {
         display: none;
     }
     
-    nav-collapse, .nav-collapse.collapse {
+    .nav-collapse, .nav-collapse.collapse {
         height: 40px;
         overflow: visible;
         display: inline;
     }
     
     .navbar .nav li a {
-        float: left;
+        /*float: left;*/
     }
     
     .navbar .nav > li > a {
@@ -1261,20 +1262,56 @@ body {
         background: none;
     }
 
-    .login_user {
-        margin-right: 50px;
-    }
+    /*.login_user {
+        margin-right: 5px;
+    }*/
 }
 
 /* reduce the line height between login info and help link on small screens */
-@media ( max-width: 449px) {
-    .navbar .nav.pull-right {
-        margin: 0!important;
-        padding: 10px;
+@media ( max-width: 560px) {
+
+    .helpfeedback-box {
+        float: right !important;
+        margin-bottom: 10px;
+        margin-right: 0px !important;
     }
-    
-    .navbar .brand {
-        padding-bottom: 0!important;
+    .logininfo {
+        text-align: right;
+        width: 95vw;
+    }
+    .topmenu_user {
+        float: none;
+    }
+    .login_user {
+        margin-right: 0px;
+    }
+    .nav.pull-right {
+        max-width: 0px;
+    }
+    .ucsf_logininfo {
+        float: none;
+    }
+    .ucsf_logininfo .logininfo{
+        text-align: center;
+    }
+    .ucsf_logininfo .logininfo .logininfo-box {
+        margin-right: 10px;
+    }
+
+    .ucsf_footer_text {
+        text-align: center;
+        width: 100%;
+        clear: both;
+    }
+    .ucsf_footer_links_container {
+        clear: both;
+        width: 100%;
+        height: 25px;
+        text-align: center;
+    }
+    .ucsf_footer_links_container p {
+        text-align: center !important;
+        margin-bottom: 10px !important;
     }
 }
 
@@ -1283,7 +1320,7 @@ body {
     .row-fluid .span3,
     .row-fluid .span8,
     .row-fluid .span9,
-    .row-fluid .span12, 
+    .row-fluid .span12,
     #page-site-index .row-fluid #block-region-side-pre.span4 {
         width: 100%!important;
         margin: 0 auto;

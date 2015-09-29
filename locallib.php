@@ -474,6 +474,8 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
      */
     public function validate($data) {
 
+
+
         $time_start = strtotime($data['datepicker']) + $data['only_hour'] * 3600 + $data['only_minute'] * 60;
         $time_end = strtotime($data['end_datepicker']) + $data['end_hour']* 3600 + $data['end_minute'] * 60;
 
