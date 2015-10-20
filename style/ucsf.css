@@ -545,6 +545,11 @@ hr { background-color:#b3becb; height:1px; border:none }
     margin-bottom: 20px;
 }
 
+#required {
+    margin-left: 3px;
+    color: #999;
+}
+
 /*------------------------------------------------------------------------------------*/
 /* TILES & BANNER */
 
@@ -631,6 +636,15 @@ hr { background-color:#b3becb; height:1px; border:none }
 .topmenu_user {
     font-weight: 600;
     float: left;
+}
+
+.topmenu_username {
+    display: inline-block;
+}
+.topmenu_logout {
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: normal;
 }
 
 .navbar .nav > li > a {
@@ -1144,105 +1158,36 @@ body {
     background: none;
 }
 
-/*@media (min-width: 1200px) {
-    .pagelayout-frontpage #block-region-side-pre.span4 {
-        width: 21.6239%!important;
-    }
-
-    .empty-region-side-post.used-region-side-pre #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
-        width: 75.812% !important
-    }
-    .pagelayout-frontpage #regionmain {
-        padding: 0 !important;
-    }
-}
-
-@media (min-width: 1440px) {
-    .pagelayout-frontpage #block-region-side-pre.span4 {
-        width: 20.6239%!important;
-    }
-    
-    .pagelayout-frontpage #region-main.span8 {
-        width: 76.812%!important;
-    }
-}
-
-@media (min-width: 1680px) {
-    
-    
-    .pagelayout-frontpage #block-region-side-pre.span4 {
-        width: 18.6239%!important;
-    }
-    
-    .pagelayout-frontpage #region-main.span8 {
-        width: 78.812%!important;
-    }
-}*/
-
- /*block fixed 
-@media (min-width: 1200px) {
-    #block-region-side-pre.span4 {
-        width: 21.6239%!important;
-    }
-    
-    #region-main.span8 {
-        width: 75.812%!important;
-    }
-}
-
-@media (min-width: 1440px) {
-    #block-region-side-pre.span4 {
-        width: 20.6239%!important;
-    }
-    
-    #region-main.span8 {
-        width: 76.812%!important;
-    }
-}
-@media (min-width: 1680px) {
-    
-    
-    #block-region-side-pre.span4 {
-        width: 18.6239%!important;
-    }
-    
-    #region-main.span8 {
-        width: 78.812%!important;
-    }
-    
-    
-}*/
-
 /* show menu from 779px to 979px */
 @media (min-width: 780px) and (max-width: 979px)  {
     a.btn.btn-navbar {
         display: none;
     }
-    
+
     .nav-collapse, .nav-collapse.collapse {
         height: 40px;
         overflow: visible;
         display: inline;
     }
-    
+
     .navbar .nav li a {
         /*float: left;*/
     }
-    
+
     .navbar .nav > li > a {
         color: #777;
         font-weight: normal;
     }
-    
+
     .navbar .nav > li {
         background: url([[pix:theme_ucsf|menu-separator]]) no-repeat top right; 
         float: left;
     }
-    
+
     .navbar .nav > li:last-child{
         background: none; 
     }
-    
+
     .menu-left, .menu-right {
         background: none;
     }
@@ -1262,9 +1207,6 @@ body {
         background: none;
     }
 
-    /*.login_user {
-        margin-right: 5px;
-    }*/
 }
 
 /* reduce the line height between login info and help link on small screens */
@@ -1312,6 +1254,12 @@ body {
     .ucsf_footer_links_container p {
         text-align: center !important;
         margin-bottom: 10px !important;
+    }
+    .topmenu_username {
+        display: inline-block !important;
+    }
+    .topmenu_logout {
+        display: inline-block !important;
     }
 }
 

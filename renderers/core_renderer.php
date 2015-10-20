@@ -101,9 +101,9 @@
                     $loggedinas .= '('.html_writer::tag('a', get_string('switchrolereturn'), array('href'=>$url)).')';
                 }
             } else {
-                $loggedinas = '<div class="topmenu_user">'.$realuserinfo.$username;
+                $loggedinas = '<div class="topmenu_user"><div class="topmenu_username">'.$realuserinfo.$username.'</div>';
                 if ($withlinks) {
-                    $loggedinas .= " (<a href=\"$CFG->wwwroot/login/logout.php?sesskey=".sesskey()."\">".get_string('logout').'</a>)';
+                    $loggedinas .= "<div class='topmenu_logout'>(<a href=\"$CFG->wwwroot/login/logout.php?sesskey=".sesskey()."\">".get_string('logout').'</a>)</div>';
                 }
                 $loggedinas .= '</div>';
             }

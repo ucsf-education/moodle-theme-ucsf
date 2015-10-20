@@ -178,7 +178,7 @@ $string['end_date'] = 'End date';
 $string['end_datedesc'] = 'Set end date when you want this alert to stop showing.';
 
 $string['recurring_alert'] = 'Recurring alert';
-$string['recurring_alertdesc'] = 'Select which type alert do you want to use.';
+$string['recurring_alertdesc'] = 'Select which type alert do you want to use. IMPORTANT: You must click SAVE CHANGES after changing the alert type.';
 $string['none'] = 'None';
 $string['one_time'] = 'One time';
 $string['daily'] = 'Daily';
@@ -207,9 +207,9 @@ $string['start_hour_and_minute_daily'] = 'Start time: ';
 $string['start_hour_and_minute_dailydesc'] = 'Set hour and minutes when you want your daily alert to start/end.';
 $string['end_hour_and_minute_daily'] = 'End time: ';
 $string['end_hour_and_minute_dailydesc'] = 'Set hour and minutes when you want your daily alert to end.';
-$string['only_hour'] = 'Hour';
-$string['only_minute'] = 'Minute';
 
+$string['start_hour'] = 'Hour';
+$string['start_minute'] = 'Minute';
 $string['end_hour'] = 'End hour';
 $string['end_minute'] = 'End minute';
 
