@@ -27,8 +27,6 @@
 
  class theme_ucsf_core_renderer extends theme_bootstrapbase_core_renderer {
 
-    
-
     /**
      * Return the standard string that says whether you are logged in (and switched
      * roles/logged in as another user).
@@ -103,10 +101,11 @@
                     $loggedinas .= '('.html_writer::tag('a', get_string('switchrolereturn'), array('href'=>$url)).')';
                 }
             } else {
-                $loggedinas = '<div class="topmenu_user">'.$realuserinfo.$username."</div>";
+                $loggedinas = '<div class="topmenu_user"><div class="topmenu_username">'.$realuserinfo.$username.'</div>';
                 if ($withlinks) {
-                    $loggedinas .= " (<a href=\"$CFG->wwwroot/login/logout.php?sesskey=".sesskey()."\">".get_string('logout').'</a>)';
+                    $loggedinas .= "<div class='topmenu_logout'>(<a href=\"$CFG->wwwroot/login/logout.php?sesskey=".sesskey()."\">".get_string('logout').'</a>)</div>';
                 }
+                $loggedinas .= '</div>';
             }
         } else {
             $loggedinas = '';
@@ -143,9 +142,9 @@
 
 
 
- 	// custom menu override
-	public function custom_menu($custommenuitems = '') {
-		
+    // custom menu override
+    public function custom_menu($custommenuitems = '') {
+
         global $CFG, $COURSE, $PAGE;
 
         if (empty($custommenuitems) && !empty($CFG->custommenuitems)) {
@@ -155,7 +154,7 @@
             return '';
         }
         $custommenu = new custom_menu($custommenuitems, current_language());
-        
+
         // get theme comfiguration
         $COURSECATEGORY = 0;
         if ($PAGE->pagelayout=="coursecategory" && isset($_REQUEST["categoryid"]))
@@ -169,26 +168,26 @@
         $themeconfig = get_config("theme_ucsf");
         $customizedmenu = "custommenu".$COURSECATEGORY;
         $enablecustomization = $themeconfig->enablecustomization;
-        
+
 
         if($enablecustomization && isset($themeconfig->$customizedmenu) && !empty($themeconfig->$customizedmenu)) {
-        	$custommenuitems = $themeconfig->$customizedmenu;        
-    		$custommenu = new custom_menu($custommenuitems, current_language()); 
-    	}
+            $custommenuitems = $themeconfig->$customizedmenu;
+            $custommenu = new custom_menu($custommenuitems, current_language());
+        }
 
-    	return $this->render($custommenu);
+        return $this->render($custommenu);
     }
 
     // custom breadcrumb navbar
-    // replace home link with home icon 
+    // replace home link with home icon
     public function navbar() {
-    	global $OUTPUT, $CFG;
+        global $OUTPUT, $CFG;
         $items = $this->page->navbar->get_items();
         $breadcrumbs = array();
         $countitems = count($items);
 
         for ($i=1; $i<$countitems; $i++) {
-        	$item = $items[$i];
+            $item = $items[$i];
 
             $item->hideicon = true;
             $breadcrumbs[] = $this->render($item);

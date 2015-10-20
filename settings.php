@@ -221,7 +221,7 @@ defined('MOODLE_INTERNAL') || die;
     $heading = get_string('displaycoursetitle', 'theme_ucsf');
     $information = get_string('displaycoursetitledesc', 'theme_ucsf');
     $default = 1;
-    $setting = new admin_setting_configcheckbox($name, $heading, $information, $default,1);
+    $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
     $settings_lr->add($setting);
 
     //Hide custom menu when logged out
@@ -341,7 +341,7 @@ defined('MOODLE_INTERNAL') || die;
         $name = 'theme_ucsf/recurring_alert'.$i;
         $title = get_string('recurring_alert' , 'theme_ucsf');
         $description = get_string('recurring_alertdesc', 'theme_ucsf');
-        $default = '2';
+        $default = '1';
         $recurring_alerts = array(
         '1'=> get_string('never_end', 'theme_ucsf'),
         '2'=> get_string('one_time', 'theme_ucsf'),
@@ -385,7 +385,7 @@ defined('MOODLE_INTERNAL') || die;
             $title = get_string('start_date', 'theme_ucsf');
             $date_start = 'start_date_daily'.$i;
             $date_end = 'end_date_daily'.$i;
-            $default = '';
+            $default = null;
             $description = get_string('start_datedesc', 'theme_ucsf');
             $setting = new theme_ucsf_datepicker($name, $date_start, $date_end, $title, $description, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
@@ -394,11 +394,12 @@ defined('MOODLE_INTERNAL') || die;
             //Start/end daily time picker
             $name = 'theme_ucsf/start_hour_and_minute_daily'.$i;
             $title = get_string('end_date_weekly', 'theme_ucsf');
-            $hour_start = 'start_only_hour_daily'.$i;
-            $minute_start = 'start_only_minute_daily'.$i;
-            $hour_end = 'end_only_hour_daily'.$i;
-            $minute_end = 'end_only_minute_daily'.$i;
+            $hour_start = 'start_hour_daily'.$i;
+            $minute_start = 'start_minute_daily'.$i;
+            $hour_end = 'end_hour_daily'.$i;
+            $minute_end = 'end_minute_daily'.$i;
             $description = get_string('start_hour_and_minute_dailydesc', 'theme_ucsf');
+            $default = null;
             $setting = new theme_ucsf_datepicker_time($name, $hour_start, $minute_start, $hour_end, $minute_end, $title, $description, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
@@ -423,7 +424,7 @@ defined('MOODLE_INTERNAL') || die;
             $minute = 'end_minute_weekly'.$i;
             $start_hour = 'start_hour_weekly'.$i;
             $start_minute = 'start_minute_weekly'.$i;
-            $default = '';
+            $default = null;
             $description = get_string('end_weeklydesc', 'theme_ucsf');
             $setting = new theme_ucsf_datepicker_time($name, $start_hour, $start_minute, $hour, $minute, $title, $description, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
@@ -717,8 +718,8 @@ defined('MOODLE_INTERNAL') || die;
                 $name = 'theme_ucsf/linklabeltocategorypage'.$cats->id;
                 $heading = get_string('linklabeltocategorypage', 'theme_ucsf');
                 $information = get_string('linklabeltocategorypagedesc', 'theme_ucsf');
-                $default = 1;
-                $setting = new admin_setting_configcheckbox($name, $heading, $information, 1,1);
+                $default = "0";
+                $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
                 $settings_lr->add($setting);
 
                 //Display course title
@@ -726,7 +727,7 @@ defined('MOODLE_INTERNAL') || die;
                 $heading = get_string('displaycoursetitle', 'theme_ucsf');
                 $information = get_string('displaycoursetitledesc', 'theme_ucsf');
                 $default = 1;
-                $setting = new admin_setting_configcheckbox($name, $heading, $information, 1,1);
+                $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
                 $settings_lr->add($setting);
 
                 //Custom menu
@@ -871,8 +872,8 @@ defined('MOODLE_INTERNAL') || die;
                 $name = 'theme_ucsf/linklabeltocategorypage'.$cats->id;
                 $heading = get_string('linklabeltocategorypage', 'theme_ucsf');
                 $information = get_string('linklabeltocategorypagedesc', 'theme_ucsf');
-                $default = 1;
-                $setting = new admin_setting_configcheckbox($name, $heading, $information, 1,1);
+                $default = "0";
+                $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
                 $settings_lr->add($setting);
 
                 //Display course title
@@ -880,7 +881,7 @@ defined('MOODLE_INTERNAL') || die;
                 $heading = get_string('displaycoursetitle', 'theme_ucsf');
                 $information = get_string('displaycoursetitledesc', 'theme_ucsf');
                 $default = 1;
-                $setting = new admin_setting_configcheckbox($name, $heading, $information, 1,1);
+                $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
                 $settings_lr->add($setting);
 
                 //Custom menu

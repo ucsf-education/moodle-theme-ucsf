@@ -42,7 +42,7 @@
 
 
 function theme_ucsf_process_css($css, $theme) {
-    
+
     // Set the background image for the logo.
     $logo = $theme->setting_file_url('logo', 'logo');
     $css = theme_ucsf_set_logo($css, $logo);
@@ -54,7 +54,7 @@ function theme_ucsf_process_css($css, $theme) {
         $customcss = null;
     }
     $css = theme_ucsf_set_customcss($css, $customcss);
-    
+
     // Block settings
     // Set block width for large desktop
     if (!empty($theme->settings->block_width_desktop)) {
@@ -63,7 +63,7 @@ function theme_ucsf_process_css($css, $theme) {
         $block_width = '';
     }
     $css = theme_ucsf_block_width($css, '[[setting:block_width_desktop]]', $block_width);
-    
+
     // Block width for portrait tablet to landscape and desktop
     if (!empty($theme->settings->block_width_portrait_tablet)) {
         $block_width_portrait_tablet = $theme->settings->block_width_portrait_tablet;
@@ -124,7 +124,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
 
     $course_categories =  $DB->get_records_sql($sql);
     foreach ($course_categories as $cat) {
-        $CATEGORILABELIMAGE[]= "categorylabelimage".$cat->id;        
+        $CATEGORILABELIMAGE[]= "categorylabelimage".$cat->id;
     }
 
 
@@ -246,7 +246,7 @@ function theme_ucsf_get_setting($setting, $format = false)
  * @return stdClass An object with the following properties:
  *      - enablecustomization: true if Category Customization is enabled. By default false.
  *      - categorylabel: String to use for the Top Level Category Label. By default ''.
- *      - displaycoursetitle: The course title will appear on the course page for all courses, 
+ *      - displaycoursetitle: The course title will appear on the course page for all courses,
 *         unless the course title is set NOT to display on configured categories.
  *      - displaycustommenu: Hide Custom Menu when logged out. By default returns custom menu.
  */
@@ -258,13 +258,11 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
     $return->coursetitle = '';
     $return->displaycustommenu = $output->custom_menu();
 
-    /* 
+    /*
     *   Help/Feedback Links
     *   Pulling the number of links dynamically from the Help/Feedback Settings inside Theme Settings
     */
-
     $target = '';
-    
 
     $helpfeedbacktitle = null;
 
@@ -276,7 +274,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         $helpfeedbacktitle = $page->theme->settings->helpfeedbacktitle;
     }
     $helpfeedback = null;
-    
+
     for ($i = 1; $i <= $page->theme->settings->numberoflinks; $i++ ) {
         $helpfeedbacklink = theme_ucsf_get_setting('helpfeedback' . $i . 'link');
         $helpfeedbacklinklabel = theme_ucsf_get_setting('helpfeedback' . $i . 'linklabel');
@@ -312,8 +310,6 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         $return->enablecustomization = true;
     }
 
-
-
     // category customization enabled
     if($return->enablecustomization) {
 
@@ -329,48 +325,50 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         else
             $COURSECATEGORY = $COURSE->category;
 
+        theme_ucsf_get_category_roots($COURSECATEGORY);
+
         // Help/Feedback Links
         if ($COURSECATEGORY != 0) {
-
-            $target = '';
-
-            if(theme_ucsf_get_setting('cathelpfeedbacktitle'.$COURSECATEGORY) == null || theme_ucsf_get_setting('cathelpfeedbacktitle'.$COURSECATEGORY) == "") {
-
-                $helpfeedbacktitle = 'Help/Feedback';
-
-            } else {
-                $helpfeedbacktitle = theme_ucsf_get_setting('cathelpfeedbacktitle'.$COURSECATEGORY);
-            }
-
-            $cathelpfeedback = null;
-            $catnumberoflinks = theme_ucsf_get_setting('catnumberoflinks'.$COURSECATEGORY);
-
-            for ($i = 1; $i <= $page->theme->settings->numberoflinks; $i++ ) {
-                $helpfeedbacklink = theme_ucsf_get_setting('cathelpfeedback' . $i . 'link' . $COURSECATEGORY);
-                $helpfeedbacklinklabel = theme_ucsf_get_setting('cathelpfeedback' . $i . 'linklabel' . $COURSECATEGORY);
-                $helpfeedbacklinktarget = theme_ucsf_get_setting('cathelpfeedback' . $i . 'linktarget' . $COURSECATEGORY);
-
-                if (!empty($helpfeedbacklink)) {
-                    if(!empty($helpfeedbacklinklabel)) {
-                        if ($helpfeedbacklinktarget == true) {
-                            $target = 'target = "_blank"';
-                            $cathelpfeedback .= '<li role="presentation"><a title="'.$helpfeedbacklinklabel.'" href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklinklabel.'</a></li><li class="divider">';
-                        }else{
-                            $target = 'target = "_self"';
-                            $cathelpfeedback .= '<li role="presentation"><a title="'.$helpfeedbacklinklabel.'" href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklinklabel.'</a></li><li class="divider">';}
-                    }else{
-                        $cathelpfeedback .=  '<li role="presentation"><a href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklink.'</a></li><li class="divider">';
+            for($j = 0; $j < count($CATEGORIES); $j++) {
+                if (theme_ucsf_get_setting('catenablehelpfeedback'.$CATEGORIES[$j]) == 1) {
+                    $target = '';
+                    if(theme_ucsf_get_setting('cathelpfeedbacktitle'.$CATEGORIES[$j]) == null || theme_ucsf_get_setting('cathelpfeedbacktitle'.$CATEGORIES[$j]) == "") {
+                        $helpfeedbacktitle = 'Help/Feedback';
+                    } else {
+                        $helpfeedbacktitle = theme_ucsf_get_setting('cathelpfeedbacktitle'.$CATEGORIES[$j]);
                     }
-                }
-            }
-            if($cathelpfeedback != null){
-                if (theme_ucsf_get_setting('catenablehelpfeedback'.$COURSECATEGORY) == 1) {
-                    $return->helpfeedbacklink = '<div class="dropdown helpfeedback-box"><a class="dropdown-toggle" data-toggle="dropdown">'.$helpfeedbacktitle.'<span class="caret"></span></a>'
-                            . '<ul class="dropdown-menu help-feedback pull-right" role="menu">'
-                            . $cathelpfeedback
-                            . '</ul></div>';
-                } else {
-                    $return->helpfeedbacklink;
+                    $cathelpfeedback = null;
+                    $catnumberoflinks = theme_ucsf_get_setting('catnumberoflinks'.$CATEGORIES[$j]);
+
+                    for ($i = 1; $i <= $catnumberoflinks; $i++ ) {
+                        $helpfeedbacklink = theme_ucsf_get_setting('cathelpfeedback' . $i . 'link' . $CATEGORIES[$j]);
+                        $helpfeedbacklinklabel = theme_ucsf_get_setting('cathelpfeedback' . $i . 'linklabel' . $CATEGORIES[$j]);
+                        $helpfeedbacklinktarget = theme_ucsf_get_setting('cathelpfeedback' . $i . 'linktarget' . $CATEGORIES[$j]);
+
+                        if (!empty($helpfeedbacklink)) {
+                            if(!empty($helpfeedbacklinklabel)) {
+                                if ($helpfeedbacklinktarget == true) {
+                                    $target = 'target = "_blank"';
+                                    $cathelpfeedback .= '<li role="presentation"><a title="'.$helpfeedbacklinklabel.'" href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklinklabel.'</a></li><li class="divider">';
+                                }else{
+                                    $target = 'target = "_self"';
+                                    $cathelpfeedback .= '<li role="presentation"><a title="'.$helpfeedbacklinklabel.'" href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklinklabel.'</a></li><li class="divider">';}
+                            }else{
+                                $cathelpfeedback .=  '<li role="presentation"><a href="'.$helpfeedbacklink.'" '.$target.'>'.$helpfeedbacklink.'</a></li><li class="divider">';
+                            }
+                        }
+                    }
+                    if($cathelpfeedback != null){
+                        if (theme_ucsf_get_setting('catenablehelpfeedback'.$CATEGORIES[$j]) == 1) {
+                            $return->helpfeedbacklink = '<div class="dropdown helpfeedback-box"><a class="dropdown-toggle" data-toggle="dropdown">'.$helpfeedbacktitle.'<span class="caret"></span></a>'
+                                    . '<ul class="dropdown-menu help-feedback pull-right" role="menu">'
+                                    . $cathelpfeedback
+                                    . '</ul></div>';
+                        } else {
+                            $return->helpfeedbacklink;
+                        }
+                    }
+                    break;
                 }
             }
         }
@@ -390,7 +388,6 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         }
 
         // category labels
-        theme_ucsf_get_category_roots($COURSECATEGORY);
         $COURSECATEGORY = theme_ucsf_get_first_category_customization($page);
 
         // override top level category label with custom category label
@@ -449,7 +446,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
     $return->logo = '<img title="UCSF | CLE" alt="UCSF | CLE" src="'.$output->pix_url('ucsf-logo', 'theme_ucsf').'"/>';
 
     // menu background clean css
-    $menubackgroundcleen = ""; 
+    $menubackgroundcleen = "";
 
     if($return->categorylabel == '') {
         $menubackgroundcleen = "menu-background-cleen";
@@ -525,14 +522,33 @@ function theme_ucsf_get_first_category_customization_menu(moodle_page $page) {
 }
 
 function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
-    global $CFG, $COURSE;
+    global $CFG, $COURSE, $CATEGORIES;
+
+    $cats = get_config('theme_ucsf');
+
+    $all_cats = $cats->all_categories;
+    $all_categories_array = explode(",", $all_cats);
+    $sub_cat = [];
+
+    if($CATEGORIES !== null) {
+        foreach($all_categories_array as $sub_category){
+            if (in_array($sub_category, $CATEGORIES)){
+                $sub_cat[] = $sub_category;
+            }
+        }
+    }
+
+    $current_hour = date('G');
+    $current_minute = date('i');
+    $current_time = $current_hour. ':' .$current_minute;
+    $current_time_timestamp = strtotime($current_time);
+    $current_date = new DateTime();
+    $current_date_timestamp = $current_date->getTimestamp();
+    $current_day_timestamp = strtotime("midnight");
 
     $hasalert = array(false, false, false, false, false, false, false, false, false, false);
 
     $number_of_alerts = isset($page->theme->settings->number_of_alerts) ? intval($page->theme->settings->number_of_alerts) : '';
-
-    $current_date = new DateTime();
-    $current_date_timestamp = $current_date->getTimestamp();
 
     for ($i = 1; $i <= $number_of_alerts; $i++) {
         $category = theme_ucsf_get_setting('categories_list_alert'.$i);
@@ -546,8 +562,10 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
             $COURSECATEGORY = $COURSE->category;
         }
 
-        if ($COURSECATEGORY == $category || $category == 0) {
+        if ($COURSECATEGORY == $category || $category == 0 || in_array($category, $sub_cat)) {
+
             if(!isset($_SESSION["alerts"]["alert".$i]) || $_SESSION["alerts"]["alert".$i] != 0) {
+
                 //Never-Ending Alert
                 if ($alert_type == '1') {
                     if($enable_alert == 1) {
@@ -566,18 +584,24 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
                     if ($start_minute == false) {
                         $start_minute = '00';
                     }
+                    if ($start_hour == false) {
+                        $start_hour = '00';
+                    }
 
                     // Formating date and getting timestamp from it
                     $start_date_format = date($start_date .' '.$start_hour.':'.$start_minute.':00');
                     $start_date_timestamp   = strtotime($start_date_format);
 
                     // Creating end date.
-                    $end_date   = (null !== (theme_ucsf_get_setting('end_date'.$i))) ? theme_ucsf_get_setting('end_date'.$i) : ''; 
-                    $end_hour     = (null !== (theme_ucsf_get_setting('end_hour'.$i))) ? theme_ucsf_get_setting('end_hour'.$i) : '';  
-                    $end_minute   = (null !== (theme_ucsf_get_setting('end_minute'.$i))) ? theme_ucsf_get_setting('end_minute'.$i) : ''; 
+                    $end_date   = (null !== (theme_ucsf_get_setting('end_date'.$i))) ? theme_ucsf_get_setting('end_date'.$i) : '';
+                    $end_hour     = (null !== (theme_ucsf_get_setting('end_hour'.$i))) ? theme_ucsf_get_setting('end_hour'.$i) : '';
+                    $end_minute   = (null !== (theme_ucsf_get_setting('end_minute'.$i))) ? theme_ucsf_get_setting('end_minute'.$i) : '';
                     // Do not set false if the value is 0.
                     if ($end_minute == false) {
                         $end_minute = '00';
+                    }
+                    if ($end_hour == false) {
+                        $end_hour = '00';
                     }
 
                     // Formating date and getting timestamp from it
@@ -596,34 +620,46 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
 
                     //Getting daily start date from config and converting it to timestamp.
                     $start_date = (null !== (theme_ucsf_get_setting('start_date_daily'.$i))) ? theme_ucsf_get_setting('start_date_daily'.$i) : '';
-                    $start_hour = (null !== (theme_ucsf_get_setting('start_only_hour_daily'.$i))) ? theme_ucsf_get_setting('start_only_hour_daily'.$i) : '';
-                    $start_minute = (null !== (theme_ucsf_get_setting('start_only_minute_daily'.$i))) ? theme_ucsf_get_setting('start_only_minute_daily'.$i) : "";
+                    $start_hour = (null !== (theme_ucsf_get_setting('start_hour_daily'.$i))) ? theme_ucsf_get_setting('start_hour_daily'.$i) : '';
+                    $start_minute = (null !== (theme_ucsf_get_setting('start_minute_daily'.$i))) ? theme_ucsf_get_setting('start_minute_daily'.$i) : "";
 
                     // Do not set false if the value is 0.
                     if ($start_minute == false) {
                         $start_minute = '00';
                     }
+                    if ($start_hour == false) {
+                        $start_hour = '00';
+                    }
 
-                    $start_date_format = date($start_date .' '.$start_hour.':'.$start_minute.':00');
-                    $start_date_timestamp = strtotime($start_date_format);
+                    $start_time = $start_hour. ':' .$start_minute;
+
+                    $start_date_timestamp = strtotime($start_date);
+                    $start_time_timestamp = strtotime($start_time);
 
                     //Getting daily end date from config and converting it to timestamp.
                     $end_date = (null !== (theme_ucsf_get_setting('end_date_daily'.$i))) ? theme_ucsf_get_setting('end_date_daily'.$i) : '';
-                    $end_hour = (null !== (theme_ucsf_get_setting('end_only_hour_daily'.$i))) ? theme_ucsf_get_setting('end_only_hour_daily'.$i) : '';
-                    $end_minute = (null !== (theme_ucsf_get_setting('end_only_minute_daily'.$i))) ? theme_ucsf_get_setting('end_only_minute_daily'.$i) : "";
+                    $end_hour = (null !== (theme_ucsf_get_setting('end_hour_daily'.$i))) ? theme_ucsf_get_setting('end_hour_daily'.$i) : '';
+                    $end_minute = (null !== (theme_ucsf_get_setting('end_minute_daily'.$i))) ? theme_ucsf_get_setting('end_minute_daily'.$i) : "";
 
                     if ($end_minute == false) {
                         $end_minute = '00';
                     }
+                    if ($end_hour == false) {
+                        $end_hour = '00';
+                    }
+
+                    $end_time = $end_hour. ':' .$end_minute;
 
                     // Formating date and getting timestamp from it
-                    $end_date_format = date($end_date .' '.$end_hour.':'.$end_minute.':00');
-                    $end_date_timestamp = strtotime($end_date_format);
+                    $end_date_timestamp = strtotime($end_date);
+                    $end_time_timestamp = strtotime($end_time);
 
                     if ($enable_alert == 1) {
-                        if($start_date_timestamp <= $current_date_timestamp && $end_date_timestamp >= $current_date_timestamp) {
-                            $_SESSION["alerts"]["alert".$i] = 1;
-                            $hasalert[$i] = true;
+                        if($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
+                            if($start_time_timestamp <= $current_time_timestamp && $end_time_timestamp > $current_time_timestamp){
+                                $_SESSION["alerts"]["alert".$i] = 1;
+                                $hasalert[$i] = true;
+                            }
                         }
                     }
                 }
@@ -664,32 +700,44 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
                     if ($start_minute == false) {
                         $start_minute = '00';
                     }
+                    if ($start_hour == false) {
+                        $start_hour = '00';
+                    }
 
-                    $start_date_format = date($start_date .' '.$start_hour.':'.$start_minute.':00');
-                    $start_date_timestamp = strtotime($start_date_format);
+                    $start_time = $start_hour. ':' .$start_minute;
+
+                    $start_date_timestamp = strtotime($start_date);
+                    $start_time_timestamp = strtotime($start_time);
 
                     //Getting daily end date from config and converting it to timestamp.
                     $end_date = (null !== (theme_ucsf_get_setting('end_date_weekly'.$i))) ? theme_ucsf_get_setting('end_date_weekly'.$i) : '';
                     $end_hour = (null !== (theme_ucsf_get_setting('end_hour_weekly'.$i))) ? theme_ucsf_get_setting('end_hour_weekly'.$i) : '';
                     $end_minute = (null !== (theme_ucsf_get_setting('end_minute_weekly'.$i))) ? theme_ucsf_get_setting('end_minute_weekly'.$i) : "";
+
                     if ($end_minute == false) {
                         $end_minute = '00';
                     }
 
-                    // Formating date and getting timestamp from it
-                    $end_date_format = date($end_date .' '.$end_hour.':'.$end_minute.':00');
-                    $end_date_timestamp = strtotime($end_date_format);
+                    if ($end_hour == false) {
+                        $end_hour = '00';
+                    }
 
-                    if ($enable_alert = 1){
+                    $end_time = $end_hour. ':' .$end_minute;
+
+                    // Formating date and getting timestamp from it
+                    $end_date_timestamp = strtotime($end_date);
+                    $end_time_timestamp = strtotime($end_time);
+
+                    if ($enable_alert == 1){
                         if ($weekday_timestamp == $current_weekday_timestamp) {
-                            if ($start_date_timestamp <= $current_date_timestamp && $end_date_timestamp >= $current_date_timestamp) {
-                                $_SESSION["alerts"]["alert".$i] = 1;
-                                $hasalert[$i] = true;
+                            if ($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
+                                if ($start_time_timestamp <= $current_date_timestamp && $end_time_timestamp > $current_date_timestamp) {
+                                    $_SESSION["alerts"]["alert".$i] = 1;
+                                    $hasalert[$i] = true;
+                                }
                             }
                         }
                     }
-
-
                 }
             }
         }
@@ -772,7 +820,7 @@ function theme_ucsf_get_tiles(renderer_base $output, moodle_page $page) {
             if ($index < 2) {
                 ${'tile' . $arr . 'image'} = "";
                 if(!empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
-                    ${'tile' . $arr . 'image'} = '<img src="'.$page->theme->setting_file_url('tile' . $arr . 'image', 'tile' . $arr . 'image').'" alt="'.theme_ucsf_get_setting('tile' . $arr . 'imagealt').'" title="'.theme_ucsf_get_setting('tile' . $arr . 'imagetitle').'" class="tile-image">'; 
+                    ${'tile' . $arr . 'image'} = '<img src="'.$page->theme->setting_file_url('tile' . $arr . 'image', 'tile' . $arr . 'image').'" alt="'.theme_ucsf_get_setting('tile' . $arr . 'imagealt').'" title="'.theme_ucsf_get_setting('tile' . $arr . 'imagetitle').'" class="tile-image">';
                 }
                 if(!empty(theme_ucsf_get_setting('tile' . $arr . 'content')) || !empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
                     $tileborder = 'tile-border';
@@ -861,5 +909,5 @@ function ucsf_set_customcss() {
 
 function theme_ucsf_page_init(moodle_page $page) {
     $page->requires->jquery();
-    $page->requires->jquery_plugin('alert', 'theme_ucsf');  
+    $page->requires->jquery_plugin('alert', 'theme_ucsf');
 }
