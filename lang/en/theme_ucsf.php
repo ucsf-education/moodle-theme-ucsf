@@ -158,7 +158,7 @@ $string['alerttitle'] = 'Title';
 $string['alerttitledesc'] = 'Main title/heading for your alert';
 
 $string['alerttype'] = 'Level';
-$string['alerttypedesc'] = 'Set the appropriate alert level/type to best inform your users';
+$string['alerttypedesc'] = 'Set the appropriate alert level/type.';
 
 $string['alerttext'] = 'Alert Text';
 $string['alerttextdesc'] = 'What is the text you wish to display in your alert';
@@ -170,7 +170,7 @@ $string['alert_general'] = 'Announcement';
 $string['alertbgcolor'] = 'Alert Background Color';
 $string['alertbgcolordesc'] = 'Set the custom alert background color';
 $string['categories_list_alert'] = 'Category';
-$string['categories_list_alertdesc'] = 'Select which category/subcategory does this alert belongs. If you set "Site wide" value, the alert will be set through entire site.';
+$string['categories_list_alertdesc'] = 'Select the category/subcategory where the alert should appear.';
 
 $string['start_date'] = 'Start/End date';
 $string['start_datedesc'] = 'Set start date when you want this alert to show and end date when you want this alert to stop.';
@@ -178,7 +178,7 @@ $string['end_date'] = 'End date';
 $string['end_datedesc'] = 'Set end date when you want this alert to stop showing.';
 
 $string['recurring_alert'] = 'Recurring alert';
-$string['recurring_alertdesc'] = 'Select which type alert do you want to use. IMPORTANT: You must click SAVE CHANGES after changing the alert type.';
+$string['recurring_alertdesc'] = 'Select which alert type you want to use. IMPORTANT: You must click SAVE CHANGES after changing the alert type to view the settings for the newly selected alert type.';
 $string['none'] = 'None';
 $string['one_time'] = 'One time';
 $string['daily'] = 'Daily';
