@@ -58,7 +58,7 @@ echo $OUTPUT->doctype() ?>
     <!-- Google fonts -->
     <link href="//fonts.googleapis.com/css?family=Open Sans:400,600,700,Bold,italic" rel="stylesheet" type="text/css"/>
     <!-- Awesome fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body <?php echo $OUTPUT->body_attributes(); ?>>

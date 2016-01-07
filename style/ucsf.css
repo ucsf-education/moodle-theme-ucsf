@@ -3,20 +3,21 @@
 /* GENERAL */
 
 @font-face {
-    font-family: 'FontAwesome'; 
-    font-weight: normal;
-    font-style: normal;
-    src: url('//netdna.bootstrapcdn.com/font-awesome/4.0.0/fonts/fontawesome-webfont.eot?v=4.0.0');
-    src: url('//netdna.bootstrapcdn.com/font-awesome/4.0.0/fonts/fontawesome-webfont.eot?#iefix&v=4.0.0') format('embedded-opentype'), 
-         url('//netdna.bootstrapcdn.com/font-awesome/4.0.0/fonts/fontawesome-webfont.woff?v=4.0.0') format('woff'), 
-         url('//netdna.bootstrapcdn.com/font-awesome/4.0.0/fonts/fontawesome-webfont.ttf?v=4.0.0') format('truetype'), 
-         url('//netdna.bootstrapcdn.com/font-awesome/4.0.0/fonts/fontawesome-webfont.svg#fontawesomeregular?v=4.0.0') format('svg');
+  font-family: 'FontAwesome';
+  src: url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.eot?v=4.5.0');
+  src: url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.eot?#iefix&v=4.5.0') format('embedded-opentype'),
+       url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.woff2?v=4.5.0') format('woff2'),
+       url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.woff?v=4.5.0') format('woff'),
+       url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.ttf?v=4.5.0') format('truetype'),
+       url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
-    background: url([[pix:theme_ucsf|background]]) no-repeat center top  #FFF; 
+    background: url([[pix:theme_ucsf|background]]) no-repeat center top  #FFF;
     font-family: "Open Sans",sans-serif;
-    font-size: 13px; 
+    font-size: 13px;
     color: #333;
     margin-top: 0px;
     padding-top: 0px!important;
@@ -26,16 +27,16 @@ body {
 /* styles for when the page size is reduce to fit large custom menus */
 
 @media ( max-width: 1199px ) {
-    
+
     /* the left block but only on the front page*/
 
-    
+
     /* the main but only on the front page*/
 
     #page-site-index .row-fluid .span4 {
         width: 31.9149% !important;
     }
-    
+
     /* the left block but only on the front page*/
 
     #page-site-index .row-fluid #block-region-side-pre.span4 {
@@ -47,42 +48,42 @@ body {
     body{
             background: #FFF!important;
     }
-    
+
     #page {
         padding: 0 10px!important;
     }
-    
+
     .category-label {
         display: block;
         padding-left: 5px !important;
     }
-    
+
     .navbar .nav > li {
        /* background: none!important;*/
     }
-    
+
     .navbar-inner {
         padding: 0px 10px 0 10px !important;
     }
-    
+
     .main-footer {
         padding: 0 10px!important;
     }
-    
+
     /* the left block but only on the front page*/
 
     #page-site-index .row-fluid #block-region-side-pre.span4 {
         width: 23.4043% !important;
     }
-    
+
     body#page-site-index.has_dock #page {
         padding-left: 0 !important;
    }
-    
+
 }
 
 @media ( max-width: 1030px ) {
-    
+
     /* the left block but only on the front page*/
 
     /* docked padding fix front page*/
@@ -90,27 +91,27 @@ body {
     body#page-site-index.has_dock #page {
             padding-left: 50px !important;
     }
-    
+
     /* ----- Control the width of the blocks -----*/
 
-    /* the main center content area 
+    /* the main center content area
     .row-fluid .span8 {
             width: 65.812% !important;
     }
 */
-    /* the left block 
+    /* the left block
     .row-fluid .span4 {
             width: 31.6239% !important;
     }*/
 
-    /* the right block 
+    /* the right block
 
         .row-fluid .span3 {
             width: 24.0769% !important;
     }*/
 
     /* pre (left) and main */
-        
+
         /* This is commented line because of new settings for tablet layout
             Erase this line if the client except the new setting.
     .row-fluid .span9 {
@@ -125,22 +126,22 @@ body {
     }
 
     /* pre (left and main when all right blocks docked */
-    
+
     .empty-region-side-post .row-fluid .span9 {
             width: 100% !important;
     }
-    
+
     /* main when all blocks docked */
-    
+
     .empty-region-side-pre #region-bs-main-and-pre.span9 #region-main, .jsenabled.docked-region-side-pre #region-bs-main-and-pre.span9 #region-main {
             width: 100% !important;
     }
-    
+
     /* the main center content area */
     .pagelayout-frontpage .row-fluid .span8 {
             width: 74% !important;
     }
-    
+
     /* the left block but only on the front page*/
 
     #page-site-index .row-fluid .span4 {
@@ -148,7 +149,7 @@ body {
     }
 
     /* front page */
-    
+
     .pagelayout-frontpage .container-fluid {
             max-width: 100% !important;
     }
@@ -156,37 +157,37 @@ body {
 
 
 @media ( max-width: 1010px) {
-    
+
     body{
             background: #FFF!important;
     }
-    
+
     #page {
         padding: 0 10px!important;
     }
-    
+
     .category-label {
         display: block;
         padding-left: 5px !important;
     }
-    
+
     .navbar .nav {
             margin: 0;
     }
-    
+
     .navbar .nav > li {
        /* background: none!important;*/
     }
-    
+
     .navbar .nav > li > a {
             font-size: 11px !important;
             padding: 10px 7px 10px 7px !important;
     }
-    
+
     .navbar-inner {
         padding: 0px 8px 0 8px !important;
     }
-    
+
     .main-footer {
         padding: 0 10px!important;
     }
@@ -199,35 +200,35 @@ body {
     body{
             background: #FFF!important;
     }
-    
+
     #page {
         padding: 0 10px!important;
     }
-    
+
     .ucsf-custom-menu {
         background: #e4edf4;
     }
-    
+
     .category-label-container {
         width: 100%!important;
     }
-    
+
     .category-label {
         display: block;
         background: url([[pix:theme_ucsf|breadcrumb-arrow-clear]]) no-repeat right!important;
         padding-left: 5px !important;
     }
-    
+
     .navbar-inner {
         padding: 0px 8px 0 8px !important;
     }
-    
+
     .main-footer {
         padding: 0 10px!important;
     }
-    
-    
-    
+
+
+
     /* the main but only on the front page*/
 
     #page-site-index .row-fluid .span4 {
@@ -246,27 +247,27 @@ body {
 @media ( max-width: 767px ) {
     #page,
     .container-fluid,
-    .main-footer { 
+    .main-footer {
         padding: 0 5px!important;
     }
-    
+
     .cle-text {
         display: none!important;
     }
-    
+
     .sectionname {
         line-height: 25px;
     }
-    
+
     .course-content ul.topics li.section .left,
     .course-content ul.topics li.section .right {
         width: 0px;
     }
-    
+
     .navbar-inner {
         padding: 0px 5px 0 5px !important;
     }
-    
+
     /* ----- Control the width of the blocks -----*/
 
     /* the main center content area */
@@ -358,7 +359,7 @@ hr { background-color:#b3becb; height:1px; border:none }
 
 .pagelayout-frontpage .container-fluid {
     max-width: 940px;
-    
+
 }
 
 #page {
@@ -441,8 +442,8 @@ hr { background-color:#b3becb; height:1px; border:none }
     background: #cbdcea;
 }
 
-.menu-background {    
-    background: url([[pix:theme_ucsf|menu-background]]) no-repeat left top #e4edf4; 
+.menu-background {
+    background: url([[pix:theme_ucsf|menu-background]]) no-repeat left top #e4edf4;
 }
 
 .menu-background-cleen {
@@ -459,7 +460,7 @@ hr { background-color:#b3becb; height:1px; border:none }
     min-height: 40px;
     padding-right: 20px;
     color: #365376;
-    background: url([[pix:theme_ucsf|breadcrumb-arrow]]) no-repeat right; 
+    background: url([[pix:theme_ucsf|breadcrumb-arrow]]) no-repeat right;
 }
 
 .category-label-image {
@@ -473,16 +474,16 @@ hr { background-color:#b3becb; height:1px; border:none }
     float: right;
 }
 
-.category-label a { 
+.category-label a {
     color: #365376;
 }
 
-.nav-collapse .dropdown-menu a:hover, 
-.nav-collapse .dropdown-menu a:focus, 
-.nav-collapse .dropdown-submenu a:focus, 
-.nav-collapse .dropdown-submenu a:hover, 
-.nav-collapse .dropdown-submenu a:active, 
-.nav-collapse .dropdown-menu > li > a:hover, 
+.nav-collapse .dropdown-menu a:hover,
+.nav-collapse .dropdown-menu a:focus,
+.nav-collapse .dropdown-submenu a:focus,
+.nav-collapse .dropdown-submenu a:hover,
+.nav-collapse .dropdown-submenu a:active,
+.nav-collapse .dropdown-menu > li > a:hover,
 .nav-collapse .dropdown-menu > li > a:focus {
     color: #fff;
 }
@@ -534,7 +535,7 @@ hr { background-color:#b3becb; height:1px; border:none }
     padding-left: 7px;
     padding-right: 7px;
     margin-right: 15px;
-    margin-left: 1px;    
+    margin-left: 1px;
     color: #fcf8e3;
     background-color: #c09853;
     border-radius: 20px;
@@ -554,9 +555,9 @@ hr { background-color:#b3becb; height:1px; border:none }
 /* TILES & BANNER */
 
 .tile {
-    background-color: #fff;    
+    background-color: #fff;
     padding: 0px ;
-    text-align: left;    
+    text-align: left;
 }
 
 .tile-border {
@@ -571,7 +572,7 @@ hr { background-color:#b3becb; height:1px; border:none }
     margin: 1px;
 }
 
-.tile-image, 
+.tile-image,
 .banner-image {
     width: 100%;
 }
@@ -626,7 +627,7 @@ hr { background-color:#b3becb; height:1px; border:none }
 }
 
 .navbar .nav > li {
-    background: url([[pix:theme_ucsf|menu-separator]]) no-repeat top right; 
+    background: url([[pix:theme_ucsf|menu-separator]]) no-repeat top right;
 }
 
 .navbar-text {
@@ -656,8 +657,8 @@ hr { background-color:#b3becb; height:1px; border:none }
 /* MENU */
 
 .dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus, 
-.dropdown-submenu:hover > a, 
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
 .dropdown-submenu:focus > a {
     background: none;
     background-color: #365376!important;
@@ -670,7 +671,7 @@ hr { background-color:#b3becb; height:1px; border:none }
     border:none;
 }
 .block {
-    font-size: 13px;    
+    font-size: 13px;
     background-color:#f3f3f4;
     border: none;
     padding:0px;
@@ -708,7 +709,7 @@ hr { background-color:#b3becb; height:1px; border:none }
     padding-right: 8px;
 }
 
-.block_tree .active_tree_node, 
+.block_tree .active_tree_node,
 .block_tree .active_tree_node a {
     font-weight: 600;
 }
@@ -769,19 +770,19 @@ hr { background-color:#b3becb; height:1px; border:none }
 /* docked padding fix */
 body.has_dock #page {
     padding-left: 60px !important;
-    
+
 }
 
 /* docked padding fix front page*/
 body#page-site-index.has_dock #page {
     padding-left: 0;
-    
+
 }
 
 /*------------------------------------------------------------------------------------*/
 /* COURSE PAGE BLOCKS */
 
-.block_course_overview, 
+.block_course_overview,
 .block_course_overview .block .content,
 .block_course_overview .header .title h2  {
     background: none!important;
@@ -796,7 +797,7 @@ body#page-site-index.has_dock #page {
     color: #365376;
     font-size: 16px;
  }
- 
+
 .block_course_overview .coursebox {
     border-radius: 0px;
     border:1px solid #b3becb;
@@ -843,7 +844,7 @@ body#page-site-index.has_dock #page {
     margin-bottom: 10px;
 }
 
-.course-content .single-section .section-navigation .mdl-left a, 
+.course-content .single-section .section-navigation .mdl-left a,
 .course-content .single-section .section-navigation .mdl-right a {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -947,7 +948,7 @@ body#page-site-index.has_dock #page {
 }
 
 .ucsf_footer_link {
-    margin-left:20px; 
+    margin-left:20px;
 }
 
 .ucsf_logininfo {
@@ -962,11 +963,11 @@ body#page-site-index.has_dock #page {
     .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4 {
         width: 100%;
     }
-    
+
     .empty-region-side-post.used-region-side-pre #region-main.span8 {
         width: 100%;
-    }  
-    
+    }
+
     #region-main {
         padding:5px;
         padding-bottom:0px;
@@ -1180,12 +1181,12 @@ body {
     }
 
     .navbar .nav > li {
-        background: url([[pix:theme_ucsf|menu-separator]]) no-repeat top right; 
+        background: url([[pix:theme_ucsf|menu-separator]]) no-repeat top right;
         float: left;
     }
 
     .navbar .nav > li:last-child{
-        background: none; 
+        background: none;
     }
 
     .menu-left, .menu-right {
@@ -1198,11 +1199,11 @@ body {
     a.btn.btn-navbar {
         display: block;
     }
-    
+
     .navbar .nav > li {
         background: none;
     }
-    
+
     .menu-left, .menu-right, .menu-background {
         background: none;
     }
@@ -1274,11 +1275,11 @@ body {
         margin: 0 auto;
         clear: both;
     }
-    
+
     .row-fluid .span4{
         width: 100%!important;
     }
-    
+
     .pagelayout-frontpage .row-fluid .span8 {
         width: 100%!important;
     }
@@ -1300,7 +1301,7 @@ body {
 /*------------------------------------------------------------------------------------*/
 /* BLOCK WIDTH SETTINGS FOR DIFFERENT LAYOUT SIZES */
 /* Large desktop */
-@media (min-width: 1200px) { 
+@media (min-width: 1200px) {
     .empty-region-side-post.used-region-side-pre #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
         width: calc(100% - [[setting:block_width_desktop]]px - 20px);
     }
@@ -1309,7 +1310,7 @@ body {
     }
     #page-mod-quiz-view  #block-region-side-pre.span4,
     #page-mod-quiz-edit #block-region-side-pre.span4,
-    #page-course-index #block-region-side-pre.span4, 
+    #page-course-index #block-region-side-pre.span4,
     .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
     .pagelayout-standard #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
     .editing #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
@@ -1318,7 +1319,7 @@ body {
     .pagelayout-mydashboard #block-region-side-pre.span4 {
         width: [[setting:block_width_desktop]]px;
     }
-    
+
     #page-mod-quiz-view #region-main.span8,
     #page-mod-quiz-edit #region-main.span8,
     #page-course-index #region-main.span8,
@@ -1330,7 +1331,7 @@ body {
     .pagelayout-mydashboard #region-main.span8 {
         width: calc(100% - [[setting:block_width_desktop]]px - 20px);
     }
-    
+
     #page-mod-quiz-view .row-fluid .span9,
     #page-mod-quiz-edit .row-fluid .span9,
     .two-column .row-fluid .span9,
@@ -1341,20 +1342,20 @@ body {
         width: calc(100% - [[setting:block_width_desktop]]px - 20px);
         padding-right: 20px;
     }
-    
+
     #page-mod-quiz-view .row-fluid .span8,
     #page-mod-quiz-edit .row-fluid .span8,
     #page-course-index .row-fluid .span8,
-    .two-column .row-fluid .span8, 
-    .pagelayout-standard .row-fluid .span8, 
-    .path-course-view .row-fluid .span8, 
+    .two-column .row-fluid .span8,
+    .pagelayout-standard .row-fluid .span8,
+    .path-course-view .row-fluid .span8,
     .pagelayout-coursecategory .row-fluid .span8,
     .pagelayout-mydashboard .row-fluid .span8 {
         width: calc(100% - [[setting:block_width_desktop]]px - 20px);
         padding-right: 20px;
         padding-left: 20px;
     }
-    
+
     #page-mod-quiz-view .row-fluid .span4,
     #page-mod-quiz-edit .row-fluid .span4,
     .pagelayout-standard .row-fluid .span4,
@@ -1363,7 +1364,7 @@ body {
     .pagelayout-mydashboard .row-fluid .span4 {
         width: [[setting:block_width_desktop]]px;
     }
-    
+
     #page-mod-quiz-view .row-fluid .span9,
     #page-mod-quiz-edit .row-fluid .span9,
     .two-column .row-fluid .span9,
@@ -1373,14 +1374,14 @@ body {
     .pagelayout-mydashboard .row-fluid .span9 {
         width: calc(100% - [[setting:block_width_desktop]]px);
     }
-    
+
     #region-main {padding:0 20px;}
-    
+
     #page-mod-quiz-view .row-fluid .span3,
     #page-mod-quiz-edit .row-fluid .span3,
     #page-course-index .row-fluid .span3,
     .two-column .row-fluid .span3,
-    .pagelayout-standard .row-fluid .span3, 
+    .pagelayout-standard .row-fluid .span3,
     .path-course-view .row-fluid .span3,
     .pagelayout-coursecategory .row-fluid .span3,
     .pagelayout-mydashboard .row-fluid .span3 {
@@ -1395,18 +1396,18 @@ body {
         width: 74%;
         padding: 0;
     }
-    
+
     .empty-region-side-post.used-region-side-pre #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
         width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
     }
-    
+
     .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4 {
         width: [[setting:block_width_portrait_tablet]]px;
     }
-    
+
     #page-mod-quiz-view  #block-region-side-pre.span4,
     #page-mod-quiz-edit #block-region-side-pre.span4,
-    #page-course-index #block-region-side-pre.span4, 
+    #page-course-index #block-region-side-pre.span4,
     .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
     .pagelayout-standard #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
     .editing #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
@@ -1415,7 +1416,7 @@ body {
     .pagelayout-mydashboard #block-region-side-pre.span4 {
         width: [[setting:block_width_portrait_tablet]]px;
     }
-    
+
     #page-mod-quiz-view #region-main.span8,
     #page-mod-quiz-edit #region-main.span8,
     #page-course-index #region-main.span8,
@@ -1427,7 +1428,7 @@ body {
     .pagelayout-mydashboard #region-main.span8 {
         width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
     }
-    
+
     #page-mod-quiz-view .row-fluid .span9,
     #page-mod-quiz-edit .row-fluid .span9,
     #page-course-index .row-fluid .span9,
@@ -1439,31 +1440,31 @@ body {
         width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
         padding-right: 20px;
     }
-    
+
     #page-mod-quiz-view .row-fluid .span8,
     #page-mod-quiz-edit .row-fluid .span8,
     #page-course-index .row-fluid .span8,
-    .two-column .row-fluid .span8, 
-    .pagelayout-standard .row-fluid .span8, 
-    .path-course-view .row-fluid .span8, 
+    .two-column .row-fluid .span8,
+    .pagelayout-standard .row-fluid .span8,
+    .path-course-view .row-fluid .span8,
     .pagelayout-coursecategory .row-fluid .span8,
     .pagelayout-mydashboard .row-fluid .span8 {
         width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
         padding-right: 20px;
         padding-left: 20px;
     }
-    
+
     #page-mod-quiz-view .row-fluid .span4,
     #page-mod-quiz-edit .row-fluid .span4,
     #page-course-index .row-fluid .span4,
-    .two-column .row-fluid .span4, 
+    .two-column .row-fluid .span4,
     .pagelayout-standard .row-fluid .span4,
     .path-course-view .row-fluid .span4,
     .pagelayout-coursecategory .row-fluid .span4,
     .pagelayout-mydashboard .row-fluid .span4 {
         width: [[setting:block_width_portrait_tablet]]px;
     }
-    
+
     #page-mod-quiz-view .row-fluid .span9,
     #page-mod-quiz-edit .row-fluid .span9,
     #page-course-index .row-fluid .span9,
@@ -1474,14 +1475,14 @@ body {
     .pagelayout-mydashboard .row-fluid .span9 {
         width: calc(100% - [[setting:block_width_portrait_tablet]]px);
     }
-    
+
     #region-main {padding:0 20px;}
-    
+
     #page-mod-quiz-view .row-fluid .span3,
     #page-mod-quiz-edit .row-fluid .span3,
     #page-course-index .row-fluid .span3,
     .two-column .row-fluid .span3,
-    .pagelayout-standard .row-fluid .span3, 
+    .pagelayout-standard .row-fluid .span3,
     .path-course-view .row-fluid .span3,
     .pagelayout-coursecategory .row-fluid .span3,
     .pagelayout-mydashboard .row-fluid .span3 {
