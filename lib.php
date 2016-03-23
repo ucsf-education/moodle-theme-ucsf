@@ -31,6 +31,37 @@
  */
 
 /**
+ * Extra LESS code to inject.
+ *
+ * This will generate some LESS code from the settings used by the user. We cannot use
+ * the {@link theme_more_less_variables()} here because we need to create selectors or
+ * alter existing ones.
+ *
+ * @param theme_config $theme The theme config object.
+ * @return string Raw LESS code.
+ */
+function theme_ucsf_extra_less($theme) {
+    $content = '';
+    // @todo implement [ST 2016/03/23]
+    return $content;
+}
+
+/**
+ * Returns variables for LESS.
+ *
+ * We will inject some LESS variables from the settings that the user has defined
+ * for the theme. No need to write some custom LESS for this.
+ *
+ * @param theme_config $theme The theme config object.
+ * @return array of LESS variables without the @.
+ */
+function theme_ucsf_less_variables($theme) {
+    $variables = array();
+    // @todo implement [ST 2016/03/23]
+    return $variables;
+}
+
+/**
  * Parses CSS before it is cached.
  *
  * This function can make alterations and replace patterns within the CSS.
@@ -39,8 +70,6 @@
  * @param theme_config $theme The theme config object.
  * @return string The parsed CSS The parsed CSS.
  */
-
-
 function theme_ucsf_process_css($css, $theme) {
 
     // Set the background image for the logo.
