@@ -23,9 +23,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- require_once($CFG->dirroot."/theme/ucsf/lib.php");
+require_once($CFG->dirroot . "/theme/ucsf/lib.php");
 
- class theme_ucsf_core_renderer extends theme_bootstrapbase_core_renderer {
+class theme_ucsf_core_renderer extends theme_bootstrapbase_core_renderer {
 
     /**
      * Return the standard string that says whether you are logged in (and switched
@@ -53,8 +53,8 @@
             $fullname = fullname($realuser, true);
             if ($withlinks) {
                 $loginastitle = get_string('loginas');
-                $realuserinfo = " [<a href=\"$CFG->wwwroot/course/loginas.php?id=$course->id&amp;sesskey=".sesskey()."\"";
-                $realuserinfo .= "title =\"".$loginastitle."\">$fullname</a>] ";
+                $realuserinfo = " [<a href=\"$CFG->wwwroot/course/loginas.php?id=$course->id&amp;sesskey=" . sesskey() . "\"";
+                $realuserinfo .= "title =\"" . $loginastitle . "\">$fullname</a>] ";
             } else {
                 $realuserinfo = " [$fullname] ";
             }
@@ -78,7 +78,7 @@
             } else {
                 $username = $fullname;
             }
-            if (is_mnet_remote_user($USER) and $idprovider = $DB->get_record('mnet_host', array('id'=>$USER->mnethostid))) {
+            if (is_mnet_remote_user($USER) and $idprovider = $DB->get_record('mnet_host', array('id' => $USER->mnethostid))) {
                 if ($withlinks) {
                     $username .= " from <a href=\"{$idprovider->wwwroot}\">{$idprovider->name}</a>";
                 } else {
@@ -86,35 +86,35 @@
                 }
             }
             if (isguestuser()) {
-                $loggedinas = $realuserinfo.get_string('loggedinasguest');
+                $loggedinas = $realuserinfo . get_string('loggedinasguest');
                 if (!$loginpage && $withlinks) {
-                    $loggedinas .= " (<a href=\"$loginurl\">".get_string('login').'</a>)';
+                    $loggedinas .= " (<a href=\"$loginurl\">" . get_string('login') . '</a>)';
                 }
             } else if (is_role_switched($course->id)) { // Has switched roles
                 $rolename = '';
-                if ($role = $DB->get_record('role', array('id'=>$USER->access['rsw'][$context->path]))) {
-                    $rolename = ': '.role_get_name($role, $context);
+                if ($role = $DB->get_record('role', array('id' => $USER->access['rsw'][$context->path]))) {
+                    $rolename = ': ' . role_get_name($role, $context);
                 }
-                $loggedinas = $username.$rolename;
+                $loggedinas = $username . $rolename;
                 if ($withlinks) {
-                    $url = new moodle_url('/course/switchrole.php', array('id'=>$course->id,'sesskey'=>sesskey(), 'switchrole'=>0, 'returnurl'=>$this->page->url->out_as_local_url(false)));
-                    $loggedinas .= '('.html_writer::tag('a', get_string('switchrolereturn'), array('href'=>$url)).')';
+                    $url = new moodle_url('/course/switchrole.php', array('id' => $course->id, 'sesskey' => sesskey(), 'switchrole' => 0, 'returnurl' => $this->page->url->out_as_local_url(false)));
+                    $loggedinas .= '(' . html_writer::tag('a', get_string('switchrolereturn'), array('href' => $url)) . ')';
                 }
             } else {
-                $loggedinas = '<div class="topmenu_user"><div class="topmenu_username">'.$realuserinfo.$username.'</div>';
+                $loggedinas = '<div class="topmenu_user"><div class="topmenu_username">' . $realuserinfo . $username . '</div>';
                 if ($withlinks) {
-                    $loggedinas .= "<div class='topmenu_logout'>(<a href=\"$CFG->wwwroot/login/logout.php?sesskey=".sesskey()."\">".get_string('logout').'</a>)</div>';
+                    $loggedinas .= "<div class='topmenu_logout'>(<a href=\"$CFG->wwwroot/login/logout.php?sesskey=" . sesskey() . "\">" . get_string('logout') . '</a>)</div>';
                 }
                 $loggedinas .= '</div>';
             }
         } else {
             $loggedinas = '';
             if (!$loginpage && $withlinks) {
-                $loggedinas .= "<div class=\"logininfo-box\"> <a href=\"$loginurl\">".get_string('login').'</a></div>';
+                $loggedinas .= "<div class=\"logininfo-box\"> <a href=\"$loginurl\">" . get_string('login') . '</a></div>';
             }
         }
 
-        $loggedinas = '<div class="logininfo">'.$loggedinas.'</div>';
+        $loggedinas = '<div class="logininfo">' . $loggedinas . '</div>';
 
         if (isset($SESSION->justloggedin)) {
             unset($SESSION->justloggedin);
@@ -128,8 +128,8 @@
                             $loggedinas .= get_string('failedloginattemptsall', '', $count);
                         }
                         if (file_exists("$CFG->dirroot/report/log/index.php") and has_capability('report/log:view', context_system::instance())) {
-                            $loggedinas .= ' (<a href="'.$CFG->wwwroot.'/report/log/index.php'.
-                                                 '?chooselog=1&amp;id=1&amp;modid=site_errors">'.get_string('logs').'</a>)';
+                            $loggedinas .= ' (<a href="' . $CFG->wwwroot . '/report/log/index.php' .
+                                    '?chooselog=1&amp;id=1&amp;modid=site_errors">' . get_string('logs') . '</a>)';
                         }
                         $loggedinas .= '</div>';
                     }
@@ -139,8 +139,6 @@
 
         return $loggedinas;
     }
-
-
 
     // custom menu override
     public function custom_menu($custommenuitems = '') {
@@ -157,7 +155,7 @@
 
         // get theme comfiguration
         $COURSECATEGORY = 0;
-        if ($PAGE->pagelayout=="coursecategory" && isset($_REQUEST["categoryid"]))
+        if ($PAGE->pagelayout == "coursecategory" && isset($_REQUEST["categoryid"]))
             $COURSECATEGORY = $_REQUEST["categoryid"];
         else
             $COURSECATEGORY = $COURSE->category;
@@ -166,11 +164,11 @@
 
 
         $themeconfig = get_config("theme_ucsf");
-        $customizedmenu = "custommenu".$COURSECATEGORY;
+        $customizedmenu = "custommenu" . $COURSECATEGORY;
         $enablecustomization = $themeconfig->enablecustomization;
 
 
-        if($enablecustomization && isset($themeconfig->$customizedmenu) && !empty($themeconfig->$customizedmenu)) {
+        if ($enablecustomization && isset($themeconfig->$customizedmenu) && !empty($themeconfig->$customizedmenu)) {
             $custommenuitems = $themeconfig->$customizedmenu;
             $custommenu = new custom_menu($custommenuitems, current_language());
         }
@@ -186,16 +184,16 @@
         $breadcrumbs = array();
         $countitems = count($items);
 
-        for ($i=1; $i<$countitems; $i++) {
+        for ($i = 1; $i < $countitems; $i++) {
             $item = $items[$i];
 
             $item->hideicon = true;
             $breadcrumbs[] = $this->render($item);
         }
-        $iconhome ='<a href="'.$CFG->wwwroot.'"><img src ="'.$OUTPUT->pix_url('icon-home', 'theme_ucsf').'"></a>';
+        $iconhome = '<a href="' . $CFG->wwwroot . '"><img src ="' . $OUTPUT->pix_url('icon-home', 'theme_ucsf') . '"></a>';
         $divider = '<span class="divider">/</span>';
-        $list_items = '<li>'.join(" $divider</li><li>", $breadcrumbs).'</li>';
-        $title = '<span class="accesshide">'.get_string('pagepath').'</span>';
-        return $title . "<ul class=\"breadcrumb\"><li class=\"iconhome\">".$iconhome."</li>$list_items</ul>";
+        $list_items = '<li>' . join(" $divider</li><li>", $breadcrumbs) . '</li>';
+        $title = '<span class="accesshide">' . get_string('pagepath') . '</span>';
+        return $title . "<ul class=\"breadcrumb\"><li class=\"iconhome\">" . $iconhome . "</li>$list_items</ul>";
     }
- }
+}
