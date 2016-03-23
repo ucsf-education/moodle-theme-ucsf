@@ -1,4 +1,4 @@
-A Moodle theme for UCSF's [Common Learning Environment](https://courses.ucsf.edu/).
+A Moodle theme for UCSF's [Collaborative Learning Environment](https://courses.ucsf.edu/).
 
 ![screenshot](pix/screenshot.jpg)
 
