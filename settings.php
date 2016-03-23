@@ -241,6 +241,16 @@ defined('MOODLE_INTERNAL') || die;
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings_lr->add($setting);
 
+
+    // Custom CSS file.
+    $name = 'theme_ucsf/customcss';
+    $title = get_string('customcss', 'theme_ucsf');
+    $description = get_string('customcssdesc', 'theme_ucsf');
+    $default = '';
+    $setting = new admin_setting_configtextarea($name, $title, $description, $default);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $settings_lr->add($setting);
+
     // Footnote
     $name = 'theme_ucsf/footnote';
     $title = get_string('footnote', 'theme_ucsf');
