@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A theme for UCSF's Common Learning Environment (CLE).
+ * A theme for UCSF's Collaborative Learning Environment (CLE).
  *
  * For full information about creating Moodle themes, see:
  * http://docs.moodle.org/dev/Themes_2.0
