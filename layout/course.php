@@ -34,7 +34,7 @@ $html = theme_ucsf_get_html_for_settings($OUTPUT, $PAGE);
 $globalsettings = theme_ucsf_get_global_settings($OUTPUT, $PAGE);
 $alerts = theme_ucsf_get_alerts($OUTPUT, $PAGE);
 
-global $CFG, $DB, $COURSE;
+global $CFG, $COURSE;
 require_once($CFG->dirroot.'/course/lib.php');
 require_once($CFG->libdir.'/coursecatlib.php');
 

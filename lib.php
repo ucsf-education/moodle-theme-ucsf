@@ -470,7 +470,7 @@ function theme_ucsf_get_category_roots($categoryid) {
 }
 
 function theme_ucsf_get_first_category_customization(moodle_page $page) {
-    global $CATEGORIES, $DB;
+    global $CATEGORIES;
 
     $categories = get_config('theme_ucsf');
     $all_categories = '';
@@ -495,7 +495,7 @@ function theme_ucsf_get_first_category_customization(moodle_page $page) {
 }
 
 function theme_ucsf_get_first_category_customization_menu(moodle_page $page) {
-    global $CATEGORIES, $DB;
+    global $CATEGORIES;
 
     $categories = get_config('theme_ucsf');
     $all_categories = '';

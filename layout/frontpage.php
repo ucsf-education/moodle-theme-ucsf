@@ -36,7 +36,7 @@ $alerts = theme_ucsf_get_alerts($OUTPUT, $PAGE);
 $banner = theme_ucsf_get_banner($OUTPUT, $PAGE);
 $tiles = theme_ucsf_get_tiles($OUTPUT, $PAGE);
 
-global $CFG, $DB, $COURSE;
+global $CFG, $COURSE;
 require_once($CFG->dirroot.'/course/lib.php');
 require_once($CFG->libdir.'/coursecatlib.php');
 
