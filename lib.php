@@ -460,11 +460,9 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 function theme_ucsf_get_category_roots($categoryid) {
     global $CATEGORIES, $DB;
 
-    $sql = "SELECT cc.parent, cc.name
-        FROM {course_categories} cc
-        WHERE cc.id = ".$categoryid."";
+    $sql = "SELECT cc.parent, cc.name FROM {course_categories} cc WHERE cc.id = ?";
 
-    $course_categories =  $DB->get_records_sql($sql);
+    $course_categories =  $DB->get_records_sql($sql, array($categoryid));
     foreach ($course_categories as $cat) {
         $CATEGORIES[]= $categoryid;
         theme_ucsf_get_category_roots($cat->parent);
