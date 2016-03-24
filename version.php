@@ -28,9 +28,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2015072426;
+$plugin->version   = 2016032400;
 $plugin->requires  = 2013110500;
-$plugin->release = 'v1.0.0';
+$plugin->release = 'v1.0.1';
 $plugin->component = 'theme_ucsf';
 $plugin->dependencies = array(
     'theme_bootstrapbase'  => 2013110500,
