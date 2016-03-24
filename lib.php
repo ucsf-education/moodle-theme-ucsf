@@ -458,6 +458,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 }
 
 function theme_ucsf_get_category_roots($categoryid) {
+    // @todo rid the world of this global $CATEGORIES variable. [ST 2016/03/24]
     global $CATEGORIES, $DB;
 
     $sql = "SELECT cc.parent, cc.name FROM {course_categories} cc WHERE cc.id = ?";
