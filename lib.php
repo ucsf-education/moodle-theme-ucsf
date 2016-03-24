@@ -458,13 +458,12 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 }
 
 function theme_ucsf_get_category_roots($categoryid) {
+    // @todo rid the world of this global $CATEGORIES variable. [ST 2016/03/24]
     global $CATEGORIES, $DB;
 
-    $sql = "SELECT cc.parent, cc.name
-        FROM {course_categories} cc
-        WHERE cc.id = ".$categoryid."";
+    $sql = "SELECT cc.parent, cc.name FROM {course_categories} cc WHERE cc.id = ?";
 
-    $course_categories =  $DB->get_records_sql($sql);
+    $course_categories =  $DB->get_records_sql($sql, array($categoryid));
     foreach ($course_categories as $cat) {
         $CATEGORIES[]= $categoryid;
         theme_ucsf_get_category_roots($cat->parent);
@@ -472,7 +471,7 @@ function theme_ucsf_get_category_roots($categoryid) {
 }
 
 function theme_ucsf_get_first_category_customization(moodle_page $page) {
-    global $CATEGORIES, $DB;
+    global $CATEGORIES;
 
     $categories = get_config('theme_ucsf');
     $all_categories = '';
@@ -497,7 +496,7 @@ function theme_ucsf_get_first_category_customization(moodle_page $page) {
 }
 
 function theme_ucsf_get_first_category_customization_menu(moodle_page $page) {
-    global $CATEGORIES, $DB;
+    global $CATEGORIES;
 
     $categories = get_config('theme_ucsf');
     $all_categories = '';
