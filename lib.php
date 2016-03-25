@@ -319,11 +319,11 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
             $return->categorylabel = '<div class="category-label pull-left"><div class="category-label-text">'.$page->theme->settings->toplevelcategorylabel.'</div></div>';
         }
 
-        $COURSECATEGORY = theme_ucsf_get_current_course_category($page, $COURSE);
-        $categories = theme_ucsf_get_category_roots($COURSECATEGORY);
+        $coursecategory = theme_ucsf_get_current_course_category($page, $COURSE);
+        $categories = theme_ucsf_get_category_roots($coursecategory);
 
         // Help/Feedback Links
-        if ($COURSECATEGORY != 0) {
+        if ($coursecategory != 0) {
             for($j = 0; $j < count($categories); $j++) {
                 if (theme_ucsf_get_setting('catenablehelpfeedback'.$categories[$j]) == 1) {
                     $target = '';
@@ -375,23 +375,23 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
                 if(!empty($COURSE->fullname))
                     $return->coursetitle = '<div class="custom_course_title">'. $COURSE->fullname . '</div>';
 
-        if(!is_null($COURSECATEGORY && $COURSECATEGORY!=0)) {
-            $displaycustomcoursetitle = "displaycoursetitle".$COURSECATEGORY;
+        if(!is_null($coursecategory && $coursecategory!=0)) {
+            $displaycustomcoursetitle = "displaycoursetitle".$coursecategory;
             if(isset($page->theme->settings->$displaycustomcoursetitle))
                 if(!$page->theme->settings->$displaycustomcoursetitle)
                     $return->coursetitle = '';
         }
 
         // category labels
-        $COURSECATEGORY = theme_ucsf_get_first_category_customization($page, $categories);
+        $coursecategory = theme_ucsf_get_first_category_customization($page, $categories);
 
         // override top level category label with custom category label
-        if(!is_null($COURSECATEGORY && $COURSECATEGORY!=0)) {
-            $categorylabelcustom = "categorylabel".$COURSECATEGORY;
-            $categorylabelimagecustom = "categorylabelimage".$COURSECATEGORY;
-            $categorylabelimageheightcustom = "categorylabelimageheight".$COURSECATEGORY;
-            $categorylabelimagealtcustom = "categorylabelimagealt".$COURSECATEGORY;
-            $categorylabelimagetitlecustom = "categorylabelimagetitle".$COURSECATEGORY;
+        if(!is_null($coursecategory && $coursecategory!=0)) {
+            $categorylabelcustom = "categorylabel".$coursecategory;
+            $categorylabelimagecustom = "categorylabelimage".$coursecategory;
+            $categorylabelimageheightcustom = "categorylabelimageheight".$coursecategory;
+            $categorylabelimagealtcustom = "categorylabelimagealt".$coursecategory;
+            $categorylabelimagetitlecustom = "categorylabelimagetitle".$coursecategory;
 
             if (!empty($page->theme->settings->$categorylabelcustom)) {
 
@@ -401,7 +401,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
                 $imgtitle = "";
 
                 if (!empty($page->theme->settings->$categorylabelimagecustom)) {
-                    $categorylabelimage = '<div class="category-label-image"><img src="'.$page->theme->setting_file_url('categorylabelimage'.$COURSECATEGORY, 'categorylabelimage'.$COURSECATEGORY).'"';
+                    $categorylabelimage = '<div class="category-label-image"><img src="'.$page->theme->setting_file_url('categorylabelimage'.$coursecategory, 'categorylabelimage'.$coursecategory).'"';
                 }
                 if (!empty($page->theme->settings->$categorylabelimageheightcustom)) {
                     $categorylabelimage.= 'height="'.$page->theme->settings->$categorylabelimageheightcustom.'"';
@@ -421,10 +421,10 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         }
 
         // set link label to category page
-        $linklabeltocategorypage = "linklabeltocategorypage".$COURSECATEGORY;
+        $linklabeltocategorypage = "linklabeltocategorypage".$coursecategory;
         if (isset($page->theme->settings->$linklabeltocategorypage))
             if($page->theme->settings->$linklabeltocategorypage)
-                $return->categorylabel = '<a href="'.$CFG->wwwroot.'/course/index.php?categoryid='.$COURSECATEGORY.'"">'.$return->categorylabel.'</a>';
+                $return->categorylabel = '<a href="'.$CFG->wwwroot.'/course/index.php?categoryid='.$coursecategory.'"">'.$return->categorylabel.'</a>';
             else
                 $return->categorylabel = $return->categorylabel;
 
@@ -552,8 +552,8 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
     $all_categories_array = explode(",", $all_cats);
     $sub_cat = [];
 
-    $COURSECATEGORY = theme_ucsf_get_current_course_category($page, $COURSE);
-    $categories = theme_ucsf_get_category_roots($COURSECATEGORY);
+    $coursecategory = theme_ucsf_get_current_course_category($page, $COURSE);
+    $categories = theme_ucsf_get_category_roots($coursecategory);
 
     foreach($all_categories_array as $sub_category){
        if (in_array($sub_category, $categories)){
@@ -578,7 +578,7 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
         $alert_type = theme_ucsf_get_setting('recurring_alert'.$i);
         $enable_alert = theme_ucsf_get_setting('enable'.$i.'alert');
 
-        if ($COURSECATEGORY == $category || $category == 0 || in_array($category, $sub_cat)) {
+        if ($coursecategory == $category || $category == 0 || in_array($category, $sub_cat)) {
 
             if(!isset($_SESSION["alerts"]["alert".$i]) || $_SESSION["alerts"]["alert".$i] != 0) {
 
