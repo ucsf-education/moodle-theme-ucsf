@@ -1302,19 +1302,24 @@ body {
 /* BLOCK WIDTH SETTINGS FOR DIFFERENT LAYOUT SIZES */
 /* Large desktop */
 @media (min-width: 1200px) {
-    .empty-region-side-post.used-region-side-pre #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
+    .empty-region-side-post.used-region-side-pre #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
         width: calc(100% - [[setting:block_width_desktop]]px - 20px);
     }
-    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4 {
+    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4 {
         width: [[setting:block_width_desktop]]px;
     }
     #page-mod-quiz-view  #block-region-side-pre.span4,
     #page-mod-quiz-edit #block-region-side-pre.span4,
     #page-course-index #block-region-side-pre.span4,
     .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
-    .pagelayout-standard #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
-    .editing #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
-    .pagelayout-coursecategory #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-standard #block-region-side-pre.span4,
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .editing #block-region-side-pre.span4,
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-coursecategory #block-region-side-pre.span4,
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
     .path-course-view.used-region-side-pre #block-region-side-pre.span4,
     .pagelayout-mydashboard #block-region-side-pre.span4 {
         width: [[setting:block_width_desktop]]px;
@@ -1324,10 +1329,14 @@ body {
     #page-mod-quiz-edit #region-main.span8,
     #page-course-index #region-main.span8,
     .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
-    .pagelayout-standard #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
-    .editing #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
-    .pagelayout-coursecategory #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
-    .path-course-view #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-standard #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .editing #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-coursecategory #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .path-course-view #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
     .pagelayout-mydashboard #region-main.span8 {
         width: calc(100% - [[setting:block_width_desktop]]px - 20px);
     }
@@ -1392,16 +1401,19 @@ body {
 
 @media (min-width: 770px) and (max-width: 1199px) {
 
-    .pagelayout-frontpage.empty-region-side-post.used-region-side-pre #region-main.span8, .pagelayout-frontpage.jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
+    .pagelayout-frontpage.empty-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-frontpage.jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
         width: 74%;
         padding: 0;
     }
 
-    .empty-region-side-post.used-region-side-pre #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
+    .empty-region-side-post.used-region-side-pre #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
         width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
     }
 
-    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4 {
+    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4 {
         width: [[setting:block_width_portrait_tablet]]px;
     }
 
@@ -1409,9 +1421,12 @@ body {
     #page-mod-quiz-edit #block-region-side-pre.span4,
     #page-course-index #block-region-side-pre.span4,
     .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
-    .pagelayout-standard #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
-    .editing #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
-    .pagelayout-coursecategory #block-region-side-pre.span4, .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-standard #block-region-side-pre.span4,
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .editing #block-region-side-pre.span4,
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-coursecategory #block-region-side-pre.span4,
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
     .path-course-view.used-region-side-pre #block-region-side-pre.span4,
     .pagelayout-mydashboard #block-region-side-pre.span4 {
         width: [[setting:block_width_portrait_tablet]]px;
@@ -1421,10 +1436,14 @@ body {
     #page-mod-quiz-edit #region-main.span8,
     #page-course-index #region-main.span8,
     .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
-    .pagelayout-standard #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
-    .editing #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
-    .pagelayout-coursecategory #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
-    .path-course-view #region-main.span8, .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-standard #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .editing #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-coursecategory #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .path-course-view #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
     .pagelayout-mydashboard #region-main.span8 {
         width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
     }
