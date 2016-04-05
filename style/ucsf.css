@@ -1306,14 +1306,12 @@ body {
     .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
         width: calc(100% - [[setting:block_width_desktop]]px - 20px);
     }
-    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4,
-    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4 {
-        width: [[setting:block_width_desktop]]px;
-    }
+
     #page-course-index #block-region-side-pre.span4,
     #page-mod-quiz-edit #block-region-side-pre.span4,
     #page-mod-quiz-view  #block-region-side-pre.span4,
     .editing #block-region-side-pre.span4,
+    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4,
     .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
     .pagelayout-coursecategory #block-region-side-pre.span4,
     .pagelayout-mydashboard #block-region-side-pre.span4,
@@ -1405,15 +1403,11 @@ body {
         width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
     }
 
-    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4,
-    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4 {
-        width: [[setting:block_width_portrait_tablet]]px;
-    }
-
     #page-course-index #block-region-side-pre.span4,
     #page-mod-quiz-edit #block-region-side-pre.span4,
     #page-mod-quiz-view  #block-region-side-pre.span4,
     .editing #block-region-side-pre.span4,
+    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4,
     .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
     .pagelayout-coursecategory #block-region-side-pre.span4,
     .pagelayout-mydashboard #block-region-side-pre.span4,
