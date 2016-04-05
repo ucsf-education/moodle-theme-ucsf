@@ -1340,7 +1340,6 @@ body {
     .editing #region-main.span8,
     .empty-region-side-post.used-region-side-pre #region-main.span8,
     .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
-    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
     .pagelayout-coursecategory #region-main.span8,
     .pagelayout-mydashboard #region-main.span8,
     .pagelayout-standard #region-main.span8,
@@ -1370,16 +1369,6 @@ body {
     .two-column .row-fluid .span9 {
         width: calc(100% - [[setting:block_width_desktop]]px - 20px);
         padding-right: 20px;
-    }
-
-    #page-mod-quiz-edit .row-fluid .span9,
-    #page-mod-quiz-view .row-fluid .span9,
-    .pagelayout-coursecategory .row-fluid .span9,
-    .pagelayout-mydashboard .row-fluid .span9,
-    .pagelayout-standard .row-fluid .span9,
-    .path-course-view .row-fluid .span9,
-    .two-column .row-fluid .span9 {
-        width: calc(100% - [[setting:block_width_desktop]]px);
     }
 
     #region-main {padding:0 20px;}
@@ -1432,7 +1421,6 @@ body {
     .editing #region-main.span8,
     .empty-region-side-post.used-region-side-pre #region-main.span8,
     .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
-    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
     .pagelayout-coursecategory #region-main.span8,
     .pagelayout-mydashboard #region-main.span8,
     .pagelayout-standard #region-main.span8,
@@ -1463,17 +1451,6 @@ body {
     .two-column .row-fluid .span9 {
         width: calc(100% - [[setting:block_width_portrait_tablet]]px - 20px);
         padding-right: 20px;
-    }
-
-    #page-course-index .row-fluid .span9,
-    #page-mod-quiz-edit .row-fluid .span9,
-    #page-mod-quiz-view .row-fluid .span9,
-    .pagelayout-coursecategory .row-fluid .span9,
-    .pagelayout-mydashboard .row-fluid .span9,
-    .pagelayout-standard .row-fluid .span9,
-    .path-course-view .row-fluid .span9,
-    .two-column .row-fluid .span9 {
-        width: calc(100% - [[setting:block_width_portrait_tablet]]px);
     }
 
     #region-main {padding:0 20px;}
