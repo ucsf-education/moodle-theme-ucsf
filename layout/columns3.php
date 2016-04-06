@@ -63,7 +63,7 @@ echo $OUTPUT->doctype() ?>
 
 <?php echo $OUTPUT->standard_top_of_body_html() ?>
 
-<header role="banner" class="navbar '.$return->navbarclass.'">
+<header role="banner" class="navbar <?php echo $html->navbarclass; ?>">
     <nav role="navigation" class="navbar-inner">            
         <div class="container-fluid top-header">
             
