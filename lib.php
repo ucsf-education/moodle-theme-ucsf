@@ -77,7 +77,7 @@ function theme_ucsf_process_css($css, $theme) {
     $css = theme_ucsf_set_logo($css, $logo);
 
     // Set custom CSS.
-    if (!empty($theme->settings->customcss)) {
+    if ($theme->settings->customcssenabled && !empty($theme->settings->customcss)) {
         $customcss = $theme->settings->customcss;
     } else {
         $customcss = null;
