@@ -41,9 +41,34 @@
  * @return string Raw LESS code.
  */
 function theme_ucsf_extra_less($theme) {
-    $content = '';
-    // @todo implement [ST 2016/03/23]
-    return $content;
+    // get all categories that are configured for customizations
+    $settings = $theme->settings;
+    if (empty($settings->all_categories)) {
+        return '';
+    }
+    $category_ids = explode(',', $settings->all_categories);
+
+    // filter out any categories that don't have CSS customizations turned on
+    // and that don't provide any styles
+    $category_ids = array_filter($category_ids, function($id) use ($settings) {
+        $enabled_key = 'customcssenabled' . (int) $id;
+        $css_key = 'customcss' . (int) $id;
+        return ! empty($settings->$enabled_key) && ! empty($settings->$css_key);
+    });
+    $category_ids = array_values($category_ids);
+    if (empty($category_ids)) {
+        return '';
+    }
+
+    // generate LESS rules by category
+    $contents = array();
+    foreach($category_ids as $id) {
+        $css_key = 'customcss'. $id;
+        // anchor rules off of the body tag with category class applied
+        $contents[] =  "body.category-{$id} {\n{$settings->$css_key}\n}";
+    }
+
+    return implode("\n", $contents);
 }
 
 /**
@@ -57,7 +82,7 @@ function theme_ucsf_extra_less($theme) {
  */
 function theme_ucsf_less_variables($theme) {
     $variables = array();
-    // @todo implement [ST 2016/03/23]
+    // @todo implement or remove, if n/a [ST 2016/04/06]
     return $variables;
 }
 
