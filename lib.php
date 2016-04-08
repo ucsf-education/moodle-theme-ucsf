@@ -46,26 +46,37 @@ function theme_ucsf_extra_less($theme) {
     if (empty($settings->all_categories)) {
         return '';
     }
-    $category_ids = explode(',', $settings->all_categories);
+    $all_category_ids = explode(',', $settings->all_categories);
 
     // filter out any categories that don't have CSS customizations turned on
     // and that don't provide any styles
-    $category_ids = array_filter($category_ids, function($id) use ($settings) {
+    $customized_category_ids = array_filter($all_category_ids, function($id) use ($settings) {
         $enabled_key = 'customcssenabled' . (int) $id;
         $css_key = 'customcss' . (int) $id;
         return ! empty($settings->$enabled_key) && ! empty($settings->$css_key);
     });
-    $category_ids = array_values($category_ids);
-    if (empty($category_ids)) {
+    $customized_category_ids = array_values($customized_category_ids);
+    if (empty($customized_category_ids)) {
         return '';
     }
 
     // generate LESS rules by category
+    // "inherit" any custom rules that may have been defined/enabled by parent categories.
     $contents = array();
-    foreach($category_ids as $id) {
-        $css_key = 'customcss'. $id;
-        // anchor rules off of the body tag with category class applied
-        $contents[] =  "body.category-{$id} {\n{$settings->$css_key}\n}";
+    foreach($all_category_ids as $category_id) {
+        $category_css = [];
+        $ids = theme_ucsf_get_category_roots($category_id);
+        foreach($ids as $id) {
+            if (in_array($id, $customized_category_ids)) {
+                $css_key = 'customcss' . (int) $id;
+                $category_css[] = $settings->$css_key;
+            }
+        }
+        if (! empty($category_css)) {
+            $category_css = implode("\n", array_reverse($category_css));
+            // anchor rules off of the body tag with category class applied
+            $contents[] = "body.category-{$category_id} {\n{$category_css}\n}";
+        }
     }
 
     return implode("\n", $contents);
