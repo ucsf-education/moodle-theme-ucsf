@@ -461,7 +461,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 function theme_ucsf_get_category_roots($id) {
     static $cache = null;
 
-    if (isset($cache)) {
+    if (! isset($cache)) {
         $cache = array();
     }
 
