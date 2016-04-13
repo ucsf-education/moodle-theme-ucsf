@@ -490,12 +490,10 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         }
 
         // set link label to category page
-        $linklabeltocategorypage = "linklabeltocategorypage".$coursecategory;
-        if (isset($theme_settings->$linklabeltocategorypage))
-            if($theme_settings->$linklabeltocategorypage)
-                $return->categorylabel = '<a href="'.$CFG->wwwroot.'/course/index.php?categoryid='.$coursecategory.'"">'.$return->categorylabel.'</a>';
-            else
-                $return->categorylabel = $return->categorylabel;
+        $linklabeltocategorypage = "linklabeltocategorypage" . $coursecategory;
+        if ($theme_settings->$linklabeltocategorypage) {
+            $return->categorylabel = '<a href="' . $CFG->wwwroot . '/course/index.php?categoryid=' . $coursecategory . '"">' . $return->categorylabel . '</a>';
+        }
 
     }
 
