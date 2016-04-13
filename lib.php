@@ -569,10 +569,10 @@ function theme_ucsf_get_current_course_category(moodle_page $page, $course) {
 
 
 /**
- * @param moodle_page $page
- * @param array $categories
- * @return int
- * @throws dml_exception
+ * Finds and returns the first customized category out of a given hierarchy of categories.
+ * @param moodle_page $page The current moodle page.
+ * @param array $categories A hierarchy of category ids, from lowest to highest.
+ * @return int the ID of the first found customized category.
  */
 function theme_ucsf_get_first_category_customization(moodle_page $page, array $categories) {
 
