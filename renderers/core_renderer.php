@@ -155,8 +155,7 @@ class theme_ucsf_core_renderer extends theme_bootstrapbase_core_renderer {
 
         $categories = theme_ucsf_get_category_roots(theme_ucsf_get_current_course_category($PAGE, $COURSE));
 
-        $coursecategory = theme_ucsf_get_first_category_customization_menu($PAGE, $categories);
-
+        $coursecategory = theme_ucsf_find_first_configured_category($PAGE->theme->settings, $categories, 'custommenu');
 
         $themeconfig = get_config("theme_ucsf");
         $customizedmenu = "custommenu" . $coursecategory;

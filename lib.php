@@ -452,7 +452,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         }
 
         // category labels
-        $coursecategory = theme_ucsf_get_first_category_customization($theme_settings, $categories);
+        $coursecategory = theme_ucsf_find_first_configured_category($theme_settings, $categories, 'categorylabel');
 
         // override top level category label with custom category label
         if(!is_null($coursecategory && $coursecategory!=0)) {
@@ -566,59 +566,6 @@ function theme_ucsf_get_current_course_category(moodle_page $page, $course) {
         return $_REQUEST["categoryid"];
     }
     return $course->category;
-}
-
-
-/**
- * Finds and returns the first customized category out of a given hierarchy of categories.
- * @param object $theme_settings The theme settings object.
- * @param array $categories A hierarchy of category ids, from lowest to highest.
- * @return int the ID of the first found customized category.
- */
-function theme_ucsf_get_first_category_customization($theme_settings, array $categories) {
-
-    $all_categories_array = array();
-    if(!empty($theme_settings->all_categories)){
-        $all_categories_array = explode(",", $theme_settings->all_categories);
-    }
-
-    foreach ($categories as $cat) {
-        if(in_array($cat, $all_categories_array)) {
-            $categorylabelcustom = "categorylabel".$cat;
-            if (!empty($theme_settings->$categorylabelcustom)) {
-                return $cat;
-            }
-        }
-    }
-
-    return 0;
-}
-
-/**
- * @param moodle_page $page
- * @param array $categories
- * @return int
- * @throws dml_exception
- */
-function theme_ucsf_get_first_category_customization_menu(moodle_page $page, array $categories) {
-    $theme_config = get_config('theme_ucsf');
-    $all_categories_array = array();
-    if(!empty($theme_config->all_categories)){
-        $all_categories_array = explode(",", $theme_config->all_categories);
-    }
-
-    if(is_array($categories)) {
-        foreach ($categories as $cat) {
-            if(in_array($cat, $all_categories_array)) {
-                $categorycustommenu = "custommenu".$cat;
-                if (!empty($page->theme->settings->$categorycustommenu)) {
-                    return $cat;
-                }
-            }
-        }
-    }
-
-    return 0;
 }
 
 function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
@@ -1044,4 +991,39 @@ function _theme_ucsf_get_all_category_ids() {
     return $categories;
 }
 
+/**
+ * Find and returns the first category (from the bottom) in a given category hierarchy
+ * that has a customized setting in a given theme.
+ *
+ * Example:
+ *  1. The category hierarchy is (top) id = 1 >> id = 2 >> id = 5 >> id = 7 (bottom).
+ *  2. We're searching the theme settings for all entries pertaining to custom labels (all config keys starting with "customlabel").
+ *  3. The theme settings contains entries keyed of by 'customlabel1' an 'customlabel5'.
+ *  4. This method will return 5, since 'customlabel5' matches the lowest category id = 5 in the hierarchy.
+ *
+ * @param object $theme_settings The theme settings.
+ * @param array $category_hierarchy A hierarchy of category ids, sorted bottom to top.
+ * @param string $config_key_prefix Configuration settings key prefix.
+ * @return int The first matching category id. 0 if no matching category can be found.
+ * @see theme_ucsf_get_category_roots()
+ */
+function theme_ucsf_find_first_configured_category($theme_settings, array $category_hierarchy, $config_key_prefix) {
 
+    // get a list of all categories that have customizations enabled.
+    $enabled_categories = array();
+    if(!empty($theme_settings->all_categories)){
+        $enabled_categories = explode(",", $theme_settings->all_categories);
+    }
+
+    // find first matching
+    foreach ($category_hierarchy as $category_id) {
+        if (in_array($category_id, $enabled_categories)) {
+            $config_key =  $config_key_prefix . $category_id;
+            if (! empty($theme_settings->$config_key)) {
+                return $category_id;
+            }
+        }
+    }
+
+    return 0;
+}
