@@ -923,39 +923,10 @@ function theme_ucsf_get_tiles(renderer_base $output, moodle_page $page) {
         return $tiles;
 }
 
-
-/**
- * All theme functions should start with theme_ucsf_
- * @deprecated since 2.5.1
- */
-function ucsf_process_css() {
-    throw new coding_exception('Please call theme_'.__FUNCTION__.' instead of '.__FUNCTION__);
-}
-
-/**
- * All theme functions should start with theme_ucsf_
- * @deprecated since 2.5.1
- */
-function ucsf_set_logo() {
-    throw new coding_exception('Please call theme_'.__FUNCTION__.' instead of '.__FUNCTION__);
-}
-
-/**
- * All theme functions should start with theme_ucsf_
- * @deprecated since 2.5.1
- */
-function ucsf_set_customcss() {
-    throw new coding_exception('Please call theme_'.__FUNCTION__.' instead of '.__FUNCTION__);
-}
-
 function theme_ucsf_page_init(moodle_page $page) {
     $page->requires->jquery();
     $page->requires->jquery_plugin('alert', 'theme_ucsf');
 }
-
-//
-// "private" methods.
-//
 
 /**
  * Retrieve a list of all course category ids,
