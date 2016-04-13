@@ -576,10 +576,9 @@ function theme_ucsf_get_current_course_category(moodle_page $page, $course) {
  */
 function theme_ucsf_get_first_category_customization(moodle_page $page, array $categories) {
 
-    $theme_config = get_config('theme_ucsf');
     $all_categories_array = array();
-    if(!empty($theme_config->all_categories)){
-        $all_categories_array = explode(",", $theme_config->all_categories);
+    if(!empty($page->theme->settings->all_categories)){
+        $all_categories_array = explode(",", $page->theme->settings->all_categories);
     }
 
     foreach ($categories as $cat) {
