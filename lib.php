@@ -43,7 +43,7 @@
 function theme_ucsf_extra_less($theme) {
 
     // get the ids of all course categories
-    $all_category_ids = _theme_ucsf_get_all_category_ids();
+    $all_category_ids = theme_ucsf_get_all_category_ids();
 
     // get all categories that are configured for customizations
     $settings = $theme->settings;
@@ -983,7 +983,7 @@ function _theme_ucsf_get_category_roots($id, $categories = array()) {
  * since Moodle's course API does not appear to provide such a method.
  * @return array A list course ids, sorted by ID in descending order (newest first).
  */
-function _theme_ucsf_get_all_category_ids() {
+function theme_ucsf_get_all_category_ids() {
     global $DB;
 
     $sql = "SELECT cc.id FROM {course_categories} cc ORDER BY cc.id DESC";
