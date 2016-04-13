@@ -325,6 +325,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
     $return->categorylabel = '';
     $return->coursetitle = '';
     $return->displaycustommenu = $output->custom_menu();
+    $theme_settings = $page->theme->settings;
 
     /*
     *   Help/Feedback Links
@@ -334,16 +335,16 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 
     $helpfeedbacktitle = null;
 
-    if(!isset($page->theme->settings->helpfeedbacktitle) || $page->theme->settings->helpfeedbacktitle == "") {
+    if(!isset($theme_settings->helpfeedbacktitle) || $theme_settings->helpfeedbacktitle == "") {
 
         $helpfeedbacktitle = 'Help/Feedback';
 
     } else {
-        $helpfeedbacktitle = $page->theme->settings->helpfeedbacktitle;
+        $helpfeedbacktitle = $theme_settings->helpfeedbacktitle;
     }
     $helpfeedback = null;
 
-    for ($i = 1; $i <= $page->theme->settings->numberoflinks; $i++ ) {
+    for ($i = 1; $i <= $theme_settings->numberoflinks; $i++ ) {
         $helpfeedbacklink = theme_ucsf_get_setting('helpfeedback' . $i . 'link');
         $helpfeedbacklinklabel = theme_ucsf_get_setting('helpfeedback' . $i . 'linklabel');
         $helpfeedbacklinktarget = theme_ucsf_get_setting('helpfeedback' . $i . 'linktarget');
@@ -363,7 +364,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
             }
         }
     }
-    if ($page->theme->settings->enablehelpfeedback == 1 && $helpfeedback != false) {
+    if ($theme_settings->enablehelpfeedback == 1 && $helpfeedback != false) {
         $return->helpfeedbacklink = '<div class="dropdown helpfeedback-box"><a class="dropdown-toggle" data-toggle="dropdown">'.$helpfeedbacktitle.'<span class="caret"></span></a>'
                 . '<ul class="dropdown-menu help-feedback pull-right" role="menu">'
                 . $helpfeedback
@@ -374,7 +375,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 
     // customization enable
     $return->enablecustomization = false;
-    if ($page->theme->settings->enablecustomization) {
+    if ($theme_settings->enablecustomization) {
         $return->enablecustomization = true;
     }
 
@@ -383,8 +384,8 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 
         // set toplevel category label
         $return->categorylabel = '';
-        if (!empty($page->theme->settings->toplevelcategorylabel)) {
-            $return->categorylabel = '<div class="category-label pull-left"><div class="category-label-text">'.$page->theme->settings->toplevelcategorylabel.'</div></div>';
+        if (!empty($theme_settings->toplevelcategorylabel)) {
+            $return->categorylabel = '<div class="category-label pull-left"><div class="category-label-text">'.$theme_settings->toplevelcategorylabel.'</div></div>';
         }
 
         $coursecategory = theme_ucsf_get_current_course_category($page, $COURSE);
@@ -438,20 +439,20 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 
         // set course title
         $return->coursetitle = '';
-        if(!empty($page->theme->settings->displaycoursetitle))
-            if ($page->theme->settings->displaycoursetitle)
+        if(!empty($theme_settings->displaycoursetitle))
+            if ($theme_settings->displaycoursetitle)
                 if(!empty($COURSE->fullname))
                     $return->coursetitle = '<div class="custom_course_title">'. $COURSE->fullname . '</div>';
 
         if(!is_null($coursecategory && $coursecategory!=0)) {
             $displaycustomcoursetitle = "displaycoursetitle".$coursecategory;
-            if(isset($page->theme->settings->$displaycustomcoursetitle))
-                if(!$page->theme->settings->$displaycustomcoursetitle)
+            if(isset($theme_settings->$displaycustomcoursetitle))
+                if(!$theme_settings->$displaycustomcoursetitle)
                     $return->coursetitle = '';
         }
 
         // category labels
-        $coursecategory = theme_ucsf_get_first_category_customization($page->theme->settings, $categories);
+        $coursecategory = theme_ucsf_get_first_category_customization($theme_settings, $categories);
 
         // override top level category label with custom category label
         if(!is_null($coursecategory && $coursecategory!=0)) {
@@ -461,37 +462,37 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
             $categorylabelimagealtcustom = "categorylabelimagealt".$coursecategory;
             $categorylabelimagetitlecustom = "categorylabelimagetitle".$coursecategory;
 
-            if (!empty($page->theme->settings->$categorylabelcustom)) {
+            if (!empty($theme_settings->$categorylabelcustom)) {
 
                 $categorylabelimage = "";
                 $imgheight = "";
                 $imgalt = "";
                 $imgtitle = "";
 
-                if (!empty($page->theme->settings->$categorylabelimagecustom)) {
+                if (!empty($theme_settings->$categorylabelimagecustom)) {
                     $categorylabelimage = '<div class="category-label-image"><img src="'.$page->theme->setting_file_url('categorylabelimage'.$coursecategory, 'categorylabelimage'.$coursecategory).'"';
                 }
-                if (!empty($page->theme->settings->$categorylabelimageheightcustom)) {
-                    $categorylabelimage.= 'height="'.$page->theme->settings->$categorylabelimageheightcustom.'"';
+                if (!empty($theme_settings->$categorylabelimageheightcustom)) {
+                    $categorylabelimage.= 'height="'.$theme_settings->$categorylabelimageheightcustom.'"';
                 }
-                if (!empty($page->theme->settings->$categorylabelimagealtcustom)) {
-                    $categorylabelimage.= 'alt="'.$page->theme->settings->$categorylabelimagealtcustom.'"';
+                if (!empty($theme_settings->$categorylabelimagealtcustom)) {
+                    $categorylabelimage.= 'alt="'.$theme_settings->$categorylabelimagealtcustom.'"';
                 }
-                if (!empty($page->theme->settings->$categorylabelimagetitlecustom)) {
-                    $categorylabelimage.= 'title="'.$page->theme->settings->$categorylabelimagetitlecustom.'"';
+                if (!empty($theme_settings->$categorylabelimagetitlecustom)) {
+                    $categorylabelimage.= 'title="'.$theme_settings->$categorylabelimagetitlecustom.'"';
                 }
-                if (!empty($page->theme->settings->$categorylabelimagecustom)) {
+                if (!empty($theme_settings->$categorylabelimagecustom)) {
                     $categorylabelimage.= '/></div>';
                 }
 
-                $return->categorylabel = '<div class="category-label pull-left">'.$categorylabelimage.'<div class="category-label-text">'.$page->theme->settings->$categorylabelcustom.'</div></div>';
+                $return->categorylabel = '<div class="category-label pull-left">'.$categorylabelimage.'<div class="category-label-text">'.$theme_settings->$categorylabelcustom.'</div></div>';
             }
         }
 
         // set link label to category page
         $linklabeltocategorypage = "linklabeltocategorypage".$coursecategory;
-        if (isset($page->theme->settings->$linklabeltocategorypage))
-            if($page->theme->settings->$linklabeltocategorypage)
+        if (isset($theme_settings->$linklabeltocategorypage))
+            if($theme_settings->$linklabeltocategorypage)
                 $return->categorylabel = '<a href="'.$CFG->wwwroot.'/course/index.php?categoryid='.$coursecategory.'"">'.$return->categorylabel.'</a>';
             else
                 $return->categorylabel = $return->categorylabel;
@@ -500,7 +501,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 
     // display custom menu
     $return->displaycustommenu = $output->custom_menu();
-    if ($page->theme->settings->hidecustommenuwhenloggedout) {
+    if ($theme_settings->hidecustommenuwhenloggedout) {
         if(!isloggedin())
             $return->displaycustommenu = '';
     }
