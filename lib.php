@@ -958,27 +958,6 @@ function theme_ucsf_page_init(moodle_page $page) {
 //
 
 /**
- * Recursively retrieve all ancestral categories for a given category, including the category itself.
- * @param int $id The category id.
- * @param array $categories A partial list of ancestral category ids.
- * @return array A list full list of ancestral category ids, including the given id itself.
- */
-function _theme_ucsf_get_category_roots($id, $categories = array()) {
-    global $DB;
-
-    $sql = "SELECT cc.parent, cc.name FROM {course_categories} cc WHERE cc.id = ?";
-    $cats =  $DB->get_records_sql($sql, array($id));
-
-    if (empty($cats)) {
-        return $categories;
-    }
-
-    $categories[]  = $id;
-    $cat = array_shift($cats);
-    return  _theme_ucsf_get_category_roots($cat->parent, $categories);
-}
-
-/**
  * Retrieve a list of all course category ids,
  * since Moodle's course API does not appear to provide such a method.
  * @return array A list course ids, sorted by ID in descending order (newest first).
@@ -1026,4 +1005,25 @@ function theme_ucsf_find_first_configured_category($theme_settings, array $categ
     }
 
     return 0;
+}
+
+/**
+ * Recursively retrieve all ancestral categories for a given category, including the category itself.
+ * @param int $id The category id.
+ * @param array $categories A partial list of ancestral category ids.
+ * @return array A list full list of ancestral category ids, including the given id itself.
+ */
+function _theme_ucsf_get_category_roots($id, $categories = array()) {
+    global $DB;
+
+    $sql = "SELECT cc.parent, cc.name FROM {course_categories} cc WHERE cc.id = ?";
+    $cats =  $DB->get_records_sql($sql, array($id));
+
+    if (empty($cats)) {
+        return $categories;
+    }
+
+    $categories[]  = $id;
+    $cat = array_shift($cats);
+    return  _theme_ucsf_get_category_roots($cat->parent, $categories);
 }
