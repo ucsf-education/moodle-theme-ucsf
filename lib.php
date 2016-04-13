@@ -451,7 +451,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         }
 
         // category labels
-        $coursecategory = theme_ucsf_get_first_category_customization($page, $categories);
+        $coursecategory = theme_ucsf_get_first_category_customization($page->theme->settings, $categories);
 
         // override top level category label with custom category label
         if(!is_null($coursecategory && $coursecategory!=0)) {
@@ -570,21 +570,21 @@ function theme_ucsf_get_current_course_category(moodle_page $page, $course) {
 
 /**
  * Finds and returns the first customized category out of a given hierarchy of categories.
- * @param moodle_page $page The current moodle page.
+ * @param object $theme_settings The theme settings object.
  * @param array $categories A hierarchy of category ids, from lowest to highest.
  * @return int the ID of the first found customized category.
  */
-function theme_ucsf_get_first_category_customization(moodle_page $page, array $categories) {
+function theme_ucsf_get_first_category_customization($theme_settings, array $categories) {
 
     $all_categories_array = array();
-    if(!empty($page->theme->settings->all_categories)){
-        $all_categories_array = explode(",", $page->theme->settings->all_categories);
+    if(!empty($theme_settings->all_categories)){
+        $all_categories_array = explode(",", $theme_settings->all_categories);
     }
 
     foreach ($categories as $cat) {
         if(in_array($cat, $all_categories_array)) {
             $categorylabelcustom = "categorylabel".$cat;
-            if (!empty($page->theme->settings->$categorylabelcustom)) {
+            if (!empty($theme_settings->$categorylabelcustom)) {
                 return $cat;
             }
         }
