@@ -56,8 +56,8 @@ echo $OUTPUT->doctype() ?>
     <nav role="navigation" class="navbar-inner">
         <div class="container-fluid">
             <div class="container-fluid top-header">
-                <span class="brand pull-left"><?php echo $globalsettings->logo;?></span>
-                <div class="cle-text"><?php echo $globalsettings->banner_title;?></div>
+                <span class="brand pull-left"><?php echo $globalsettings->headerimage;?></span>
+                <div class="cle-text"><?php echo $globalsettings->headerlabel;?></div>
             </div>
         </div>
     </nav>

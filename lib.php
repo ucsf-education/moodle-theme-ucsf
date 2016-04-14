@@ -224,6 +224,8 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
             return $theme->setting_file_serve('tile10image', $args, $forcedownload, $options);
         }else if (in_array($filearea,  $CATEGORILABELIMAGE)) {
             return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+        }else if ($filearea === 'headerimage') {
+            return $theme->setting_file_serve('headerimage', $args, $forcedownload, $options);
         } else {
             send_file_not_found();
         }
@@ -495,24 +497,25 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
             $return->displaycustommenu = '';
     }
 
-    // banner title
-    $return->banner_title = 'Collaborative Learning Environment';
+    // header title
+    $return->headerlabel = $theme_settings->headerlabel ? $theme_settings->headerlabel : 'Collaborative Learning Environment';
 
-    // logo
+    // header image
     $logo_attributes = array();
-    $logo_attributes['title'] = 'UCSF | CLE';
-    $logo_attributes['alt'] = 'UCSF | CLE';
-    $logo_attributes['src'] = $output->pix_url('ucsf-logo', 'theme_ucsf');
+    $logo_attributes['title'] = $theme_settings->headerimagetitle ? $theme_settings->headerimagetitle : 'UCSF | CLE';
+    $logo_attributes['alt'] = $theme_settings->headerimagealt ? $theme_settings->headerimagealt : 'UCSF | CLE';
+    $logo_attributes['width'] = $theme_settings->headerimagewidth;
+    $logo_attributes['height'] = $theme_settings->headerimageheight;
+    $logo_attributes['src'] = $theme_settings->headerimage ? $page->theme->setting_file_url('headerimage', 'headerimage') : $output->pix_url('ucsf-logo', 'theme_ucsf');
     $logo_attributes = theme_ucsf_render_attrs_to_string($logo_attributes);
-    $return->logo = "<img {$logo_attributes} />";
-
-    $is_logo_linked = true;
+    $return->headerimage = "<img {$logo_attributes} />";
+    $is_logo_linked = ! empty($theme_settings->headerimagelink);
     if ($is_logo_linked) {
         $logo_link_attributes = array();
-        $logo_link_attributes['href'] = 'http://courses.ucsf.edu';
-        $logo_link_attributes['target'] = '_self';
+        $logo_link_attributes['href'] = $theme_settings->headerimagelink;
+        $logo_link_attributes['target'] = $theme_settings->headerimagelinktarget;
         $logo_link_attributes = theme_ucsf_render_attrs_to_string($logo_link_attributes);
-        $return->logo = "<a {$logo_link_attributes}>{$return->logo}</a>";
+        $return->headerimage = "<a {$logo_link_attributes}>{$return->headerimage}</a>";
     }
 
     // menu background clean css

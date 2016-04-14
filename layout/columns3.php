@@ -67,7 +67,7 @@ echo $OUTPUT->doctype() ?>
     <nav role="navigation" class="navbar-inner">            
         <div class="container-fluid top-header">
 
-            <span class="brand pull-left"><?php echo $globalsettings->logo;?></span>
+            <span class="brand pull-left"><?php echo $globalsettings->headerimage;?></span>
             <ul class="nav pull-right">
                 <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
                 <div class="login_user">
@@ -80,7 +80,7 @@ echo $OUTPUT->doctype() ?>
                     ?>
                 </div> 
             </ul>
-            <div class="cle-text"><?php echo $globalsettings->banner_title;?></div>
+            <div class="cle-text"><?php echo $globalsettings->headerlabel;?></div>
         </div>
 
         <div class="container-fluid menu-background <?php echo $globalsettings->menubackgroundcleen; ?>">

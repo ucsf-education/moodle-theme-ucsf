@@ -204,7 +204,78 @@ $name = 'theme_ucsf/enablecustomization';
 $heading = get_string('enablecustomization', 'theme_ucsf');
 $information = get_string('enablecustomizationdesc', 'theme_ucsf');
 $default = '0';
-$setting = new admin_setting_configcheckbox($name, $heading, $information,$default);
+$setting = new admin_setting_configcheckbox($name, $heading, $information, $default);
+$settings_lr->add($setting);
+
+// Header Image
+$name = 'theme_ucsf/headerimage';
+$heading = get_string('headerimage', 'theme_ucsf');
+$information = get_string('headerimagedesc', 'theme_ucsf');
+$setting = new admin_setting_configstoredfile($name, $heading, $information, 'headerimage');
+$setting->set_updatedcallback('theme_reset_all_caches');
+$settings_lr->add($setting);
+
+// Header Image Alt Text
+$name = 'theme_ucsf/headerimagealt';
+$heading = get_string('headerimagealt', 'theme_ucsf');
+$information = get_string('headerimagealtdesc', 'theme_ucsf');
+$default = 'UCSF | CLE ';
+$setting = new admin_setting_configtext($name, $heading, $information, $default);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$settings_lr->add($setting);
+
+// Header Image Title
+$name = 'theme_ucsf/headerimagetitle';
+$heading = get_string('headerimagetitle', 'theme_ucsf');
+$information = get_string('headerimagetitledesc', 'theme_ucsf');
+$default = 'UCSF | CLE ';
+$setting = new admin_setting_configtext($name, $heading, $information, $default);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$settings_lr->add($setting);
+
+// Header Image Height
+$name = 'theme_ucsf/headerimageheight';
+$heading = get_string('headerimageheight', 'theme_ucsf');
+$information = get_string('headerimageheightdesc', 'theme_ucsf');
+$default = '';
+$setting = new admin_setting_configtext($name, $heading, $information, $default);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$settings_lr->add($setting);
+
+// Header Image Width
+$name = 'theme_ucsf/headerimagewidth';
+$heading = get_string('headerimagewidth', 'theme_ucsf');
+$information = get_string('headerimagewidthdesc', 'theme_ucsf');
+$default = '';
+$setting = new admin_setting_configtext($name, $heading, $information, $default);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$settings_lr->add($setting);
+
+// Header Image Link
+$name = 'theme_ucsf/headerimagelink';
+$heading = get_string('headerimagelink', 'theme_ucsf');
+$information = get_string('headerimagelinkdesc', 'theme_ucsf');
+$default = '';
+$setting = new admin_setting_configtext($name, $heading, $information, $default);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$settings_lr->add($setting);
+
+// Header Image Link Target
+$name = 'theme_ucsf/headerimagelinktarget';
+$heading = get_string('headerimagelinktarget', 'theme_ucsf');
+$information = get_string('headerimagelinktargetdesc', 'theme_ucsf');
+$default = '';
+$setting = new admin_setting_configcheckbox($name, $heading, $information, $default, '_blank', '');
+$setting->set_updatedcallback('theme_reset_all_caches');
+$settings_lr->add($setting);
+
+// Header Label
+$name = 'theme_ucsf/headerlabel';
+$heading = get_string('headerlabel', 'theme_ucsf');
+$information = get_string('headerlabeldesc', 'theme_ucsf');
+$default = 'Collaborative Learning Environment';
+$setting = new admin_setting_configtext($name, $heading, $information, $default);
+$setting->set_updatedcallback('theme_reset_all_caches');
 $settings_lr->add($setting);
 
 //Top-level category label
