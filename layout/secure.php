@@ -56,8 +56,8 @@ echo $OUTPUT->doctype() ?>
     <nav role="navigation" class="navbar-inner">
         <div class="container-fluid">
             <div class="container-fluid top-header">
-                <a class="brand pull-left" href="http://courses.ucsf.edu"><?php echo $globalsettings->logo;?></a>               
-                <div class="cle-text">Collaborative Learning Environment</div>
+                <span class="brand pull-left"><?php echo $globalsettings->logo;?></span>
+                <div class="cle-text"><?php echo $globalsettings->banner_title;?></div>
             </div>
         </div>
     </nav>

@@ -495,8 +495,25 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
             $return->displaycustommenu = '';
     }
 
+    // banner title
+    $return->banner_title = 'Collaborative Learning Environment';
+
     // logo
-    $return->logo = '<img title="UCSF | CLE" alt="UCSF | CLE" src="'.$output->pix_url('ucsf-logo', 'theme_ucsf').'"/>';
+    $logo_attributes = array();
+    $logo_attributes['title'] = 'UCSF | CLE';
+    $logo_attributes['alt'] = 'UCSF | CLE';
+    $logo_attributes['src'] = $output->pix_url('ucsf-logo', 'theme_ucsf');
+    $logo_attributes = theme_ucsf_render_attrs_to_string($logo_attributes);
+    $return->logo = "<img {$logo_attributes} />";
+
+    $is_logo_linked = true;
+    if ($is_logo_linked) {
+        $logo_link_attributes = array();
+        $logo_link_attributes['href'] = 'http://courses.ucsf.edu';
+        $logo_link_attributes['target'] = '_self';
+        $logo_link_attributes = theme_ucsf_render_attrs_to_string($logo_link_attributes);
+        $return->logo = "<a {$logo_link_attributes}>{$return->logo}</a>";
+    }
 
     // menu background clean css
     $menubackgroundcleen = "";
@@ -965,6 +982,28 @@ function theme_ucsf_find_first_configured_category($theme_settings, array $categ
     }
 
     return 0;
+}
+
+/**
+ * Flattens out a given assoc array of HTML element attributes to a string of key="value" pairs.
+ * @param array $attributes A map of HTML attributes.
+ * @return string The rendered HTML attributes.
+ */
+function theme_ucsf_render_attrs_to_string(array $attributes) {
+    if (empty($attributes)) {
+        return '';
+    }
+    return array_reduce(
+        array_keys($attributes),
+        function ($carry, $key) use ($attributes) {
+            $value = $attributes[$key];
+            if ('' !== trim($value)) {
+                return $carry . ' ' . $key . '="' . htmlspecialchars($attributes[$key], ENT_COMPAT) . '"';
+            }
+            return $carry;
+        },
+        ''
+    );
 }
 
 /**

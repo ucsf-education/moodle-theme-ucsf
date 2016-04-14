@@ -57,8 +57,8 @@ echo $OUTPUT->doctype() ?>
 <header role="banner" class="navbar <?php echo $html->navbarclass; ?>">
     <nav role="navigation" class="navbar-inner">            
         <div class="container-fluid top-header">
-            
-            <a class="brand pull-left" href="http://courses.ucsf.edu"><?php echo $globalsettings->logo;?></a>
+
+            <span class="brand pull-left"><?php echo $globalsettings->logo;?></span>
             <a class="btn btn-navbar pull-right" data-toggle="workaround-collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -76,7 +76,7 @@ echo $OUTPUT->doctype() ?>
                     ?>
                 </div> 
             </ul>
-            <div class="cle-text">Collaborative Learning Environment</div>
+            <div class="cle-text"><?php echo $globalsettings->banner_title;?></div>
         </div>
 
         <div class="container-fluid menu-background <?php echo $globalsettings->menubackgroundcleen; ?>">
