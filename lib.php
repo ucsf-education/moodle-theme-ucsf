@@ -185,16 +185,15 @@ function theme_ucsf_set_logo($css, $logo) {
  */
 function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
     global $DB;
-    $CATEGORILABELIMAGE = array();
+    $category_images = array();
 
-    $sql = "SELECT cc.id
-        FROM {course_categories} cc";
+    $sql = "SELECT cc.id FROM {course_categories} cc";
 
     $course_categories =  $DB->get_records_sql($sql);
     foreach ($course_categories as $cat) {
-        $CATEGORILABELIMAGE[]= "categorylabelimage".$cat->id;
+        $category_images[]= "categorylabelimage" . $cat->id;
+        $category_images[]= "headerimage" . $cat->id;
     }
-
 
     if ($context->contextlevel == CONTEXT_SYSTEM) {
         $theme = theme_config::load('ucsf');
@@ -222,7 +221,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
             return $theme->setting_file_serve('tile9image', $args, $forcedownload, $options);
         }else if ($filearea === 'tile10image') {
             return $theme->setting_file_serve('tile10image', $args, $forcedownload, $options);
-        }else if (in_array($filearea,  $CATEGORILABELIMAGE)) {
+        }else if (in_array($filearea,  $category_images)) {
             return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
         }else if ($filearea === 'headerimage') {
             return $theme->setting_file_serve('headerimage', $args, $forcedownload, $options);
@@ -454,19 +453,19 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         }
 
         // category labels
-        $coursecategory = theme_ucsf_find_first_configured_category($theme_settings, $categories, 'categorylabel');
+        $category = theme_ucsf_find_first_configured_category($theme_settings, $categories, 'categorylabel');
 
         // if applicable, override category label and image
-        if ($coursecategory) {
-            $categorylabelcustom = "categorylabel" . $coursecategory;
-            $categorylabelimagecustom = "categorylabelimage" . $coursecategory;
-            $categorylabelimageheightcustom = "categorylabelimageheight" . $coursecategory;
-            $categorylabelimagealtcustom = "categorylabelimagealt" . $coursecategory;
-            $categorylabelimagetitlecustom = "categorylabelimagetitle" . $coursecategory;
+        if ($category) {
+            $categorylabelcustom = "categorylabel" . $category;
+            $categorylabelimagecustom = "categorylabelimage" . $category;
+            $categorylabelimageheightcustom = "categorylabelimageheight" . $category;
+            $categorylabelimagealtcustom = "categorylabelimagealt" . $category;
+            $categorylabelimagetitlecustom = "categorylabelimagetitle" . $category;
 
             $categorylabelimage = '';
             if (! empty($theme_settings->$categorylabelimagecustom)) {
-                $categorylabelimage = '<div class="category-label-image"><img src="'.$page->theme->setting_file_url('categorylabelimage'.$coursecategory, 'categorylabelimage'.$coursecategory).'"';
+                $categorylabelimage = '<div class="category-label-image"><img src="'.$page->theme->setting_file_url('categorylabelimage'.$category, 'categorylabelimage'.$category).'"';
 
                 if (! empty($theme_settings->$categorylabelimageheightcustom)) {
                     $categorylabelimage.= 'height="'.$theme_settings->$categorylabelimageheightcustom.'"';
@@ -488,6 +487,38 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
         if ($theme_settings->$linklabeltocategorypage) {
             $return->categorylabel = '<a href="' . $CFG->wwwroot . '/course/index.php?categoryid=' . $coursecategory . '"">' . $return->categorylabel . '</a>';
         }
+
+        // check if header image and label customizations are turned on in this category hierarchy
+        $category = theme_ucsf_find_first_configured_category($theme_settings, $categories, 'customheaderenabled');
+        if ($category) {
+
+            // category specific header label.
+            $headerlabel = theme_ucsf_get_setting('headerlabel' . $category);
+            if ($headerlabel) {
+                $return->headerlabel = $headerlabel;
+            }
+
+            // category specific header image.
+            $headerimage = theme_ucsf_get_setting('headerimage' . $category);
+            if ($headerimage) {
+                $logo_attributes = array();
+                $logo_attributes['title'] = theme_ucsf_get_setting('headerimagetitle' . $category);
+                $logo_attributes['alt'] = theme_ucsf_get_setting('headerimagealt' . $category);
+                $logo_attributes['width'] = theme_ucsf_get_setting('headerimagewidth' . $category);
+                $logo_attributes['height'] = theme_ucsf_get_setting('headerimageheight' . $category);
+                $logo_attributes['src'] = $page->theme->setting_file_url('headerimage' . $category, 'headerimage' . $category);
+                $logo_attributes = theme_ucsf_render_attrs_to_string($logo_attributes);
+                $return->headerimage = "<img {$logo_attributes} />";
+
+                if (! empty(theme_ucsf_get_setting('headerimagelink' . $category))) {
+                    $logo_link_attributes = array();
+                    $logo_link_attributes['href'] = theme_ucsf_get_setting('headerimagelink' . $category);
+                    $logo_link_attributes['target'] = theme_ucsf_get_setting('headerimagelinktarget' . $category);
+                    $logo_link_attributes = theme_ucsf_render_attrs_to_string($logo_link_attributes);
+                    $return->headerimage = "<a {$logo_link_attributes}>{$return->headerimage}</a>";
+                }
+            }
+        }
     }
 
     // display custom menu
@@ -497,25 +528,29 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
             $return->displaycustommenu = '';
     }
 
-    // header title
-    $return->headerlabel = $theme_settings->headerlabel ? $theme_settings->headerlabel : 'Collaborative Learning Environment';
+    // set site-wide header label if none has been provided on a category-level
+    if (! $return->headerlabel) {
+        $return->headerlabel = $theme_settings->headerlabel ? $theme_settings->headerlabel : 'Collaborative Learning Environment';
+    }
 
-    // header image
-    $logo_attributes = array();
-    $logo_attributes['title'] = $theme_settings->headerimagetitle ? $theme_settings->headerimagetitle : 'UCSF | CLE';
-    $logo_attributes['alt'] = $theme_settings->headerimagealt ? $theme_settings->headerimagealt : 'UCSF | CLE';
-    $logo_attributes['width'] = $theme_settings->headerimagewidth;
-    $logo_attributes['height'] = $theme_settings->headerimageheight;
-    $logo_attributes['src'] = $theme_settings->headerimage ? $page->theme->setting_file_url('headerimage', 'headerimage') : $output->pix_url('ucsf-logo', 'theme_ucsf');
-    $logo_attributes = theme_ucsf_render_attrs_to_string($logo_attributes);
-    $return->headerimage = "<img {$logo_attributes} />";
-    $is_logo_linked = ! empty($theme_settings->headerimagelink);
-    if ($is_logo_linked) {
-        $logo_link_attributes = array();
-        $logo_link_attributes['href'] = $theme_settings->headerimagelink;
-        $logo_link_attributes['target'] = $theme_settings->headerimagelinktarget;
-        $logo_link_attributes = theme_ucsf_render_attrs_to_string($logo_link_attributes);
-        $return->headerimage = "<a {$logo_link_attributes}>{$return->headerimage}</a>";
+    // set site-wide header image if none has been provided on a category-level
+    if (! $return->headerimage) {
+        $logo_attributes = array();
+        $logo_attributes['title'] = $theme_settings->headerimagetitle ? $theme_settings->headerimagetitle : 'UCSF | CLE';
+        $logo_attributes['alt'] = $theme_settings->headerimagealt ? $theme_settings->headerimagealt : 'UCSF | CLE';
+        $logo_attributes['width'] = $theme_settings->headerimagewidth;
+        $logo_attributes['height'] = $theme_settings->headerimageheight;
+        $logo_attributes['src'] = $theme_settings->headerimage ? $page->theme->setting_file_url('headerimage', 'headerimage') : $output->pix_url('ucsf-logo', 'theme_ucsf');
+        $logo_attributes = theme_ucsf_render_attrs_to_string($logo_attributes);
+        $return->headerimage = "<img {$logo_attributes} />";
+
+        if (! empty($theme_settings->headerimagelink)) {
+            $logo_link_attributes = array();
+            $logo_link_attributes['href'] = $theme_settings->headerimagelink;
+            $logo_link_attributes['target'] = $theme_settings->headerimagelinktarget;
+            $logo_link_attributes = theme_ucsf_render_attrs_to_string($logo_link_attributes);
+            $return->headerimage = "<a {$logo_link_attributes}>{$return->headerimage}</a>";
+        }
     }
 
     // menu background clean css
