@@ -120,7 +120,7 @@ $string['block_width_tablet_heading'] = 'Block width for portrait tablet to land
 $string['block_width_portrait_tablet'] = 'Tablet';
 $string['block_width_portrait_tabletdesc'] = 'Set the width of block for tablet screen resolution (770px - 1199px). Please enter only width number.';
 $string['headerimage'] = 'Header image';
-$string['headerimagedesc'] = 'An image in the page header. Defaults to the "UCSF | CLE" logo if none is provided here.';
+$string['headerimagedesc'] = 'An image in the page header.';
 $string['headerimagealt'] = 'Header image alt text';
 $string['headerimagealtdesc'] = 'Alt text attribute of the header image.';
 $string['headerimagetitle'] = 'Header image title';
@@ -135,6 +135,8 @@ $string['headerimagelinktarget'] = 'Header image link target';
 $string['headerimagelinktargetdesc'] = 'If checked, the header image link will open in a new browser window when clicked.';
 $string['headerlabel'] = 'Header label';
 $string['headerlabeldesc'] = 'The title that appears next to the image in the page header.';
+$string['customheaderenabled'] = 'Enable header image and label customizations';
+$string['customheaderenableddesc'] = 'Check this to enable category-specific customizations to the header image and label.';
 
 /* Category Customizations */
 $string['addcategorycustomizationheading'] = 'Add category';
