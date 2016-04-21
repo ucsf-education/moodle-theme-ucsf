@@ -185,46 +185,22 @@ function theme_ucsf_set_logo($css, $logo) {
  */
 function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
     global $DB;
-    $category_images = array();
+    $whitelist = array('logo', 'bannerimage', 'headerimage', 'logo');
+    for ($i = 1; $i <= 10; $i++) {
+        $whitelist[] = "tile{$i}image";
+    }
 
     $sql = "SELECT cc.id FROM {course_categories} cc";
-
     $course_categories =  $DB->get_records_sql($sql);
     foreach ($course_categories as $cat) {
-        $category_images[]= "categorylabelimage" . $cat->id;
-        $category_images[]= "headerimage" . $cat->id;
+        $whitelist[] = "categorylabelimage" . $cat->id;
+        $whitelist[] = "headerimage" . $cat->id;
     }
 
     if ($context->contextlevel == CONTEXT_SYSTEM) {
         $theme = theme_config::load('ucsf');
-        if ($filearea === 'logo') {
-            return $theme->setting_file_serve('logo', $args, $forcedownload, $options);
-        } else if ($filearea === 'bannerimage') {
-            return $theme->setting_file_serve('bannerimage', $args, $forcedownload, $options);
-        } else if ($filearea === 'tile1image') {
-            return $theme->setting_file_serve('tile1image', $args, $forcedownload, $options);
-        } else if ($filearea === 'tile2image') {
-            return $theme->setting_file_serve('tile2image', $args, $forcedownload, $options);
-        } else if ($filearea === 'tile3image') {
-            return $theme->setting_file_serve('tile3image', $args, $forcedownload, $options);
-        } else if ($filearea === 'tile4image') {
-            return $theme->setting_file_serve('tile4image', $args, $forcedownload, $options);
-        } else if ($filearea === 'tile5image') {
-            return $theme->setting_file_serve('tile5image', $args, $forcedownload, $options);
-        } else if ($filearea === 'tile6image') {
-            return $theme->setting_file_serve('tile6image', $args, $forcedownload, $options);
-        }else if ($filearea === 'tile7image') {
-            return $theme->setting_file_serve('tile7image', $args, $forcedownload, $options);
-        }else if ($filearea === 'tile8image') {
-            return $theme->setting_file_serve('tile8image', $args, $forcedownload, $options);
-        }else if ($filearea === 'tile9image') {
-            return $theme->setting_file_serve('tile9image', $args, $forcedownload, $options);
-        }else if ($filearea === 'tile10image') {
-            return $theme->setting_file_serve('tile10image', $args, $forcedownload, $options);
-        }else if (in_array($filearea,  $category_images)) {
+        if (in_array($filearea, $whitelist)) {
             return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
-        }else if ($filearea === 'headerimage') {
-            return $theme->setting_file_serve('headerimage', $args, $forcedownload, $options);
         } else {
             send_file_not_found();
         }
