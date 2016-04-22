@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Moodle's Clean theme, an example of how to make a Bootstrap theme
+ * A theme for UCSF's Collaborative Learning Environment (CLE).
  *
  * DO NOT MODIFY THIS THEME!
  * COPY IT FIRST, THEN RENAME THE COPY AND MODIFY IT INSTEAD.
@@ -37,9 +37,13 @@ $THEME->name = 'ucsf';
 // in version.php and lang/en/theme_ucsf.php as well.
 //////////////////////////////////
 //
-$THEME->doctype = 'html5';
 $THEME->parents = array('bootstrapbase');
+$THEME->doctype = 'html5';
 $THEME->sheets = array('custom', 'datepicker', 'ucsf');
+$THEME->lessfile = 'moodle';
+$THEME->parents_exclude_sheets = array('bootstrapbase' => array('moodle'));
+$THEME->lessvariablescallback = 'theme_ucsf_less_variables';
+$THEME->extralesscallback = 'theme_ucsf_extra_less';
 $THEME->supportscssoptimisation = false;
 $THEME->yuicssmodules = array();
 $THEME->enable_dock = true;

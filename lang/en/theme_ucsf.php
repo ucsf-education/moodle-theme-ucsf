@@ -40,6 +40,10 @@ $string['configtitle'] = 'UCSF';
 
 $string['customcss'] = 'Custom CSS';
 $string['customcssdesc'] = 'Whatever CSS rules you add to this textarea will be reflected in every page, making for easier customization of this theme.';
+$string['customcatcssdesc'] = 'Whatever CSS rules you add to this textarea will be reflected in every page in this category, making for easier customization of this theme.';
+$string['enablecustomcss'] = 'Enable CSS customisations';
+$string['enablecustomcssdesc'] = 'This allows CSS customizations to be saved but not applied to the site unless checked.';
+$string['enablecustomcatcssdesc'] = 'This allows CSS customizations to be saved but not applied to the category unless checked.';
 
 $string['footnote'] = 'Footnote';
 $string['footnotedesc'] = 'Whatever you add to this textarea will be displayed in the footer throughout your Moodle site.';

@@ -232,6 +232,24 @@ $default = '0';
 $setting = new admin_setting_configcheckbox($name, $heading, $information, $default);
 $settings_lr->add($setting);
 
+// Enable/Disable custom CSS.
+$name = 'theme_ucsf/customcssenabled';
+$title = get_string('enablecustomcss', 'theme_ucsf');
+$description = get_string('enablecustomcssdesc', 'theme_ucsf');
+$default = false;
+$setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$settings_lr->add($setting);
+
+// Custom CSS.
+$name = 'theme_ucsf/customcss';
+$title = get_string('customcss', 'theme_ucsf');
+$description = get_string('customcssdesc', 'theme_ucsf');
+$default = '';
+$setting = new admin_setting_configtextarea($name, $title, $description, $default);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$settings_lr->add($setting);
+
 // Copyright
 $name = 'theme_ucsf/copyright';
 $title = get_string('copyright', 'theme_ucsf');
@@ -738,6 +756,24 @@ foreach ($all_categories_array as $allcats) {
             $setting = new admin_setting_configtextarea($name, $heading, $information,$default);
             $settings_lr->add($setting);
 
+            // Enable/Disable custom CSS.
+            $name = 'theme_ucsf/customcssenabled'.$cats->id;
+            $heading = get_string('enablecustomcss', 'theme_ucsf');
+            $information = get_string('enablecustomcatcssdesc', 'theme_ucsf');
+            $default = false;
+            $setting = new admin_setting_configcheckbox($name, $heading, $information,$default, true, false);
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $settings_lr->add($setting);
+
+            // Custom CSS.
+            $name = 'theme_ucsf/customcss'.$cats->id;
+            $heading = get_string('customcss', 'theme_ucsf');
+            $title = get_string('customcatcssdesc', 'theme_ucsf');
+            $default = '';
+            $setting = new admin_setting_configtextarea($name, $heading, $information,$default);
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $settings_lr->add($setting);
+
             // HELP/FEEDBACK LINKS
             // Enable/Disable Help/Feedback links;.
             $name = 'theme_ucsf/catenablehelpfeedback'.$cats->id;
@@ -890,6 +926,24 @@ foreach ($all_categories_array as $allcats) {
             $information = get_string('custommenudesc', 'theme_ucsf');
             $default = '';
             $setting = new admin_setting_configtextarea($name, $heading, $information,$default);
+            $settings_lr->add($setting);
+
+            // Enable/Disable custom CSS.
+            $name = 'theme_ucsf/customcssenabled'.$cats->id;
+            $heading = get_string('enablecustomcss', 'theme_ucsf');
+            $information = get_string('enablecustomcatcssdesc', 'theme_ucsf');
+            $default = false;
+            $setting = new admin_setting_configcheckbox($name, $heading, $information,$default, true, false);
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $settings_lr->add($setting);
+
+            // Custom CSS.
+            $name = 'theme_ucsf/customcss'.$cats->id;
+            $heading = get_string('customcss', 'theme_ucsf');
+            $information = get_string('customcatcssdesc', 'theme_ucsf');
+            $default = '';
+            $setting = new admin_setting_configtextarea($name, $heading, $information,$default);
+            $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
             // HELP/FEEDBACK LINKS

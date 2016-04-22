@@ -31,6 +31,76 @@
  */
 
 /**
+ * Extra LESS code to inject.
+ *
+ * This will generate some LESS code from the settings used by the user. We cannot use
+ * the {@link theme_more_less_variables()} here because we need to create selectors or
+ * alter existing ones.
+ *
+ * @param theme_config $theme The theme config object.
+ * @return string Raw LESS code.
+ */
+function theme_ucsf_extra_less($theme) {
+
+    // get the ids of all course categories
+    $all_category_ids = _theme_ucsf_get_all_category_ids();
+
+    // get all categories that are configured for customizations
+    $settings = $theme->settings;
+    if (empty($settings->all_categories)) {
+        return '';
+    }
+    $customized_category_ids = explode(',', $settings->all_categories);
+    // filter out any categories that don't have CSS customizations turned on
+    // and that don't provide any styles
+    $customized_category_ids = array_filter($customized_category_ids, function($id) use ($settings) {
+        $enabled_key = 'customcssenabled' . (int) $id;
+        $css_key = 'customcss' . (int) $id;
+        return ! empty($settings->$enabled_key) && ! empty($settings->$css_key);
+    });
+    $customized_category_ids = array_values($customized_category_ids);
+    if (empty($customized_category_ids)) {
+        return '';
+    }
+
+    // generate LESS rules by category
+    // "inherit" any custom rules that may have been defined/enabled by parent categories.
+    $contents = array();
+    foreach($all_category_ids as $category_id) {
+        $category_css = [];
+        $ids = theme_ucsf_get_category_roots($category_id);
+        foreach($ids as $id) {
+            if (in_array($id, $customized_category_ids)) {
+                $css_key = 'customcss' . (int) $id;
+                $category_css[] = $settings->$css_key;
+            }
+        }
+        if (! empty($category_css)) {
+            $category_css = implode("\n", array_reverse($category_css));
+            // anchor rules off of the body tag with category class applied
+            $contents[] = "body.category-{$category_id} {\n{$category_css}\n}";
+        }
+    }
+
+    return implode("\n", $contents);
+}
+
+/**
+ * Returns variables for LESS.
+ *
+ * We will inject some LESS variables from the settings that the user has defined
+ * for the theme. No need to write some custom LESS for this.
+ *
+ * @param theme_config $theme The theme config object.
+ * @return array of LESS variables without the @.
+ */
+function theme_ucsf_less_variables($theme) {
+    $variables = array();
+    // @todo implement or remove, if n/a [ST 2016/04/06]
+    return $variables;
+}
+
+/**
  * Parses CSS before it is cached.
  *
  * This function can make alterations and replace patterns within the CSS.
@@ -39,8 +109,6 @@
  * @param theme_config $theme The theme config object.
  * @return string The parsed CSS The parsed CSS.
  */
-
-
 function theme_ucsf_process_css($css, $theme) {
 
     // Set the background image for the logo.
@@ -48,7 +116,7 @@ function theme_ucsf_process_css($css, $theme) {
     $css = theme_ucsf_set_logo($css, $logo);
 
     // Set custom CSS.
-    if (!empty($theme->settings->customcss)) {
+    if ($theme->settings->customcssenabled && !empty($theme->settings->customcss)) {
         $customcss = $theme->settings->customcss;
     } else {
         $customcss = null;
@@ -466,7 +534,17 @@ function theme_ucsf_get_category_roots($id) {
     }
 
     if (!array_key_exists($id, $cache)) {
+        $ids = _theme_ucsf_get_category_roots($id);
         $cache[$id] = _theme_ucsf_get_category_roots($id);
+        array_shift($ids);
+        // cache category roots of all ancestors in that category hierarchy while at it.
+        for ($i = 0, $n = count($ids); $i < $n; $i++) {
+            $parent_id = $ids[$i];
+            if (array_key_exists($parent_id, $cache)) {
+                break;
+            }
+            $cache[$parent_id] = array_slice($ids, $i);
+        }
     }
     return $cache[$id];
 }
@@ -936,7 +1014,7 @@ function theme_ucsf_page_init(moodle_page $page) {
  * Recursively retrieve all ancestral categories for a given category, including the category itself.
  * @param int $id The category id.
  * @param array $categories A partial list of ancestral category ids.
- * @return array A list full list of ancestral category ids.
+ * @return array A list full list of ancestral category ids, including the given id itself.
  */
 function _theme_ucsf_get_category_roots($id, $categories = array()) {
     global $DB;
@@ -951,6 +1029,19 @@ function _theme_ucsf_get_category_roots($id, $categories = array()) {
     $categories[]  = $id;
     $cat = array_shift($cats);
     return  _theme_ucsf_get_category_roots($cat->parent, $categories);
+}
+
+/**
+ * Retrieve a list of all course category ids,
+ * since Moodle's course API does not appear to provide such a method.
+ * @return array A list course ids, sorted by ID in descending order (newest first).
+ */
+function _theme_ucsf_get_all_category_ids() {
+    global $DB;
+
+    $sql = "SELECT cc.id FROM {course_categories} cc ORDER BY cc.id DESC";
+    $categories =  array_keys($DB->get_records_sql($sql));
+    return $categories;
 }
 
 
