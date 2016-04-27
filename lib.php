@@ -111,62 +111,35 @@ function theme_ucsf_less_variables($theme) {
  */
 function theme_ucsf_process_css($css, $theme) {
 
+    $replacements = array();
+
     // Set the background image for the logo.
-    $logo = $theme->setting_file_url('logo', 'logo');
-    $css = theme_ucsf_set_logo($css, $logo);
+    $replacements['[[setting:logo]]'] = $theme->setting_file_url('logo', 'logo');
 
     // Set custom CSS.
+    $customcss = '';
     if ($theme->settings->customcssenabled && !empty($theme->settings->customcss)) {
         $customcss = $theme->settings->customcss;
-    } else {
-        $customcss = null;
     }
-    $css = theme_ucsf_set_customcss($css, $customcss);
+    $replacements['[[setting:customcss]]'] = $customcss;
 
     // Block settings
-    // Set block width for large desktop
+    // Set block width for large
+    $block_width = '';
     if (!empty($theme->settings->block_width_desktop)) {
         $block_width = $theme->settings->block_width_desktop;
-    } else {
-        $block_width = '';
     }
-    $css = theme_ucsf_block_width($css, '[[setting:block_width_desktop]]', $block_width);
+    $replacements['[[setting:block_width_desktop]]'] = $block_width;
 
     // Block width for portrait tablet to landscape and desktop
+    $block_width_portrait_tablet = '';
     if (!empty($theme->settings->block_width_portrait_tablet)) {
         $block_width_portrait_tablet = $theme->settings->block_width_portrait_tablet;
-    } else {
-        $block_width_portrait_tablet = '';
     }
-    $css = theme_ucsf_block_width($css, '[[setting:block_width_portrait_tablet]]', $block_width_portrait_tablet);
+    $replacements['[[setting:block_width_portrait_tablet]]'] = $block_width_portrait_tablet;
 
-    return $css;
-}
-
-function theme_ucsf_block_width($css, $tag, $block_width) {
-    $replacement = $block_width;
-    if (is_null($replacement)) {
-        $replacement = '';
-    }
-    $css = str_replace($tag, $replacement, $css);
-    return $css;
-}
-
-/**
- * Adds the logo to CSS.
- *
- * @param string $css The CSS.
- * @param string $logo The URL of the logo.
- * @return string The parsed CSS
- */
-function theme_ucsf_set_logo($css, $logo) {
-    $tag = '[[setting:logo]]';
-    $replacement = $logo;
-    if (is_null($replacement)) {
-        $replacement = '';
-    }
-
-    $css = str_replace($tag, $replacement, $css);
+    // substitute placeholders
+    $css = str_replace(array_keys($replacements), array_values($replacements), $css);
 
     return $css;
 }
@@ -207,25 +180,6 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
     } else {
         send_file_not_found();
     }
-}
-
-/**
- * Adds any custom CSS to the CSS before it is cached.
- *
- * @param string $css The original CSS.
- * @param string $customcss The custom CSS to add.
- * @return string The CSS which now contains our custom CSS.
- */
-function theme_ucsf_set_customcss($css, $customcss) {
-    $tag = '[[setting:customcss]]';
-    $replacement = $customcss;
-    if (is_null($replacement)) {
-        $replacement = '';
-    }
-
-    $css = str_replace($tag, $replacement, $css);
-
-    return $css;
 }
 
 /**
