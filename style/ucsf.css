@@ -1156,7 +1156,7 @@ body {
 }
 
 .navbar .nav > li:last-child {
-    background: none;
+    background: none !important;
 }
 
 /* show menu from 779px to 979px */
@@ -1186,7 +1186,7 @@ body {
     }
 
     .navbar .nav > li:last-child{
-        background: none;
+        background: none !important;
     }
 
     .menu-left, .menu-right {
@@ -1201,11 +1201,15 @@ body {
     }
 
     .navbar .nav > li {
+        background: none !important;
+    }
+
+    .menu-left, .menu-right {
         background: none;
     }
 
-    .menu-left, .menu-right, .menu-background {
-        background: none;
+    .menu-background {
+        background: none !important;
     }
 
 }
