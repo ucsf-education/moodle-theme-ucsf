@@ -64,20 +64,57 @@ function theme_ucsf_extra_less($theme) {
     }
 
     // generate LESS rules by category
-    // "inherit" any custom rules that may have been defined/enabled by parent categories.
     $contents = array();
     foreach($all_category_ids as $category_id) {
         $category_css = [];
+
+        // get parent categories that are enabled for css customization
+        $ids = array_values(
+            array_filter(theme_ucsf_get_category_roots($category_id), function($id) use ($customized_category_ids) {
+               return in_array($id, $customized_category_ids);
+            })
+        );
+
+        // Category-specific menu-style customizations.
+        //
+        // ACHTUNG - MINEN!
+        // Keep these styles in sync with the ones defined in "style/ucsf.css".
+        // @todo Put this nonsense to the torch. ALL of it. And start over from scratch. [ST 2016/04/27]
+        $category = theme_ucsf_find_first_configured_category($settings, $ids, 'menubackground');
+        if ($category) {
+            $menubackground = $theme->setting_file_url('menubackground' . $category, 'menubackground' . $category);
+            $category_css[] = ".menu-background { background-image: url({$menubackground}); }";
+        }
+        $category = theme_ucsf_find_first_configured_category($settings, $ids, 'menudivider');
+        if ($category) {
+            $menudivider = $theme->setting_file_url('menudivider' . $category, 'menudivider' . $category);
+            $category_css[] = ".category-label { background-image: url({$menudivider}); }";
+        }
+        $category = theme_ucsf_find_first_configured_category($settings, $ids, 'menudividermobile');
+        if ($category) {
+            $menudivider = $theme->setting_file_url('menudividermobile' . $category, 'menudividermobile' . $category);
+            $category_css[] = "@media ( max-width: 779px) { .category-label { background-image: url({$menudivider}) !important; }}";
+        }
+        $category = theme_ucsf_find_first_configured_category($settings, $ids, 'menuitemdivider');
+        if ($category) {
+            $menuitemdivider = $theme->setting_file_url('menuitemdivider' . $category, 'menuitemdivider' . $category);
+            $rule =  ".navbar .nav > li { background-image: url({$menuitemdivider}); }";
+            $category_css[] = $rule;
+            $category_css[] = "@media (min-width: 780px) and (max-width: 979px) { {$rule} }";
+        }
+
+        // Generic custom CSS
+        //
+        // "inherit" any rules that may have been defined/enabled by parent categories.
         $ids = theme_ucsf_get_category_roots($category_id);
         foreach($ids as $id) {
-            if (in_array($id, $customized_category_ids)) {
-                $css_key = 'customcss' . (int) $id;
-                $category_css[] = $settings->$css_key;
-            }
+            $css_key = 'customcss' . (int) $id;
+            $category_css[] = $settings->$css_key;
         }
+
+        // Finally, scope category specific rules with a class selector anchored of the <body> tag.
         if (! empty($category_css)) {
             $category_css = implode("\n", array_reverse($category_css));
-            // anchor rules off of the body tag with category class applied
             $contents[] = "body.category-{$category_id} {\n{$category_css}\n}";
         }
     }
@@ -165,9 +202,18 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
 
     $sql = "SELECT cc.id FROM {course_categories} cc";
     $course_categories =  $DB->get_records_sql($sql);
+    $prefixes = array(
+        'categorylabelimage',
+        'headerimage',
+        'menubackground',
+        'menudivider',
+        'menudividermobile',
+        'menuitemdivider'
+    );
     foreach ($course_categories as $cat) {
-        $whitelist[] = "categorylabelimage" . $cat->id;
-        $whitelist[] = "headerimage" . $cat->id;
+        foreach ($prefixes as $prefix) {
+            $whitelist[] = $prefix . $cat->id;
+        }
     }
 
     if ($context->contextlevel == CONTEXT_SYSTEM) {
