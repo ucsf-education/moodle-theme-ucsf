@@ -52,11 +52,9 @@ function theme_ucsf_extra_less($theme) {
     }
     $customized_category_ids = explode(',', $settings->all_categories);
     // filter out any categories that don't have CSS customizations turned on
-    // and that don't provide any styles
     $customized_category_ids = array_filter($customized_category_ids, function($id) use ($settings) {
         $enabled_key = 'customcssenabled' . (int) $id;
-        $css_key = 'customcss' . (int) $id;
-        return ! empty($settings->$enabled_key) && ! empty($settings->$css_key);
+        return ! empty($settings->$enabled_key);
     });
     $customized_category_ids = array_values($customized_category_ids);
     if (empty($customized_category_ids)) {
@@ -109,7 +107,10 @@ function theme_ucsf_extra_less($theme) {
         $ids = theme_ucsf_get_category_roots($category_id);
         foreach($ids as $id) {
             $css_key = 'customcss' . (int) $id;
-            $category_css[] = $settings->$css_key;
+            $custom_css = $settings->$css_key;
+            if (trim($custom_css)) {
+                $category_css[] = $custom_css;
+            }
         }
 
         // Finally, scope category specific rules with a class selector anchored of the <body> tag.
