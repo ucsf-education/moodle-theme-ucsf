@@ -461,7 +461,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 
         // set link label to category page
         $linklabeltocategorypage = "linklabeltocategorypage" . $coursecategory;
-        if ($theme_settings->$linklabeltocategorypage) {
+        if (property_exists($theme_settings, $linklabeltocategorypage) && $theme_settings->$linklabeltocategorypage) {
             $return->categorylabel = '<a href="' . $CFG->wwwroot . '/course/index.php?categoryid=' . $coursecategory . '"">' . $return->categorylabel . '</a>';
         }
 
@@ -506,12 +506,12 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
     }
 
     // set site-wide header label if none has been provided on a category-level
-    if (! $return->headerlabel) {
+    if (! property_exists($return, 'headerlabel') || ! $return->headerlabel) {
         $return->headerlabel = $theme_settings->headerlabel ? $theme_settings->headerlabel : 'Collaborative Learning Environment';
     }
 
     // set site-wide header image if none has been provided on a category-level
-    if (! $return->headerimage) {
+    if (! property_exists($return, 'headerimage') || ! $return->headerimage) {
         $logo_attributes = array();
         $logo_attributes['title'] = $theme_settings->headerimagetitle ? $theme_settings->headerimagetitle : 'UCSF | CLE';
         $logo_attributes['alt'] = $theme_settings->headerimagealt ? $theme_settings->headerimagealt : 'UCSF | CLE';
