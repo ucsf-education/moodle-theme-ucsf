@@ -1,3 +1,23 @@
+## [Version 1.2.0](https://github.com/ucsf-ckm/moodle-theme-ucsf/releases/tag/v1.2.0) (2016-05-20)
+
+- Added property existence checks prior to accessing props.
+- Various improvements to settings form.
+- Fixed edge case where menu customizations are provided, but no custom css.
+- Tweaked stylesheet to make it jive with backend-driven overrides.
+- Outputting menu customizations to stylesheet.
+- Augmented category forms with input fields for menu customizations.
+- Render category-specific header image and label, if applicable.
+- Added header customization settings to category config form.
+- Made header image and header label configurable.
+- Added new utility method for find category customizations.
+- Implemented 'style inheritance' for subcategories.
+- Fixed and augmented caching implementation.
+- Implemented category-specific customizations in CSS generation.
+- Added fields to settings for entering category-specific CSS customizations.
+- Added site-wide CSS customizations and on/off-switch for it.
+- Enabled LESS support.
+
+
 ## [Version 1.1.0](https://github.com/ucsf-ckm/moodle-theme-ucsf/releases/tag/v1.1.0) (2016-04-19)
 
 - Eliminated global `$CATEGORIES` variable. (#11)
