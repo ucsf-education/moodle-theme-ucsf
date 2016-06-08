@@ -807,7 +807,7 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
 
     $alert = null;
 
-    for ($i = 0; $i < 10; $i++) {
+    for ($i = 0; $i <= 10; $i++) {
         if($hasalert[$i]) {
 
             $alert.= '<div class="useralerts alert alert-'.theme_ucsf_get_setting('alert'.$i.'type').' alert' . $i . '">';
