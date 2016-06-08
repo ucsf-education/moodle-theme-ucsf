@@ -37,18 +37,19 @@
       , $parent
       , alerts
       , target = $this.attr('data-target-url')
+      , i
 
     if (!selector) {
       selector = $this.attr('href')
       selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
     }
 
-    if($this.parent().hasClass('alert1')){
-      alerts="alert1";
-    } else if($this.parent().hasClass('alert2')) {
-      alerts="alert2";
-    } else {
-      alerts="alert3";
+    for (i = 1; i <= 10; i++) {
+      key = 'alert' + i;
+      if($this.parent().hasClass('alert' + i)) {
+        alerts = 'alert' + i;
+        break;
+      }
     }
 
     $parent = $(selector)
