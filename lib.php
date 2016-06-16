@@ -615,32 +615,33 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
     $current_date_timestamp = $current_date->getTimestamp();
     $current_day_timestamp = strtotime("midnight");
 
-    $hasalert = array(false, false, false, false, false, false, false, false, false, false);
+    $hasalert = array_fill(0, 10, false);
 
-    $number_of_alerts = isset($page->theme->settings->number_of_alerts) ? intval($page->theme->settings->number_of_alerts) : '';
+    $number_of_alerts = isset($page->theme->settings->number_of_alerts) ? intval($page->theme->settings->number_of_alerts, 10) : 0;
 
-    for ($i = 1; $i <= $number_of_alerts; $i++) {
-        $category = theme_ucsf_get_setting('categories_list_alert'.$i);
-        $alert_type = theme_ucsf_get_setting('recurring_alert'.$i);
-        $enable_alert = theme_ucsf_get_setting('enable'.$i.'alert');
+    for ($i = 0; $i < $number_of_alerts; $i++) {
+        $n = $i + 1;
+        $category = theme_ucsf_get_setting('categories_list_alert'.$n);
+        $alert_type = theme_ucsf_get_setting('recurring_alert'.$n);
+        $enable_alert = theme_ucsf_get_setting('enable'.$n.'alert');
 
         if ($coursecategory == $category || $category == 0 || in_array($category, $sub_cat)) {
 
-            if(!isset($_SESSION["alerts"]["alert".$i]) || $_SESSION["alerts"]["alert".$i] != 0) {
+            if(!isset($_SESSION["alerts"]["alert".$n]) || $_SESSION["alerts"]["alert".$n] != 0) {
 
                 //Never-Ending Alert
                 if ($alert_type == '1') {
                     if($enable_alert == 1) {
-                        $_SESSION["alerts"]["alert".$i] = 1;
+                        $_SESSION["alerts"]["alert".$n] = 1;
                         $hasalert[$i] = true;
                     }
                 }
                 //One-Time Alert
                 if ($alert_type == '2') {
 
-                    $start_date     = (null !== (theme_ucsf_get_setting('start_date'.$i))) ? theme_ucsf_get_setting('start_date'.$i) : '';
-                    $start_hour     = (null !== (theme_ucsf_get_setting('start_hour'.$i))) ? theme_ucsf_get_setting('start_hour'.$i) : '';
-                    $start_minute   = (null !== (theme_ucsf_get_setting('start_minute'.$i))) ? theme_ucsf_get_setting('start_minute'.$i) : '';
+                    $start_date     = (null !== (theme_ucsf_get_setting('start_date'.$n))) ? theme_ucsf_get_setting('start_date'.$n) : '';
+                    $start_hour     = (null !== (theme_ucsf_get_setting('start_hour'.$n))) ? theme_ucsf_get_setting('start_hour'.$n) : '';
+                    $start_minute   = (null !== (theme_ucsf_get_setting('start_minute'.$n))) ? theme_ucsf_get_setting('start_minute'.$n) : '';
 
                     // Do not set false if the value is 0.
                     if ($start_minute == false) {
@@ -655,9 +656,9 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
                     $start_date_timestamp   = strtotime($start_date_format);
 
                     // Creating end date.
-                    $end_date   = (null !== (theme_ucsf_get_setting('end_date'.$i))) ? theme_ucsf_get_setting('end_date'.$i) : '';
-                    $end_hour     = (null !== (theme_ucsf_get_setting('end_hour'.$i))) ? theme_ucsf_get_setting('end_hour'.$i) : '';
-                    $end_minute   = (null !== (theme_ucsf_get_setting('end_minute'.$i))) ? theme_ucsf_get_setting('end_minute'.$i) : '';
+                    $end_date   = (null !== (theme_ucsf_get_setting('end_date'.$n))) ? theme_ucsf_get_setting('end_date'.$n) : '';
+                    $end_hour     = (null !== (theme_ucsf_get_setting('end_hour'.$n))) ? theme_ucsf_get_setting('end_hour'.$n) : '';
+                    $end_minute   = (null !== (theme_ucsf_get_setting('end_minute'.$n))) ? theme_ucsf_get_setting('end_minute'.$n) : '';
                     // Do not set false if the value is 0.
                     if ($end_minute == false) {
                         $end_minute = '00';
@@ -672,7 +673,7 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
 
                     if ($enable_alert == 1) {
                         if ($start_date_timestamp <= $current_date_timestamp && $end_date_timestamp >= $current_date_timestamp) {
-                            $_SESSION["alerts"]["alert".$i] = 1;
+                            $_SESSION["alerts"]["alert".$n] = 1;
                             $hasalert[$i] = true;
                         }
                     }
@@ -681,9 +682,9 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
                 if ($alert_type == '3') {
 
                     //Getting daily start date from config and converting it to timestamp.
-                    $start_date = (null !== (theme_ucsf_get_setting('start_date_daily'.$i))) ? theme_ucsf_get_setting('start_date_daily'.$i) : '';
-                    $start_hour = (null !== (theme_ucsf_get_setting('start_hour_daily'.$i))) ? theme_ucsf_get_setting('start_hour_daily'.$i) : '';
-                    $start_minute = (null !== (theme_ucsf_get_setting('start_minute_daily'.$i))) ? theme_ucsf_get_setting('start_minute_daily'.$i) : "";
+                    $start_date = (null !== (theme_ucsf_get_setting('start_date_daily'.$n))) ? theme_ucsf_get_setting('start_date_daily'.$n) : '';
+                    $start_hour = (null !== (theme_ucsf_get_setting('start_hour_daily'.$n))) ? theme_ucsf_get_setting('start_hour_daily'.$n) : '';
+                    $start_minute = (null !== (theme_ucsf_get_setting('start_minute_daily'.$n))) ? theme_ucsf_get_setting('start_minute_daily'.$n) : "";
 
                     // Do not set false if the value is 0.
                     if ($start_minute == false) {
@@ -699,9 +700,9 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
                     $start_time_timestamp = strtotime($start_time);
 
                     //Getting daily end date from config and converting it to timestamp.
-                    $end_date = (null !== (theme_ucsf_get_setting('end_date_daily'.$i))) ? theme_ucsf_get_setting('end_date_daily'.$i) : '';
-                    $end_hour = (null !== (theme_ucsf_get_setting('end_hour_daily'.$i))) ? theme_ucsf_get_setting('end_hour_daily'.$i) : '';
-                    $end_minute = (null !== (theme_ucsf_get_setting('end_minute_daily'.$i))) ? theme_ucsf_get_setting('end_minute_daily'.$i) : "";
+                    $end_date = (null !== (theme_ucsf_get_setting('end_date_daily'.$n))) ? theme_ucsf_get_setting('end_date_daily'.$n) : '';
+                    $end_hour = (null !== (theme_ucsf_get_setting('end_hour_daily'.$n))) ? theme_ucsf_get_setting('end_hour_daily'.$n) : '';
+                    $end_minute = (null !== (theme_ucsf_get_setting('end_minute_daily'.$n))) ? theme_ucsf_get_setting('end_minute_daily'.$n) : "";
 
                     if ($end_minute == false) {
                         $end_minute = '00';
@@ -719,7 +720,7 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
                     if ($enable_alert == 1) {
                         if($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
                             if($start_time_timestamp <= $current_time_timestamp && $end_time_timestamp > $current_time_timestamp){
-                                $_SESSION["alerts"]["alert".$i] = 1;
+                                $_SESSION["alerts"]["alert".$n] = 1;
                                 $hasalert[$i] = true;
                             }
                         }
@@ -728,25 +729,25 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
                 if ($alert_type == '4') {
 
                     // Get settings for weekday and put them into timestamp.
-                    if (theme_ucsf_get_setting('show_week_day'.$i) == '0') {
+                    if (theme_ucsf_get_setting('show_week_day'.$n) == '0') {
                         $weekday = 'Sunday';
                         $weekday_timestamp = strtotime($weekday);
-                    } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '1') {
+                    } elseif (theme_ucsf_get_setting('show_week_day'.$n) == '1') {
                         $weekday = 'Monday';
                         $weekday_timestamp = strtotime($weekday);
-                    } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '2') {
+                    } elseif (theme_ucsf_get_setting('show_week_day'.$n) == '2') {
                         $weekday = 'Tuesday';
                         $weekday_timestamp = strtotime($weekday);
-                    } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '3') {
+                    } elseif (theme_ucsf_get_setting('show_week_day'.$n) == '3') {
                         $weekday = 'Wednesday';
                         $weekday_timestamp = strtotime($weekday);
-                    } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '4') {
+                    } elseif (theme_ucsf_get_setting('show_week_day'.$n) == '4') {
                         $weekday = 'Thursday';
                         $weekday_timestamp = strtotime($weekday);
-                    } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '5') {
+                    } elseif (theme_ucsf_get_setting('show_week_day'.$n) == '5') {
                         $weekday = 'Friday';
                         $weekday_timestamp = strtotime($weekday);
-                    } elseif (theme_ucsf_get_setting('show_week_day'.$i) == '6') {
+                    } elseif (theme_ucsf_get_setting('show_week_day'.$n) == '6') {
                         $weekday = 'Saturday';
                         $weekday_timestamp = strtotime($weekday);
                     }
@@ -755,9 +756,9 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
                     $current_weekday = date('D');
                     $current_weekday_timestamp = strtotime($current_weekday);
 
-                    $start_date = (null !== (theme_ucsf_get_setting('start_date_weekly'.$i))) ? theme_ucsf_get_setting('start_date_weekly'.$i) : '';
-                    $start_hour = (null !== (theme_ucsf_get_setting('start_hour_weekly'.$i))) ? theme_ucsf_get_setting('start_hour_weekly'.$i) : '';
-                    $start_minute = (null !==(theme_ucsf_get_setting('start_minute_weekly'.$i))) ? theme_ucsf_get_setting('start_minute_weekly'.$i) : '';
+                    $start_date = (null !== (theme_ucsf_get_setting('start_date_weekly'.$n))) ? theme_ucsf_get_setting('start_date_weekly'.$n) : '';
+                    $start_hour = (null !== (theme_ucsf_get_setting('start_hour_weekly'.$n))) ? theme_ucsf_get_setting('start_hour_weekly'.$n) : '';
+                    $start_minute = (null !==(theme_ucsf_get_setting('start_minute_weekly'.$n))) ? theme_ucsf_get_setting('start_minute_weekly'.$n) : '';
 
                     if ($start_minute == false) {
                         $start_minute = '00';
@@ -772,9 +773,9 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
                     $start_time_timestamp = strtotime($start_time);
 
                     //Getting daily end date from config and converting it to timestamp.
-                    $end_date = (null !== (theme_ucsf_get_setting('end_date_weekly'.$i))) ? theme_ucsf_get_setting('end_date_weekly'.$i) : '';
-                    $end_hour = (null !== (theme_ucsf_get_setting('end_hour_weekly'.$i))) ? theme_ucsf_get_setting('end_hour_weekly'.$i) : '';
-                    $end_minute = (null !== (theme_ucsf_get_setting('end_minute_weekly'.$i))) ? theme_ucsf_get_setting('end_minute_weekly'.$i) : "";
+                    $end_date = (null !== (theme_ucsf_get_setting('end_date_weekly'.$n))) ? theme_ucsf_get_setting('end_date_weekly'.$n) : '';
+                    $end_hour = (null !== (theme_ucsf_get_setting('end_hour_weekly'.$n))) ? theme_ucsf_get_setting('end_hour_weekly'.$n) : '';
+                    $end_minute = (null !== (theme_ucsf_get_setting('end_minute_weekly'.$n))) ? theme_ucsf_get_setting('end_minute_weekly'.$n) : "";
 
                     if ($end_minute == false) {
                         $end_minute = '00';
@@ -794,7 +795,7 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
                         if ($weekday_timestamp == $current_weekday_timestamp) {
                             if ($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
                                 if ($start_time_timestamp <= $current_date_timestamp && $end_time_timestamp > $current_date_timestamp) {
-                                    $_SESSION["alerts"]["alert".$i] = 1;
+                                    $_SESSION["alerts"]["alert".$n] = 1;
                                     $hasalert[$i] = true;
                                 }
                             }
@@ -807,12 +808,12 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
 
     $alert = null;
 
-    for ($i = 0; $i <= 10; $i++) {
+    for ($i = 0; $i < $number_of_alerts; $i++) {
         if($hasalert[$i]) {
-
-            $alert.= '<div class="useralerts alert alert-'.theme_ucsf_get_setting('alert'.$i.'type').' alert' . $i . '">';
+            $n = $i + 1;
+            $alert.= '<div class="useralerts alert alert-'.theme_ucsf_get_setting('alert'.$n.'type').' alert' . $n . '">';
             $alert.='<a class="close" data-dismiss="alert" data-target-url="'.$CFG->wwwroot.'" href="#">×</a>';
-            $alert.='<span class="title">'.theme_ucsf_get_setting('alert'.$i.'title').'</span>'.theme_ucsf_get_setting('alert'.$i.'text');
+            $alert.='<span class="title">'.theme_ucsf_get_setting('alert'.$n.'title').'</span>'.theme_ucsf_get_setting('alert'.$n.'text');
             $alert.='</div>';
             $showalert = true;
         }
