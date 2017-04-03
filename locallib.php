@@ -198,6 +198,8 @@ class theme_ucsf_datepicker extends admin_setting {
 class theme_ucsf_datepicker_time extends admin_setting {
     public $start_hour;
     public $start_minute;
+    public $end_minute;
+    public $end_hour;
 
     /**
      * Constructor
@@ -377,6 +379,9 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
     public $start_date;
     public $start_hour;
     public $start_minute;
+    public $end_date;
+    public $end_hour;
+    public $end_minute;
 
     /**
      * Constructor
