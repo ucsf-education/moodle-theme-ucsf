@@ -83,11 +83,8 @@ class theme_ucsf_datepicker extends admin_setting {
     /**
      * Constructor
      * @param string $name setting for component name
-     * @param string $year setting for year
-     * @param string $month setting for month
-     * @param string $date setting for date
-     * @param string $hour setting for hour
-     * @param string $minute setting for minute
+     * @param string $datepicker
+     * @param string $end_datepicker
      * @param string $visiblename localised
      * @param string $description long localised info
      * @param array $defaultsetting array representing null
@@ -99,7 +96,7 @@ class theme_ucsf_datepicker extends admin_setting {
     }
 
     /**
-     * Get the selected yera, month, date, hour and minute.
+     * Get the selected year, month, date, hour and minute.
      *
      * @return mixed An array containing 'year'=>xxxx, 'month'=>xx, 'date'=>xx, 'hour'=>xx, 'minute'=>xx, or null if not set
      */
@@ -144,7 +141,7 @@ class theme_ucsf_datepicker extends admin_setting {
 
     /**
      * Validate data before storage
-     * @param string data
+     * @param string $data
      * @return mixed true if ok string if error found
      */
     public function validate($data) {
@@ -204,16 +201,14 @@ class theme_ucsf_datepicker_time extends admin_setting {
     /**
      * Constructor
      * @param string $name setting for component name
-     * @param string $year setting for year
-     * @param string $month setting for month
-     * @param string $date setting for date
-     * @param string $hour setting for hour
-     * @param string $minute setting for minute
+     * @param string $hour
+     * @param string $minute
+     * @param string $end_hour
+     * @param string $end_minute
      * @param string $visiblename localised
      * @param string $description long localised info
      * @param array $defaultsetting array representing null
      */
-
     public function __construct($name, $hour, $minute, $end_hour, $end_minute, $visiblename, $description, $defaultsetting) {
         $this->start_hour = $hour;
         $this->start_minute = $minute;
@@ -266,7 +261,6 @@ class theme_ucsf_datepicker_time extends admin_setting {
                 && $this->config_write($this->end_minute, isset($data['end_minute']) ? $data['end_minute'] : '');
             return ($result ? '' : get_string('errorsetting', 'admin'));
         } else {
-            $result = false;
             return (get_string('oneTimeStartEndTimeError', 'theme_ucsf'));
         }
 
@@ -274,7 +268,7 @@ class theme_ucsf_datepicker_time extends admin_setting {
 
     /**
      * Validate data before storage
-     * @param string data
+     * @param string $data
      * @return mixed true if ok and false if error found
      */
     public function validate($data) {
@@ -305,13 +299,8 @@ class theme_ucsf_datepicker_time extends admin_setting {
         $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_hour">' . get_string('start_hour', 'theme_ucsf') . '</label>';
         $return .= ' Hour: <select id="' . $this->get_id() . 'start_hour" name="' . $this->get_full_name() . '[start_hour]">';
         for ($i = 0; $i <= 23; $i++) {
-            if ($i < 10) {
-                $writeHour = "0".$i;
-            }
-            if ($i >= 10) {
-                $writeHour = "".$i;
-            }
-            $return .= '<option value="' . $i . '"' . ($i == $data['start_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
+            $writeHour = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $return .= '<option value="' . $i . '" ' . ($i == $data['start_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
         }
         $return .= '</select>';
 
@@ -319,13 +308,8 @@ class theme_ucsf_datepicker_time extends admin_setting {
         $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_minute">' . get_string('start_minute', 'theme_ucsf') . '</label>';
         $return .= ' Minute: <select id="' . $this->get_id() . 'start_minute" name="' . $this->get_full_name() . '[start_minute]">';
         for ($i = 0; $i < 60; $i += 5) {
-            if ($i < 10) {
-                $writeminute = "0".$i;
-            }
-            if ($i >= 10) {
-                $writeminute = "".$i;
-            }
-            $return .= '<option value="' . $i . '"' . ($i == $data['start_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
+            $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $return .= '<option value="' . $i . '" ' . ($i == $data['start_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
         }
         $return .= '</select><span id="required">Required</span>';
         $return .= '</br>';
@@ -334,13 +318,8 @@ class theme_ucsf_datepicker_time extends admin_setting {
         $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_hour">' . get_string('end_hour', 'theme_ucsf') . '</label>';
         $return .= ' Hour: <select id="' . $this->get_id() . 'end_hour" name="' . $this->get_full_name() . '[end_hour]">';
         for ($i = 0; $i <= 23; $i++) {
-            if ($i < 10) {
-                $writeHour = "0".$i;
-            }
-            if ($i >= 10) {
-                $writeHour = "".$i;
-            }
-            $return .= '<option value="' . $i . '"' . ($i == $data['end_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
+            $writeHour = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $return .= '<option value="' . $i . '" ' . ($i == $data['end_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
         }
         $return .= '</select>';
 
@@ -348,13 +327,8 @@ class theme_ucsf_datepicker_time extends admin_setting {
         $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_minute">' . get_string('end_minute', 'theme_ucsf') . '</label>';
         $return .= ' Minute: <select id="' . $this->get_id() . 'end_minute" name="' . $this->get_full_name() . '[end_minute]">';
         for ($i = 0; $i < 60; $i += 5) {
-            if ($i < 10) {
-                $writeminute = "0".$i;
-            }
-            if ($i >= 10) {
-                $writeminute = "".$i;
-            }
-            $return .= '<option value="' . $i . '"' . ($i == $data['end_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
+            $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $return .= '<option value="' . $i . '" ' . ($i == $data['end_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
         }
         $return .= '</select><span id="required">Required</span>';
 
@@ -386,11 +360,12 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
     /**
      * Constructor
      * @param string $name setting for component name
-     * @param string $year setting for year
-     * @param string $month setting for month
-     * @param string $date setting for date
+     * @param string $datepicker
      * @param string $hour setting for hour
      * @param string $minute setting for minute
+     * @param string $end_datepicker
+     * @param string $end_hour
+     * @param string $end_minute
      * @param string $visiblename localised
      * @param string $description long localised info
      * @param array $defaultsetting array representing null
@@ -450,7 +425,6 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
      * @return bool true if success, false if not
      */
     public function write_setting($data) {
-        global $CFG;
 
         $validate = $this->validate($data);
         if ($validate === true){
@@ -474,12 +448,10 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
 
     /**
      * Validate data before storage
-     * @param string data
+     * @param string $data
      * @return mixed true if ok string if error found
      */
     public function validate($data) {
-
-
 
         $time_start = strtotime($data['datepicker']) + $data['start_hour'] * 3600 + $data['start_minute'] * 60;
         $time_end = strtotime($data['end_datepicker']) + $data['end_hour']* 3600 + $data['end_minute'] * 60;
@@ -510,13 +482,8 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
         $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_hour">' . get_string('start_hour', 'theme_ucsf') . '</label>';
         $return .= ' Hour: <select id="' . $this->get_id() . 'start_hour" name="' . $this->get_full_name() . '[start_hour]">';
         for ($i = 0; $i <= 23; $i++) {
-            if ($i < 10) {
-                $writeHour = "0".$i;
-            }
-            if ($i >= 10) {
-                $writeHour = "".$i;
-            }
-            $return .= '<option value="' . $i . '"' . ($i == $data['start_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
+            $writeHour = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $return .= '<option value="' . $i . '" ' . ($i == $data['start_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
         }
         $return .= '</select>';
 
@@ -524,13 +491,8 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
         $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_minute">' . get_string('start_minute', 'theme_ucsf') . '</label>';
         $return .= ' Minute: <select id="' . $this->get_id() . 'start_minute" name="' . $this->get_full_name() . '[start_minute]">';
         for ($i = 0; $i < 60; $i += 5) {
-            if ($i < 10) {
-                $writeminute = "0".$i;
-            }
-            if ($i >= 10) {
-                $writeminute = "".$i;
-            }
-            $return .= '<option value="' . $i . '"' . ($i == $data['start_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
+            $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $return .= '<option value="' . $i . '" ' . ($i == $data['start_minute'] ? ' selected="selected"' : '') . ' >' . $writeminute . '</option>';
         }
         $return .= '</select><span id="required">Required</span>';
         $return .= '<br />';
@@ -542,13 +504,8 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
         $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_hour">' . get_string('end_hour', 'theme_ucsf') . '</label>';
         $return .= ' Hour: <select id="' . $this->get_id() . 'end_hour" name="' . $this->get_full_name() . '[end_hour]">';
         for ($i = 0; $i <= 23; $i++) {
-            if ($i < 10) {
-                $writeHour = "0".$i;
-            }
-            if ($i >= 10) {
-                $writeHour = "".$i;
-            }
-            $return .= '<option value="' . $i . '"' . ($i == $data['end_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
+            $writeHour = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $return .= '<option value="' . $i . '" ' . ($i == $data['end_hour'] ? ' selected="selected"' : '') . '>' . $writeHour . '</option>';
         }
         $return .= '</select>';
 
@@ -556,13 +513,8 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
         $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_minute">' . get_string('end_minute', 'theme_ucsf') . '</label>';
         $return .= ' Minute: <select id="' . $this->get_id() . 'end_minute" name="' . $this->get_full_name() . '[end_minute]">';
         for ($i = 0; $i < 60; $i += 5) {
-            if ($i < 10) {
-                $writeminute = "0".$i;
-            }
-            if ($i >= 10) {
-                $writeminute = "".$i;
-            }
-            $return .= '<option value="' . $i . '"' . ($i == $data['end_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
+            $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $return .= '<option value="' . $i . '" ' . ($i == $data['end_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
         }
         $return .= '</select><span id="required">Required</span>';
 
@@ -573,4 +525,3 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
     }
 
 }
-?>
