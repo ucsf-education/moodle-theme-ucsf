@@ -1,3 +1,9 @@
+## [Version 1.3.0](https://github.com/ucsf-ckm/moodle-theme-ucsf/releases/tag/v1.3.0) (2017-04-03)
+
+- Fixed Alert dismissal bug (#19)
+- Corrected out-of-bounds error in Alerts (#22)
+- Re-aligned login_info() method in custom renderer with moodle core (#24)
+
 ## [Version 1.2.0](https://github.com/ucsf-ckm/moodle-theme-ucsf/releases/tag/v1.2.0) (2016-05-20)
 
 - Added property existence checks prior to accessing props.
