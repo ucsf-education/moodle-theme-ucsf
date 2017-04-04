@@ -39,7 +39,7 @@ $THEME->name = 'ucsf';
 //
 $THEME->parents = array('bootstrapbase');
 $THEME->doctype = 'html5';
-$THEME->sheets = array('custom', 'datepicker', 'ucsf');
+$THEME->sheets = array('custom', 'bootstrap-datepicker', 'ucsf');
 $THEME->lessfile = 'moodle';
 $THEME->parents_exclude_sheets = array('bootstrapbase' => array('moodle'));
 $THEME->lessvariablescallback = 'theme_ucsf_less_variables';
@@ -64,7 +64,7 @@ $THEME->layouts = array(
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
         'options' => array('nonavbar'=>true),
-    ),    
+    ),
     // Main course page.
     'course' => array(
         'file' => 'course.php',
@@ -82,13 +82,13 @@ $THEME->layouts = array(
         'file' => 'course.php',
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
-    ),    
+    ),
     // The pagelayout used for reports.
     'report' => array(
         'file' => 'columns3.php',
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
-    ),    
+    ),
     // My dashboard page.
     'mydashboard' => array(
         'file' => 'mydashboard.php',
@@ -98,6 +98,7 @@ $THEME->layouts = array(
     ),
 
 );
+
 $THEME->javascripts_footer = array(
     'datepicker'
 );
