@@ -29,6 +29,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/* @global $THEME */
 $THEME->name = 'ucsf';
 
 /////////////////////////////////
@@ -100,5 +101,5 @@ $THEME->layouts = array(
 );
 
 $THEME->javascripts_footer = array(
-    'datepicker'
+    'datepicker', 'alerts'
 );

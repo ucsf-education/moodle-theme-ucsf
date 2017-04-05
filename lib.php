@@ -811,8 +811,8 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
     for ($i = 0; $i < $number_of_alerts; $i++) {
         if($hasalert[$i]) {
             $n = $i + 1;
-            $alert.= '<div class="useralerts alert alert-'.theme_ucsf_get_setting('alert'.$n.'type').' alert' . $n . '">';
-            $alert.='<a class="close" data-dismiss="alert" data-target-url="'.$CFG->wwwroot.'" href="#">×</a>';
+            $alert.= '<div class="alert alert-block alert-'.theme_ucsf_get_setting('alert'.$n.'type'). ' ucsf-alert" role="alert" data-ucsf-alert-id="alert' . $n . '" data-ucsf-target-url="'.$CFG->wwwroot.'/theme/ucsf/alert.php">';
+            $alert.='<button type="button" class="close" data-dismiss="alert" >×</button>';
             $alert.='<span class="title">'.theme_ucsf_get_setting('alert'.$n.'title').'</span>'.theme_ucsf_get_setting('alert'.$n.'text');
             $alert.='</div>';
             $showalert = true;
