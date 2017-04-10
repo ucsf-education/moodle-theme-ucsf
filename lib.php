@@ -945,11 +945,6 @@ function theme_ucsf_get_tiles(renderer_base $output, moodle_page $page) {
         return $tiles;
 }
 
-function theme_ucsf_page_init(moodle_page $page) {
-    $page->requires->jquery();
-    $page->requires->jquery_plugin('alert', 'theme_ucsf');
-}
-
 /**
  * Retrieve a list of all course category ids,
  * since Moodle's course API does not appear to provide such a method.
