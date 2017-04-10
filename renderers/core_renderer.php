@@ -59,6 +59,8 @@ class theme_ucsf_core_renderer extends theme_bootstrapbase_core_renderer {
 
     // custom breadcrumb navbar
     // replace home link with home icon
+    // @todo for Moodle 3 upgrade: remove completely. [ST 2017/04/10]
+    /*
     public function navbar() {
         global $OUTPUT, $CFG;
         $items = $this->page->navbar->get_items();
@@ -77,4 +79,5 @@ class theme_ucsf_core_renderer extends theme_bootstrapbase_core_renderer {
         $title = '<span class="accesshide">' . get_string('pagepath') . '</span>';
         return $title . "<ul class=\"breadcrumb\"><li class=\"iconhome\">" . $iconhome . "</li>$list_items</ul>";
     }
+    */
 }
