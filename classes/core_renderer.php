@@ -58,28 +58,4 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer {
 
         return $this->render($custommenu);
     }
-
-    // custom breadcrumb navbar
-    // replace home link with home icon
-    // @todo for Moodle 3 upgrade: remove completely. [ST 2017/04/10]
-    /*
-    public function navbar() {
-        global $OUTPUT, $CFG;
-        $items = $this->page->navbar->get_items();
-        $breadcrumbs = array();
-        $countitems = count($items);
-
-        for ($i = 1; $i < $countitems; $i++) {
-            $item = $items[$i];
-
-            $item->hideicon = true;
-            $breadcrumbs[] = $this->render($item);
-        }
-        $iconhome = '<a href="' . $CFG->wwwroot . '"><img src ="' . $OUTPUT->pix_url('icon-home', 'theme_ucsf') . '"></a>';
-        $divider = '<span class="divider">/</span>';
-        $list_items = '<li>' . join(" $divider</li><li>", $breadcrumbs) . '</li>';
-        $title = '<span class="accesshide">' . get_string('pagepath') . '</span>';
-        return $title . "<ul class=\"breadcrumb\"><li class=\"iconhome\">" . $iconhome . "</li>$list_items</ul>";
-    }
-    */
 }
