@@ -38,7 +38,7 @@ $THEME->name = 'ucsf';
 // in version.php and lang/en/theme_ucsf.php as well.
 //////////////////////////////////
 //
-$THEME->parents = array('bootstrapbase');
+$THEME->parents = array('clean');
 $THEME->doctype = 'html5';
 $THEME->sheets = array('custom', 'bootstrap-datepicker', 'ucsf');
 $THEME->lessfile = 'moodle';

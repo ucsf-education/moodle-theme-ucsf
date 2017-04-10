@@ -23,9 +23,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once($CFG->dirroot . "/theme/ucsf/lib.php");
+require_once($CFG->dirroot . '/theme/clean/classes/core_renderer.php');
+require_once($CFG->dirroot . '/theme/ucsf/lib.php');
 
-class theme_ucsf_core_renderer extends theme_bootstrapbase_core_renderer {
+
+class theme_ucsf_core_renderer extends theme_clean_core_renderer {
 
     // custom menu override
     public function custom_menu($custommenuitems = '') {
