@@ -40,7 +40,7 @@ $THEME->name = 'ucsf';
 //
 $THEME->parents = array('clean');
 $THEME->doctype = 'html5';
-$THEME->sheets = array('custom', 'bootstrap-datepicker', 'ucsf');
+$THEME->sheets = array('bootstrap-datepicker', 'custom', 'ucsf');
 $THEME->lessfile = 'moodle';
 $THEME->parents_exclude_sheets = array('bootstrapbase' => array('moodle'));
 $THEME->lessvariablescallback = 'theme_ucsf_less_variables';
