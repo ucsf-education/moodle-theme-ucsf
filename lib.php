@@ -588,6 +588,13 @@ function theme_ucsf_get_current_course_category(moodle_page $page, $course) {
     return $course->category;
 }
 
+/**
+ * Returns all applicable custom alerts.
+ *
+ * @param renderer_base $output The output renderer
+ * @param moodle_page $page The current page
+ * @return string|null
+ */
 function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page) {
     global $CFG, $COURSE;
 
