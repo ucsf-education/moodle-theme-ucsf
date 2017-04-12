@@ -53,11 +53,6 @@ $THEME->editor_sheets = array();
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->csspostprocess = 'theme_ucsf_process_css';
 
-$THEME->blockrtlmanipulations = array(
-    'side-pre' => 'side-post',
-    'side-post' => 'side-pre'
-);
-
 $THEME->layouts = array(
     // Front page.
     'frontpage' => array(
