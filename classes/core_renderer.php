@@ -1,18 +1,4 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
-//
-// Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Moodle is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * UCSF theme with the underlying Bootstrap theme.
@@ -29,7 +15,9 @@ require_once($CFG->dirroot . '/theme/ucsf/lib.php');
 
 class theme_ucsf_core_renderer extends theme_clean_core_renderer {
 
-    // custom menu override
+    /**
+     * @inheritdoc
+     */
     public function custom_menu($custommenuitems = '') {
 
         global $CFG, $COURSE, $PAGE;
@@ -57,5 +45,28 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer {
         }
 
         return $this->render($custommenu);
+    }
+
+    /**
+     * Returns a help menu.
+     *
+     * @return string HTML The help menu, or a blank string.
+     */
+    public function help_menu()
+    {
+        global $PAGE, $COURSE;
+
+        if (! isloggedin()) {
+            return '';
+        }
+
+        $menu = theme_ucsf_get_helpmenu($PAGE, $COURSE);
+
+        if (! empty($menu)) {
+            return $this->render_from_template('theme_ucsf/helpmenu_popover', $menu);
+        }
+
+        return '';
+
     }
 }

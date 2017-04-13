@@ -38,11 +38,11 @@ $THEME->name = 'ucsf';
 // in version.php and lang/en/theme_ucsf.php as well.
 //////////////////////////////////
 //
-$THEME->parents = array('clean');
+$THEME->parents = array('clean', 'bootstrapbase');
 $THEME->doctype = 'html5';
 $THEME->sheets = array('bootstrap-datepicker', 'custom');
 $THEME->lessfile = 'moodle';
-$THEME->parents_exclude_sheets = array('bootstrapbase' => array('moodle'));
+$THEME->parents_exclude_sheets = array('bootstrapbase' => array('moodle'), 'clean' => array('custom'));
 $THEME->lessvariablescallback = 'theme_ucsf_less_variables';
 $THEME->extralesscallback = 'theme_ucsf_extra_less';
 $THEME->supportscssoptimisation = false;
