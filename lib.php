@@ -1097,7 +1097,7 @@ function _theme_ucsf_get_default_helpmenu($theme_settings)
         if (!empty($url)) {
             $menu['items'][] = array(
                 'url' => $url,
-                'title' => $title,
+                'title' => empty($title) ? '' : $title,
                 'options' => array(
                     'target' => empty($target) ? '_self' : '_blank'
                 ),
@@ -1137,7 +1137,7 @@ function _theme_ucsf_get_category_helpmenu($category)
         if (!empty($url)) {
             $menu['items'][] = array(
                 'url' => $url,
-                'title' => $title,
+                'title' => empty($title) ? '' : $title,
                 'options' => array(
                     'target' => empty($target) ? '_self' : '_blank'
                 ),
