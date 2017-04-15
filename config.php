@@ -61,24 +61,6 @@ $THEME->layouts = array(
         'defaultregion' => 'side-pre',
         'options' => array('nonavbar' => true),
     ),
-    // Main course page.
-    'course' => array(
-        'file' => 'course.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-        'options' => array('langmenu' => true),
-    ),
-    'coursecategory' => array(
-        'file' => 'course.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-    ),
-    // part of course, typical for modules - default page layout if $cm specified in require_login().
-    'incourse' => array(
-        'file' => 'course.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-    ),
     // The pagelayout used for reports.
     'report' => array(
         'file' => 'columns3.php',
@@ -92,7 +74,6 @@ $THEME->layouts = array(
         'defaultregion' => 'side-pre',
         'options' => array('langmenu' => true),
     ),
-
 );
 
 $THEME->javascripts_footer = array(

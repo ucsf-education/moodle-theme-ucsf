@@ -24,6 +24,7 @@ echo $OUTPUT->doctype() ?>
     <link rel="shortcut icon" href="<?php echo $OUTPUT->favicon(); ?>" />
     <?php echo $OUTPUT->standard_head_html() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Google fonts -->
     <link href="//fonts.googleapis.com/css?family=Open Sans:400,600,700,Bold,italic" rel="stylesheet" type="text/css"/>
     <!-- Awesome fonts -->
@@ -53,8 +54,10 @@ echo $OUTPUT->doctype() ?>
 </header>
 
 <div id="page" class="container-fluid">
+
     <?php echo $alerts ?>
     <?php echo $OUTPUT->full_header(); ?>
+
     <div id="page-content" class="row-fluid">
         <div id="region-main-box" class="<?php echo $regionmainbox; ?>">
             <div class="row-fluid">
