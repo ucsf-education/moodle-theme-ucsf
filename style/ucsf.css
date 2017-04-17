@@ -315,22 +315,6 @@ body {
     .navbar-text-responsive {
         display: block!important;
     }
-
-    .logininfo-box {
-        float: right;
-    }
-
-    .logininfo-box a {
-        margin-left: 0px!important;
-    }
-
-    .logininfo-box a:hover {
-        background-color: #FFF!important;
-    }
-
-    .login_user {
-        margin-right: 0px;
-    }
 }
 
 
@@ -383,28 +367,8 @@ hr { background-color:#b3becb; height:1px; border:none }
     font-weight: 600;
 }
 
-.logininfo, .pipe-separator, .help-feedback {
+.pipe-separator, .help-feedback {
     float: left;
-}
-
-/*.logininfo-box {
-    float: left;
-}*/
-
-.logininfo-box a {
-    background-color: #af8e31;
-    padding: 5px 10px;
-    margin-top: 9px;
-    margin-left: 10px;
-    color: #fff;
-    font-weight: 600;
-}
-
-.logininfo-box a:hover {
-    background-color: #e4edf4;
-    color: #af8e31;
-    font-weight: 600;
-    text-decoration: none;
 }
 
 .pipe-separator {
@@ -632,20 +596,6 @@ hr { background-color:#b3becb; height:1px; border:none }
 
 .navbar-text {
     background: none!important;
-}
-
-.topmenu_user {
-    font-weight: 600;
-    float: left;
-}
-
-.topmenu_username {
-    display: inline-block;
-}
-.topmenu_logout {
-    display: inline-block;
-    margin-left: 10px;
-    font-weight: normal;
 }
 
 .navbar .nav > li > a {
@@ -1226,9 +1176,7 @@ body {
         text-align: right;
         width: 95vw;
     }
-    .topmenu_user {
-        float: none;
-    }
+
     .login_user {
         margin-right: 0px;
     }
@@ -1241,7 +1189,7 @@ body {
     .ucsf_logininfo .logininfo{
         text-align: center;
     }
-    .ucsf_logininfo .logininfo .logininfo-box {
+    .ucsf_logininfo .logininfo {
         margin-right: 10px;
     }
 
@@ -1259,12 +1207,6 @@ body {
     .ucsf_footer_links_container p {
         text-align: center !important;
         margin-bottom: 10px !important;
-    }
-    .topmenu_username {
-        display: inline-block !important;
-    }
-    .topmenu_logout {
-        display: inline-block !important;
     }
 }
 

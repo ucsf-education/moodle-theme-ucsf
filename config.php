@@ -38,11 +38,11 @@ $THEME->name = 'ucsf';
 // in version.php and lang/en/theme_ucsf.php as well.
 //////////////////////////////////
 //
-$THEME->parents = array('bootstrapbase');
+$THEME->parents = array('clean', 'bootstrapbase');
 $THEME->doctype = 'html5';
-$THEME->sheets = array('custom', 'bootstrap-datepicker', 'ucsf');
+$THEME->sheets = array('bootstrap-datepicker', 'custom');
 $THEME->lessfile = 'moodle';
-$THEME->parents_exclude_sheets = array('bootstrapbase' => array('moodle'));
+$THEME->parents_exclude_sheets = array('bootstrapbase' => array('moodle'), 'clean' => array('custom'));
 $THEME->lessvariablescallback = 'theme_ucsf_less_variables';
 $THEME->extralesscallback = 'theme_ucsf_extra_less';
 $THEME->supportscssoptimisation = false;
@@ -53,36 +53,13 @@ $THEME->editor_sheets = array();
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->csspostprocess = 'theme_ucsf_process_css';
 
-$THEME->blockrtlmanipulations = array(
-    'side-pre' => 'side-post',
-    'side-post' => 'side-pre'
-);
-
 $THEME->layouts = array(
     // Front page.
     'frontpage' => array(
         'file' => 'frontpage.php',
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
-        'options' => array('nonavbar'=>true),
-    ),
-    // Main course page.
-    'course' => array(
-        'file' => 'course.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-        'options' => array('langmenu'=>true),
-    ),
-    'coursecategory' => array(
-        'file' => 'course.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-    ),
-    // part of course, typical for modules - default page layout if $cm specified in require_login().
-    'incourse' => array(
-        'file' => 'course.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
+        'options' => array('nonavbar' => true),
     ),
     // The pagelayout used for reports.
     'report' => array(
@@ -95,9 +72,8 @@ $THEME->layouts = array(
         'file' => 'mydashboard.php',
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
-        'options' => array('langmenu'=>true),
+        'options' => array('langmenu' => true),
     ),
-
 );
 
 $THEME->javascripts_footer = array(

@@ -325,3 +325,13 @@ $string['menudividermobile'] = 'Menu divider (mobile)';
 $string['menudividermobiledesc'] = 'The menu divider image seen on mobile devices.';
 $string['menuitemdivider'] = 'Menu item divider';
 $string['menuitemdividerdesc'] = 'Spacer image between top-level menu items.';
+
+
+// Help menu popup
+$string['showhelpmenuwindow'] = 'Show help menu window';
+$string['hidehelpmenuwindow'] = 'Hide help menu window';
+$string['togglehelpmenu'] = 'Toggle help menu';
+$string['helpmenuwindow'] = 'Help menu window';
+$string['helpmenu'] = 'Help menu';
+$string['helpmenutitle'] = 'Help/Feedback';
+
