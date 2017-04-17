@@ -1,11 +1,7 @@
 <?php
 
 /**
-
- * @package    theme
- * @subpackage UCSF
- * @author     Lambda Soulutions
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package theme_ucsf
  */
 
 // Get the HTML for the settings bits.
