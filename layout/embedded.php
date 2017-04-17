@@ -3,7 +3,7 @@
 /**
  * The embedded layout.
  *
- * @package   theme_ucsf
+ * @package theme_ucsf
  */
 
 echo $OUTPUT->doctype() ?>
