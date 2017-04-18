@@ -342,45 +342,6 @@ $settings_lr->add($setting);
 $ADMIN->add('theme_ucsf', $settings_lr);
 
 
-/* BLOCK SETTINGS
--------------------------------------------------------------------------------*/
-
-$settings_lr = new admin_settingpage('theme_ucsf_block_settings', get_string('blockheading', 'theme_ucsf'));
-
-// Block width for large desktop
-$name = 'theme_ucsf/block_width_desktop_heading';
-$heading = get_string('block_width_desktop_heading', 'theme_ucsf');
-$information = "";
-$setting = new admin_setting_heading($name, $heading, $information);
-$settings_lr->add($setting);
-
-// Block width settings
-$name = 'theme_ucsf/block_width_desktop';
-$title = get_string('block_width_desktop', 'theme_ucsf');
-$description = get_string('block_width_desktopdesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_configtext($name, $title, $description, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-// Block width for large desktop
-$name = 'theme_ucsf/block_width_tablet_heading';
-$heading = get_string('block_width_tablet_heading', 'theme_ucsf');
-$information = "";
-$setting = new admin_setting_heading($name, $heading, $information);
-$settings_lr->add($setting);
-
-// Block width settings
-$name = 'theme_ucsf/block_width_portrait_tablet';
-$title = get_string('block_width_portrait_tablet', 'theme_ucsf');
-$description = get_string('block_width_portrait_tabletdesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_configtext($name, $title, $description, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-$ADMIN->add('theme_ucsf', $settings_lr);
-
 /* ALERTS SETTINGS
 -------------------------------------------------------------------------------*/
 
