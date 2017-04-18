@@ -122,21 +122,6 @@ function theme_ucsf_process_css($css, $theme)
     }
     $replacements['[[setting:customcss]]'] = $customcss;
 
-    // Block settings
-    // Set block width for large
-    $block_width = '';
-    if (!empty($theme->settings->block_width_desktop)) {
-        $block_width = $theme->settings->block_width_desktop;
-    }
-    $replacements['[[setting:block_width_desktop]]'] = $block_width;
-
-    // Block width for portrait tablet to landscape and desktop
-    $block_width_portrait_tablet = '';
-    if (!empty($theme->settings->block_width_portrait_tablet)) {
-        $block_width_portrait_tablet = $theme->settings->block_width_portrait_tablet;
-    }
-    $replacements['[[setting:block_width_portrait_tablet]]'] = $block_width_portrait_tablet;
-
     // substitute placeholders
     $css = str_replace(array_keys($replacements), array_values($replacements), $css);
 
