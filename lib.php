@@ -181,7 +181,8 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
  *      - navbarclass A CSS class to use on the navbar. By default ''.
  *      - heading HTML to use for the heading. A logo if one is selected or the default heading.
  *      - footnote HTML to use as a footnote. By default ''.
- *      - copyright HTML The copyright notice
+ *      - copyright The copyright notice.
+ *      - custom_alerts Markup containing custom alerts
  */
 function theme_ucsf_get_html_for_settings(renderer_base $output, moodle_page $page)
 {
@@ -209,6 +210,8 @@ function theme_ucsf_get_html_for_settings(renderer_base $output, moodle_page $pa
         $return->footnote = $page->theme->settings->footnote;
     }
 
+    $return->custom_alerts = theme_ucsf_get_alerts($output, $page);
+
     return $return;
 }
 
@@ -225,7 +228,7 @@ function theme_ucsf_get_setting($setting, $format = false)
     if (empty($theme)) {
         $theme = theme_config::load('ucsf');
     }
-    if (empty($theme->settings->$setting)) {
+    if (empty($theme->settings->settings->$setting)) {
         return false;
     } else if (!$format) {
         return $theme->settings->$setting;
@@ -680,7 +683,7 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page)
         }
     }
 
-    $alert = null;
+    $alert = '';
 
     for ($i = 0; $i < $number_of_alerts; $i++) {
         if ($hasalert[$i]) {

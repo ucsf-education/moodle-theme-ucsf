@@ -9,7 +9,6 @@
 // Get the HTML for the settings bits.
 $html = theme_ucsf_get_html_for_settings($OUTPUT, $PAGE);
 $globalsettings = theme_ucsf_get_global_settings($OUTPUT, $PAGE);
-$alerts = theme_ucsf_get_alerts($OUTPUT, $PAGE);
 
 $regionmainbox = 'span9 desktop-first-column';
 $regionmain = 'span8 pull-right';
@@ -56,7 +55,7 @@ echo $OUTPUT->doctype() ?>
 
 <div id="page" class="container-fluid">
 
-    <?php echo $alerts ?>
+    <?php echo $html->custom_alerts; ?>
     <?php echo $OUTPUT->full_header(); ?>
 
     <div id="page-content" class="row-fluid">
