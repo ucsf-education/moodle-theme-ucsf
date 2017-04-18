@@ -216,13 +216,12 @@ function theme_ucsf_get_html_for_settings(renderer_base $output, moodle_page $pa
 }
 
 /**
- * Retrieves and formats a theme setting.
+ * Retrieves a form setting.
  *
  * @param string $setting
- * @param bool|string $format
- * @return bool|string
+ * @return mixed The setting's value, or FALSE if none could be found.
  */
-function theme_ucsf_get_setting($setting, $format = false)
+function theme_ucsf_get_setting($setting)
 {
     static $theme;
     if (empty($theme)) {
@@ -230,12 +229,6 @@ function theme_ucsf_get_setting($setting, $format = false)
     }
     if (empty($theme->settings->$setting)) {
         return false;
-    } else if (!$format) {
-        return $theme->settings->$setting;
-    } else if ($format === 'format_text') {
-        return format_text($theme->settings->$setting);
-    } else {
-        return format_string($theme->settings->$setting);
     }
 }
 

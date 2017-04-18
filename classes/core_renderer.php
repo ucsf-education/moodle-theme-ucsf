@@ -191,17 +191,14 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer
     }
 
     /**
-     * Retrieves a given theme setting and formats it according to the given formatting option.
-     *
      * @param string $setting
-     * @param bool|string $format
-     * @return bool|string
+     * @return mixed
      *
-     * @see get_theme_setting
+     * @see theme_ucsf_get_setting()
      */
-    protected function get_theme_setting($setting, $format = false)
+    protected function get_theme_setting($setting)
     {
-        return theme_ucsf_get_setting($setting, $format);
+        return theme_ucsf_get_setting($setting);
     }
 
     /**
