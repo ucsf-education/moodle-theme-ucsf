@@ -143,10 +143,7 @@ function theme_ucsf_process_css($css, $theme)
 function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array())
 {
     global $DB;
-    $whitelist = array('logo', 'bannerimage', 'headerimage', 'logo');
-    for ($i = 1; $i <= 10; $i++) {
-        $whitelist[] = "tile{$i}image";
-    }
+    $whitelist = array('logo', 'headerimage', 'logo');
 
     $sql = "SELECT cc.id FROM {course_categories} cc";
     $course_categories = $DB->get_records_sql($sql);
@@ -185,6 +182,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
  *      - navbarclass A CSS class to use on the navbar. By default ''.
  *      - heading HTML to use for the heading. A logo if one is selected or the default heading.
  *      - footnote HTML to use as a footnote. By default ''.
+ *      - copyright HTML The copyright notice
  */
 function theme_ucsf_get_html_for_settings(renderer_base $output, moodle_page $page)
 {
@@ -703,126 +701,6 @@ function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page)
     }
 
     return $alert;
-}
-
-function theme_ucsf_get_category_label_image(renderer_base $output, moodle_page $page)
-{
-    $categorylabelimage = "";
-
-    if (!empty($page->theme->settings->categorylabelimage))
-        $categorylabelimage = '<img src="' . $page->theme->setting_file_url('categorylabelimage', 'categorylabelimage') . '" alt="' . $page->theme->settings->bannerimagealt . '" title="' . $page->theme->settings->bannerimagetitle . '" class="banner-image">';
-
-    return $categorylabelimage;
-}
-
-function theme_ucsf_get_banner(renderer_base $output, moodle_page $page)
-{
-    $banner = null;
-
-
-    $bannerimage = "";
-    if (!empty($page->theme->settings->bannerimage))
-        $bannerimage = '<img src="' . $page->theme->setting_file_url('bannerimage', 'bannerimage') . '" alt="' . $page->theme->settings->bannerimagealt . '" title="' . $page->theme->settings->bannerimagetitle . '" class="banner-image">';
-
-    $bannertext = "";
-    if (!empty($page->theme->settings->banner))
-        $bannertext = $page->theme->settings->banner;
-
-    if (!empty($page->theme->settings->bannerimage) || !empty($page->theme->settings->banner))
-        $banner = '<div class="banner">' . $bannertext . '<div class="banner-image-container">' . $bannerimage . '</div></div>';
-
-    return $banner;
-}
-
-function theme_ucsf_get_tiles(renderer_base $output, moodle_page $page)
-{
-    $tiles = null;
-    $tilesinnerfirst = null;
-    $tilesinnersecond = null;
-    $myarr = [null, null, null, null, null, null];
-
-    for ($i = 1; $i <= $page->theme->settings->numberoftiles; $i++) {
-        $test = theme_ucsf_get_setting('positionoftile' . $i) - 1;
-        if (theme_ucsf_get_setting('tile' . $i . 'select') == 1) {
-
-            if (theme_ucsf_get_setting('positionoftile' . $i) != false) {
-                $myarr[$test] = $i;
-            } else if (theme_ucsf_get_setting('positionoftile' . $i) == false) {
-                array_push($myarr, $i);
-            }
-        }
-    }
-
-    foreach ($myarr as $key => $val) {
-        if ($val === null)
-            unset($myarr[$key]);
-    }
-
-    if (count($myarr) == 4 || count($myarr) == 2) {
-        foreach ($myarr as $index => $arr) {
-            if ($index < 2) {
-                ${'tile' . $arr . 'image'} = "";
-                if (!empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
-                    ${'tile' . $arr . 'image'} = '<img src="' . $page->theme->setting_file_url('tile' . $arr . 'image', 'tile' . $arr . 'image') . '" alt="' . theme_ucsf_get_setting('tile' . $arr . 'imagealt') . '" title="' . theme_ucsf_get_setting('tile' . $arr . 'imagetitle') . '" class="tile-image">';
-                }
-                if (!empty(theme_ucsf_get_setting('tile' . $arr . 'content')) || !empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
-                    $tileborder = 'tile-border';
-                }
-                if ($arr == null) {
-                    $tileborder = '';
-                }
-                $tilesinnerfirst .= '<div class="span6 tile ' . $tileborder . ' tile-even">' . theme_ucsf_get_setting('tile' . $arr . 'content') . '<div class="tile-image-container">' . ${'tile' . $arr . 'image'} . '</div></div>';
-            } else if ($index > 1) {
-                ${'tile' . $arr . 'image'} = "";
-                if (!empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
-                    ${'tile' . $arr . 'image'} = '<img src="' . $page->theme->setting_file_url('tile' . $arr . 'image', 'tile' . $arr . 'image') . '" alt="' . theme_ucsf_get_setting('tile' . $arr . 'imagealt') . '" title="' . theme_ucsf_get_setting('tile' . $arr . 'imagetitle') . '" class="tile-image">';
-                }
-                if (!empty(theme_ucsf_get_setting('tile' . $arr . 'content')) || !empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
-                    $tileborder = 'tile-border';
-                }
-                if ($arr == null) {
-                    $tileborder = '';
-                }
-
-                $tilesinnersecond .= '<div class="span6 tile ' . $tileborder . ' tile-even">' . theme_ucsf_get_setting('tile' . $arr . 'content') . '<div class="tile-image-container">' . ${'tile' . $arr . 'image'} . '</div></div>';
-            }
-        }
-    } else {
-        foreach ($myarr as $index => $arr) {
-            if ($index < 3) {
-                ${'tile' . $arr . 'image'} = "";
-                if (!empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
-                    ${'tile' . $arr . 'image'} = '<img src="' . $page->theme->setting_file_url('tile' . $arr . 'image', 'tile' . $arr . 'image') . '" alt="' . theme_ucsf_get_setting('tile' . $arr . 'imagealt') . '" title="' . theme_ucsf_get_setting('tile' . $arr . 'imagetitle') . '" class="tile-image">';
-                }
-                if (!empty(theme_ucsf_get_setting('tile' . $arr . 'content')) || !empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
-                    $tileborder = 'tile-border';
-                }
-                if ($arr == null) {
-                    $tileborder = '';
-                }
-
-                $tilesinnerfirst .= '<div class="span4 tile ' . $tileborder . '">' . theme_ucsf_get_setting('tile' . $arr . 'content') . '<div class="tile-image-container">' . ${'tile' . $arr . 'image'} . '</div></div>';
-            } else if ($index < 6) {
-                ${'tile' . $arr . 'image'} = "";
-                if (!empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
-                    ${'tile' . $arr . 'image'} = '<img src="' . $page->theme->setting_file_url('tile' . $arr . 'image', 'tile' . $arr . 'image') . '" alt="' . theme_ucsf_get_setting('tile' . $arr . 'imagealt') . '" title="' . theme_ucsf_get_setting('tile' . $arr . 'imagetitle') . '" class="tile-image">';
-                }
-                if (!empty(theme_ucsf_get_setting('tile' . $arr . 'content')) || !empty(theme_ucsf_get_setting('tile' . $arr . 'image'))) {
-                    $tileborder = 'tile-border';
-                }
-                if ($arr == null) {
-                    $tileborder = '';
-                }
-
-                $tilesinnersecond .= '<div class="span4 tile ' . $tileborder . '">' . theme_ucsf_get_setting('tile' . $arr . 'content') . '<div class="tile-image-container">' . ${'tile' . $arr . 'image'} . '</div></div>';
-            }
-        }
-    }
-
-    $tiles .= '<div class="row-fluid">' . $tilesinnerfirst . '</div>';
-    $tiles .= '<div class="row-fluid">' . $tilesinnersecond . '</div>';
-
-    return $tiles;
 }
 
 /**
