@@ -13,7 +13,6 @@ $regionmain = 'span8 pull-right';
 $sidepre = 'span4 desktop-first-column';
 $sidepost = 'span3 pull-right';
 
-$alerts = theme_ucsf_get_alerts($OUTPUT, $PAGE);
 $banner = theme_ucsf_get_banner($OUTPUT, $PAGE);
 $tiles = theme_ucsf_get_tiles($OUTPUT, $PAGE);
 
@@ -55,7 +54,7 @@ echo $OUTPUT->doctype() ?>
 
 <div id="page" class="container-fluid">
 
-    <?php echo $alerts ?>
+    <?php echo $html->custom_alerts; ?>
     <?php echo $OUTPUT->full_header(); ?>
 
     <div id="page-content" class="row-fluid">

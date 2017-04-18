@@ -9,7 +9,6 @@
 // Get the HTML for the settings bits.
 $html = theme_ucsf_get_html_for_settings($OUTPUT, $PAGE);
 $globalsettings = theme_ucsf_get_global_settings($OUTPUT, $PAGE);
-$alerts = theme_ucsf_get_alerts($OUTPUT, $PAGE);
 
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
@@ -50,7 +49,7 @@ echo $OUTPUT->doctype() ?>
 
 <div id="page" class="container-fluid">
 
-    <?php echo $alerts; ?>
+    <?php echo $html->custom_alerts; ?>
     <?php echo $OUTPUT->full_header(); ?>
 
     <div id="page-content" class="row-fluid">
