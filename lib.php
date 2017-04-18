@@ -1,16 +1,16 @@
 <?php
 
 /**
+ * Special theming functions.
+ *
  * @package theme_ucsf
- * @author  Lambda Solutions
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
  * Extra LESS code to inject.
  *
  * This will generate some LESS code from the settings used by the user. We cannot use
- * the {@link theme_more_less_variables()} here because we need to create selectors or
+ * the {@link theme_ucsf_less_variables()} here because we need to create selectors or
  * alter existing ones.
  *
  * @param theme_config $theme The theme config object.
@@ -286,51 +286,7 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
     $return->displaycustommenu = $output->custom_menu();
     $theme_settings = $page->theme->settings;
 
-    /*
-    *   Help/Feedback Links
-    *   Pulling the number of links dynamically from the Help/Feedback Settings inside Theme Settings
-    */
     $target = '';
-
-    $helpfeedbacktitle = null;
-
-    if (!isset($theme_settings->helpfeedbacktitle) || $theme_settings->helpfeedbacktitle == "") {
-
-        $helpfeedbacktitle = 'Help/Feedback';
-
-    } else {
-        $helpfeedbacktitle = $theme_settings->helpfeedbacktitle;
-    }
-    $helpfeedback = null;
-
-    for ($i = 1; $i <= $theme_settings->numberoflinks; $i++) {
-        $helpfeedbacklink = theme_ucsf_get_setting('helpfeedback' . $i . 'link');
-        $helpfeedbacklinklabel = theme_ucsf_get_setting('helpfeedback' . $i . 'linklabel');
-        $helpfeedbacklinktarget = theme_ucsf_get_setting('helpfeedback' . $i . 'linktarget');
-
-        if (!empty($helpfeedbacklink)) {
-            if (!empty($helpfeedbacklinklabel)) {
-                if ($helpfeedbacklinktarget == true) {
-                    $target = 'target = "_blank"';
-                    $helpfeedback .= '<li role="presentation"><a title="' . $helpfeedbacklinklabel . '" href="' . $helpfeedbacklink . '" ' . $target . '>' . $helpfeedbacklinklabel . '</a></li>
-                    <li class="divider"></li>';
-                } else {
-                    $target = 'target = "_self"';
-                    $helpfeedback .= '<li role="presentation"><a title="' . $helpfeedbacklinklabel . '" href="' . $helpfeedbacklink . '" ' . $target . '>' . $helpfeedbacklinklabel . '</a></li><li class="divider">';
-                }
-            } else {
-                $helpfeedback .= '<li role="presentation"><a href="' . $helpfeedbacklink . '" ' . $target . '>' . $helpfeedbacklink . '</a></li><li class="divider">';
-            }
-        }
-    }
-    if ($theme_settings->enablehelpfeedback == 1 && $helpfeedback != false) {
-        $return->helpfeedbacklink = '<div class="dropdown helpfeedback-box"><a class="dropdown-toggle" data-toggle="dropdown">' . $helpfeedbacktitle . '<span class="caret"></span></a>'
-            . '<ul class="dropdown-menu help-feedback pull-right" role="menu">'
-            . $helpfeedback
-            . '</ul></div>';
-    } else {
-        $return->helpfeedbacklink = '';
-    }
 
     // customization enable
     $return->enablecustomization = false;
@@ -349,53 +305,6 @@ function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page
 
         $coursecategory = theme_ucsf_get_current_course_category($page, $COURSE);
         $categories = theme_ucsf_get_category_roots($coursecategory);
-
-        // Help/Feedback Links
-        if ($coursecategory != 0) {
-            for ($j = 0; $j < count($categories); $j++) {
-                if (theme_ucsf_get_setting('catenablehelpfeedback' . $categories[$j]) == 1) {
-                    $target = '';
-                    if (theme_ucsf_get_setting('cathelpfeedbacktitle' . $categories[$j]) == null || theme_ucsf_get_setting('cathelpfeedbacktitle' . $categories[$j]) == "") {
-                        $helpfeedbacktitle = 'Help/Feedback';
-                    } else {
-                        $helpfeedbacktitle = theme_ucsf_get_setting('cathelpfeedbacktitle' . $categories[$j]);
-                    }
-                    $cathelpfeedback = null;
-                    $catnumberoflinks = theme_ucsf_get_setting('catnumberoflinks' . $categories[$j]);
-
-                    for ($i = 1; $i <= $catnumberoflinks; $i++) {
-                        $helpfeedbacklink = theme_ucsf_get_setting('cathelpfeedback' . $i . 'link' . $categories[$j]);
-                        $helpfeedbacklinklabel = theme_ucsf_get_setting('cathelpfeedback' . $i . 'linklabel' . $categories[$j]);
-                        $helpfeedbacklinktarget = theme_ucsf_get_setting('cathelpfeedback' . $i . 'linktarget' . $categories[$j]);
-
-                        if (!empty($helpfeedbacklink)) {
-                            if (!empty($helpfeedbacklinklabel)) {
-                                if ($helpfeedbacklinktarget == true) {
-                                    $target = 'target = "_blank"';
-                                    $cathelpfeedback .= '<li role="presentation"><a title="' . $helpfeedbacklinklabel . '" href="' . $helpfeedbacklink . '" ' . $target . '>' . $helpfeedbacklinklabel . '</a></li><li class="divider">';
-                                } else {
-                                    $target = 'target = "_self"';
-                                    $cathelpfeedback .= '<li role="presentation"><a title="' . $helpfeedbacklinklabel . '" href="' . $helpfeedbacklink . '" ' . $target . '>' . $helpfeedbacklinklabel . '</a></li><li class="divider">';
-                                }
-                            } else {
-                                $cathelpfeedback .= '<li role="presentation"><a href="' . $helpfeedbacklink . '" ' . $target . '>' . $helpfeedbacklink . '</a></li><li class="divider">';
-                            }
-                        }
-                    }
-                    if ($cathelpfeedback != null) {
-                        if (theme_ucsf_get_setting('catenablehelpfeedback' . $categories[$j]) == 1) {
-                            $return->helpfeedbacklink = '<div class="dropdown helpfeedback-box"><a class="dropdown-toggle" data-toggle="dropdown">' . $helpfeedbacktitle . '<span class="caret"></span></a>'
-                                . '<ul class="dropdown-menu help-feedback pull-right" role="menu">'
-                                . $cathelpfeedback
-                                . '</ul></div>';
-                        } else {
-                            $return->helpfeedbacklink;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
 
         // set course title
         $return->coursetitle = '';
@@ -556,6 +465,7 @@ function theme_ucsf_get_category_roots($id)
 
 /**
  * Retrieves the current course category id.
+ *
  * @param moodle_page $page The current page object.
  * @param stdClass $course The current course object.
  * @return int The course category id.
