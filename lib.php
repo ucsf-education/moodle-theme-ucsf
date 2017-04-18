@@ -230,6 +230,13 @@ function theme_ucsf_get_html_for_settings(renderer_base $output, moodle_page $pa
     return $return;
 }
 
+/**
+ * Retrieves and formats a theme setting.
+ *
+ * @param string $setting
+ * @param bool|string $format
+ * @return bool|string
+ */
 function theme_ucsf_get_setting($setting, $format = false)
 {
     static $theme;
