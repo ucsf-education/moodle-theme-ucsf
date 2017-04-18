@@ -13,9 +13,6 @@ $regionmain = 'span8 pull-right';
 $sidepre = 'span4 desktop-first-column';
 $sidepost = 'span3 pull-right';
 
-$banner = theme_ucsf_get_banner($OUTPUT, $PAGE);
-$tiles = theme_ucsf_get_tiles($OUTPUT, $PAGE);
-
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
 <head>
@@ -62,8 +59,6 @@ echo $OUTPUT->doctype() ?>
             <div class="row-fluid">
                 <section id="region-main" class="<?php echo $regionmain; ?>">
                     <?php
-                    echo $banner;
-                    echo $tiles;
                     echo $OUTPUT->course_content_header();
                     echo $OUTPUT->main_content();
                     echo $OUTPUT->course_content_footer();
