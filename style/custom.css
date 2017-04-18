@@ -12,19 +12,12 @@ div.logo {
 
 img.small-logo {
     float: left;
-    height: 35px;
-    margin: 3px 10px 3px 0;
-}
-
-@media (max-width: 767px) {
-    img.small-logo {
-        margin: 3px;
-    }
+    margin: 6px 10px 0 0;
 }
 
 @media (max-width: 480px) {
     .navbar img.small-logo {
-        max-width: 150px;
+        max-width: 100px;
     }
     /* Applying accesshide styles */
     .navbar .small-logo-container + .brand {
@@ -33,6 +26,320 @@ img.small-logo {
         font-size: 1em;
         font-weight: normal;
     }
+}
+
+/** General Styles
+-------------------------*/
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.eot?v=4.5.0');
+    src: url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.eot?#iefix&v=4.5.0') format('embedded-opentype'),
+    url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.woff2?v=4.5.0') format('woff2'),
+    url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.woff?v=4.5.0') format('woff'),
+    url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.ttf?v=4.5.0') format('truetype'),
+    url('//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+/*    background: url([[pix:theme_ucsf|background]]) no-repeat center top  #FFF;*/
+    font-family: "Open Sans",sans-serif;
+    font-size: 13px;
+    color: #333;
+    /*
+    margin-top: 0;
+    padding-top: 0!important;
+    padding: 0!important;*/
+}
+
+a {color: #5d93bd; cursor: pointer; }
+a:link, a:visited, a:active {text-decoration: none;}
+a:hover {color: #5d93bd; text-decoration: underline;}
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: #365376;
+}
+h1 {font-size: 24px}
+h2 {font-size: 21px}
+h3 {font-size: 18px}
+h4 {font-size: 16px}
+h5 {font-size: 14px}
+h6 {font-size: 13px}
+
+hr { background-color:#b3becb; height:1px; border:none }
+
+/* Header
+-------------------------*/
+
+/* hide navigation in header */
+@media (min-width: 980px) {
+    .navbar .nav {
+        visibility: hidden;
+        height: 0;
+    }
+}
+
+/* accesshide header title */
+@media (max-width: 859px) {
+    .navbar .brand {
+        position: absolute;
+        left: -10000px;
+        font-size: 1em;
+        font-weight: normal;
+    }
+}
+
+/*------------------------------------------------------------------------------------*/
+/* BLOCK */
+.block .content {
+    border:none;
+}
+.block {
+    font-size: 13px;
+    background-color:#f3f3f4;
+    border: none;
+    padding:0px;
+    -webkit-border-radius:0!important;
+    -moz-border-radius:0!important;
+    border-radius:0!important;
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+}
+
+.block .header .title h2, .block h3.main {
+    font-family: "Open Sans",sans-serif;
+    font-size: 12px;
+    text-shadow: none;
+    background-color:#365376;
+    color:#FFF;
+    font-weight: 600;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 5px 15px;
+}
+
+.block a{
+    color:#5d93bd;
+    font-weight:normal;
+}
+
+.block a:hover {
+    color: #5d93bd;
+    text-decoration:underline;
+}
+
+.block .header .block_action {
+    padding-top: 3px;
+    padding-right: 8px;
+}
+
+.block_tree .active_tree_node,
+.block_tree .active_tree_node a {
+    font-weight: 600;
+}
+
+.tree_item span {
+    padding-bottom: 10px;
+}
+
+.tree_item img {
+    margin-top: 4px;
+}
+
+.block_tree .collapsed .tree_item.branch,
+.block_tree .collapsed .tree_item.emptybranch,
+.block_tree .tree_item.emptybranch,
+.block_tree .tree_item.branch {
+    background-position: 0 3px!important;
+}
+
+.block hr {
+    border-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+}
+
+.block .footer {
+    text-align: center!important;
+}
+
+
+/*------------------------------------------------------------------------------------*/
+/* COURSE PAGE BLOCKS */
+
+.block_course_overview,
+.block_course_overview .block .content,
+.block_course_overview .header .title h2  {
+    background: none!important;
+    border: none!important;
+}
+
+.block_course_overview .header .title .block_action {
+    display: none;
+}
+
+.block_course_overview .header .title h2 {
+    color: #365376;
+    font-size: 16px;
+}
+
+.block_course_overview .coursebox {
+    border-radius: 0px;
+    border:1px solid #b3becb;
+}
+
+.block_course_overview a,
+.block_course_overview a:hover {
+    color: #365376;
+}
+
+.course-content ul li.section.main {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-color: #b3becb;
+}
+
+.custom_course_title {
+    color: #365376;
+    border-top: 1px solid #b3becb;
+    border-bottom: 2px solid #b3becb;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 11px 0 11px 0;
+}
+
+.coursebox > .info > .coursename,
+.coursebox > .info > .coursename a {
+    background-position: left 0.25em!important;
+}
+
+.course-content .sectionname {
+    font-size: 16px!important;
+    line-height: 25px;
+}
+
+.course-content .section-summary .section-title,
+.summary h3 {
+    line-height: 25px!important;
+}
+
+.course-content .single-section .section-navigation .mdl-left,
+.course-content .single-section .section-navigation .mdl-right {
+    margin-bottom: 10px;
+}
+
+.course-content .single-section .section-navigation .mdl-left a,
+.course-content .single-section .section-navigation .mdl-right a {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-weight: 700;
+    padding: 5px 10px;
+}
+
+.mdl-align {
+    margin-top: 35px;
+}
+
+.course-content ul.topics li.section .left,
+.course-content ul.topics li.section .right {
+    width: 0px;
+}
+
+.block.list_block .unlist > li > .column {
+    /* margin-left: 23px; */
+    position: relative;
+    padding-left: 23px;
+    width: auto;
+}
+
+.block.list_block .unlist > li > .column > a > img {
+    /* margin-left: -23px;    */
+    left: 0;
+    top: 3px;
+    position: absolute;
+}
+
+/*------------------------------------------------------------------------------------*/
+/* Course Page */
+
+.course-content ul.topics li.section .content, .course-content ul.weeks li.section .content {
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.course-content ul.topics li.section .summary {
+    margin-left: 15px;
+}
+
+.course-content ul.section {
+    margin: 0.7em 0.1em 0.7em 0.1em;
+}
+
+.section .activity .mod-indent-outer {
+    padding-left: 17px;
+}
+
+.section .label .mod-indent-outer {
+    display: block;
+    padding-left: 15px;
+}
+
+.section .label .contentwithoutlink, .section .label .activityinstance {
+    padding-right: 15px;
+}
+
+/*------------------------------------------------------------------------------------*/
+/* FOOTER */
+
+#page-footer {
+    background:none;
+    padding: 10px!important;
+    border: none;
+    color: #365376;
+}
+
+#page-footer a{
+    color: #5d93bd
+}
+
+#page-footer a:hover{
+    color: #5d93bd;
+    text-decoration: underline;
+}
+
+.main-footer {
+    background: #e4edf4;
+    color: #365376;
+    padding: 0 30px;
+}
+
+#page-footer .logininfo {
+    color: #365376;
+}
+
+.ucsf_footer_text {
+    float: left;
+    width: 50%;
+    height: 50px;
+    text-align: left;
+}
+
+.ucsf_footer_links_container {
+    float: left;
+    width: 50%;
+    height: 50px;
+    text-align: right;
+}
+
+.ucsf_footer_link {
+    margin-left:20px;
+}
+
+.ucsf_logininfo {
+    margin-top: 20px;
+    float: right;
 }
 
 /* Custom CSS Settings
