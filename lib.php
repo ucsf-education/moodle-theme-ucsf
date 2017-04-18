@@ -9,9 +9,7 @@
 /**
  * Extra LESS code to inject.
  *
- * This will generate some LESS code from the settings used by the user. We cannot use
- * the {@link theme_ucsf_less_variables()} here because we need to create selectors or
- * alter existing ones.
+ * This will generate some LESS code from the settings used by the user.
  *
  * @param theme_config $theme The theme config object.
  * @return string Raw LESS code.
@@ -97,22 +95,6 @@ function theme_ucsf_extra_less($theme)
     }
 
     return implode("\n", $contents);
-}
-
-/**
- * Returns variables for LESS.
- *
- * We will inject some LESS variables from the settings that the user has defined
- * for the theme. No need to write some custom LESS for this.
- *
- * @param theme_config $theme The theme config object.
- * @return array of LESS variables without the @.
- */
-function theme_ucsf_less_variables($theme)
-{
-    $variables = array();
-    // @todo implement or remove, if n/a [ST 2016/04/06]
-    return $variables;
 }
 
 /**

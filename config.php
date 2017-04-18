@@ -43,7 +43,6 @@ $THEME->doctype = 'html5';
 $THEME->sheets = array('bootstrap-datepicker', 'custom');
 $THEME->lessfile = 'moodle';
 $THEME->parents_exclude_sheets = array('bootstrapbase' => array('moodle'), 'clean' => array('custom'));
-$THEME->lessvariablescallback = 'theme_ucsf_less_variables';
 $THEME->extralesscallback = 'theme_ucsf_extra_less';
 $THEME->supportscssoptimisation = false;
 $THEME->yuicssmodules = array();
