@@ -228,7 +228,7 @@ function theme_ucsf_get_setting($setting, $format = false)
     if (empty($theme)) {
         $theme = theme_config::load('ucsf');
     }
-    if (empty($theme->settings->settings->$setting)) {
+    if (empty($theme->settings->$setting)) {
         return false;
     } else if (!$format) {
         return $theme->settings->$setting;
