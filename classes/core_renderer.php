@@ -11,40 +11,6 @@ require_once($CFG->dirroot . '/theme/ucsf/lib.php');
 
 class theme_ucsf_core_renderer extends theme_clean_core_renderer
 {
-
-    /**
-     * @inheritdoc
-     */
-    public function custom_menu($custommenuitems = '')
-    {
-
-        global $CFG;
-
-        if (empty($custommenuitems) && !empty($CFG->custommenuitems)) {
-            $custommenuitems = $CFG->custommenuitems;
-        }
-        if (empty($custommenuitems)) {
-            return '';
-        }
-        $custommenu = new custom_menu($custommenuitems, current_language());
-
-        $categories = $this->get_category_roots($this->get_current_course_category());
-
-        $coursecategory = $this->find_first_configured_category($categories, 'custommenu');
-
-        $themeconfig = get_config("theme_ucsf");
-        $customizedmenu = "custommenu" . $coursecategory;
-        $enablecustomization = $themeconfig->enablecustomization;
-
-
-        if ($enablecustomization && isset($themeconfig->$customizedmenu) && !empty($themeconfig->$customizedmenu)) {
-            $custommenuitems = $themeconfig->$customizedmenu;
-            $custommenu = new custom_menu($custommenuitems, current_language());
-        }
-
-        return $this->render($custommenu);
-    }
-
     /**
      * Returns a help menu.
      *
