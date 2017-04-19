@@ -215,6 +215,8 @@ function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, mood
 
     $return->custom_menu = theme_ucsf_get_custom_menu($output, $page);
 
+    $return->help_menu = theme_ucsf_get_help_menu($output, $page);
+
     return $return;
 }
 
@@ -484,6 +486,140 @@ function theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_pag
 
     return $output->custom_menu($menu_items);
 }
+
+/**
+ * Returns a help menu.
+ *
+ * @param theme_ucsf_core_renderer $output
+ * @param moodle_page $page
+ * @return string The help menu HTML, or a blank string.
+ *
+ */
+function theme_ucsf_get_help_menu(theme_ucsf_core_renderer $output, moodle_page $page)
+{
+    global $COURSE;
+
+    if (!isloggedin()) {
+        return '';
+    }
+
+    $theme_settings = $page->theme->settings;
+
+    $menu = false;
+
+    if ($theme_settings->enablecustomization) {
+        $current_category = theme_ucsf_get_current_course_category($page, $COURSE);
+
+        if (!empty($current_category)) {
+            $parent_categories = theme_ucsf_get_category_roots($current_category);
+            while (!$menu && !empty($parent_categories)) {
+                $category = array_shift($parent_categories);
+                $menu = theme_ucsf_get_category_helpmenu($theme_settings, $category);
+            }
+        }
+
+        if (!$menu) {
+            $menu = theme_ucsf_get_default_helpmenu($theme_settings);
+        }
+    } else {
+        $menu = theme_ucsf_get_default_helpmenu($theme_settings);
+    }
+
+
+    if (!empty($menu)) {
+        return $output->help_menu($menu);
+    }
+
+    return '';
+
+}
+
+/**
+ * Returns the default help menu data.
+ *
+ * @param stdClass $theme_settings
+ *
+ * @return array|bool
+ */
+function theme_ucsf_get_default_helpmenu($theme_settings)
+{
+    if (!$theme_settings->enablehelpfeedback) {
+        return false;
+    }
+
+    $menu = array();
+
+    $title = $theme_settings->helpfeedbacktitle;
+    $menu['title'] = empty($title) ? get_string('helpmenutitle', 'theme_ucsf') : $title;
+
+    $menu['items'] = array();
+    $number_of_links = (int)$theme_settings->numberoflinks;
+    for ($i = 1; $i <= $number_of_links; $i++) {
+        $url = theme_ucsf_get_setting('helpfeedback' . $i . 'link');
+        $title = theme_ucsf_get_setting('helpfeedback' . $i . 'linklabel');
+        $target = theme_ucsf_get_setting('helpfeedback' . $i . 'linktarget');
+
+        if (!empty($url)) {
+            $menu['items'][] = array(
+                'url' => $url,
+                'title' => empty($title) ? '' : $title,
+                'options' => array(
+                    'target' => empty($target) ? '_self' : '_blank'
+                ),
+            );
+        }
+    }
+
+    if (empty($menu['items'])) {
+        return false;
+    }
+
+    return $menu;
+}
+
+/**
+ * Returns the category help menu data.
+ *
+ * @param stdClass $theme_settings
+ * @param int $category The course category id.
+ * @return array|bool
+ */
+function theme_ucsf_get_category_helpmenu($theme_settings, $category)
+{
+    if (!theme_ucsf_get_setting('catenablehelpfeedback' . $category)) {
+        return false;
+    }
+
+    $menu = array();
+
+    $title = theme_ucsf_get_setting('cathelpfeedbacktitle' . $category);
+    $menu['title'] = empty($title) ? get_string('helpmenutitle', 'theme_ucsf') : $title;
+
+    $menu['items'] = array();
+    $number_of_links = (int)theme_ucsf_get_setting('catnumberoflinks' . $category);
+    for ($i = 1; $i <= $number_of_links; $i++) {
+        $url = theme_ucsf_get_setting('cathelpfeedback' . $i . 'link' . $category);
+        $title = theme_ucsf_get_setting('cathelpfeedback' . $i . 'linklabel' . $category);
+        $target = theme_ucsf_get_setting('cathelpfeedback' . $i . 'linktarget' . $category);
+
+        if (!empty($url)) {
+            $menu['items'][] = array(
+                'url' => $url,
+                'title' => empty($title) ? '' : $title,
+                'options' => array(
+                    'target' => empty($target) ? '_self' : '_blank'
+                ),
+            );
+        }
+    }
+
+    if (empty($menu['items'])) {
+        return false;
+    }
+
+    return $menu;
+}
+
 /**
  * Returns all applicable custom alerts.
  *
