@@ -38,7 +38,7 @@ echo $OUTPUT->doctype() ?>
             <?php echo $OUTPUT->navbar_plugin_output(); ?>
             <?php echo $OUTPUT->search_box(); ?>
             <div class="nav-collapse collapse">
-                <?php echo $OUTPUT->custom_menu(); ?>
+                <?php echo $html->custom_menu; ?>
                 <ul class="nav pull-right">
                     <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
                 </ul>

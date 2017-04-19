@@ -175,7 +175,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
 /**
  * Returns an object containing HTML for the areas affected by settings.
  *
- * @param renderer_base $output Pass in $OUTPUT.
+ * @param theme_ucsf_core_renderer $output Pass in $OUTPUT.
  * @param moodle_page $page Pass in $PAGE.
  * @return stdClass An object with the following properties:
  *      - navbarclass A CSS class to use on the navbar. By default ''.
@@ -183,8 +183,9 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
  *      - footnote HTML to use as a footnote. By default ''.
  *      - copyright The copyright notice.
  *      - custom_alerts Markup containing custom alerts
+ *      - custom_menu Markup containing the custom menu.
  */
-function theme_ucsf_get_html_for_settings(renderer_base $output, moodle_page $page)
+function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, moodle_page $page)
 {
     global $CFG;
     $return = new stdClass;
@@ -212,6 +213,8 @@ function theme_ucsf_get_html_for_settings(renderer_base $output, moodle_page $pa
 
     $return->custom_alerts = theme_ucsf_get_alerts($output, $page);
 
+    $return->custom_menu = theme_ucsf_get_custom_menu($output, $page);
+
     return $return;
 }
 
@@ -230,12 +233,13 @@ function theme_ucsf_get_setting($setting)
     if (empty($theme->settings->$setting)) {
         return false;
     }
+    return $theme->settings->$setting;
 }
 
 /**
  * Returns an object containing HTML for the areas affected by category customization settings.
  *
- * @param renderer_base $output Pass in $OUTPUT.
+ * @param theme_ucsf_core_renderer $output Pass in $OUTPUT.
  * @param moodle_page $page Pass in $PAGE.
  * @return stdClass An object with the following properties:
  *      - enablecustomization: true if Category Customization is enabled. By default false.
@@ -244,7 +248,7 @@ function theme_ucsf_get_setting($setting)
  *         unless the course title is set NOT to display on configured categories.
  *      - displaycustommenu: Hide Custom Menu when logged out. By default returns custom menu.
  */
-function theme_ucsf_get_global_settings(renderer_base $output, moodle_page $page)
+function theme_ucsf_get_global_settings(theme_ucsf_core_renderer $output, moodle_page $page)
 {
     global $CFG, $COURSE;
     $return = new stdClass;
@@ -451,14 +455,43 @@ function theme_ucsf_get_current_course_category(moodle_page $page, $course)
     return $course->category;
 }
 
+
+/**
+ * Returns the fully rendered custom menu.
+ *
+ * @param theme_ucsf_core_renderer $output
+ * @param moodle_page $page
+ * @return string
+ */
+function theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_page $page)
+{
+    global $COURSE;
+
+    $theme_settings = $page->theme->settings;
+
+    if ($theme_settings->hidecustommenuwhenloggedout && ! isloggedin()) {
+        return '';
+    }
+
+    $menu_items = '';
+
+    if (theme_ucsf_get_setting('enablecustomization')) {
+        $categories = theme_ucsf_get_category_roots(theme_ucsf_get_current_course_category($page, $COURSE));
+        $course_category = theme_ucsf_find_first_configured_category($theme_settings, $categories, 'custommenu');
+        $menu_items = theme_ucsf_get_setting("custommenu" . $course_category);
+
+    }
+
+    return $output->custom_menu($menu_items);
+}
 /**
  * Returns all applicable custom alerts.
  *
- * @param renderer_base $output The output renderer
+ * @param theme_ucsf_core_renderer $output The output renderer
  * @param moodle_page $page The current page
  * @return string|null
  */
-function theme_ucsf_get_alerts(renderer_base $output, moodle_page $page)
+function theme_ucsf_get_alerts(theme_ucsf_core_renderer $output, moodle_page $page)
 {
     global $CFG, $COURSE;
 
