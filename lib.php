@@ -189,7 +189,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
 function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, moodle_page $page)
 {
     global $CFG;
-    $return = new stdClass;
+    $return = new stdClass();
 
     $return->navbarclass = '';
     if (!empty($page->theme->settings->invert)) {
@@ -222,19 +222,20 @@ function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, mood
 }
 
 /**
- * Retrieves a form setting.
+ * Retrieves a theme setting.
  *
- * @param string $setting
- * @return mixed The setting's value, or FALSE if none could be found.
+ * @param string $setting The name of the setting.
+ * @param mixed $default A default value, to be used as fallback if the setting is not defined.
+ * @return mixed The setting's value, or the given default if the setting has not been defined.
  */
-function theme_ucsf_get_setting($setting)
+function theme_ucsf_get_setting($setting, $default = false)
 {
     static $theme;
     if (empty($theme)) {
         $theme = theme_config::load('ucsf');
     }
-    if (empty($theme->settings->$setting)) {
-        return false;
+    if (!isset($theme->settings->$setting)) {
+        return $default;
     }
     return $theme->settings->$setting;
 }
@@ -254,7 +255,7 @@ function theme_ucsf_get_setting($setting)
 function theme_ucsf_get_global_settings(theme_ucsf_core_renderer $output, moodle_page $page)
 {
     global $CFG, $COURSE;
-    $return = new stdClass;
+    $return = new stdClass();
 
     $return->categorylabel = '';
     $return->coursetitle = '';
@@ -851,9 +852,12 @@ function theme_ucsf_get_alerts(theme_ucsf_core_renderer $output, moodle_page $pa
     for ($i = 0; $i < $number_of_alerts; $i++) {
         if ($hasalert[$i]) {
             $n = $i + 1;
-            $alert .= '<div class="alert alert-block alert-' . theme_ucsf_get_setting('alert' . $n . 'type') . ' ucsf-alert" role="alert" data-ucsf-alert-id="alert' . $n . '" data-ucsf-target-url="' . $CFG->wwwroot . '/theme/ucsf/alert.php">';
+            $alert_type = theme_ucsf_get_setting('alert' . $n . 'type', 'info');
+            $alert_title = theme_ucsf_get_setting('alert' . $n . 'title', '');
+            $alert_text = theme_ucsf_get_setting('alert' . $n . 'text');
+            $alert .= '<div class="alert alert-block alert-' . $alert_type . ' ucsf-alert" role="alert" data-ucsf-alert-id="alert' . $n . '" data-ucsf-target-url="' . $CFG->wwwroot . '/theme/ucsf/alert.php">';
             $alert .= '<button type="button" class="close" data-dismiss="alert" >×</button>';
-            $alert .= '<span class="title">' . theme_ucsf_get_setting('alert' . $n . 'title') . '</span>' . theme_ucsf_get_setting('alert' . $n . 'text');
+            $alert .= '<span class="title">' . $alert_title  . '</span>' . $alert_text;
             $alert .= '</div>';
             $showalert = true;
         }
