@@ -19,6 +19,7 @@ img.small-logo {
     .navbar img.small-logo {
         max-width: 100px;
     }
+
     /* Applying accesshide styles */
     .navbar .small-logo-container + .brand {
         position: absolute;
@@ -43,8 +44,8 @@ img.small-logo {
 }
 
 body {
-/*    background: url([[pix:theme_ucsf|background]]) no-repeat center top  #FFF;*/
-    font-family: "Open Sans",sans-serif;
+    /*    background: url([[pix:theme_ucsf|background]]) no-repeat center top  #FFF;*/
+    font-family: "Open Sans", sans-serif;
     font-size: 13px;
     color: #333;
     /*
@@ -53,22 +54,53 @@ body {
     padding: 0!important;*/
 }
 
-a {color: #5d93bd; cursor: pointer; }
-a:link, a:visited, a:active {text-decoration: none;}
-a:hover {color: #5d93bd; text-decoration: underline;}
+a {
+    color: #5d93bd;
+    cursor: pointer;
+}
 
+a:link, a:visited, a:active {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #5d93bd;
+    text-decoration: underline;
+}
 
 h1, h2, h3, h4, h5, h6 {
     color: #365376;
 }
-h1 {font-size: 24px}
-h2 {font-size: 21px}
-h3 {font-size: 18px}
-h4 {font-size: 16px}
-h5 {font-size: 14px}
-h6 {font-size: 13px}
 
-hr { background-color:#b3becb; height:1px; border:none }
+h1 {
+    font-size: 24px
+}
+
+h2 {
+    font-size: 21px
+}
+
+h3 {
+    font-size: 18px
+}
+
+h4 {
+    font-size: 16px
+}
+
+h5 {
+    font-size: 14px
+}
+
+h6 {
+    font-size: 13px
+}
+
+hr {
+    background-color: #b3becb;
+    height: 1px;
+    border: none
+}
 
 /* Header
 -------------------------*/
@@ -94,40 +126,39 @@ hr { background-color:#b3becb; height:1px; border:none }
 /*------------------------------------------------------------------------------------*/
 /* BLOCK */
 .block .content {
-    border:none;
+    border: none;
 }
+
 .block {
     font-size: 13px;
-    background-color:#f3f3f4;
+    background-color: #f3f3f4;
     border: none;
     padding: 0;
-    -webkit-border-radius:0!important;
-    -moz-border-radius:0!important;
-    border-radius:0!important;
-    border-bottom-left-radius: 0!important;
-    border-bottom-right-radius: 0!important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
 }
 
 .block .header .title h2, .block h3.main {
-    font-family: "Open Sans",sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 12px;
     text-shadow: none;
-    background-color:#365376;
-    color:#FFF;
+    background-color: #365376;
+    color: #FFF;
     font-weight: 600;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     padding: 5px 15px;
 }
 
-.block a{
-    color:#5d93bd;
-    font-weight:normal;
+.block a {
+    color: #5d93bd;
+    font-weight: normal;
 }
 
 .block a:hover {
     color: #5d93bd;
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
 .block .header .block_action {
@@ -152,7 +183,7 @@ hr { background-color:#b3becb; height:1px; border:none }
 .block_tree .collapsed .tree_item.emptybranch,
 .block_tree .tree_item.emptybranch,
 .block_tree .tree_item.branch {
-    background-position: 0 3px!important;
+    background-position: 0 3px !important;
 }
 
 .block hr {
@@ -161,7 +192,7 @@ hr { background-color:#b3becb; height:1px; border:none }
 }
 
 .block .footer {
-    text-align: center!important;
+    text-align: center !important;
 }
 
 /*------------------------------------------------------------------------------------*/
@@ -173,10 +204,10 @@ hr { background-color:#b3becb; height:1px; border:none }
 }
 
 #dock .dockedtitle h2 {
-    font-family: "Open Sans",sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 12px;
     text-shadow: none;
-    color:#FFF;
+    color: #FFF;
     font-weight: 600;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -187,29 +218,28 @@ hr { background-color:#b3becb; height:1px; border:none }
 }
 
 #dockeditempanel .dockeditempanel_hd {
-    background-color:#365376;
+    background-color: #365376;
 }
 
-#dockeditempanel .dockeditempanel_hd h2{
+#dockeditempanel .dockeditempanel_hd h2 {
     font-family: "Open Sans", sans-serif;
     font-size: 12px;
     text-shadow: none;
-    background-color:#365376;
-    color:#FFF;
+    background-color: #365376;
+    color: #FFF;
     font-weight: 600;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-
 
 /*------------------------------------------------------------------------------------*/
 /* COURSE PAGE BLOCKS */
 
 .block_course_overview,
 .block_course_overview .block .content,
-.block_course_overview .header .title h2  {
-    background: none!important;
-    border: none!important;
+.block_course_overview .header .title h2 {
+    background: none !important;
+    border: none !important;
 }
 
 .block_course_overview .header .title .block_action {
@@ -222,8 +252,8 @@ hr { background-color:#b3becb; height:1px; border:none }
 }
 
 .block_course_overview .coursebox {
-    border-radius: 0px;
-    border:1px solid #b3becb;
+    border-radius: 0;
+    border: 1px solid #b3becb;
 }
 
 .block_course_overview a,
@@ -249,17 +279,17 @@ hr { background-color:#b3becb; height:1px; border:none }
 
 .coursebox > .info > .coursename,
 .coursebox > .info > .coursename a {
-    background-position: left 0.25em!important;
+    background-position: left 0.25em !important;
 }
 
 .course-content .sectionname {
-    font-size: 16px!important;
+    font-size: 16px !important;
     line-height: 25px;
 }
 
 .course-content .section-summary .section-title,
 .summary h3 {
-    line-height: 25px!important;
+    line-height: 25px !important;
 }
 
 .course-content .single-section .section-navigation .mdl-left,
@@ -281,7 +311,7 @@ hr { background-color:#b3becb; height:1px; border:none }
 
 .course-content ul.topics li.section .left,
 .course-content ul.topics li.section .right {
-    width: 0px;
+    width: 0;
 }
 
 .block.list_block .unlist > li > .column {
@@ -331,17 +361,17 @@ hr { background-color:#b3becb; height:1px; border:none }
 /* FOOTER */
 
 #page-footer {
-    background:none;
-    padding: 10px!important;
+    background: none;
+    padding: 10px !important;
     border: none;
     color: #365376;
 }
 
-#page-footer a{
+#page-footer a {
     color: #5d93bd
 }
 
-#page-footer a:hover{
+#page-footer a:hover {
     color: #5d93bd;
     text-decoration: underline;
 }
@@ -371,7 +401,7 @@ hr { background-color:#b3becb; height:1px; border:none }
 }
 
 .ucsf_footer_link {
-    margin-left:20px;
+    margin-left: 20px;
 }
 
 .ucsf_logininfo {
@@ -407,4 +437,7 @@ hr { background-color:#b3becb; height:1px; border:none }
 
 /* Custom CSS Settings
 -------------------------*/
-[[setting:customcss]]
+[[setting:customcss
+
+]
+]
