@@ -342,6 +342,32 @@ hr { background-color:#b3becb; height:1px; border:none }
     float: right;
 }
 
+/*------------------------------------------------------------------------------------*/
+/* ALERTS */
+
+.ucsf-alert .title {
+    margin-right: 20px;
+}
+
+.ucsf-alert:before {
+    font-family: "FontAwesome";
+    padding-right: 15px;
+    font-size: 20px;
+}
+
+.ucsf-alert.alert-success::before {
+    content: "\f0a1 ";
+
+}
+
+.ucsf-alert.alert-error::before {
+    content: "\f071 ";
+}
+
+.ucsf-alert.alert-info::before {
+    content: "\f129 ";
+}
+
 /* Custom CSS Settings
 -------------------------*/
 [[setting:customcss]]
