@@ -100,7 +100,7 @@ hr { background-color:#b3becb; height:1px; border:none }
     font-size: 13px;
     background-color:#f3f3f4;
     border: none;
-    padding:0px;
+    padding: 0;
     -webkit-border-radius:0!important;
     -moz-border-radius:0!important;
     border-radius:0!important;
@@ -162,6 +162,43 @@ hr { background-color:#b3becb; height:1px; border:none }
 
 .block .footer {
     text-align: center!important;
+}
+
+/*------------------------------------------------------------------------------------*/
+/* DOCK */
+
+#dock .dockedtitle {
+    background: #365376 none;
+    color: #fff;
+}
+
+#dock .dockedtitle h2 {
+    font-family: "Open Sans",sans-serif;
+    font-size: 12px;
+    text-shadow: none;
+    color:#FFF;
+    font-weight: 600;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#dock .dockedtitle:hover, #dock .dockedtitle:focus {
+    background: #365376;
+}
+
+#dockeditempanel .dockeditempanel_hd {
+    background-color:#365376;
+}
+
+#dockeditempanel .dockeditempanel_hd h2{
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    text-shadow: none;
+    background-color:#365376;
+    color:#FFF;
+    font-weight: 600;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 
