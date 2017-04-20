@@ -112,13 +112,15 @@ function theme_ucsf_process_css($css, $theme)
 
     $replacements = array();
 
+    $theme_settings = $theme->settings;
+
     // Set the background image for the logo.
     $replacements['[[setting:logo]]'] = $theme->setting_file_url('logo', 'logo');
 
     // Set custom CSS.
     $customcss = '';
-    if ($theme->settings->customcssenabled && !empty($theme->settings->customcss)) {
-        $customcss = $theme->settings->customcss;
+    if ($theme_settings->customcssenabled && !empty($theme_settings->customcss)) {
+        $customcss = $theme_settings->customcss;
     }
     $replacements['[[setting:customcss]]'] = $customcss;
 
