@@ -21,15 +21,15 @@ function theme_ucsf_extra_less($theme)
     $all_category_ids = theme_ucsf_get_all_category_ids();
 
     // get all categories that are configured for customizations
-    $settings = $theme->settings;
-    if (empty($settings->all_categories)) {
+    $theme_settings = $theme->settings;
+    if (empty($theme_settings->all_categories)) {
         return '';
     }
-    $customized_category_ids = explode(',', $settings->all_categories);
+    $customized_category_ids = explode(',', $theme_settings->all_categories);
     // filter out any categories that don't have CSS customizations turned on
-    $customized_category_ids = array_filter($customized_category_ids, function ($id) use ($settings) {
+    $customized_category_ids = array_filter($customized_category_ids, function ($id) use ($theme_settings) {
         $enabled_key = 'customcssenabled' . (int)$id;
-        return !empty($settings->$enabled_key);
+        return !empty($theme_settings->$enabled_key);
     });
     $customized_category_ids = array_values($customized_category_ids);
     if (empty($customized_category_ids)) {
@@ -53,22 +53,22 @@ function theme_ucsf_extra_less($theme)
         // ACHTUNG - MINEN!
         // Keep these styles in sync with the ones defined in "style/ucsf.css".
         // @todo Put this nonsense to the torch. ALL of it. And start over from scratch. [ST 2016/04/27]
-        $category = theme_ucsf_find_first_configured_category($settings, $ids, 'menubackground');
+        $category = theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menubackground');
         if ($category) {
             $menubackground = $theme->setting_file_url('menubackground' . $category, 'menubackground' . $category);
             $category_css[] = ".menu-background { background-image: url({$menubackground}); }";
         }
-        $category = theme_ucsf_find_first_configured_category($settings, $ids, 'menudivider');
+        $category = theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menudivider');
         if ($category) {
             $menudivider = $theme->setting_file_url('menudivider' . $category, 'menudivider' . $category);
             $category_css[] = ".category-label { background-image: url({$menudivider}); }";
         }
-        $category = theme_ucsf_find_first_configured_category($settings, $ids, 'menudividermobile');
+        $category = theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menudividermobile');
         if ($category) {
             $menudivider = $theme->setting_file_url('menudividermobile' . $category, 'menudividermobile' . $category);
             $category_css[] = "@media ( max-width: 779px) { .category-label { background-image: url({$menudivider}) !important; }}";
         }
-        $category = theme_ucsf_find_first_configured_category($settings, $ids, 'menuitemdivider');
+        $category = theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menuitemdivider');
         if ($category) {
             $menuitemdivider = $theme->setting_file_url('menuitemdivider' . $category, 'menuitemdivider' . $category);
             $rule = ".navbar .nav > li { background-image: url({$menuitemdivider}); }";
@@ -81,7 +81,7 @@ function theme_ucsf_extra_less($theme)
         // "inherit" any rules that may have been defined/enabled by parent categories.
         foreach ($ids as $id) {
             $css_key = 'customcss' . (int)$id;
-            $custom_css = $settings->$css_key;
+            $custom_css = $theme_settings->$css_key;
             if (trim($custom_css)) {
                 $category_css[] = $custom_css;
             }
