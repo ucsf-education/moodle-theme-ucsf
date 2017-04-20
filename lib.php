@@ -469,7 +469,7 @@ function theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_pag
 
     $theme_settings = $page->theme->settings;
 
-    if ($theme_settings->hidecustommenuwhenloggedout && ! isloggedin()) {
+    if ($theme_settings->hidecustommenuwhenloggedout && !isloggedin()) {
         return '';
     }
 
@@ -478,7 +478,7 @@ function theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_pag
     if (theme_ucsf_get_setting($theme_settings, 'enablecustomization')) {
         $categories = theme_ucsf_get_category_roots(theme_ucsf_get_current_course_category($page, $COURSE));
         $course_category = theme_ucsf_find_first_configured_category($theme_settings, $categories, 'custommenu');
-        $menu_items = theme_ucsf_get_setting($theme_settings,"custommenu" . $course_category);
+        $menu_items = theme_ucsf_get_setting($theme_settings, "custommenu" . $course_category, '');
 
     }
 
@@ -541,26 +541,26 @@ function theme_ucsf_get_help_menu(theme_ucsf_core_renderer $output, moodle_page 
  */
 function theme_ucsf_get_default_helpmenu($theme_settings)
 {
-    if (!$theme_settings->enablehelpfeedback) {
+    if (!theme_ucsf_get_setting($theme_settings, 'enablehelpfeedback')) {
         return false;
     }
 
     $menu = array();
 
-    $title = $theme_settings->helpfeedbacktitle;
+    $title = theme_ucsf_get_setting($theme_settings, 'helpfeedbacktitle', '');
     $menu['title'] = empty($title) ? get_string('helpmenutitle', 'theme_ucsf') : $title;
 
     $menu['items'] = array();
-    $number_of_links = (int)$theme_settings->numberoflinks;
+    $number_of_links = (int)theme_ucsf_get_setting($theme_settings, 'numberoflinks', 0);
     for ($i = 1; $i <= $number_of_links; $i++) {
-        $url = theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'link');
-        $title = theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'linklabel');
+        $url = theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'link', '');
+        $title = theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'linklabel', '');
         $target = theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'linktarget');
 
         if (!empty($url)) {
             $menu['items'][] = array(
                 'url' => $url,
-                'title' => empty($title) ? '' : $title,
+                'title' => $title,
                 'options' => array(
                     'target' => empty($target) ? '_self' : '_blank'
                 ),
@@ -590,20 +590,20 @@ function theme_ucsf_get_category_helpmenu($theme_settings, $category)
 
     $menu = array();
 
-    $title = theme_ucsf_get_setting($theme_settings, 'cathelpfeedbacktitle' . $category);
+    $title = theme_ucsf_get_setting($theme_settings, 'cathelpfeedbacktitle' . $category, '');
     $menu['title'] = empty($title) ? get_string('helpmenutitle', 'theme_ucsf') : $title;
 
     $menu['items'] = array();
-    $number_of_links = (int)theme_ucsf_get_setting($theme_settings, 'catnumberoflinks' . $category);
+    $number_of_links = (int)theme_ucsf_get_setting($theme_settings, 'catnumberoflinks' . $category, 0);
     for ($i = 1; $i <= $number_of_links; $i++) {
-        $url = theme_ucsf_get_setting($theme_settings, 'cathelpfeedback' . $i . 'link' . $category);
-        $title = theme_ucsf_get_setting($theme_settings, 'cathelpfeedback' . $i . 'linklabel' . $category);
+        $url = theme_ucsf_get_setting($theme_settings, 'cathelpfeedback' . $i . 'link' . $category, '');
+        $title = theme_ucsf_get_setting($theme_settings, 'cathelpfeedback' . $i . 'linklabel' . $category, '');
         $target = theme_ucsf_get_setting($theme_settings, 'cathelpfeedback' . $i . 'linktarget' . $category);
 
         if (!empty($url)) {
             $menu['items'][] = array(
                 'url' => $url,
-                'title' => empty($title) ? '' : $title,
+                'title' => $title,
                 'options' => array(
                     'target' => empty($target) ? '_self' : '_blank'
                 ),
@@ -855,7 +855,7 @@ function theme_ucsf_get_alerts(theme_ucsf_core_renderer $output, moodle_page $pa
             $alert_text = theme_ucsf_get_setting($theme_settings, 'alert' . $n . 'text', '');
             $alert .= '<div class="alert alert-block alert-' . $alert_type . ' ucsf-alert" role="alert" data-ucsf-alert-id="alert' . $n . '" data-ucsf-target-url="' . $CFG->wwwroot . '/theme/ucsf/alert.php">';
             $alert .= '<button type="button" class="close" data-dismiss="alert" >×</button>';
-            $alert .= '<span class="title">' . $alert_title  . '</span>' . $alert_text;
+            $alert .= '<span class="title">' . $alert_title . '</span>' . $alert_text;
             $alert .= '</div>';
             $showalert = true;
         }
