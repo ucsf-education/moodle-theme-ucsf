@@ -250,6 +250,10 @@ function theme_ucsf_get_setting($theme_settings, $setting, $default = false)
  *      - displaycoursetitle: The course title will appear on the course page for all courses,
  *         unless the course title is set NOT to display on configured categories.
  *      - displaycustommenu: Hide Custom Menu when logged out. By default returns custom menu.
+ *
+ * @deprecated
+ *
+ * @todo Port any functionality needed to theme_ucsf_get_html_for_settings() [ST 2017/04/20]
  */
 function theme_ucsf_get_global_settings(theme_ucsf_core_renderer $output, moodle_page $page)
 {

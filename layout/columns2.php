@@ -8,7 +8,6 @@
 
 // Get the HTML for the settings bits.
 $html = theme_ucsf_get_html_for_settings($OUTPUT, $PAGE);
-$globalsettings = theme_ucsf_get_global_settings($OUTPUT, $PAGE);
 
 $regionmain = 'span9 pull-right';
 $sidepre = 'span3 desktop-first-column';
