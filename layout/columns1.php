@@ -60,18 +60,24 @@ echo $OUTPUT->doctype() ?>
             ?>
         </section>
     </div>
+</div>
 
+<div class="main-footer container-fluid">
     <footer id="page-footer">
         <div id="course-footer"><?php echo $OUTPUT->course_footer(); ?></div>
+        <div class="ucsf_footer_text">
+            <?php echo $html->copyright; ?>
+        </div>
+        <div class="ucsf_footer_links_container">
+            <?php echo $html->footnote; ?>
+        </div>
         <?php
-        echo $html->footnote;
         echo $OUTPUT->login_info();
         echo $OUTPUT->standard_footer_html();
         ?>
     </footer>
-
     <?php echo $OUTPUT->standard_end_of_body_html() ?>
-
 </div>
+
 </body>
 </html>

@@ -360,15 +360,18 @@ hr {
 /*------------------------------------------------------------------------------------*/
 /* FOOTER */
 
+.main-footer {
+    background: #e4edf4;
+    color: #365376;
+}
+
 #page-footer {
-    background: none;
-    padding: 10px !important;
     border: none;
     color: #365376;
 }
 
 #page-footer a {
-    color: #5d93bd
+    color: #5d93bd;
 }
 
 #page-footer a:hover {
@@ -376,27 +379,19 @@ hr {
     text-decoration: underline;
 }
 
-.main-footer {
-    background: #e4edf4;
-    color: #365376;
-    padding: 0 30px;
-}
-
-#page-footer .logininfo {
-    color: #365376;
-}
-
 .ucsf_footer_text {
     float: left;
     width: 50%;
-    height: 50px;
     text-align: left;
 }
 
 .ucsf_footer_links_container {
     float: left;
     width: 50%;
-    height: 50px;
+    text-align: right;
+}
+
+.ucsf_footer_links_container p {
     text-align: right;
 }
 
@@ -404,9 +399,23 @@ hr {
     margin-left: 20px;
 }
 
-.ucsf_logininfo {
-    margin-top: 20px;
-    float: right;
+@media ( max-width: 560px) {
+
+    .ucsf_footer_text {
+        text-align: center;
+        width: 100%;
+        clear: both;
+    }
+    .ucsf_footer_links_container {
+        clear: both;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .ucsf_footer_links_container p {
+        text-align: center !important;
+    }
 }
 
 /*------------------------------------------------------------------------------------*/
