@@ -76,5 +76,5 @@ $THEME->layouts = array(
 );
 
 $THEME->javascripts_footer = array(
-    'datepicker', 'alerts'
+    'datepicker', 'custom_alerts'
 );
