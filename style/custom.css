@@ -130,6 +130,27 @@ hr {
     background-color: #e4edf4;
 }
 
+.ucsf-custom-menu .nav > li > a {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.ucsf-custom-menu .nav > li > a:first-child {
+    padding-left: 0;
+}
+
+.ucsf-custom-menu .nav > li > a:last-child {
+    padding-right: 0;
+}
+
+.ucsf-custom-menu .nav > li > a:after {
+    content: " | ";
+}
+
+.ucsf-custom-menu .nav > li:last-child > a:after {
+    content: "";
+}
+
 @media (min-width: 980px) {
     .ucsf-custom-menu.navbar .nav {
         visibility: visible;
