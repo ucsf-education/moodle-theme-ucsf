@@ -49,6 +49,14 @@ echo $OUTPUT->doctype() ?>
     </nav>
 </header>
 
+<header role="banner" class="navbar ucsf-custom-menu">
+    <nav role="navigation">
+        <div class="container-fluid">
+            <?php echo $html->custom_menu; ?>
+        </div>
+    </nav>
+</header>
+
 <div id="page" class="container-fluid">
     <?php echo $html->custom_alerts; ?>
     <?php echo $OUTPUT->full_header(); ?>

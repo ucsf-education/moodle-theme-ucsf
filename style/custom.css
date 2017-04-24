@@ -123,6 +123,22 @@ hr {
     }
 }
 
+/* Custom UCSF Navigation
+-------------------------*/
+
+@media (min-width: 980px) {
+    .ucsf-custom-menu.navbar .nav {
+        visibility: visible;
+        height: inherit;
+    }
+}
+
+@media (max-width: 979px) {
+    .ucsf-custom-menu.navbar .nav {
+        display: none;
+    }
+}
+
 /*------------------------------------------------------------------------------------*/
 /* BLOCK */
 .block .content {
