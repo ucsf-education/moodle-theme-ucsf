@@ -28,6 +28,25 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer
     }
 
     /**
+     * Returns the custom alerts.
+     *
+     * @param string $callback_url
+     * @param array $alerts
+     * @return string The custom alerts HTML, or a blank string if no alerts were given.
+     */
+    public function custom_alerts($callback_url, $alerts = array()) {
+
+        if (empty($alerts)) {
+            return '';
+        }
+
+        $context = new stdClass();
+        $context->alerts = $alerts;
+        $context->url = $callback_url;
+        return $this->render_from_template('theme_ucsf/custom_alerts', $context);
+    }
+
+    /**
      * @inheritdoc
      */
     protected function get_home_ref($returnlink = true)
@@ -45,4 +64,6 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer
 
         return html_writer::tag('span', $sitename, array('class' => 'brand'));
     }
+
+
 }

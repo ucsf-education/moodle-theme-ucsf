@@ -851,29 +851,20 @@ function theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_p
         }
     }
 
-    $alert = '';
-
+    $alerts = array();
     for ($i = 0; $i < $number_of_alerts; $i++) {
         if ($hasalert[$i]) {
-            $n = $i + 1;
-            $alert_type = theme_ucsf_get_setting($theme_settings, 'alert' . $n . 'type', 'info');
-            $alert_title = theme_ucsf_get_setting($theme_settings, 'alert' . $n . 'title', '');
-            $alert_text = theme_ucsf_get_setting($theme_settings, 'alert' . $n . 'text', '');
-            $alert .= '<div class="alert alert-block alert-' . $alert_type . ' ucsf-alert" role="alert" data-ucsf-alert-id="alert' . $n . '" data-ucsf-target-url="' . $CFG->wwwroot . '/theme/ucsf/alert.php">';
-            $alert .= '<button type="button" class="close" data-dismiss="alert" >×</button>';
-            $alert .= '<span class="title">' . $alert_title . '</span>' . $alert_text;
-            $alert .= '</div>';
-            $showalert = true;
+            $id = $i + 1;
+            $alert = array();
+            $alert['id'] = $id;
+            $alert['type'] = theme_ucsf_get_setting($theme_settings, "alert{$id}type", 'info');
+            $alert['title'] = theme_ucsf_get_setting($theme_settings, "alert{$id}title", '');
+            $alert['text'] = theme_ucsf_get_setting($theme_settings, "alert{$id}text", '');
+            $alerts[] = $alert;
         }
     }
 
-    if (in_array(true, $hasalert, true)) {
-        $alert = '<div class="alerts">' . $alert . '</div>';
-    } else if ($page->pagelayout == "frontpage") {
-        $alert = '<div class="alerts"></div>';
-    }
-
-    return $alert;
+    return $output->custom_alerts($CFG->wwwroot . '/theme/ucsf/alert.php', $alerts);
 }
 
 /**
