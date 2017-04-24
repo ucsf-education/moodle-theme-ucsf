@@ -213,7 +213,7 @@ function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, mood
         $return->footnote = $page->theme->settings->footnote;
     }
 
-    $return->custom_alerts = theme_ucsf_get_alerts($output, $page);
+    $return->custom_alerts = theme_ucsf_get_custom_alerts($output, $page);
 
     $return->custom_menu = theme_ucsf_get_custom_menu($output, $page);
 
@@ -631,7 +631,7 @@ function theme_ucsf_get_category_helpmenu($theme_settings, $category)
  * @param moodle_page $page The current page
  * @return string|null
  */
-function theme_ucsf_get_alerts(theme_ucsf_core_renderer $output, moodle_page $page)
+function theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_page $page)
 {
     global $CFG, $COURSE;
 
