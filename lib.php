@@ -531,7 +531,7 @@ function theme_ucsf_get_help_menu(theme_ucsf_core_renderer $output, moodle_page 
 
 
     if (!empty($menu)) {
-        return $output->help_menu($menu);
+        return $output->help_menu($menu['items'], $menu['title']);
     }
 
     return '';
