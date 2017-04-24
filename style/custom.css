@@ -126,6 +126,10 @@ hr {
 /* Custom UCSF Navigation
 -------------------------*/
 
+.ucsf-custom-menu {
+    background-color: #e4edf4;
+}
+
 @media (min-width: 980px) {
     .ucsf-custom-menu.navbar .nav {
         visibility: visible;
@@ -134,7 +138,7 @@ hr {
 }
 
 @media (max-width: 979px) {
-    .ucsf-custom-menu.navbar .nav {
+    .ucsf-custom-menu {
         display: none;
     }
 }
