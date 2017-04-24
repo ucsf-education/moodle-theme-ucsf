@@ -1,3 +1,28 @@
+{{!
+    @template theme_ucsf/custom_alerts
+
+    This template will render all given custom alerts.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * All data attributes are required
+
+    Context variables required for this template:
+    * url The URL to the server-side callback script for clearing alerts from the user session.
+    * alerts The list of alerts.
+
+    Example context (json):
+    {
+        "title: "http://localhost/theme/ucsf/alert.php",
+        "alerts": [
+            { "type": "info", "title": "Achtung!": "text": "Lorem Ipsum" },
+            { "type": "warning", "title": "Fair Warning": "text": "Foo Bar Baz" },
+        ]
+    }
+
+}}
 <div class="alerts">
     {{#alerts}}
         <div class="alert alert-block alert-{{type}} ucsf-alert" role="alert" data-ucsf-alert-id="alert{{id}}"
