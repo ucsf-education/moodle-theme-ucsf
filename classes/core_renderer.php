@@ -14,17 +14,21 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer
     /**
      * Returns a help menu.
      *
-     * @param array $menu An associative array containing the help menu data.
+     * @param array $items An associative array containing the help menu items.
+     * @param string $title The menu title.
      * @return string The help menu HTML, or a blank string if the given menu data is empty.
      */
-    public function help_menu($menu)
+    public function help_menu($items = array(), $title = '')
     {
-        if (!empty($menu)) {
-            return $this->render_from_template('theme_ucsf/helpmenu_popover', $menu);
+        if (empty($items)) {
+            return '';
         }
 
-        return '';
+        $context = new stdClass();
+        $context->items = $items;
+        $context->title = $title;
 
+        return $this->render_from_template('theme_ucsf/helpmenu_popover', $context);
     }
 
     /**
@@ -43,6 +47,7 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer
         $context = new stdClass();
         $context->alerts = $alerts;
         $context->url = $callback_url;
+
         return $this->render_from_template('theme_ucsf/custom_alerts', $context);
     }
 
