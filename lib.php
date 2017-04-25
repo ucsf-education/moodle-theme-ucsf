@@ -170,7 +170,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
  *      - custom_alerts Markup containing custom alerts
  *      - custom_menu Markup containing the custom menu.
  *      - category_label Markup containing a category label, to be displayed left of the custom nav.
- *      - navbar_home Markup containing the title and logo, to be displayed in the main navbar.
+ *      - navbar_home Markup containing the title and logo, to be displayed in the primary header.
  */
 function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, moodle_page $page)
 {
