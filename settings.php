@@ -233,24 +233,6 @@ $setting = new admin_setting_configtext($name, $heading, $information, $default)
 $setting->set_updatedcallback('theme_reset_all_caches');
 $settings_lr->add($setting);
 
-// Header Image Height
-$name = 'theme_ucsf/headerimageheight';
-$heading = get_string('headerimageheight', 'theme_ucsf');
-$information = get_string('headerimageheightdesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_configtext($name, $heading, $information, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-// Header Image Width
-$name = 'theme_ucsf/headerimagewidth';
-$heading = get_string('headerimagewidth', 'theme_ucsf');
-$information = get_string('headerimagewidthdesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_configtext($name, $heading, $information, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
 // Header Image Link
 $name = 'theme_ucsf/headerimagelink';
 $heading = get_string('headerimagelink', 'theme_ucsf');
@@ -976,24 +958,6 @@ foreach ($all_categories_array as $allcats) {
             $name = 'theme_ucsf/headerimagetitle' . $cats->id;
             $heading = get_string('headerimagetitle', 'theme_ucsf');
             $information = get_string('headerimagetitledesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $heading, $information, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Header Image Height
-            $name = 'theme_ucsf/headerimageheight' . $cats->id;
-            $heading = get_string('headerimageheight', 'theme_ucsf');
-            $information = get_string('headerimageheightdesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $heading, $information, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Header Image Width
-            $name = 'theme_ucsf/headerimagewidth' . $cats->id;
-            $heading = get_string('headerimagewidth', 'theme_ucsf');
-            $information = get_string('headerimagewidthdesc', 'theme_ucsf');
             $default = '';
             $setting = new admin_setting_configtext($name, $heading, $information, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
