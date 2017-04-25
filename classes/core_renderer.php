@@ -72,6 +72,46 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer
     }
 
     /**
+     * Renders the given logo, to be included in the primary header.
+     *
+     * @param string $logo_image_url
+     * @param string $logo_image_alt
+     * @param string $logo_link_url
+     * @param string $logo_link_title
+     * @param string $logo_link_target
+     * @return string
+     */
+    public function navbar_home_logo(
+        $logo_image_url,
+        $logo_image_alt = '',
+        $logo_link_url = '',
+        $logo_link_title = '',
+        $logo_link_target = '_self'
+    ) {
+        $out = html_writer::img($logo_image_url, $logo_image_alt, array('class' => 'small-logo'));
+        if (! empty($logo_link_url)) {
+            $out = html_writer::link(
+                $logo_link_url,
+                $out,
+                array('class' => 'small-logo-container', 'target' => $logo_link_target, 'title' => $logo_link_title)
+            );
+        }
+
+        return $out;
+    }
+
+    /**
+     * Renders the given title, to be rendered in the primary header.
+     *
+     * @param string $title
+     * @return string
+     */
+    public function navbar_home_title($title)
+    {
+        return html_writer::span($title, 'brand');
+    }
+
+    /**
      * @inheritdoc
      */
     protected function get_home_ref($returnlink = true)
@@ -89,6 +129,4 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer
 
         return html_writer::tag('span', $sitename, array('class' => 'brand'));
     }
-
-
 }
