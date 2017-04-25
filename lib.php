@@ -242,8 +242,8 @@ function theme_ucsf_get_category_roots($id)
     }
 
     if (!array_key_exists($id, $cache)) {
-        $ids = _theme_ucsf_get_category_roots($id);
-        $cache[$id] = _theme_ucsf_get_category_roots($id);
+        $ids = _theme_ucsf_recursively_get_category_roots($id);
+        $cache[$id] = _theme_ucsf_recursively_get_category_roots($id);
         array_shift($ids);
         // cache category roots of all ancestors in that category hierarchy while at it.
         for ($i = 0, $n = count($ids); $i < $n; $i++) {
@@ -843,7 +843,7 @@ function theme_ucsf_get_category_label(theme_ucsf_core_renderer $output, moodle_
  * @param array $categories A partial list of ancestral category ids.
  * @return array A list full list of ancestral category ids, including the given id itself.
  */
-function _theme_ucsf_get_category_roots($id, $categories = array())
+function _theme_ucsf_recursively_get_category_roots($id, $categories = array())
 {
     global $DB;
 
@@ -856,5 +856,5 @@ function _theme_ucsf_get_category_roots($id, $categories = array())
 
     $categories[] = $id;
     $cat = array_shift($cats);
-    return _theme_ucsf_get_category_roots($cat->parent, $categories);
+    return _theme_ucsf_recursively_get_category_roots($cat->parent, $categories);
 }
