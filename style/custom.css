@@ -128,6 +128,18 @@ hr {
 
 .ucsf-custom-menu {
     background-color: #e4edf4;
+    margin-left: 0;
+}
+
+.ucsf-custom-menu .category-label {
+    background: url([[pix:theme_ucsf|breadcrumb-arrow]]) #cbdcea no-repeat right;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.ucsf-custom-menu .container-fluid {
+    background-color: #e4edf4;
+    padding-left: 0;
 }
 
 .ucsf-custom-menu .nav > li > a {
@@ -136,7 +148,7 @@ hr {
 }
 
 .ucsf-custom-menu .nav > li > a:first-child {
-    padding-left: 0;
+    padding-left: 10px;
 }
 
 .ucsf-custom-menu .nav > li > a:last-child {

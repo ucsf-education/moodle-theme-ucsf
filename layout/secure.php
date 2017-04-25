@@ -43,6 +43,7 @@ echo $OUTPUT->doctype() ?>
 <header role="banner" class="navbar ucsf-custom-menu">
     <nav role="navigation">
         <div class="container-fluid">
+            <?php echo $html->category_label; ?>
             <?php echo $html->custom_menu; ?>
         </div>
     </nav>
