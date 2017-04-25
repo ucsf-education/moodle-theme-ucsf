@@ -61,7 +61,7 @@ function theme_ucsf_extra_less($theme)
         $category = theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menudivider');
         if ($category) {
             $menudivider = $theme->setting_file_url('menudivider' . $category, 'menudivider' . $category);
-            $category_css[] = ".category-label { background-image: url({$menudivider}); }";
+            $category_css[] = ".ucsf-custom-menu .category-label { background-image: url({$menudivider}); }";
         }
         $category = theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menudividermobile');
         if ($category) {
@@ -187,6 +187,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
  *      - copyright The copyright notice.
  *      - custom_alerts Markup containing custom alerts
  *      - custom_menu Markup containing the custom menu.
+ *      - category_label Markup containing a category label, to be displayed left of the custom nav.
  */
 function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, moodle_page $page)
 {
@@ -219,6 +220,8 @@ function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, mood
     $return->custom_menu = theme_ucsf_get_custom_menu($output, $page);
 
     $return->help_menu = theme_ucsf_get_help_menu($output, $page);
+
+    $return->category_label = theme_ucsf_get_category_label($output, $page);
 
     return $return;
 }
@@ -941,6 +944,52 @@ function theme_ucsf_render_attrs_to_string(array $attributes)
         },
         ''
     );
+}
+
+/**
+ * Returns the category label for the custom navigation.
+ *
+ * @param theme_ucsf_core_renderer $output
+ * @param moodle_page $page
+ * @return string The rendered label, or an empty string if n/a.
+ */
+function theme_ucsf_get_category_label(theme_ucsf_core_renderer $output, moodle_page $page)
+{
+    global $COURSE, $CFG;
+
+    $theme_settings = $page->theme->settings;
+
+    if (! theme_ucsf_get_setting($theme_settings, 'enablecustomization')) {
+        return '';
+    }
+
+    $html = '';
+
+    // category-specific label
+    $current_category = theme_ucsf_get_current_course_category($page, $COURSE);
+    if ($current_category) {
+        $parent_categories = theme_ucsf_get_category_roots($current_category);
+        $category = theme_ucsf_find_first_configured_category($theme_settings, $parent_categories, 'categorylabel');
+        if ($category) {
+            $label_text = theme_ucsf_get_setting($theme_settings, "categorylabel{$category}", '');
+            $link_to_category = theme_ucsf_get_setting($theme_settings, "linklabeltocategorypage{$category}");
+            if ($link_to_category) {
+                $link_to_category = $CFG->wwwroot . '/course/index.php?categoryid=' . $category;
+            }
+            $html = $output->category_label($label_text, $link_to_category);
+        }
+    }
+
+    // fallback to site-wide category label
+    if (empty($html)) {
+        $label_text = theme_ucsf_get_setting($theme_settings, 'toplevelcategorylabel');
+        if ($label_text) {
+            $html = $output->category_label($label_text);
+        }
+    }
+
+    return $html;
+
 }
 
 /**
