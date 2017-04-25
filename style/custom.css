@@ -11,8 +11,11 @@ div.logo {
 }
 
 img.small-logo {
+    height: 30px;
     float: left;
     margin: 6px 10px 0 0;
+    width: 125px;
+
 }
 
 @media (max-width: 480px) {
