@@ -169,6 +169,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
  *      - custom_alerts Markup containing custom alerts
  *      - custom_menu Markup containing the custom menu.
  *      - category_label Markup containing a category label, to be displayed left of the custom nav.
+ *      - navbar_home Markup containing the title and logo, to be displayed in the main navbar.
  */
 function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, moodle_page $page)
 {
@@ -203,6 +204,8 @@ function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, mood
     $return->help_menu = theme_ucsf_get_help_menu($output, $page);
 
     $return->category_label = theme_ucsf_get_category_label($output, $page);
+
+    $return->navbar_home = theme_ucsf_get_navbar_home($output, $page);
 
     return $return;
 }
@@ -474,6 +477,20 @@ function theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_pag
     }
 
     return $output->custom_menu($menu_items);
+}
+
+/**
+ * Returns the branding logo and title for the primary nav bar.
+ *
+ * @param theme_ucsf_core_renderer $output
+ * @param moodle_page $page
+ * @return string The navbar home HTML.
+ */
+function theme_ucsf_get_navbar_home(theme_ucsf_core_renderer $output, moodle_page $page)
+{
+    // @todo implement [ST 2017/04/25]
+    return '<a class="small-logo-container" title="Home" href="http://moodle3.local/"><img class="small-logo" src="http://moodle3.local/pluginfile.php/1/core_admin/logocompact/0x35/1493153857/ucsf-logo.png" alt="Site Logo"></a>' .
+        '<a class="brand" title="Home" href="http://moodle3.local/">Collaborative Learning Environment</a>';
 }
 
 /**
