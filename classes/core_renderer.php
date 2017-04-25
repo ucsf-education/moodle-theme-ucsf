@@ -58,18 +58,17 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer
      * @param string $label_text The label text.
      * @param string $label_link Optional link for the given label.
      * @return string The rendered markup.
-     *
-     * @todo use template or html_writer to generate output. [ST 2017/04/25]
      */
     public function category_label($label_text, $label_link = '') {
 
-        $output = $label_text;
+        $out = $label_text;
 
         if (!empty($label_link)) {
-            $output = "<a href=\"{$label_link}\">{$output}</a>";
+
+            $out = html_writer::link($label_link, $out);
         }
 
-        return "<div class=\"category-label pull-left\">{$output}</div>";
+        return html_writer::div($out, 'category-label pull-left');
     }
 
     /**
