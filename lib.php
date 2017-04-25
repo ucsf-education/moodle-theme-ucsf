@@ -633,7 +633,7 @@ function theme_ucsf_get_category_helpmenu($theme_settings, $category)
  *
  * @param theme_ucsf_core_renderer $output The output renderer
  * @param moodle_page $page The current page
- * @return string|null
+ * @return string
  */
 function theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_page $page)
 {
