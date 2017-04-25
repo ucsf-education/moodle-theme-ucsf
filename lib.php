@@ -52,28 +52,10 @@ function theme_ucsf_extra_less($theme)
         //
         // ACHTUNG - MINEN!
         // Keep these styles in sync with the ones defined in "style/ucsf.css".
-        // @todo Put this nonsense to the torch. ALL of it. And start over from scratch. [ST 2016/04/27]
-        $category = theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menubackground');
-        if ($category) {
-            $menubackground = $theme->setting_file_url('menubackground' . $category, 'menubackground' . $category);
-            $category_css[] = ".menu-background { background-image: url({$menubackground}); }";
-        }
         $category = theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menudivider');
         if ($category) {
             $menudivider = $theme->setting_file_url('menudivider' . $category, 'menudivider' . $category);
             $category_css[] = ".ucsf-custom-menu .category-label { background-image: url({$menudivider}); }";
-        }
-        $category = theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menudividermobile');
-        if ($category) {
-            $menudivider = $theme->setting_file_url('menudividermobile' . $category, 'menudividermobile' . $category);
-            $category_css[] = "@media ( max-width: 779px) { .category-label { background-image: url({$menudivider}) !important; }}";
-        }
-        $category = theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menuitemdivider');
-        if ($category) {
-            $menuitemdivider = $theme->setting_file_url('menuitemdivider' . $category, 'menuitemdivider' . $category);
-            $rule = ".navbar .nav > li { background-image: url({$menuitemdivider}); }";
-            $category_css[] = $rule;
-            $category_css[] = "@media (min-width: 780px) and (max-width: 979px) { {$rule} }";
         }
 
         // Generic custom CSS

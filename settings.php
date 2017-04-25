@@ -776,35 +776,11 @@ foreach ($all_categories_array as $allcats) {
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
-            // Menu background
-            $name = 'theme_ucsf/menubackground' . $cats->id;
-            $heading = get_string('menubackground', 'theme_ucsf');
-            $information = get_string('menubackgrounddesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menubackground' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
             // Menu divider
             $name = 'theme_ucsf/menudivider' . $cats->id;
             $heading = get_string('menudivider', 'theme_ucsf');
             $information = get_string('menudividerdesc', 'theme_ucsf');
             $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menudivider' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Menu divider mobile
-            $name = 'theme_ucsf/menudividermobile' . $cats->id;
-            $heading = get_string('menudividermobile', 'theme_ucsf');
-            $information = get_string('menudividermobiledesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menudividermobile' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Menu item divider
-            $name = 'theme_ucsf/menuitemdivider' . $cats->id;
-            $heading = get_string('menuitemdivider', 'theme_ucsf');
-            $information = get_string('menuitemdividerdesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menuitemdivider' . $cats->id);
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
@@ -1087,14 +1063,6 @@ foreach ($all_categories_array as $allcats) {
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
-            // Menu background
-            $name = 'theme_ucsf/menubackground' . $cats->id;
-            $heading = get_string('menubackground', 'theme_ucsf');
-            $information = get_string('menubackgrounddesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menubackground' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
             // Menu divider
             $name = 'theme_ucsf/menudivider' . $cats->id;
             $heading = get_string('menudivider', 'theme_ucsf');
@@ -1103,28 +1071,13 @@ foreach ($all_categories_array as $allcats) {
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
-            // Menu divider mobile
-            $name = 'theme_ucsf/menudividermobile' . $cats->id;
-            $heading = get_string('menudividermobile', 'theme_ucsf');
-            $information = get_string('menudividermobiledesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menudividermobile' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Menu item divider
-            $name = 'theme_ucsf/menuitemdivider' . $cats->id;
-            $heading = get_string('menuitemdivider', 'theme_ucsf');
-            $information = get_string('menuitemdividerdesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menuitemdivider' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
+            // HELP/FEEDBACK LINKS
 
             $name = 'theme_ucsf/helpfeedbacksubsection';
             $heading = get_string('helpfeedbacksubsectiontitle', 'theme_ucsf');
             $setting = new admin_setting_heading($name, $heading,'');
             $settings_lr->add($setting);
 
-            // HELP/FEEDBACK LINKS
             // Enable/Disable Help/Feedback links;.
             $name = 'theme_ucsf/catenablehelpfeedback'.$cats->id;
             $title = get_string('enablehelpfeedback', 'theme_ucsf');

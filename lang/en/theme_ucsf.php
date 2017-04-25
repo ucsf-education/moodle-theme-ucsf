@@ -318,15 +318,8 @@ $string['logoinfodesc'] = 'Logo desc';
 
 
 // Menu configuration
-$string['menubackground'] = 'Menu background';
-$string['menubackgrounddesc'] = 'Menu background image.';
 $string['menudivider'] = 'Menu divider';
 $string['menudividerdesc'] = 'The image that separates the category title from its menu.';
-$string['menudividermobile'] = 'Menu divider (mobile)';
-$string['menudividermobiledesc'] = 'The menu divider image seen on mobile devices.';
-$string['menuitemdivider'] = 'Menu item divider';
-$string['menuitemdividerdesc'] = 'Spacer image between top-level menu items.';
-
 
 // Help menu popup
 $string['showhelpmenuwindow'] = 'Show help menu window';
