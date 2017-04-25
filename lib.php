@@ -51,7 +51,7 @@ function theme_ucsf_extra_less($theme)
         // Category-specific menu-style customizations.
         //
         // ACHTUNG - MINEN!
-        // Keep these styles in sync with the ones defined in "style/ucsf.css".
+        // Keep these styles in sync with the ones defined in "style/custom.css".
         $category = _theme_ucsf_find_first_configured_category($theme_settings, $ids, 'menudivider');
         if ($category) {
             $menudivider = $theme->setting_file_url('menudivider' . $category, 'menudivider' . $category);
