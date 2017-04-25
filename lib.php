@@ -170,6 +170,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
  *      - custom_alerts Markup containing custom alerts
  *      - custom_menu Markup containing the custom menu.
  *      - category_label Markup containing a category label, to be displayed left of the custom nav.
+ *      - navbar_home Markup containing the title and logo, to be displayed in the main navbar.
  */
 function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, moodle_page $page)
 {
@@ -204,6 +205,8 @@ function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, mood
     $return->help_menu = theme_ucsf_get_help_menu($output, $page);
 
     $return->category_label = theme_ucsf_get_category_label($output, $page);
+
+    $return->navbar_home = theme_ucsf_get_navbar_home($output, $page);
 
     return $return;
 }
@@ -475,6 +478,62 @@ function theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_pag
     }
 
     return $output->custom_menu($menu_items);
+}
+
+/**
+ * Returns the branding logo and title for the primary header.
+ *
+ * @param theme_ucsf_core_renderer $output
+ * @param moodle_page $page
+ * @return string The rendered markup.
+ */
+function theme_ucsf_get_navbar_home(theme_ucsf_core_renderer $output, moodle_page $page)
+{
+    global $COURSE;
+
+    $theme_settings = $page->theme->settings;
+
+    $html = '';
+
+    if (theme_ucsf_get_setting($theme_settings, 'enablecustomization')) {
+
+        // category-specific settings
+        $current_category = theme_ucsf_get_current_course_category($page, $COURSE);
+        if ($current_category) {
+            $parent_categories = theme_ucsf_get_category_roots($current_category);
+            $category = theme_ucsf_find_first_configured_category($theme_settings, $parent_categories, 'customheaderenabled');
+            if ($category) {
+                $logo = theme_ucsf_get_setting($theme_settings, "headerimage{$category}");
+                if ($logo) {
+                    $logo_image_url = $page->theme->setting_file_url("headerimage{$category}", "headerimage{$category}");
+                    $logo_image_alt = theme_ucsf_get_setting($theme_settings, "headerimagealt{$category}", '');
+                    $logo_link_url = theme_ucsf_get_setting($theme_settings, "headerimagelink{$category}", '');
+                    $logo_link_title = theme_ucsf_get_setting($theme_settings, "headerimagetitle{$category}", '');
+                    $logo_link_target = theme_ucsf_get_setting($theme_settings, "headerimagelinktarget{$category}") ? '_blank' : '_self';
+                    $html = $output->navbar_home_logo($logo_image_url, $logo_image_alt, $logo_link_url, $logo_link_title, $logo_link_target);
+                }
+                $title = theme_ucsf_get_setting($theme_settings, "headerlabel{$category}", '');
+                $html .= $output->navbar_home_title($title);
+            }
+        }
+    }
+    // fallback to site-wide settings
+    if (empty($html)) {
+        $logo = theme_ucsf_get_setting($theme_settings, "headerimage");
+        if ($logo) {
+            $logo_image_url = $page->theme->setting_file_url("headerimage", "headerimage");
+            $logo_image_alt = theme_ucsf_get_setting($theme_settings, "headerimagealt", '');
+            $logo_link_url = theme_ucsf_get_setting($theme_settings, "headerimagelink", '');
+            $logo_link_title = theme_ucsf_get_setting($theme_settings, "headerimagetitle", '');
+            $logo_link_target = theme_ucsf_get_setting($theme_settings, "headerimagelinktarget") ? '_blank' : '_self';
+            $html = $output->navbar_home_logo($logo_image_url, $logo_image_alt, $logo_link_url, $logo_link_title, $logo_link_target);
+        }
+
+        $title = theme_ucsf_get_setting($theme_settings, "headerlabel", '');
+        $html .= $output->navbar_home_title($title);
+    }
+
+    return $html;
 }
 
 /**

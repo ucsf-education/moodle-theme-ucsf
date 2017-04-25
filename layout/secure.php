@@ -28,7 +28,7 @@ echo $OUTPUT->doctype() ?>
 <header role="banner" class="navbar navbar-fixed-top moodle-has-zindex">
     <nav role="navigation" class="navbar-inner">
         <div class="container-fluid">
-            <?php echo $OUTPUT->navbar_home(false); ?>
+            <?php echo $html->navbar_home; ?>
             <?php echo $OUTPUT->navbar_button(); ?>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
