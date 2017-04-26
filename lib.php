@@ -553,7 +553,7 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
 
             //Never-Ending Alert
             if ($alert_type == '1') {
-                 $_SESSION["alerts"]["alert" . $n] = 1;
+                 $_SESSION["alerts"]["alert" . $n] = false;
                  $hasalert[$i] = true;
             }
             //One-Time Alert
@@ -592,7 +592,7 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                 $end_date_timestamp = strtotime($end_date_format);
 
                 if ($start_date_timestamp <= $current_date_timestamp && $end_date_timestamp >= $current_date_timestamp) {
-                    $_SESSION["alerts"]["alert" . $n] = 1;
+                    $_SESSION["alerts"]["alert" . $n] = false;
                     $hasalert[$i] = true;
                 }
             }
@@ -637,7 +637,7 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
 
                 if ($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
                     if ($start_time_timestamp <= $current_time_timestamp && $end_time_timestamp > $current_time_timestamp) {
-                        $_SESSION["alerts"]["alert" . $n] = 1;
+                        $_SESSION["alerts"]["alert" . $n] = false;
                         $hasalert[$i] = true;
                     }
                 }
@@ -710,7 +710,7 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                 if ($weekday_timestamp == $current_weekday_timestamp) {
                     if ($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
                         if ($start_time_timestamp <= $current_date_timestamp && $end_time_timestamp > $current_date_timestamp) {
-                            $_SESSION["alerts"]["alert" . $n] = 1;
+                            $_SESSION["alerts"]["alert" . $n] = false;
                             $hasalert[$i] = true;
                         }
                     }
