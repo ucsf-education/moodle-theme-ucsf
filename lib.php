@@ -262,7 +262,7 @@ function _theme_ucsf_get_category_roots($id)
  *
  * @param moodle_page $page The current page object.
  * @param stdClass $course The current course object.
- * @return int The course category id.
+ * @return string The course category id.
  */
 function _theme_ucsf_get_current_course_category(moodle_page $page, $course)
 {
