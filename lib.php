@@ -538,9 +538,15 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
 
     for ($i = 0; $i < $number_of_alerts; $i++) {
         $n = $i + 1;
+
+        // only proceed if alert is enabled
+        $alert_enabled = _theme_ucsf_get_setting($theme_settings, 'enable' . $n . 'alert');
+        if (! $alert_enabled) {
+            continue;
+        }
+
         $category = _theme_ucsf_get_setting($theme_settings, 'categories_list_alert' . $n);
         $alert_type = _theme_ucsf_get_setting($theme_settings, 'recurring_alert' . $n);
-        $enable_alert = _theme_ucsf_get_setting($theme_settings, 'enable' . $n . 'alert');
 
         if ($coursecategory == $category || $category == 0 || in_array($category, $sub_cat)) {
 
@@ -548,10 +554,8 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
 
                 //Never-Ending Alert
                 if ($alert_type == '1') {
-                    if ($enable_alert == 1) {
-                        $_SESSION["alerts"]["alert" . $n] = 1;
-                        $hasalert[$i] = true;
-                    }
+                     $_SESSION["alerts"]["alert" . $n] = 1;
+                     $hasalert[$i] = true;
                 }
                 //One-Time Alert
                 if ($alert_type == '2') {
@@ -588,11 +592,9 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                     $end_date_format = date($end_date . ' ' . $end_hour . ':' . $end_minute . ':00');
                     $end_date_timestamp = strtotime($end_date_format);
 
-                    if ($enable_alert == 1) {
-                        if ($start_date_timestamp <= $current_date_timestamp && $end_date_timestamp >= $current_date_timestamp) {
-                            $_SESSION["alerts"]["alert" . $n] = 1;
-                            $hasalert[$i] = true;
-                        }
+                    if ($start_date_timestamp <= $current_date_timestamp && $end_date_timestamp >= $current_date_timestamp) {
+                        $_SESSION["alerts"]["alert" . $n] = 1;
+                        $hasalert[$i] = true;
                     }
                 }
 
@@ -634,12 +636,10 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                     $end_date_timestamp = strtotime($end_date);
                     $end_time_timestamp = strtotime($end_time);
 
-                    if ($enable_alert == 1) {
-                        if ($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
-                            if ($start_time_timestamp <= $current_time_timestamp && $end_time_timestamp > $current_time_timestamp) {
-                                $_SESSION["alerts"]["alert" . $n] = 1;
-                                $hasalert[$i] = true;
-                            }
+                    if ($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
+                        if ($start_time_timestamp <= $current_time_timestamp && $end_time_timestamp > $current_time_timestamp) {
+                            $_SESSION["alerts"]["alert" . $n] = 1;
+                            $hasalert[$i] = true;
                         }
                     }
                 }
@@ -708,13 +708,11 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                     $end_date_timestamp = strtotime($end_date);
                     $end_time_timestamp = strtotime($end_time);
 
-                    if ($enable_alert == 1) {
-                        if ($weekday_timestamp == $current_weekday_timestamp) {
-                            if ($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
-                                if ($start_time_timestamp <= $current_date_timestamp && $end_time_timestamp > $current_date_timestamp) {
-                                    $_SESSION["alerts"]["alert" . $n] = 1;
-                                    $hasalert[$i] = true;
-                                }
+                    if ($weekday_timestamp == $current_weekday_timestamp) {
+                        if ($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
+                            if ($start_time_timestamp <= $current_date_timestamp && $end_time_timestamp > $current_date_timestamp) {
+                                $_SESSION["alerts"]["alert" . $n] = 1;
+                                $hasalert[$i] = true;
                             }
                         }
                     }
