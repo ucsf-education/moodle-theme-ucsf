@@ -12,6 +12,7 @@
  * This will generate some LESS code from the settings used by the user.
  *
  * @param theme_config $theme The theme config object.
+ *
  * @return string Raw LESS code.
  */
 function theme_ucsf_extra_less($theme)
@@ -27,10 +28,14 @@ function theme_ucsf_extra_less($theme)
     }
     $customized_category_ids = explode(',', $theme_settings->all_categories);
     // filter out any categories that don't have CSS customizations turned on
-    $customized_category_ids = array_filter($customized_category_ids, function ($id) use ($theme_settings) {
-        $enabled_key = 'customcssenabled' . (int)$id;
-        return !empty($theme_settings->$enabled_key);
-    });
+    $customized_category_ids = array_filter(
+        $customized_category_ids,
+        function ($id) use ($theme_settings) {
+            $enabled_key = 'customcssenabled' . (int) $id;
+
+            return ! empty($theme_settings->$enabled_key);
+        }
+    );
     $customized_category_ids = array_values($customized_category_ids);
     if (empty($customized_category_ids)) {
         return '';
@@ -43,9 +48,12 @@ function theme_ucsf_extra_less($theme)
 
         // get parent categories that are enabled for css customization
         $ids = array_values(
-            array_filter(_theme_ucsf_get_category_roots($category_id), function ($id) use ($customized_category_ids) {
-                return in_array($id, $customized_category_ids);
-            })
+            array_filter(
+                _theme_ucsf_get_category_roots($category_id),
+                function ($id) use ($customized_category_ids) {
+                    return in_array($id, $customized_category_ids);
+                }
+            )
         );
 
         // Category-specific menu-style customizations.
@@ -62,7 +70,7 @@ function theme_ucsf_extra_less($theme)
         //
         // "inherit" any rules that may have been defined/enabled by parent categories.
         foreach ($ids as $id) {
-            $css_key = 'customcss' . (int)$id;
+            $css_key = 'customcss' . (int) $id;
             $custom_css = $theme_settings->$css_key;
             if (trim($custom_css)) {
                 $category_css[] = $custom_css;
@@ -70,7 +78,7 @@ function theme_ucsf_extra_less($theme)
         }
 
         // Finally, scope category specific rules with a class selector anchored of the <body> tag.
-        if (!empty($category_css)) {
+        if (! empty($category_css)) {
             $category_css = implode("\n", array_reverse($category_css));
             $contents[] = "body.category-{$category_id} {\n{$category_css}\n}";
         }
@@ -84,8 +92,9 @@ function theme_ucsf_extra_less($theme)
  *
  * This function can make alterations and replace patterns within the CSS.
  *
- * @param string $css The CSS
+ * @param string       $css   The CSS
  * @param theme_config $theme The theme config object.
+ *
  * @return string The parsed CSS The parsed CSS.
  */
 function theme_ucsf_process_css($css, $theme)
@@ -100,7 +109,7 @@ function theme_ucsf_process_css($css, $theme)
 
     // Set custom CSS.
     $customcss = '';
-    if ($theme_settings->customcssenabled && !empty($theme_settings->customcss)) {
+    if ($theme_settings->customcssenabled && ! empty($theme_settings->customcss)) {
         $customcss = $theme_settings->customcss;
     }
     $replacements['[[setting:customcss]]'] = $customcss;
@@ -116,11 +125,12 @@ function theme_ucsf_process_css($css, $theme)
  *
  * @param stdClass $course
  * @param stdClass $cm
- * @param context $context
- * @param string $filearea
- * @param array $args
- * @param bool $forcedownload
- * @param array $options
+ * @param context  $context
+ * @param string   $filearea
+ * @param array    $args
+ * @param bool     $forcedownload
+ * @param array    $options
+ *
  * @return bool
  */
 function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array())
@@ -136,7 +146,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
         'menubackground',
         'menudivider',
         'menudividermobile',
-        'menuitemdivider'
+        'menuitemdivider',
     );
     foreach ($course_categories as $cat) {
         foreach ($prefixes as $prefix) {
@@ -160,7 +170,8 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
  * Returns an object containing HTML for the areas affected by settings.
  *
  * @param theme_ucsf_core_renderer $output Pass in $OUTPUT.
- * @param moodle_page $page Pass in $PAGE.
+ * @param moodle_page              $page   Pass in $PAGE.
+ *
  * @return stdClass An object with the following properties:
  *      - navbarclass A CSS class to use on the navbar. By default ''.
  *      - heading HTML to use for the heading. A logo if one is selected or the default heading.
@@ -177,23 +188,27 @@ function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, mood
     $return = new stdClass();
 
     $return->navbarclass = '';
-    if (!empty($page->theme->settings->invert)) {
+    if (! empty($page->theme->settings->invert)) {
         $return->navbarclass .= ' navbar-inverse';
     }
 
-    if (!empty($page->theme->settings->logo)) {
-        $return->heading = html_writer::link($CFG->wwwroot, '', array('title' => get_string('home'), 'class' => 'logo'));
+    if (! empty($page->theme->settings->logo)) {
+        $return->heading = html_writer::link(
+            $CFG->wwwroot,
+            '',
+            array('title' => get_string('home'), 'class' => 'logo')
+        );
     } else {
         $return->heading = $output->page_heading();
     }
 
     $return->copyright = '';
-    if (!empty($page->theme->settings->copyright)) {
+    if (! empty($page->theme->settings->copyright)) {
         $return->copyright = $page->theme->settings->copyright;
     }
 
     $return->footnote = '';
-    if (!empty($page->theme->settings->footnote)) {
+    if (! empty($page->theme->settings->footnote)) {
         $return->footnote = $page->theme->settings->footnote;
     }
 
@@ -214,33 +229,37 @@ function theme_ucsf_get_html_for_settings(theme_ucsf_core_renderer $output, mood
  * Retrieves a theme setting.
  *
  * @param stdClass $theme_settings The theme settings object
- * @param string $setting The name of the setting.
- * @param mixed $default A default value, to be used as fallback if the setting is not defined.
+ * @param string   $setting        The name of the setting.
+ * @param mixed    $default        A default value, to be used as fallback if the setting is not defined.
+ *
  * @return mixed The setting's value, or the given default if the setting has not been defined.
  */
 function _theme_ucsf_get_setting($theme_settings, $setting, $default = false)
 {
-    if (!isset($theme_settings->$setting)) {
+    if (! isset($theme_settings->$setting)) {
         return $default;
     }
+
     return $theme_settings->$setting;
 }
 
 /**
  * Returns a list of all ancestral categories of a given category.
  * The first element in that list is the given category itself, followed by its parent, the parent's parent and so on.
+ *
  * @param int $id The category id.
+ *
  * @return array A list of category ids, will be empty if the given category is bogus.
  */
 function _theme_ucsf_get_category_roots($id)
 {
     static $cache = null;
 
-    if (!isset($cache)) {
+    if (! isset($cache)) {
         $cache = array();
     }
 
-    if (!array_key_exists($id, $cache)) {
+    if (! array_key_exists($id, $cache)) {
         $ids = _theme_ucsf_recursively_get_category_roots($id);
         $cache[$id] = _theme_ucsf_recursively_get_category_roots($id);
         array_shift($ids);
@@ -253,14 +272,16 @@ function _theme_ucsf_get_category_roots($id)
             $cache[$parent_id] = array_slice($ids, $i);
         }
     }
+
     return $cache[$id];
 }
 
 /**
  * Retrieves the current course category id.
  *
- * @param moodle_page $page The current page object.
- * @param stdClass $course The current course object.
+ * @param moodle_page $page   The current page object.
+ * @param stdClass    $course The current course object.
+ *
  * @return string The course category id.
  */
 function _theme_ucsf_get_current_course_category(moodle_page $page, $course)
@@ -273,6 +294,7 @@ function _theme_ucsf_get_current_course_category(moodle_page $page, $course)
     if ($page->pagelayout == "coursecategory" && isset($_REQUEST["categoryid"])) {
         return $_REQUEST["categoryid"];
     }
+
     return $course->category;
 }
 
@@ -281,7 +303,8 @@ function _theme_ucsf_get_current_course_category(moodle_page $page, $course)
  * Returns the fully rendered custom menu.
  *
  * @param theme_ucsf_core_renderer $output
- * @param moodle_page $page
+ * @param moodle_page              $page
+ *
  * @return string
  */
 function _theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_page $page)
@@ -290,7 +313,7 @@ function _theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_pa
 
     $theme_settings = $page->theme->settings;
 
-    if ($theme_settings->hidecustommenuwhenloggedout && !isloggedin()) {
+    if ($theme_settings->hidecustommenuwhenloggedout && ! isloggedin()) {
         return '';
     }
 
@@ -300,7 +323,6 @@ function _theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_pa
         $categories = _theme_ucsf_get_category_roots(_theme_ucsf_get_current_course_category($page, $COURSE));
         $course_category = _theme_ucsf_find_first_configured_category($theme_settings, $categories, 'custommenu');
         $menu_items = _theme_ucsf_get_setting($theme_settings, "custommenu" . $course_category, '');
-
     }
 
     return $output->custom_menu($menu_items);
@@ -310,11 +332,11 @@ function _theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_pa
  * Returns the branding logo and title for the primary header.
  *
  * @param theme_ucsf_core_renderer $output
- * @param moodle_page $page
+ * @param moodle_page              $page
+ *
  * @return string The rendered markup.
  */
-function _theme_ucsf_get_navbar_home(theme_ucsf_core_renderer $output, moodle_page $page)
-{
+function _theme_ucsf_get_navbar_home(theme_ucsf_core_renderer $output, moodle_page $page) {
     global $COURSE;
 
     $theme_settings = $page->theme->settings;
@@ -347,7 +369,7 @@ function _theme_ucsf_get_navbar_home(theme_ucsf_core_renderer $output, moodle_pa
     if (empty($html)) {
         $logo = _theme_ucsf_get_setting($theme_settings, "headerimage");
         if ($logo) {
-            $logo_image_url = $page->theme->setting_file_url("headerimage", "headerimage");
+            $logo_image_url = $page->theme->setting_file_url("headerimage","headerimage");
             $logo_image_alt = _theme_ucsf_get_setting($theme_settings, "headerimagealt", '');
             $logo_link_url = _theme_ucsf_get_setting($theme_settings, "headerimagelink", '');
             $logo_link_title = _theme_ucsf_get_setting($theme_settings, "headerimagetitle", '');
@@ -366,7 +388,8 @@ function _theme_ucsf_get_navbar_home(theme_ucsf_core_renderer $output, moodle_pa
  * Returns a help menu.
  *
  * @param theme_ucsf_core_renderer $output
- * @param moodle_page $page
+ * @param moodle_page              $page
+ *
  * @return string The help menu HTML, or a blank string.
  *
  */
@@ -374,7 +397,7 @@ function _theme_ucsf_get_help_menu(theme_ucsf_core_renderer $output, moodle_page
 {
     global $COURSE;
 
-    if (!isloggedin()) {
+    if (! isloggedin()) {
         return '';
     }
 
@@ -385,15 +408,15 @@ function _theme_ucsf_get_help_menu(theme_ucsf_core_renderer $output, moodle_page
     if ($theme_settings->enablecustomization) {
         $current_category = _theme_ucsf_get_current_course_category($page, $COURSE);
 
-        if (!empty($current_category)) {
+        if (! empty($current_category)) {
             $parent_categories = _theme_ucsf_get_category_roots($current_category);
-            while (!$menu && !empty($parent_categories)) {
+            while (! $menu && ! empty($parent_categories)) {
                 $category = array_shift($parent_categories);
                 $menu = _theme_ucsf_get_category_helpmenu($theme_settings, $category);
             }
         }
 
-        if (!$menu) {
+        if (! $menu) {
             $menu = _theme_ucsf_get_default_helpmenu($theme_settings);
         }
     } else {
@@ -401,7 +424,7 @@ function _theme_ucsf_get_help_menu(theme_ucsf_core_renderer $output, moodle_page
     }
 
 
-    if (!empty($menu)) {
+    if (! empty($menu)) {
         return $output->help_menu($menu['items'], $menu['title']);
     }
 
@@ -418,7 +441,7 @@ function _theme_ucsf_get_help_menu(theme_ucsf_core_renderer $output, moodle_page
  */
 function _theme_ucsf_get_default_helpmenu($theme_settings)
 {
-    if (!_theme_ucsf_get_setting($theme_settings, 'enablehelpfeedback')) {
+    if (! _theme_ucsf_get_setting($theme_settings, 'enablehelpfeedback')) {
         return false;
     }
 
@@ -428,18 +451,18 @@ function _theme_ucsf_get_default_helpmenu($theme_settings)
     $menu['title'] = empty($title) ? get_string('helpmenutitle', 'theme_ucsf') : $title;
 
     $menu['items'] = array();
-    $number_of_links = (int)_theme_ucsf_get_setting($theme_settings, 'numberoflinks', 0);
+    $number_of_links = (int) _theme_ucsf_get_setting($theme_settings, 'numberoflinks', 0);
     for ($i = 1; $i <= $number_of_links; $i++) {
         $url = _theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'link', '');
         $title = _theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'linklabel', '');
         $target = _theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'linktarget');
 
-        if (!empty($url)) {
+        if (! empty($url)) {
             $menu['items'][] = array(
-                'url' => $url,
-                'title' => $title,
+                'url'     => $url,
+                'title'   => $title,
                 'options' => array(
-                    'target' => empty($target) ? '_self' : '_blank'
+                    'target' => empty($target) ? '_self' : '_blank',
                 ),
             );
         }
@@ -456,12 +479,13 @@ function _theme_ucsf_get_default_helpmenu($theme_settings)
  * Returns the category help menu data.
  *
  * @param stdClass $theme_settings
- * @param int $category The course category id.
+ * @param int      $category The course category id.
+ *
  * @return array|bool
  */
 function _theme_ucsf_get_category_helpmenu($theme_settings, $category)
 {
-    if (!_theme_ucsf_get_setting($theme_settings, 'catenablehelpfeedback' . $category)) {
+    if (! _theme_ucsf_get_setting($theme_settings, 'catenablehelpfeedback' . $category)) {
         return false;
     }
 
@@ -471,18 +495,18 @@ function _theme_ucsf_get_category_helpmenu($theme_settings, $category)
     $menu['title'] = empty($title) ? get_string('helpmenutitle', 'theme_ucsf') : $title;
 
     $menu['items'] = array();
-    $number_of_links = (int)_theme_ucsf_get_setting($theme_settings, 'catnumberoflinks' . $category, 0);
+    $number_of_links = (int) _theme_ucsf_get_setting($theme_settings, 'catnumberoflinks' . $category, 0);
     for ($i = 1; $i <= $number_of_links; $i++) {
         $url = _theme_ucsf_get_setting($theme_settings, 'cathelpfeedback' . $i . 'link' . $category, '');
         $title = _theme_ucsf_get_setting($theme_settings, 'cathelpfeedback' . $i . 'linklabel' . $category, '');
         $target = _theme_ucsf_get_setting($theme_settings, 'cathelpfeedback' . $i . 'linktarget' . $category);
 
-        if (!empty($url)) {
+        if (! empty($url)) {
             $menu['items'][] = array(
-                'url' => $url,
-                'title' => $title,
+                'url'     => $url,
+                'title'   => $title,
                 'options' => array(
-                    'target' => empty($target) ? '_self' : '_blank'
+                    'target' => empty($target) ? '_self' : '_blank',
                 ),
             );
         }
@@ -499,7 +523,8 @@ function _theme_ucsf_get_category_helpmenu($theme_settings, $category)
  * Returns all applicable custom alerts.
  *
  * @param theme_ucsf_core_renderer $output The output renderer
- * @param moodle_page $page The current page
+ * @param moodle_page              $page   The current page
+ *
  * @return string
  */
 function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_page $page)
@@ -520,9 +545,14 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
     $categories = _theme_ucsf_get_setting($theme_settings, 'all_categories', '');
     $categories = explode(',', $categories);
 
-    $filtered_categories = array_values(array_filter($categories, function ($category) use ($parent_categories) {
-        return in_array($category, $parent_categories);
-    }));
+    $filtered_categories = array_values(
+        array_filter(
+            $categories,
+            function ($category) use ($parent_categories) {
+                return in_array($category, $parent_categories);
+            }
+        )
+    );
 
     $now = time();
     $current_day_timestamp = strtotime("midnight", $now);
@@ -550,12 +580,13 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
         // if none of these apply, then skip this alert.
         if (! empty($alert_category)
             && (int) $current_course_category !== (int) $alert_category
-            && in_array($alert_category, $filtered_categories)) {
+            && ! in_array($alert_category, $filtered_categories)
+        ) {
             continue;
         }
 
         // process alerts based on their type
-        switch($alert_type) {
+        switch ($alert_type) {
             case '1': // never-ending alert
                 $has_alert[$i] = true;
                 break;
@@ -564,7 +595,7 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                 $start_hour = (int) _theme_ucsf_get_setting($theme_settings, 'start_hour' . $n);
                 $start_minute = (int) _theme_ucsf_get_setting($theme_settings, 'start_minute' . $n);
 
-                $end_date =  _theme_ucsf_get_setting($theme_settings, 'end_date' . $n);
+                $end_date = _theme_ucsf_get_setting($theme_settings, 'end_date' . $n);
                 $end_hour = (int) _theme_ucsf_get_setting($theme_settings, 'end_hour' . $n);
                 $end_minute = (int) _theme_ucsf_get_setting($theme_settings, 'end_minute' . $n);
 
@@ -584,9 +615,12 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                 $start_date->setTime($start_hour, $start_minute);
                 $end_date->setTime($end_hour, $end_minute);
 
-                if ($start_date->getTimestamp() <= $now && $end_date->getTimestamp() >= $now) {
-                    $has_alert[$i] = true;
+                if ($start_date->getTimestamp() > $now || $end_date->getTimestamp() < $now) {
+                    break;
                 }
+
+                $has_alert[$i] = true;
+
                 break;
             case '3': // daily alert
                 $start_date = _theme_ucsf_get_setting($theme_settings, 'start_date_daily' . $n);
@@ -609,6 +643,10 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                     break;
                 }
 
+                if ($start_date->getTimestamp() > $current_day_timestamp || $end_date->getTimestamp() < $current_day_timestamp) {
+                    break;
+                }
+
                 $today_start_date = new \DateTime();
                 $today_start_date->setTimestamp($now);
                 $today_start_date->setTime($start_hour, $start_minute);
@@ -617,11 +655,12 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                 $today_end_date->setTimestamp($now);
                 $today_end_date->setTime($end_hour, $end_minute);
 
-                if ($start_date->getTimestamp() <= $now && $end_date->getTimestamp() >= $now) {
-                    if ($today_start_date->getTimestamp() <= $now && $today_end_date->getTimestamp() > $now) {
-                        $has_alert[$i] = true;
-                    }
+                if ($today_start_date->getTimestamp() > $now || $today_end_date->getTimestamp() < $now) {
+                    break;
                 }
+
+                $has_alert[$i] = true;
+
                 break;
             case '4': // weekly alert
 
@@ -651,6 +690,10 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                     break;
                 }
 
+                if ($start_date->getTimestamp() > $current_day_timestamp || $end_date->getTimestamp() < $current_day_timestamp) {
+                    break;
+                }
+
                 $today_start_date = new \DateTime();
                 $today_start_date->setTimestamp($now);
                 $today_start_date->setTime($start_hour, $start_minute);
@@ -659,11 +702,12 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
                 $today_end_date->setTimestamp($now);
                 $today_end_date->setTime($end_hour, $end_minute);
 
-                if ($start_date->getTimestamp() <= $current_day_timestamp && $end_date->getTimestamp() >= $current_day_timestamp) {
-                   if ($start_date->getTimestamp() <= $now && $end_date->getTimestamp() > $now) {
-                        $has_alert[$i] = true;
-                    }
+                if ($today_start_date->getTimestamp() > $now || $today_end_date->getTimestamp() <= $now) {
+                    break;
                 }
+
+                $has_alert[$i] = true;
+
                 break;
             default:
                 // do nothing
@@ -684,7 +728,7 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
     }
 
     // flag all applicable alerts as unseen in the user session.
-    foreach($alerts as $alert) {
+    foreach ($alerts as $alert) {
         $_SESSION["alerts"]["alert" . $alert['id']] = false;
     }
 
@@ -694,6 +738,7 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
 /**
  * Retrieve a list of all course category ids,
  * since Moodle's course API does not appear to provide such a method.
+ *
  * @return array A list course ids, sorted by ID in descending order (newest first).
  */
 function _theme_ucsf_get_all_category_ids()
@@ -702,6 +747,7 @@ function _theme_ucsf_get_all_category_ids()
 
     $sql = "SELECT cc.id FROM {course_categories} cc ORDER BY cc.id DESC";
     $categories = array_keys($DB->get_records_sql($sql));
+
     return $categories;
 }
 
@@ -715,18 +761,18 @@ function _theme_ucsf_get_all_category_ids()
  *  3. The theme settings contains entries keyed of by 'customlabel1' an 'customlabel5'.
  *  4. This method will return 5, since 'customlabel5' matches the lowest category id = 5 in the hierarchy.
  *
- * @param object $theme_settings The theme settings.
- * @param array $category_hierarchy A hierarchy of category ids, sorted bottom to top.
- * @param string $config_key_prefix Configuration settings key prefix.
+ * @param object $theme_settings     The theme settings.
+ * @param array  $category_hierarchy A hierarchy of category ids, sorted bottom to top.
+ * @param string $config_key_prefix  Configuration settings key prefix.
+ *
  * @return int The first matching category id. 0 if no matching category can be found.
  * @see _theme_ucsf_get_category_roots()
  */
 function _theme_ucsf_find_first_configured_category($theme_settings, array $category_hierarchy, $config_key_prefix)
 {
-
     // get a list of all categories that have customizations enabled.
     $enabled_categories = array();
-    if (!empty($theme_settings->all_categories)) {
+    if (! empty($theme_settings->all_categories)) {
         $enabled_categories = explode(",", $theme_settings->all_categories);
     }
 
@@ -734,7 +780,7 @@ function _theme_ucsf_find_first_configured_category($theme_settings, array $cate
     foreach ($category_hierarchy as $category_id) {
         if (in_array($category_id, $enabled_categories)) {
             $config_key = $config_key_prefix . $category_id;
-            if (!empty($theme_settings->$config_key)) {
+            if (! empty($theme_settings->$config_key)) {
                 return $category_id;
             }
         }
@@ -747,7 +793,8 @@ function _theme_ucsf_find_first_configured_category($theme_settings, array $cate
  * Returns the category label for the custom navigation.
  *
  * @param theme_ucsf_core_renderer $output
- * @param moodle_page $page
+ * @param moodle_page              $page
+ *
  * @return string The rendered label, or an empty string if n/a.
  */
 function _theme_ucsf_get_category_label(theme_ucsf_core_renderer $output, moodle_page $page)
@@ -791,8 +838,10 @@ function _theme_ucsf_get_category_label(theme_ucsf_core_renderer $output, moodle
 
 /**
  * Recursively retrieve all ancestral categories for a given category, including the category itself.
- * @param int $id The category id.
+ *
+ * @param int   $id         The category id.
  * @param array $categories A partial list of ancestral category ids.
+ *
  * @return array A list full list of ancestral category ids, including the given id itself.
  */
 function _theme_ucsf_recursively_get_category_roots($id, $categories = array())
@@ -808,5 +857,6 @@ function _theme_ucsf_recursively_get_category_roots($id, $categories = array())
 
     $categories[] = $id;
     $cat = array_shift($cats);
+
     return _theme_ucsf_recursively_get_category_roots($cat->parent, $categories);
 }
