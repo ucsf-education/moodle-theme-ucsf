@@ -507,32 +507,29 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
     global $CFG, $COURSE;
 
     $theme_settings = $page->theme->settings;
-    $theme_config = get_config('theme_ucsf');
 
-    $categories = explode(",", $theme_config->all_categories);
+    $number_of_alerts = (int) _theme_ucsf_get_setting($theme_settings, 'number_of_alerts');
+
+    if (! $number_of_alerts) {
+        return '';
+    }
 
     $current_course_category = _theme_ucsf_get_current_course_category($page, $COURSE);
     $parent_categories = _theme_ucsf_get_category_roots($current_course_category);
+
+    $categories = _theme_ucsf_get_setting($theme_settings, 'all_categories', '');
+    $categories = explode(',', $categories);
 
     $filtered_categories = array_values(array_filter($categories, function ($category) use ($parent_categories) {
         return in_array($category, $parent_categories);
     }));
 
-
-    $current_hour = date('G');
-    $current_minute = date('i');
-    $current_time = $current_hour . ':' . $current_minute;
-    $current_time_timestamp = strtotime($current_time);
-    $current_date = new DateTime();
-    $current_date_timestamp = $current_date->getTimestamp();
-    $current_day_timestamp = strtotime("midnight");
+    $now = time();
+    $current_day_timestamp = strtotime("midnight", $now);
 
     $has_alert = array_fill(0, 10, false);
 
-    $number_of_alerts = isset($page->theme->settings->number_of_alerts) ? intval($page->theme->settings->number_of_alerts, 10) : 0;
-
     for ($i = 0; $i < $number_of_alerts; $i++) {
-
         $n = $i + 1;
 
         // skip if alert has already been flagged as seen in this user's session.
@@ -557,174 +554,119 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
             continue;
         }
 
-        // at this point, we know that this alert is applicable.
-        // proceed based on alert type.
-
-
-        //Never-Ending Alert
-        if ($alert_type == '1') {
-             $_SESSION["alerts"]["alert" . $n] = false;
-             $has_alert[$i] = true;
-        }
-        //One-Time Alert
-        if ($alert_type == '2') {
-
-            $start_date = (false !== (_theme_ucsf_get_setting($theme_settings, 'start_date' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'start_date' . $n) : '';
-            $start_hour = (false !== (_theme_ucsf_get_setting($theme_settings, 'start_hour' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'start_hour' . $n) : '';
-            $start_minute = (false !== (_theme_ucsf_get_setting($theme_settings, 'start_minute' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'start_minute' . $n) : '';
-
-            // Do not set false if the value is 0.
-            if ($start_minute == false) {
-                $start_minute = '00';
-            }
-            if ($start_hour == false) {
-                $start_hour = '00';
-            }
-
-            // Formating date and getting timestamp from it
-            $start_date_format = date($start_date . ' ' . $start_hour . ':' . $start_minute . ':00');
-            $start_date_timestamp = strtotime($start_date_format);
-
-            // Creating end date.
-            $end_date = (false !== (_theme_ucsf_get_setting($theme_settings, 'end_date' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'end_date' . $n) : '';
-            $end_hour = (false !== (_theme_ucsf_get_setting($theme_settings, 'end_hour' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'end_hour' . $n) : '';
-            $end_minute = (false !== (_theme_ucsf_get_setting($theme_settings, 'end_minute' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'end_minute' . $n) : '';
-            // Do not set false if the value is 0.
-            if ($end_minute == false) {
-                $end_minute = '00';
-            }
-            if ($end_hour == false) {
-                $end_hour = '00';
-            }
-
-            // Formating date and getting timestamp from it
-            $end_date_format = date($end_date . ' ' . $end_hour . ':' . $end_minute . ':00');
-            $end_date_timestamp = strtotime($end_date_format);
-
-            if ($start_date_timestamp <= $current_date_timestamp && $end_date_timestamp >= $current_date_timestamp) {
-                $_SESSION["alerts"]["alert" . $n] = false;
+        // process alerts based on their type
+        switch($alert_type) {
+            case '1': // never-ending alert
                 $has_alert[$i] = true;
-            }
-        }
+                break;
+            case '2': // one-time alert
+                $start_date = _theme_ucsf_get_setting($theme_settings, 'start_date' . $n);
+                $start_hour = (int) _theme_ucsf_get_setting($theme_settings, 'start_hour' . $n);
+                $start_minute = (int) _theme_ucsf_get_setting($theme_settings, 'start_minute' . $n);
 
-        if ($alert_type == '3') {
+                $end_date =  _theme_ucsf_get_setting($theme_settings, 'end_date' . $n);
+                $end_hour = (int) _theme_ucsf_get_setting($theme_settings, 'end_hour' . $n);
+                $end_minute = (int) _theme_ucsf_get_setting($theme_settings, 'end_minute' . $n);
 
-            //Getting daily start date from config and converting it to timestamp.
-            $start_date = (false !== (_theme_ucsf_get_setting($theme_settings, 'start_date_daily' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'start_date_daily' . $n) : '';
-            $start_hour = (false !== (_theme_ucsf_get_setting($theme_settings, 'start_hour_daily' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'start_hour_daily' . $n) : '';
-            $start_minute = (false !== (_theme_ucsf_get_setting($theme_settings, 'start_minute_daily' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'start_minute_daily' . $n) : "";
+                if (empty($start_date || empty($end_date))) {
+                    break;
+                }
 
-            // Do not set false if the value is 0.
-            if ($start_minute == false) {
-                $start_minute = '00';
-            }
-            if ($start_hour == false) {
-                $start_hour = '00';
-            }
+                $start_date = date_create($start_date);
+                $end_date = date_create($end_date);
 
-            $start_time = $start_hour . ':' . $start_minute;
+                // check again
+                if (empty($start_date || empty($end_date))) {
+                    break;
+                }
 
-            $start_date_timestamp = strtotime($start_date);
-            $start_time_timestamp = strtotime($start_time);
+                // set hours and minutes
+                $start_date->setTime($start_hour, $start_minute);
+                $end_date->setTime($end_hour, $end_minute);
 
-            //Getting daily end date from config and converting it to timestamp.
-            $end_date = (false !== (_theme_ucsf_get_setting($theme_settings, 'end_date_daily' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'end_date_daily' . $n) : '';
-            $end_hour = (false !== (_theme_ucsf_get_setting($theme_settings, 'end_hour_daily' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'end_hour_daily' . $n) : '';
-            $end_minute = (false !== (_theme_ucsf_get_setting($theme_settings, 'end_minute_daily' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'end_minute_daily' . $n) : "";
-
-            if ($end_minute == false) {
-                $end_minute = '00';
-            }
-            if ($end_hour == false) {
-                $end_hour = '00';
-            }
-
-            $end_time = $end_hour . ':' . $end_minute;
-
-            // Formating date and getting timestamp from it
-            $end_date_timestamp = strtotime($end_date);
-            $end_time_timestamp = strtotime($end_time);
-
-            if ($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
-                if ($start_time_timestamp <= $current_time_timestamp && $end_time_timestamp > $current_time_timestamp) {
-                    $_SESSION["alerts"]["alert" . $n] = false;
+                if ($start_date->getTimestamp() <= $now && $end_date->getTimestamp() >= $now) {
                     $has_alert[$i] = true;
                 }
-            }
-        }
-        if ($alert_type == '4') {
+                break;
+            case '3': // daily alert
+                $start_date = _theme_ucsf_get_setting($theme_settings, 'start_date_daily' . $n);
+                $start_hour = (int) _theme_ucsf_get_setting($theme_settings, 'start_hour_daily' . $n);
+                $start_minute = (int) _theme_ucsf_get_setting($theme_settings, 'start_minute_daily' . $n);
 
-            // Get settings for weekday and put them into timestamp.
-            if (_theme_ucsf_get_setting($theme_settings, 'show_week_day' . $n) == '0') {
-                $weekday = 'Sunday';
-                $weekday_timestamp = strtotime($weekday);
-            } elseif (_theme_ucsf_get_setting($theme_settings, 'show_week_day' . $n) == '1') {
-                $weekday = 'Monday';
-                $weekday_timestamp = strtotime($weekday);
-            } elseif (_theme_ucsf_get_setting($theme_settings, 'show_week_day' . $n) == '2') {
-                $weekday = 'Tuesday';
-                $weekday_timestamp = strtotime($weekday);
-            } elseif (_theme_ucsf_get_setting($theme_settings, 'show_week_day' . $n) == '3') {
-                $weekday = 'Wednesday';
-                $weekday_timestamp = strtotime($weekday);
-            } elseif (_theme_ucsf_get_setting($theme_settings, 'show_week_day' . $n) == '4') {
-                $weekday = 'Thursday';
-                $weekday_timestamp = strtotime($weekday);
-            } elseif (_theme_ucsf_get_setting($theme_settings, 'show_week_day' . $n) == '5') {
-                $weekday = 'Friday';
-                $weekday_timestamp = strtotime($weekday);
-            } elseif (_theme_ucsf_get_setting($theme_settings, 'show_week_day' . $n) == '6') {
-                $weekday = 'Saturday';
-                $weekday_timestamp = strtotime($weekday);
-            }
+                $end_date = _theme_ucsf_get_setting($theme_settings, 'end_date_daily' . $n);
+                $end_hour = (int) _theme_ucsf_get_setting($theme_settings, 'end_hour_daily' . $n);
+                $end_minute = (int) _theme_ucsf_get_setting($theme_settings, 'end_minute_daily' . $n);
 
-            //Current weekday converted to the timestamp.
-            $current_weekday = date('D');
-            $current_weekday_timestamp = strtotime($current_weekday);
+                if (empty($start_date || empty($end_date))) {
+                    break;
+                }
 
-            $start_date = (false !== (_theme_ucsf_get_setting($theme_settings, 'start_date_weekly' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'start_date_weekly' . $n) : '';
-            $start_hour = (false !== (_theme_ucsf_get_setting($theme_settings, 'start_hour_weekly' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'start_hour_weekly' . $n) : '';
-            $start_minute = (false !== (_theme_ucsf_get_setting($theme_settings, 'start_minute_weekly' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'start_minute_weekly' . $n) : '';
+                $start_date = date_create($start_date);
+                $end_date = date_create($end_date);
 
-            if ($start_minute == false) {
-                $start_minute = '00';
-            }
-            if ($start_hour == false) {
-                $start_hour = '00';
-            }
+                // check again
+                if (empty($start_date || empty($end_date))) {
+                    break;
+                }
 
-            $start_time = $start_hour . ':' . $start_minute;
+                $today_start_date = new \DateTime();
+                $today_start_date->setTimestamp($now);
+                $today_start_date->setTime($start_hour, $start_minute);
 
-            $start_date_timestamp = strtotime($start_date);
-            $start_time_timestamp = strtotime($start_time);
+                $today_end_date = new \DateTime();
+                $today_end_date->setTimestamp($now);
+                $today_end_date->setTime($end_hour, $end_minute);
 
-            //Getting daily end date from config and converting it to timestamp.
-            $end_date = (false !== (_theme_ucsf_get_setting($theme_settings, 'end_date_weekly' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'end_date_weekly' . $n) : '';
-            $end_hour = (false !== (_theme_ucsf_get_setting($theme_settings, 'end_hour_weekly' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'end_hour_weekly' . $n) : '';
-            $end_minute = (false !== (_theme_ucsf_get_setting($theme_settings, 'end_minute_weekly' . $n))) ? _theme_ucsf_get_setting($theme_settings, 'end_minute_weekly' . $n) : "";
-
-            if ($end_minute == false) {
-                $end_minute = '00';
-            }
-
-            if ($end_hour == false) {
-                $end_hour = '00';
-            }
-
-            $end_time = $end_hour . ':' . $end_minute;
-
-            // Formating date and getting timestamp from it
-            $end_date_timestamp = strtotime($end_date);
-            $end_time_timestamp = strtotime($end_time);
-
-            if ($weekday_timestamp == $current_weekday_timestamp) {
-                if ($start_date_timestamp <= $current_day_timestamp && $end_date_timestamp >= $current_day_timestamp) {
-                    if ($start_time_timestamp <= $current_date_timestamp && $end_time_timestamp > $current_date_timestamp) {
-                        $_SESSION["alerts"]["alert" . $n] = false;
+                if ($start_date->getTimestamp() <= $now && $end_date->getTimestamp() >= $now) {
+                    if ($today_start_date->getTimestamp() <= $now && $today_end_date->getTimestamp() > $now) {
                         $has_alert[$i] = true;
                     }
                 }
-            }
+                break;
+            case '4': // weekly alert
+
+                $week_day = (int) _theme_ucsf_get_setting($theme_settings, 'show_week_day' . $n);
+
+                if ($week_day !== (int) date('w', $now)) {
+                    break;
+                }
+
+                $start_date = _theme_ucsf_get_setting($theme_settings, 'start_date_weekly' . $n);
+                $start_hour = (int) _theme_ucsf_get_setting($theme_settings, 'start_hour_weekly' . $n);
+                $start_minute = (int) _theme_ucsf_get_setting($theme_settings, 'start_minute_weekly' . $n);
+
+                $end_date = _theme_ucsf_get_setting($theme_settings, 'end_date_weekly' . $n);
+                $end_hour = (int) _theme_ucsf_get_setting($theme_settings, 'end_hour_weekly' . $n);
+                $end_minute = (int) _theme_ucsf_get_setting($theme_settings, 'end_minute_weekly' . $n);
+
+                if (empty($start_date || empty($end_date))) {
+                    break;
+                }
+
+                $start_date = date_create($start_date);
+                $end_date = date_create($end_date);
+
+                // check again
+                if (empty($start_date || empty($end_date))) {
+                    break;
+                }
+
+                $today_start_date = new \DateTime();
+                $today_start_date->setTimestamp($now);
+                $today_start_date->setTime($start_hour, $start_minute);
+
+                $today_end_date = new \DateTime();
+                $today_end_date->setTimestamp($now);
+                $today_end_date->setTime($end_hour, $end_minute);
+
+                if ($start_date->getTimestamp() <= $current_day_timestamp && $end_date->getTimestamp() >= $current_day_timestamp) {
+                   if ($start_date->getTimestamp() <= $now && $end_date->getTimestamp() > $now) {
+                        $has_alert[$i] = true;
+                    }
+                }
+                break;
+            default:
+                // do nothing
         }
     }
 
@@ -739,6 +681,11 @@ function _theme_ucsf_get_custom_alerts(theme_ucsf_core_renderer $output, moodle_
             $alert['text'] = _theme_ucsf_get_setting($theme_settings, "alert{$id}text", '');
             $alerts[] = $alert;
         }
+    }
+
+    // flag all applicable alerts as unseen in the user session.
+    foreach($alerts as $alert) {
+        $_SESSION["alerts"]["alert" . $alert['id']] = false;
     }
 
     return $output->custom_alerts($CFG->wwwroot . '/theme/ucsf/alert.php', $alerts);
