@@ -82,13 +82,6 @@ $string['enablecustomizationdesc'] = 'If "Enable category customizations" is che
 $string['toplevelcategorylabel'] = 'Top-level category label';
 $string['toplevelcategorylabeldesc'] = 'Top-level = Default. All other categories get this label and menu, unless customizations are specified below.';
 
-$string['displaycoursetitle'] = 'Display course title';
-$string['displaycoursetitledesc'] = 'If checked, the course title will appear on the course page for all courses, unless the course title is set NOT to display on configured categories.';
-
-$string['hidecustommenuwhenloggedout'] = 'Hide custom menu when logged out';
-$string['hidecustommenuwhenloggedoutdesc'] = 'Hide custom menu when logged out.';
-
-
 /* Help/Feedback */
 
 $string['helpfeedback'] = 'Help/Feedback';
@@ -117,23 +110,12 @@ $string['copyrightdesc'] = 'UCSF Copyright.';
 
 
 /* General settings */
-$string['blockheading'] = 'Block settings';
-$string['block_width_desktop_heading'] = 'Block width settings for large desktop.';
-$string['block_width_desktop'] = 'Desktop';
-$string['block_width_desktopdesc'] = 'Set the width of block for screens over 1200px width. Please enter only width number.';
-$string['block_width_tablet_heading'] = 'Block width for portrait tablet to landscape and desktop.';
-$string['block_width_portrait_tablet'] = 'Tablet';
-$string['block_width_portrait_tabletdesc'] = 'Set the width of block for tablet screen resolution (770px - 1199px). Please enter only width number.';
 $string['headerimage'] = 'Header image';
 $string['headerimagedesc'] = 'An image in the page header.';
 $string['headerimagealt'] = 'Header image alt text';
 $string['headerimagealtdesc'] = 'Alt text attribute of the header image.';
 $string['headerimagetitle'] = 'Header image title';
 $string['headerimagetitledesc'] = 'Title attribute of the header image in px.';
-$string['headerimagewidth'] = 'Header image width';
-$string['headerimagewidthdesc'] = 'Width attribute of the header image.';
-$string['headerimageheight'] = 'Header image height';
-$string['headerimageheightdesc'] = 'Height attribute of the header image in px.';
 $string['headerimagelink'] = 'Header image link';
 $string['headerimagelinkdesc'] = 'A URL that the header image links to.';
 $string['headerimagelinktarget'] = 'Header image link target';
@@ -251,47 +233,6 @@ $string['number_of_alerts'] = 'Number of alerts';
 $string['number_of_alertsdesc'] = 'Set number of alert you want to have.';
 /* end of alerts */
 
-
-/* Tiles & Banner*/
-$string['tileheading'] = 'Tiles';
-$string['tileheadingsub'] = 'Six locations on the front page to add information and links';
-
-$string['tilecontent'] = 'Content';
-$string['tilecontentdesc'] = 'Content to display in the marketing box. Keep it short and sweet.';
-
-$string['tile'] = 'Tile {$a->help}';
-$string['numberoftiles'] = 'Select number of tiles';
-
-$string['positionoftile'] = 'Select Tile Position';
-$string['positionoftiledesc'] = 'Put tile to desirable spot';
-
-$string['tileselect'] = 'Show this tile';
-$string['tileselectdesc'] = 'When selected, tile is going to show';
-
-$string['tileimage'] = 'Tile image';
-$string['tileimagedesc'] = 'Tile image to display in the tile box at the homepage';
-
-$string['tileimagealt'] = 'Tile image alt';
-$string['tileimagealtdesc'] = 'HTML image alt Attribute';
-
-$string['tileimagetitle'] = 'Tile image title';
-$string['tileimagetitledesc'] = 'HTML image title Attribute';
-
-$string['banner'] = 'Banner';
-$string['bannerdesc'] = 'Content to display in the banner box at the homepage';
-
-$string['bannerimage'] = 'Banner image';
-$string['bannerimagedesc'] = 'Banner image to display in the banner box at the homepage';
-
-$string['bannerimagealt'] = 'Banner image alt';
-$string['bannerimagealtdesc'] = 'HTML image alt Attribute';
-
-$string['bannerimagetitle'] = 'Banner image title';
-$string['bannerimagetitledesc'] = 'HTML image title Attribute';
-/* end of tiles */
-
-
-
 $string['categorylabel'] = 'Category label';
 $string['categorylabeldesc'] = 'Category label';
 
@@ -303,7 +244,6 @@ $string['custommenudesc'] = 'Custom menu';
 
 $string['logoinfo'] = 'Logo';
 $string['logoinfodesc'] = 'Logo desc';
-
 
 // Menu configuration
 $string['menudivider'] = 'Menu divider';

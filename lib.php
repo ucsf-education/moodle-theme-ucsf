@@ -143,10 +143,7 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
     $course_categories = $DB->get_records_sql($sql);
     $prefixes = array(
         'headerimage',
-        'menubackground',
         'menudivider',
-        'menudividermobile',
-        'menuitemdivider',
     );
     foreach ($course_categories as $cat) {
         foreach ($prefixes as $prefix) {
@@ -312,10 +309,6 @@ function _theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_pa
     global $COURSE;
 
     $theme_settings = $page->theme->settings;
-
-    if ($theme_settings->hidecustommenuwhenloggedout && ! isloggedin()) {
-        return '';
-    }
 
     $menu_items = '';
 
