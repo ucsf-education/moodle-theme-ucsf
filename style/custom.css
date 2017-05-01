@@ -385,6 +385,14 @@ hr {
 }
 
 /*------------------------------------------------------------------------------------*/
+/* Dashboard */
+
+/* hide the page context header, @see https://github.com/ucsf-ckm/moodle-theme-ucsf/issues/40 */
+body#page-my-index .page-context-header {
+    display: none;
+}
+
+/*------------------------------------------------------------------------------------*/
 /* Course Page */
 
 .course-content ul.topics li.section .content, .course-content ul.weeks li.section .content {
