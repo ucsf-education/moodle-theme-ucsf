@@ -310,10 +310,6 @@ function _theme_ucsf_get_custom_menu(theme_ucsf_core_renderer $output, moodle_pa
 
     $theme_settings = $page->theme->settings;
 
-    if ($theme_settings->hidecustommenuwhenloggedout && ! isloggedin()) {
-        return '';
-    }
-
     $menu_items = '';
 
     if (_theme_ucsf_get_setting($theme_settings, 'enablecustomization')) {

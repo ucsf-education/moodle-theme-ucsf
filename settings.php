@@ -269,22 +269,6 @@ $setting = new admin_setting_configtext($name, $title, $description, $default);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $settings_lr->add($setting);
 
-//Display course title
-$name = 'theme_ucsf/displaycoursetitle';
-$heading = get_string('displaycoursetitle', 'theme_ucsf');
-$information = get_string('displaycoursetitledesc', 'theme_ucsf');
-$default = 1;
-$setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
-$settings_lr->add($setting);
-
-//Hide custom menu when logged out
-$name = 'theme_ucsf/hidecustommenuwhenloggedout';
-$heading = get_string('hidecustommenuwhenloggedout', 'theme_ucsf');
-$information = get_string('hidecustommenuwhenloggedoutdesc', 'theme_ucsf');
-$default = '0';
-$setting = new admin_setting_configcheckbox($name, $heading, $information, $default);
-$settings_lr->add($setting);
-
 // Enable/Disable custom CSS.
 $name = 'theme_ucsf/customcssenabled';
 $title = get_string('enablecustomcss', 'theme_ucsf');
@@ -593,14 +577,6 @@ foreach ($all_categories_array as $allcats) {
             $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
             $settings_lr->add($setting);
 
-            //Display course title
-            $name = 'theme_ucsf/displaycoursetitle'.$cats->id;
-            $heading = get_string('displaycoursetitle', 'theme_ucsf');
-            $information = get_string('displaycoursetitledesc', 'theme_ucsf');
-            $default = 1;
-            $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
-            $settings_lr->add($setting);
-
             $name = 'theme_ucsf/headerimagesubsection';
             $heading = get_string('headerimagesubsectiontitle', 'theme_ucsf');
             $setting = new admin_setting_heading($name, $heading,'');
@@ -824,14 +800,6 @@ foreach ($all_categories_array as $allcats) {
             $heading = get_string('linklabeltocategorypage', 'theme_ucsf');
             $information = get_string('linklabeltocategorypagedesc', 'theme_ucsf');
             $default = "0";
-            $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
-            $settings_lr->add($setting);
-
-            //Display course title
-            $name = 'theme_ucsf/displaycoursetitle'.$cats->id;
-            $heading = get_string('displaycoursetitle', 'theme_ucsf');
-            $information = get_string('displaycoursetitledesc', 'theme_ucsf');
-            $default = 1;
             $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
             $settings_lr->add($setting);
 
