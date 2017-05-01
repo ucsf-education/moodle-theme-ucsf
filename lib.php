@@ -141,7 +141,6 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
     $sql = "SELECT cc.id FROM {course_categories} cc";
     $course_categories = $DB->get_records_sql($sql);
     $prefixes = array(
-        'categorylabelimage',
         'headerimage',
         'menubackground',
         'menudivider',
