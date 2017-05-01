@@ -82,13 +82,6 @@ $string['enablecustomizationdesc'] = 'If "Enable category customizations" is che
 $string['toplevelcategorylabel'] = 'Top-level category label';
 $string['toplevelcategorylabeldesc'] = 'Top-level = Default. All other categories get this label and menu, unless customizations are specified below.';
 
-$string['displaycoursetitle'] = 'Display course title';
-$string['displaycoursetitledesc'] = 'If checked, the course title will appear on the course page for all courses, unless the course title is set NOT to display on configured categories.';
-
-$string['hidecustommenuwhenloggedout'] = 'Hide custom menu when logged out';
-$string['hidecustommenuwhenloggedoutdesc'] = 'Hide custom menu when logged out.';
-
-
 /* Help/Feedback */
 
 $string['helpfeedback'] = 'Help/Feedback';
