@@ -117,13 +117,6 @@ $string['copyrightdesc'] = 'UCSF Copyright.';
 
 
 /* General settings */
-$string['blockheading'] = 'Block settings';
-$string['block_width_desktop_heading'] = 'Block width settings for large desktop.';
-$string['block_width_desktop'] = 'Desktop';
-$string['block_width_desktopdesc'] = 'Set the width of block for screens over 1200px width. Please enter only width number.';
-$string['block_width_tablet_heading'] = 'Block width for portrait tablet to landscape and desktop.';
-$string['block_width_portrait_tablet'] = 'Tablet';
-$string['block_width_portrait_tabletdesc'] = 'Set the width of block for tablet screen resolution (770px - 1199px). Please enter only width number.';
 $string['headerimage'] = 'Header image';
 $string['headerimagedesc'] = 'An image in the page header.';
 $string['headerimagealt'] = 'Header image alt text';
