@@ -251,47 +251,6 @@ $string['number_of_alerts'] = 'Number of alerts';
 $string['number_of_alertsdesc'] = 'Set number of alert you want to have.';
 /* end of alerts */
 
-
-/* Tiles & Banner*/
-$string['tileheading'] = 'Tiles';
-$string['tileheadingsub'] = 'Six locations on the front page to add information and links';
-
-$string['tilecontent'] = 'Content';
-$string['tilecontentdesc'] = 'Content to display in the marketing box. Keep it short and sweet.';
-
-$string['tile'] = 'Tile {$a->help}';
-$string['numberoftiles'] = 'Select number of tiles';
-
-$string['positionoftile'] = 'Select Tile Position';
-$string['positionoftiledesc'] = 'Put tile to desirable spot';
-
-$string['tileselect'] = 'Show this tile';
-$string['tileselectdesc'] = 'When selected, tile is going to show';
-
-$string['tileimage'] = 'Tile image';
-$string['tileimagedesc'] = 'Tile image to display in the tile box at the homepage';
-
-$string['tileimagealt'] = 'Tile image alt';
-$string['tileimagealtdesc'] = 'HTML image alt Attribute';
-
-$string['tileimagetitle'] = 'Tile image title';
-$string['tileimagetitledesc'] = 'HTML image title Attribute';
-
-$string['banner'] = 'Banner';
-$string['bannerdesc'] = 'Content to display in the banner box at the homepage';
-
-$string['bannerimage'] = 'Banner image';
-$string['bannerimagedesc'] = 'Banner image to display in the banner box at the homepage';
-
-$string['bannerimagealt'] = 'Banner image alt';
-$string['bannerimagealtdesc'] = 'HTML image alt Attribute';
-
-$string['bannerimagetitle'] = 'Banner image title';
-$string['bannerimagetitledesc'] = 'HTML image title Attribute';
-/* end of tiles */
-
-
-
 $string['categorylabel'] = 'Category label';
 $string['categorylabeldesc'] = 'Category label';
 
@@ -303,7 +262,6 @@ $string['custommenudesc'] = 'Custom menu';
 
 $string['logoinfo'] = 'Logo';
 $string['logoinfodesc'] = 'Logo desc';
-
 
 // Menu configuration
 $string['menudivider'] = 'Menu divider';
