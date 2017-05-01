@@ -117,7 +117,7 @@ hr {
 }
 
 /* accesshide header title */
-@media (max-width: 859px) {
+@media (max-width: 979px) {
     .navbar .brand {
         position: absolute;
         left: -10000px;
