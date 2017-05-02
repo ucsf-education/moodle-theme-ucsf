@@ -69,7 +69,6 @@ function theme_ucsf_extra_less($theme)
         // Generic custom CSS
         //
         // "inherit" any rules that may have been defined/enabled by parent categories.
-        $ids = _theme_ucsf_get_category_roots($category_id);
         foreach ($ids as $id) {
             $css_key = 'customcss' . (int) $id;
             $custom_css = $theme_settings->$css_key;
