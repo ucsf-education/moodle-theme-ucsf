@@ -1,3 +1,7 @@
+## [Version 1.3.1](https://github.com/ucsf-ckm/moodle-theme-ucsf/releases/tag/v1.3.1) (2017-05-03)
+
+- Fixed Bug with custom CSS feature (#45)
+
 ## [Version 1.3.0](https://github.com/ucsf-ckm/moodle-theme-ucsf/releases/tag/v1.3.0) (2017-04-03)
 
 - Fixed Alert dismissal bug (#19)
