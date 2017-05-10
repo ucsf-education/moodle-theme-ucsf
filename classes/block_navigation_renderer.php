@@ -41,7 +41,7 @@ class theme_ucsf_block_navigation_renderer extends block_navigation_renderer {
                 $first_course = $child;
             }
 
-            if ($child->isactive) {
+            if ($child->isactive || $child->forceopen) {
                 $active_course = $child;
                 break;
             }
