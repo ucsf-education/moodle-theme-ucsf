@@ -34,6 +34,10 @@ class theme_ucsf_block_navigation_renderer extends block_navigation_renderer {
             return $children;
         }
 
+        // add a class so we can style "My courses".
+        // see the "Navigation Block" section in style/custom.css
+        $my_courses->classes[] = 'mycourses';
+
         $my_courses_children = $my_courses->children;
         $active_course = false;
         $first_course = false;

@@ -251,6 +251,24 @@ hr {
     text-align: center !important;
 }
 
+/*
+ * Navigation block
+ */
+
+/* hide all but the first list item underneath "My Courses" */
+.block_navigation .mycourses + ul > li:nth-child(n+2) {
+    display: none;
+}
+
+/* hide the "My courses" section on the dashboard page */
+body#page-my-index .block_navigation .mycourses {
+    display: none;
+}
+
+body#page-my-index .block_navigation .mycourses + ul {
+    display: none;
+}
+
 /*------------------------------------------------------------------------------------*/
 /* DOCK */
 
