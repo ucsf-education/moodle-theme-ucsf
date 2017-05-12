@@ -16,20 +16,23 @@ class theme_ucsf_block_navigation_renderer extends block_navigation_renderer {
      */
     public function navigation_tree(global_navigation $navigation, $expansionlimit, array $options = array()) {
 
-        $navigation->children = $this->reorder_my_courses($navigation->children);
+        $navigation->children = $this->tweak_my_courses($navigation->children);
 
         return parent::navigation_tree($navigation, $expansionlimit, $options);
     }
 
     /**
-     * Forces the active course under "My Courses" to the top of the list.
+     * Various tweaks to the "My Courses" section of the nav block.
+     * a) force the active course under "My Courses" to the top of the list.
+     * b) flag the section to be hidden if no course is active.
      *
      * @param navigation_node_collection $children
      * @return navigation_node_collection
      */
-    protected function reorder_my_courses(navigation_node_collection $children)
+    protected function tweak_my_courses(navigation_node_collection $children)
     {
         $my_courses = $children->get('mycourses');
+
         if (empty($my_courses)) {
             return $children;
         }
@@ -39,21 +42,32 @@ class theme_ucsf_block_navigation_renderer extends block_navigation_renderer {
         $my_courses->classes[] = 'mycourses';
 
         $my_courses_children = $my_courses->children;
+
         $active_course = false;
         $first_course = false;
 
+        // find the currently active course,
+        // and grab the first course while at it.
         foreach ($my_courses_children as $child) {
             if (! $first_course) {
                 $first_course = $child;
             }
 
+            // yes, force-open qualifies as "active".
             if ($child->isactive || $child->forceopen) {
                 $active_course = $child;
                 break;
             }
         }
 
-        if (! empty($active_course) && $first_course !== $active_course)  {
+        // no "active" course? then hide "My courses".
+        if (! $active_course) {
+            $my_courses->classes[] = 'hidden';
+            return $children;
+        }
+
+        // if the "active" course is not the first course in the list, then move it there.
+        if ($first_course !== $active_course)  {
             $my_courses_children->remove($active_course->key);
             $my_courses_children->add($active_course, $first_course->key);
         }
