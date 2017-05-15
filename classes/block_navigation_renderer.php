@@ -17,6 +17,7 @@ class theme_ucsf_block_navigation_renderer extends block_navigation_renderer {
     public function navigation_tree(global_navigation $navigation, $expansionlimit, array $options = array()) {
 
         $navigation->children = $this->tweak_my_courses($navigation->children);
+        $navigation = $this->tweak_kaltura_placement($navigation);
 
         return parent::navigation_tree($navigation, $expansionlimit, $options);
     }
@@ -74,6 +75,30 @@ class theme_ucsf_block_navigation_renderer extends block_navigation_renderer {
             $my_courses_children->remove($active_course->key);
             $my_courses_children->add($active_course, $first_course->key);
         }
+
         return $children;
+    }
+
+    /**
+     * KLUDGE!
+     * Detach the Kaltura Media Gallery node from the obsolete "Current course" root-node and
+     * Re-attach it to the current course.
+     * @param global_navigation $navigation
+     * @return global_navigation
+     * @todo remove this once https://github.com/kaltura/moodle_plugin/issues/137 lands in prod. [ST 2017/05/15]
+     */
+    protected function tweak_kaltura_placement(global_navigation $navigation) {
+        global $PAGE;
+
+        $current_course_root_node = $navigation->find('currentcourse', global_navigation::TYPE_ROOTNODE);
+        $kaltura_node = $current_course_root_node->get('kalcrsgal');
+        $course_node = $navigation->find($PAGE->course->id, navigation_node::TYPE_COURSE);
+
+        if (!empty($current_course_root_node) && !empty($kaltura_node) && !empty($course_node)) {
+            $current_course_root_node->children->remove('kalcrsgal');
+            $course_node->children->add($kaltura_node);
+            $navigation->children->remove('currentcourse');
+        }
+        return $navigation;
     }
 }
