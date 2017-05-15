@@ -66,6 +66,9 @@ class theme_ucsf_block_navigation_renderer extends block_navigation_renderer {
             return $children;
         }
 
+        // re-label "My Courses" as "Current course"
+        $my_courses->text ='Current course';
+
         // if the "active" course is not the first course in the list, then move it there.
         if ($first_course !== $active_course)  {
             $my_courses_children->remove($active_course->key);
