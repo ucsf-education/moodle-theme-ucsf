@@ -20,7 +20,8 @@ img.small-logo {
 
 @media (max-width: 480px) {
     .navbar img.small-logo {
-        max-width: 100px;
+        height: 24px;
+        width: 100px;
     }
 
     /* Applying accesshide styles */
