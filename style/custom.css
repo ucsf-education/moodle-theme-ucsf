@@ -141,6 +141,11 @@ hr {
     padding: 10px 20px;
 }
 
+.ucsf-custom-menu .category-label a {
+    color: #000;
+    text-decoration: none;
+}
+
 .ucsf-custom-menu .container-fluid {
     background-color: #e4edf4;
     padding-left: 0;
