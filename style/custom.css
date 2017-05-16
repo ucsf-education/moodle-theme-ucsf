@@ -132,7 +132,6 @@ hr {
 
 .ucsf-custom-menu {
     background-color: #e4edf4;
-    margin-bottom: 0;
     margin-left: 0;
 }
 
@@ -183,7 +182,8 @@ hr {
 
 /*------------------------------------------------------------------------------------*/
  /* Page Context Header */
-.page-context-header .page-header-headings {
+.page-context-header .page-header-headings,
+.page-context-header .page-header-headings h1 {
     margin-top: 0;
 }
 
