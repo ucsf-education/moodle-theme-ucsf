@@ -6,7 +6,7 @@
  */
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2017051600;
+$plugin->version   = 2017051601;
 $plugin->requires  = 2016112900;
 $plugin->release = 'v2.0.0-beta3';
 $plugin->component = 'theme_ucsf';
