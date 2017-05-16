@@ -31,7 +31,9 @@
 
 require_once('../../config.php');
 
-$alert = $_GET["alert"];
-$_SESSION["alerts"][$alert] = 0;
-
-?>
+if (array_key_exists('alert', $_GET)) {
+    $alert = strip_tags($_GET["alert"]);
+    if (array_key_exists('alerts', $_SESSION) && array_key_exists($alert, $_SESSION['alerts'])) {
+        $_SESSION['alerts'][$alert] = true;
+    }
+}

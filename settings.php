@@ -233,24 +233,6 @@ $setting = new admin_setting_configtext($name, $heading, $information, $default)
 $setting->set_updatedcallback('theme_reset_all_caches');
 $settings_lr->add($setting);
 
-// Header Image Height
-$name = 'theme_ucsf/headerimageheight';
-$heading = get_string('headerimageheight', 'theme_ucsf');
-$information = get_string('headerimageheightdesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_configtext($name, $heading, $information, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-// Header Image Width
-$name = 'theme_ucsf/headerimagewidth';
-$heading = get_string('headerimagewidth', 'theme_ucsf');
-$information = get_string('headerimagewidthdesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_configtext($name, $heading, $information, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
 // Header Image Link
 $name = 'theme_ucsf/headerimagelink';
 $heading = get_string('headerimagelink', 'theme_ucsf');
@@ -285,22 +267,6 @@ $description = get_string('toplevelcategorylabeldesc', 'theme_ucsf');
 $default = '';
 $setting = new admin_setting_configtext($name, $title, $description, $default);
 $setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-//Display course title
-$name = 'theme_ucsf/displaycoursetitle';
-$heading = get_string('displaycoursetitle', 'theme_ucsf');
-$information = get_string('displaycoursetitledesc', 'theme_ucsf');
-$default = 1;
-$setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
-$settings_lr->add($setting);
-
-//Hide custom menu when logged out
-$name = 'theme_ucsf/hidecustommenuwhenloggedout';
-$heading = get_string('hidecustommenuwhenloggedout', 'theme_ucsf');
-$information = get_string('hidecustommenuwhenloggedoutdesc', 'theme_ucsf');
-$default = '0';
-$setting = new admin_setting_configcheckbox($name, $heading, $information, $default);
 $settings_lr->add($setting);
 
 // Enable/Disable custom CSS.
@@ -341,45 +307,6 @@ $settings_lr->add($setting);
 
 $ADMIN->add('theme_ucsf', $settings_lr);
 
-
-/* BLOCK SETTINGS
--------------------------------------------------------------------------------*/
-
-$settings_lr = new admin_settingpage('theme_ucsf_block_settings', get_string('blockheading', 'theme_ucsf'));
-
-// Block width for large desktop
-$name = 'theme_ucsf/block_width_desktop_heading';
-$heading = get_string('block_width_desktop_heading', 'theme_ucsf');
-$information = "";
-$setting = new admin_setting_heading($name, $heading, $information);
-$settings_lr->add($setting);
-
-// Block width settings
-$name = 'theme_ucsf/block_width_desktop';
-$title = get_string('block_width_desktop', 'theme_ucsf');
-$description = get_string('block_width_desktopdesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_configtext($name, $title, $description, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-// Block width for large desktop
-$name = 'theme_ucsf/block_width_tablet_heading';
-$heading = get_string('block_width_tablet_heading', 'theme_ucsf');
-$information = "";
-$setting = new admin_setting_heading($name, $heading, $information);
-$settings_lr->add($setting);
-
-// Block width settings
-$name = 'theme_ucsf/block_width_portrait_tablet';
-$title = get_string('block_width_portrait_tablet', 'theme_ucsf');
-$description = get_string('block_width_portrait_tabletdesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_configtext($name, $title, $description, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-$ADMIN->add('theme_ucsf', $settings_lr);
 
 /* ALERTS SETTINGS
 -------------------------------------------------------------------------------*/
@@ -582,137 +509,6 @@ for ($i = 1; $i <= $numberofalerts; $i++) {
 
 $ADMIN->add('theme_ucsf', $settings_lr);
 
-/* TILES SETTINGS
--------------------------------------------------------------------------------*/
-
-$settings_lr = new admin_settingpage('theme_ucsf_tiles', get_string('tileheading', 'theme_ucsf'));
-
-// This is the descriptor for Tile
-$name = 'theme_ucsf/tileheadingsub';
-$heading = get_string('tileheadingsub', 'theme_ucsf');
-$information = "";
-$setting = new admin_setting_heading($name, $heading, $information);
-$settings_lr->add($setting);
-
-// This is the descriptor for Banner
-$name = 'theme_ucsf/banner';
-$title = get_string('banner', 'theme_ucsf');
-$description = get_string('bannerdesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_confightmleditor($name, $title, $description, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-$name = 'theme_ucsf/bannerimage';
-$title = get_string('bannerimage', 'theme_ucsf');
-$description = get_string('bannerimagedesc', 'theme_ucsf');
-$setting = new admin_setting_configstoredfile($name, $title, $description, 'bannerimage');
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-$name = 'theme_ucsf/bannerimagealt';
-$title = get_string('bannerimagealt', 'theme_ucsf');
-$description = get_string('bannerimagealtdesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_configtext($name, $title, $description, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-$name = 'theme_ucsf/bannerimagetitle';
-$title = get_string('bannerimagetitle', 'theme_ucsf');
-$description = get_string('bannerimagetitledesc', 'theme_ucsf');
-$default = '';
-$setting = new admin_setting_configtext($name, $title, $description, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$settings_lr->add($setting);
-
-
-$name = 'theme_ucsf/numberoftiles';
-$title = get_string('numberoftiles', 'theme_ucsf');
-$description = '';
-$default = 0;
-$tilenumber = array (
-        0 => '0',
-        1 => '1',
-        2 => '2',
-        3 => '3',
-        4 => '4',
-        5 => '5',
-        6 => '6',
-        7 => '7',
-        8 => '8',
-        9 => '9',
-        10 => '10',
-    );
-$setting = new admin_setting_configselect($name, $title, $description, $default, $tilenumber);
-$settings_lr->add($setting);
-
-$numberoftiles = get_config('theme_ucsf', 'numberoftiles');
-for ($i = 1; $i <= $numberoftiles; $i++) {
-    $name = 'theme_ucsf/tile' . $i . 'heading';
-    $heading = get_string('tile', 'theme_ucsf', array('help' => $i));
-    $information = "";
-    $setting = new admin_setting_heading($name, $heading, $information);
-    $settings_lr->add($setting);
-
-    $name = 'theme_ucsf/tile' . $i . 'content';
-    $title = get_string('tilecontent', 'theme_ucsf');
-    $description = get_string('tilecontentdesc', 'theme_ucsf');
-    $default = '';
-    $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings_lr->add($setting);
-
-    $name = 'theme_ucsf/tile' . $i . 'image';
-    $title = get_string('tileimage', 'theme_ucsf');
-    $description = get_string('tileimagedesc', 'theme_ucsf');
-    $setting = new admin_setting_configstoredfile($name, $title, $description, 'tile' . $i . 'image');
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings_lr->add($setting);
-
-    $name = 'theme_ucsf/tile' . $i . 'imagealt';
-    $title = get_string('tileimagealt', 'theme_ucsf');
-    $description = get_string('tileimagealtdesc', 'theme_ucsf');
-    $default = '';
-    $setting = new admin_setting_configtext($name, $title, $description, $default);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings_lr->add($setting);
-
-    $name = 'theme_ucsf/tile' . $i . 'imagetitle';
-    $title = get_string('tileimagetitle', 'theme_ucsf');
-    $description = get_string('tileimagetitledesc', 'theme_ucsf');
-    $default = '';
-    $setting = new admin_setting_configtext($name, $title, $description, $default);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings_lr->add($setting);
-
-    $name = 'theme_ucsf/tile' . $i . 'select';
-    $title = get_string('tileselect', 'theme_ucsf');
-    $description = get_string('tileselectdesc', 'theme_ucsf');
-    $default = false;
-    $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings_lr->add($setting);
-
-    $name = 'theme_ucsf/positionoftile' . $i;
-    $title = get_string('positionoftile', 'theme_ucsf');
-    $description = get_string('positionoftiledesc', 'theme_ucsf');
-    $default = 0;
-    $tilenumber = array (
-            0 => '',
-            1 => '1',
-            2 => '2',
-            3 => '3',
-            4 => '4',
-            5 => '5',
-            6 => '6'
-        );
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $tilenumber);
-    $settings_lr->add($setting);
-    }
-
-$ADMIN->add('theme_ucsf', $settings_lr);
-
 /* CATEGORY CUSTOMIZATION
 -------------------------------------------------------------------------------*/
 $settings_lr = new admin_settingpage('theme_ucsf_category_customizations', get_string('categorycustomizationheading', 'theme_ucsf'));
@@ -773,54 +569,11 @@ foreach ($all_categories_array as $allcats) {
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
-            //Category label image
-            $name = 'theme_ucsf/categorylabelimage'.$cats->id;
-            $title = get_string('categorylabelimage', 'theme_ucsf');
-            $description = get_string('categorylabelimagedesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $title, $description, 'categorylabelimage'.$cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            //Category label image height
-            $name = 'theme_ucsf/categorylabelimageheight'.$cats->id;
-            $title = get_string('categorylabelimageheight', 'theme_ucsf');
-            $description = get_string('categorylabelimageheightdesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $title, $description, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            //Category label image alt
-            $name = 'theme_ucsf/categorylabelimagealt'.$cats->id;
-            $title = get_string('categorylabelimagealt', 'theme_ucsf');
-            $description = get_string('categorylabelimagealtdesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $title, $description, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            //Category label image title
-            $name = 'theme_ucsf/categorylabelimagetitle'.$cats->id;
-            $title = get_string('categorylabelimagetitle', 'theme_ucsf');
-            $description = get_string('categorylabelimagetitledesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $title, $description, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
             //Link label to category page
             $name = 'theme_ucsf/linklabeltocategorypage'.$cats->id;
             $heading = get_string('linklabeltocategorypage', 'theme_ucsf');
             $information = get_string('linklabeltocategorypagedesc', 'theme_ucsf');
             $default = "0";
-            $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
-            $settings_lr->add($setting);
-
-            //Display course title
-            $name = 'theme_ucsf/displaycoursetitle'.$cats->id;
-            $heading = get_string('displaycoursetitle', 'theme_ucsf');
-            $information = get_string('displaycoursetitledesc', 'theme_ucsf');
-            $default = 1;
             $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
             $settings_lr->add($setting);
 
@@ -859,24 +612,6 @@ foreach ($all_categories_array as $allcats) {
             $name = 'theme_ucsf/headerimagetitle' . $cats->id;
             $heading = get_string('headerimagetitle', 'theme_ucsf');
             $information = get_string('headerimagetitledesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $heading, $information, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Header Image Height
-            $name = 'theme_ucsf/headerimageheight' . $cats->id;
-            $heading = get_string('headerimageheight', 'theme_ucsf');
-            $information = get_string('headerimageheightdesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $heading, $information, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Header Image Width
-            $name = 'theme_ucsf/headerimagewidth' . $cats->id;
-            $heading = get_string('headerimagewidth', 'theme_ucsf');
-            $information = get_string('headerimagewidthdesc', 'theme_ucsf');
             $default = '';
             $setting = new admin_setting_configtext($name, $heading, $information, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
@@ -946,35 +681,11 @@ foreach ($all_categories_array as $allcats) {
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
-            // Menu background
-            $name = 'theme_ucsf/menubackground' . $cats->id;
-            $heading = get_string('menubackground', 'theme_ucsf');
-            $information = get_string('menubackgrounddesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menubackground' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
             // Menu divider
             $name = 'theme_ucsf/menudivider' . $cats->id;
             $heading = get_string('menudivider', 'theme_ucsf');
             $information = get_string('menudividerdesc', 'theme_ucsf');
             $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menudivider' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Menu divider mobile
-            $name = 'theme_ucsf/menudividermobile' . $cats->id;
-            $heading = get_string('menudividermobile', 'theme_ucsf');
-            $information = get_string('menudividermobiledesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menudividermobile' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Menu item divider
-            $name = 'theme_ucsf/menuitemdivider' . $cats->id;
-            $heading = get_string('menuitemdivider', 'theme_ucsf');
-            $information = get_string('menuitemdividerdesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menuitemdivider' . $cats->id);
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
@@ -1084,54 +795,11 @@ foreach ($all_categories_array as $allcats) {
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
-            //Category label image
-            $name = 'theme_ucsf/categorylabelimage'.$cats->id;
-            $title = get_string('categorylabelimage', 'theme_ucsf');
-            $description = get_string('categorylabelimagedesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $title, $description, 'categorylabelimage'.$cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            //Category label image height
-            $name = 'theme_ucsf/categorylabelimageheight'.$cats->id;
-            $title = get_string('categorylabelimageheight', 'theme_ucsf');
-            $description = get_string('categorylabelimageheightdesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $title, $description, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            //Category label image alt
-            $name = 'theme_ucsf/categorylabelimagealt'.$cats->id;
-            $title = get_string('categorylabelimagealt', 'theme_ucsf');
-            $description = get_string('categorylabelimagealtdesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $title, $description, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            //Category label image title
-            $name = 'theme_ucsf/categorylabelimagetitle'.$cats->id;
-            $title = get_string('categorylabelimagetitle', 'theme_ucsf');
-            $description = get_string('categorylabelimagetitledesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $title, $description, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
             //Link label to category page
             $name = 'theme_ucsf/linklabeltocategorypage'.$cats->id;
             $heading = get_string('linklabeltocategorypage', 'theme_ucsf');
             $information = get_string('linklabeltocategorypagedesc', 'theme_ucsf');
             $default = "0";
-            $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
-            $settings_lr->add($setting);
-
-            //Display course title
-            $name = 'theme_ucsf/displaycoursetitle'.$cats->id;
-            $heading = get_string('displaycoursetitle', 'theme_ucsf');
-            $information = get_string('displaycoursetitledesc', 'theme_ucsf');
-            $default = 1;
             $setting = new admin_setting_configcheckbox($name, $heading, $information, $default, 1, 0);
             $settings_lr->add($setting);
 
@@ -1170,24 +838,6 @@ foreach ($all_categories_array as $allcats) {
             $name = 'theme_ucsf/headerimagetitle' . $cats->id;
             $heading = get_string('headerimagetitle', 'theme_ucsf');
             $information = get_string('headerimagetitledesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $heading, $information, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Header Image Height
-            $name = 'theme_ucsf/headerimageheight' . $cats->id;
-            $heading = get_string('headerimageheight', 'theme_ucsf');
-            $information = get_string('headerimageheightdesc', 'theme_ucsf');
-            $default = '';
-            $setting = new admin_setting_configtext($name, $heading, $information, $default);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Header Image Width
-            $name = 'theme_ucsf/headerimagewidth' . $cats->id;
-            $heading = get_string('headerimagewidth', 'theme_ucsf');
-            $information = get_string('headerimagewidthdesc', 'theme_ucsf');
             $default = '';
             $setting = new admin_setting_configtext($name, $heading, $information, $default);
             $setting->set_updatedcallback('theme_reset_all_caches');
@@ -1257,14 +907,6 @@ foreach ($all_categories_array as $allcats) {
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
-            // Menu background
-            $name = 'theme_ucsf/menubackground' . $cats->id;
-            $heading = get_string('menubackground', 'theme_ucsf');
-            $information = get_string('menubackgrounddesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menubackground' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
             // Menu divider
             $name = 'theme_ucsf/menudivider' . $cats->id;
             $heading = get_string('menudivider', 'theme_ucsf');
@@ -1273,28 +915,13 @@ foreach ($all_categories_array as $allcats) {
             $setting->set_updatedcallback('theme_reset_all_caches');
             $settings_lr->add($setting);
 
-            // Menu divider mobile
-            $name = 'theme_ucsf/menudividermobile' . $cats->id;
-            $heading = get_string('menudividermobile', 'theme_ucsf');
-            $information = get_string('menudividermobiledesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menudividermobile' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
-
-            // Menu item divider
-            $name = 'theme_ucsf/menuitemdivider' . $cats->id;
-            $heading = get_string('menuitemdivider', 'theme_ucsf');
-            $information = get_string('menuitemdividerdesc', 'theme_ucsf');
-            $setting = new admin_setting_configstoredfile($name, $heading, $information, 'menuitemdivider' . $cats->id);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $settings_lr->add($setting);
+            // HELP/FEEDBACK LINKS
 
             $name = 'theme_ucsf/helpfeedbacksubsection';
             $heading = get_string('helpfeedbacksubsectiontitle', 'theme_ucsf');
             $setting = new admin_setting_heading($name, $heading,'');
             $settings_lr->add($setting);
 
-            // HELP/FEEDBACK LINKS
             // Enable/Disable Help/Feedback links;.
             $name = 'theme_ucsf/catenablehelpfeedback'.$cats->id;
             $title = get_string('enablehelpfeedback', 'theme_ucsf');
