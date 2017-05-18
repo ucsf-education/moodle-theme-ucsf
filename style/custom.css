@@ -264,21 +264,6 @@ hr {
     text-align: center !important;
 }
 
-/*
- * Navigation block
- */
-
-/* always hide all but the first list item underneath "My Courses" */
-.block_navigation .mycourses + ul > li:nth-child(n+2) {
-    display: none;
-}
-
-/* hide the "My courses" if applicable */
-.block_navigation .mycourses.hidden,
-.block_navigation .mycourses.hidden + ul {
-    display: none;
-}
-
 
 /*------------------------------------------------------------------------------------*/
 /* DOCK */
