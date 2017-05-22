@@ -33,7 +33,6 @@ class theme_ucsf_block_navigation_renderer extends block_navigation_renderer {
         $course_id = $COURSE->id;
 
         $current_course_rootnode = $navigation->find('currentcourse', global_navigation::TYPE_ROOTNODE);
-        $kaltura_gallery_node = $current_course_rootnode->find('kalcrsgal', global_navigation::NODETYPE_LEAF);
         $my_courses_rootnode = $navigation->find('mycourses', global_navigation::TYPE_ROOTNODE);
         $courses_rootnode = $navigation->find('courses', global_navigation::TYPE_ROOTNODE);
 
@@ -62,6 +61,7 @@ class theme_ucsf_block_navigation_renderer extends block_navigation_renderer {
         $course_node = $navigation->find($course_id, global_navigation::TYPE_COURSE);
 
         if (!empty($course_node) && !empty($current_course_rootnode)) {
+            $kaltura_gallery_node = $current_course_rootnode->find('kalcrsgal', global_navigation::NODETYPE_LEAF);
             $next_node_key = !empty($kaltura_gallery_node) ? $kaltura_gallery_node->key : null;
             $current_course_rootnode->children->add($course_node, $next_node_key);
         }
