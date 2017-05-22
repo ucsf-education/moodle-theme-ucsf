@@ -61,8 +61,13 @@ class theme_ucsf_block_navigation_renderer extends block_navigation_renderer {
         $course_node = $navigation->find($course_id, global_navigation::TYPE_COURSE);
 
         if (!empty($course_node) && !empty($current_course_rootnode)) {
+            // HACKETY HACK!
+            // The Kaltura plugin adds its own node to "Current course".
+            // If it's there, then re-attach the current course node above it.
+            // [ST 2017/05/22]
             $kaltura_gallery_node = $current_course_rootnode->find('kalcrsgal', global_navigation::NODETYPE_LEAF);
             $next_node_key = !empty($kaltura_gallery_node) ? $kaltura_gallery_node->key : null;
+
             $current_course_rootnode->children->add($course_node, $next_node_key);
         }
 
