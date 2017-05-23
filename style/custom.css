@@ -186,10 +186,21 @@ hr {
 }
 
 /*------------------------------------------------------------------------------------*/
- /* Page Context Header */
+/* Page Context Header */
 .page-context-header .page-header-headings,
 .page-context-header .page-header-headings h1 {
     margin-top: 0;
+}
+
+/*------------------------------------------------------------------------------------*/
+/* Navigation Block */
+
+/* hide the "My courses" node
+ * @link https://github.com/ucsf-ckm/moodle-theme-ucsf/issues/63
+ */
+.block_navigation .mycourses,
+.block_navigation .mycourses + ul {
+    display: none;
 }
 
 /*------------------------------------------------------------------------------------*/
