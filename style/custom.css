@@ -554,6 +554,184 @@ body#page-my-index .page-context-header {
     margin-right: 15px;
 }
 
+
+/*------------------------------------------------------------------------------------*/
+/* BLOCK WIDTH SETTINGS FOR DIFFERENT LAYOUT SIZES */
+/* Large desktop */
+@media (min-width: 1200px) {
+
+    #page-course-index .row-fluid .span3,
+    #page-mod-quiz-edit .row-fluid .span3,
+    #page-mod-quiz-view .row-fluid .span3,
+    .jsenabled.used-region-side-post #block-region-side-post.span3,
+    .pagelayout-coursecategory .row-fluid .span3,
+    .pagelayout-mydashboard .row-fluid .span3,
+    .pagelayout-standard .row-fluid .span3,
+    .path-course-view .row-fluid .span3,
+    .two-column .row-fluid .span3,
+    .used-region-side-post #block-region-side-post.span3 {
+        width: 210px;
+        margin-left: 0;
+    }
+
+    #page-course-index #block-region-side-pre.span4,
+    #page-mod-quiz-edit #block-region-side-pre.span4,
+    #page-mod-quiz-edit .row-fluid .span4,
+    #page-mod-quiz-view #block-region-side-pre.span4,
+    #page-mod-quiz-view .row-fluid .span4,
+    .editing #block-region-side-pre.span4,
+    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .jsenabled.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-coursecategory #block-region-side-pre.span4,
+    .pagelayout-coursecategory .row-fluid .span4,
+    .pagelayout-mydashboard #block-region-side-pre.span4,
+    .pagelayout-mydashboard .row-fluid .span4,
+    .pagelayout-standard #block-region-side-pre.span4,
+    .pagelayout-standard .row-fluid .span4,
+    .path-course-view .row-fluid .span4,
+    .path-course-view.used-region-side-pre #block-region-side-pre.span4,
+    .used-region-side-pre #block-region-side-pre.span4 {
+        width: 210px;
+    }
+
+    #page-course-index #region-main.span8,
+    #page-mod-quiz-edit #region-main.span8,
+    #page-mod-quiz-view #region-main.span8,
+    .editing #region-main.span8,
+    .empty-region-side-post.used-region-side-pre #region-main.span8,
+    .empty-region-side-pre.used-region-side-post #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .jsenabled.used-region-side-pre #region-main.span8,
+    .pagelayout-coursecategory #region-main.span8,
+    .pagelayout-mydashboard #region-main.span8,
+    .pagelayout-standard #region-main.span8,
+    .path-course-view #region-main.span8,
+    .used-region-side-post #region-main.span8,
+    .used-region-side-pre #region-main.span8 {
+        width: calc(100% - 210px - 20px);
+    }
+
+    #page-course-index .row-fluid .span8,
+    #page-mod-quiz-edit .row-fluid .span8,
+    #page-mod-quiz-view .row-fluid .span8,
+    .pagelayout-coursecategory .row-fluid .span8,
+    .pagelayout-mydashboard .row-fluid .span8,
+    .pagelayout-standard .row-fluid .span8,
+    .path-course-view .row-fluid .span8,
+    .two-column .row-fluid .span8 {
+        width: calc(100% - 210px - 20px);
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    #page-mod-quiz-edit .row-fluid .span9,
+    #page-mod-quiz-view .row-fluid .span9,
+    .pagelayout-coursecategory .row-fluid .span9,
+    .pagelayout-mydashboard .row-fluid .span9,
+    .pagelayout-standard .row-fluid .span9,
+    .path-course-view .row-fluid .span9,
+    .two-column .row-fluid .span9,
+    .used-region-side-pre .row-fluid .span9,
+    .used-region-side-post .row-fluid .span9 {
+        width: calc(100% - 210px - 20px);
+        padding-right: 20px;
+    }
+
+    #region-main {padding:0 20px;}
+}
+
+@media (min-width: 770px) and (max-width: 1199px) {
+
+    #page-course-index .row-fluid .span3,
+    #page-mod-quiz-edit .row-fluid .span3,
+    #page-mod-quiz-view .row-fluid .span3,
+    .jsenabled.used-region-side-post #block-region-side-post.span3,
+    .pagelayout-coursecategory .row-fluid .span3,
+    .pagelayout-mydashboard .row-fluid .span3,
+    .pagelayout-standard .row-fluid .span3,
+    .path-course-view .row-fluid .span3,
+    .two-column .row-fluid .span3,
+    .used-region-side-post #block-region-side-post.span3 {
+        width: 185px;
+        margin-left: 0;
+    }
+
+    #page-course-index #block-region-side-pre.span4,
+    #page-course-index .row-fluid .span4,
+    #page-mod-quiz-edit #block-region-side-pre.span4,
+    #page-mod-quiz-edit .row-fluid .span4,
+    #page-mod-quiz-view #block-region-side-pre.span4,
+    #page-mod-quiz-view .row-fluid .span4,
+    .editing #block-region-side-pre.span4,
+    .empty-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .jsenabled.docked-region-side-post.used-region-side-pre #block-region-side-pre.span4,
+    .jsenabled.used-region-side-pre #block-region-side-pre.span4,
+    .pagelayout-coursecategory #block-region-side-pre.span4,
+    .pagelayout-coursecategory .row-fluid .span4,
+    .pagelayout-mydashboard #block-region-side-pre.span4,
+    .pagelayout-mydashboard .row-fluid .span4,
+    .pagelayout-standard #block-region-side-pre.span4,
+    .pagelayout-standard .row-fluid .span4,
+    .path-course-view .row-fluid .span4,
+    .path-course-view.used-region-side-pre #block-region-side-pre.span4,
+    .two-column .row-fluid .span4,
+    .used-region-side-pre #block-region-side-pre.span4 {
+        width: 185px;
+    }
+
+    .pagelayout-frontpage.empty-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-frontpage.jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8 {
+        width: 74%;
+        padding: 0;
+    }
+
+    #page-course-index #region-main.span8,
+    #page-mod-quiz-edit #region-main.span8,
+    #page-mod-quiz-view #region-main.span8,
+    .editing #region-main.span8,
+    .empty-region-side-post.used-region-side-pre #region-main.span8,
+    .empty-region-side-pre.used-region-side-post #region-main.span8,
+    .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
+    .pagelayout-coursecategory #region-main.span8,
+    .pagelayout-mydashboard #region-main.span8,
+    .pagelayout-standard #region-main.span8,
+    .path-course-view #region-main.span8,
+    .used-region-side-post #region-main.span8,
+    .used-region-side-pre #region-main.span8 {
+        width: calc(100% - 185px - 20px);
+    }
+
+    #page-course-index .row-fluid .span8,
+    #page-mod-quiz-edit .row-fluid .span8,
+    #page-mod-quiz-view .row-fluid .span8,
+    .pagelayout-coursecategory .row-fluid .span8,
+    .pagelayout-mydashboard .row-fluid .span8,
+    .pagelayout-standard .row-fluid .span8,
+    .path-course-view .row-fluid .span8,
+    .two-column .row-fluid .span8 {
+        width: calc(100% - 185px - 20px);
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    #page-course-index .row-fluid .span9,
+    #page-mod-quiz-edit .row-fluid .span9,
+    #page-mod-quiz-view .row-fluid .span9,
+    .pagelayout-coursecategory .row-fluid .span9,
+    .pagelayout-mydashboard .row-fluid .span9,
+    .pagelayout-standard .row-fluid .span9,
+    .path-course-view .row-fluid .span9,
+    .two-column .row-fluid .span9,
+    .used-region-side-pre .row-fluid .span9,
+    .used-region-side-post .row-fluid .span9 {
+        width: calc(100% - 185px - 20px);
+        padding-right: 20px;
+    }
+
+    #region-main {padding:0 20px;}
+}
+
 /* Custom CSS Settings
 -------------------------*/
 [[setting:customcss]]
