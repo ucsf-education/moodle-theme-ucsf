@@ -53,13 +53,6 @@ $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->csspostprocess = 'theme_ucsf_process_css';
 
 $THEME->layouts = array(
-    // Front page.
-    'frontpage' => array(
-        'file' => 'frontpage.php',
-        'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
-        'options' => array('nonavbar' => true),
-    ),
     // The pagelayout used for reports.
     'report' => array(
         'file' => 'columns3.php',
