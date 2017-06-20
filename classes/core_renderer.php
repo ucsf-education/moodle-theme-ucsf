@@ -110,4 +110,21 @@ class theme_ucsf_core_renderer extends theme_clean_core_renderer
     {
         return html_writer::span($title, 'brand');
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function heading( $text, $level = 2, $classes = null, $id = null ) {
+        global $SITE;
+        // KLUDGE!
+        // if the given heading text is the same as the site's title,
+        // and  this is level 1 heading, then print an empty heading.
+        // @see https://github.com/ucsf-ckm/moodle-theme-ucsf/issues/75
+        // [ST 2017/06/20]
+        if ($level === 1 && $SITE->fullname === $text) {
+            $text = '';
+        }
+        return parent::heading( $text, $level, $classes, $id );
+    }
 }
+
