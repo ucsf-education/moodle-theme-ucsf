@@ -48,14 +48,9 @@ img.small-logo {
 }
 
 body {
-    /*    background: url([[pix:theme_ucsf|background]]) no-repeat center top  #FFF;*/
     font-family: "Open Sans", sans-serif;
     font-size: 13px;
     color: #333;
-    /*
-    margin-top: 0;
-    padding-top: 0!important;
-    padding: 0!important;*/
 }
 
 a {
