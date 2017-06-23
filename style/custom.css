@@ -48,13 +48,13 @@ img.small-logo {
 }
 
 body {
-    color: #333;
+    color: #1e1e1e;
     font-family: "Open Sans", sans-serif;
     font-size: 13px;
 }
 
 a {
-    color: #5d93bd;
+    color: #116492;
     cursor: pointer;
 }
 
@@ -63,36 +63,38 @@ a:link, a:visited, a:active {
 }
 
 a:hover {
-    color: #5d93bd;
+    color: #116492;
     text-decoration: underline;
 }
 
+
 h1, h2, h3, h4, h5, h6 {
-    color: #365376;
+    color: #052049;
 }
 
+
 h1 {
-    font-size: 24px
+    font-size: 22px;
 }
 
 h2 {
-    font-size: 21px
+    font-size: 20px;
 }
 
 h3 {
-    font-size: 18px
+    font-size: 18px;
 }
 
 h4 {
-    font-size: 16px
+    font-size: 16px;
 }
 
 h5 {
-    font-size: 14px
+    font-size: 14px;
 }
 
 h6 {
-    font-size: 13px
+    font-size: 13px;
 }
 
 hr {
@@ -112,14 +114,111 @@ hr {
     }
 }
 
-/* accesshide header title */
 @media (max-width: 979px) {
+    /* accesshide header title */
     .navbar .brand {
         position: absolute;
         left: -10000px;
         font-size: 1em;
         font-weight: normal;
     }
+
+    .navbar .nav > li > a:hover {
+        color: #000;
+    }
+
+    .navbar .nav li.dropdown > a:hover .caret {
+        border-top-color: #000;
+        border-bottom-color: #000;
+    }
+
+    .navbar .nav-collapse.in {
+        background-color: #052049;
+    }
+
+    .nav-collapse .nav > li > a,
+    .nav-collapse .dropdown-menu a {
+        color: #fff;
+    }
+
+    .dropdown-menu > li > a:hover,
+    .dropdown-menu > li > a:focus,
+    .dropdown-submenu:hover > a,
+    .dropdown-submenu:focus > a {
+        background: none;
+        color: #000;
+        background-color: #ededee !important;
+    }
+
+
+}
+
+.navbar .brand {
+    margin-top: 5px;
+    font-weight: 600;
+    color: #052049;
+    text-shadow: none;
+    padding: 7px 30px 10px;
+}
+
+/* increase size of messages and notification counters in header */
+.navbar .count-container {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.navbar .nav > li > a {
+    color: #fff;
+    text-shadow: none;
+}
+
+/* change caret color to fff */
+.navbar .nav li.dropdown > .dropdown-toggle .caret {
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+
+/* change hover color */
+.navbar .nav > li > a:hover {
+    color: #ffdd00;
+}
+
+/* change caret hover color */
+.navbar .nav li.dropdown > a:hover .caret {
+    border-top-color: #ffdd00;
+    border-bottom-color: #ffdd00;
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+    background-color: #ededee;
+    color: #052049;
+}
+
+/* change caret focus color */
+.navbar .nav li.dropdown > a:focus .caret {
+    border-top-color: #052049;
+    border-bottom-color: #052049;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+    background: none;
+    background-color: #052049 !important;
+}
+
+
+/* user menu */
+.jsenabled .usermenu .moodle-actionmenu.show .menu a:hover {
+    background-color: #178CCB;
+    background-image: none;
+}
+
+.usermenu .moodle-actionmenu .toggle-display .userbutton .usertext {
+    font-weight: 600;
 }
 
 /* Custom UCSF Navigation
@@ -127,22 +226,26 @@ hr {
 
 .ucsf-custom-menu {
     background-color: #e4edf4;
+    margin-bottom: 10px;
     margin-left: 0;
 }
 
 .ucsf-custom-menu .category-label {
-    background: url([[pix:theme_ucsf|breadcrumb-arrow]]) #cbdcea no-repeat right;
+    background:none;
+    color: #fff;
+    font-size: 14px;
     font-weight: bold;
     padding: 10px 20px;
 }
 
 .ucsf-custom-menu .category-label a {
-    color: #000;
+    color: #fff;
+    font-size: 14px;
     text-decoration: none;
 }
 
 .ucsf-custom-menu .container-fluid {
-    background-color: #e4edf4;
+    background-color: #506380;
     padding-left: 0;
 }
 
@@ -151,12 +254,16 @@ hr {
     padding-right: 5px;
 }
 
+.ucsf-custom-menu .nav > li > a:after {
+    content: " ";
+}
+
 .ucsf-custom-menu .nav > li > a:first-child {
     padding-left: 10px;
 }
 
 .ucsf-custom-menu .nav > li > a:last-child {
-    padding-right: 0;
+    padding-right: 15px;
 }
 
 .ucsf-custom-menu .nav > li > a:after {
@@ -181,10 +288,63 @@ hr {
 }
 
 /*------------------------------------------------------------------------------------*/
+/* Breadcrumb */
+.breadcrumb {
+    background-color: #fff;
+    font-weight: bold;
+}
+
+/* unlinked breadcrumb items appear grey */
+.breadcrumb > li {
+    color: #999999;
+}
+
+.breadcrumb a {
+    color: #506380;
+}
+
+/*------------------------------------------------------------------------------------*/
 /* Page Context Header */
-.page-context-header .page-header-headings,
-.page-context-header .page-header-headings h1 {
+
+.page-context-header .page-header-headings {
+    margin-bottom: -20px;
     margin-top: 0;
+}
+.page-context-header .page-header-headings h1 {
+    font-size: 21px;
+    margin-top: 0;
+}
+
+/*------------------------------------------------------------------------------------*/
+/* Messaging Interface */
+.messaging-area-container .messaging-area .messages-area .messages .message .content.right {
+    border: 1px solid #4f94cd;
+}
+
+.messaging-area-container .messaging-area .messages-area .messages .message .content.left {
+    border: 1px solid #ededee;
+}
+
+.messaging-area-container .messaging-area .messages-area .messages .message .content.right {
+    background-color: #4f94cd;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.messaging-area-container .messaging-area .messages-area .messages .message .content.left {
+    background-color: #ededee;
+    color: #000;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.messaging-area-container .messaging-area .messages-area .messages .message .content.left .timesent {
+    color: #000;
+}
+
+.messaging-area-container .messaging-area .messages-area .messages .message .content.right .timesent {
+    color: #fff;
 }
 
 /*------------------------------------------------------------------------------------*/
@@ -200,39 +360,41 @@ hr {
 
 /*------------------------------------------------------------------------------------*/
 /* BLOCK */
+
+.block {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    background-color: #f3fafc;
+    border: none;
+    border-radius: 0 !important;
+    font-size: 13px;
+    padding: 0;
+}
+
 .block .content {
     border: none;
 }
 
-.block {
-    font-size: 13px;
-    background-color: #f3f3f4;
-    border: none;
-    padding: 0;
-    -webkit-border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
-    border-radius: 0 !important;
-}
-
-.block .header .title h2, .block h3.main {
-    font-family: "Open Sans", sans-serif;
-    font-size: 12px;
-    text-shadow: none;
-    background-color: #365376;
-    color: #FFF;
-    font-weight: 600;
+.block .header .title h2,
+.block h3.main {
+    background-color: #506380;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    color: #FFF;
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
     padding: 5px 15px;
+    text-shadow: none;
 }
 
 .block a {
-    color: #5d93bd;
+    color: #506380;
     font-weight: normal;
 }
 
 .block a:hover {
-    color: #5d93bd;
+    color: #506380;
     text-decoration: underline;
 }
 
@@ -273,6 +435,11 @@ hr {
 
 /*------------------------------------------------------------------------------------*/
 /* DOCK */
+
+/* move docked blocks on left margin below custom menu bar */
+#dock .dockeditem_container {
+    margin-top: 115px;
+}
 
 #dock .dockedtitle {
     background: #365376 none;
@@ -444,22 +611,31 @@ body#page-my-index .page-context-header {
 /*------------------------------------------------------------------------------------*/
 /* FOOTER */
 
+/* modifies the Last Updated text at bottom of pages */
+.modified {
+    font-size: 11px;
+    padding-top: 25px;
+    text-align: center;
+}
+
 .main-footer {
-    background: #e4edf4;
+    background: #fff;
     color: #365376;
+    padding-top: 20px;
 }
 
 #page-footer {
     border: none;
-    color: #365376;
+    border-top: 1px solid #d4d4d4;
+    color: #333;
 }
 
 #page-footer a {
-    color: #5d93bd;
+    color: #116492;
 }
 
 #page-footer a:hover {
-    color: #5d93bd;
+    color: #116492;
     text-decoration: underline;
 }
 
