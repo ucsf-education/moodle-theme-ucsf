@@ -2,4 +2,4 @@ A Moodle theme for UCSF's [Collaborative Learning Environment](https://courses.u
 
 ![screenshot](pix/screenshot.jpg)
 
-Copyright (c) 2015-2016 Regents of the University of California
+Copyright (c) Regents of the University of California
