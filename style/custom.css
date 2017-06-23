@@ -254,24 +254,12 @@ hr {
     padding-right: 5px;
 }
 
-.ucsf-custom-menu .nav > li > a:after {
-    content: " ";
-}
-
 .ucsf-custom-menu .nav > li > a:first-child {
     padding-left: 10px;
 }
 
 .ucsf-custom-menu .nav > li > a:last-child {
     padding-right: 15px;
-}
-
-.ucsf-custom-menu .nav > li > a:after {
-    content: " | ";
-}
-
-.ucsf-custom-menu .nav > li:last-child > a:after {
-    content: "";
 }
 
 @media (min-width: 980px) {
