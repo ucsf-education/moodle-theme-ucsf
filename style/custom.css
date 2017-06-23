@@ -48,9 +48,9 @@ img.small-logo {
 }
 
 body {
+    color: #333;
     font-family: "Open Sans", sans-serif;
     font-size: 13px;
-    color: #333;
 }
 
 a {
