@@ -295,9 +295,10 @@ hr {
 /* Page Context Header */
 
 .page-context-header .page-header-headings {
-    margin-bottom: -20px;
+    margin-bottom: -15px;
     margin-top: 0;
 }
+
 .page-context-header .page-header-headings h1 {
     font-size: 21px;
     margin-top: 0;
