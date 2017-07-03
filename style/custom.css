@@ -105,54 +105,6 @@ hr {
 
 /* Header
 -------------------------*/
-
-/* hide navigation in header */
-@media (min-width: 980px) {
-    .navbar .nav {
-        visibility: hidden;
-        height: 0;
-    }
-}
-
-@media (max-width: 979px) {
-    /* accesshide header title */
-    .navbar .brand {
-        position: absolute;
-        left: -10000px;
-        font-size: 1em;
-        font-weight: normal;
-    }
-
-    .navbar .nav > li > a:hover {
-        color: #000;
-    }
-
-    .navbar .nav li.dropdown > a:hover .caret {
-        border-top-color: #000;
-        border-bottom-color: #000;
-    }
-
-    .navbar .nav-collapse.in {
-        background-color: #052049;
-    }
-
-    .nav-collapse .nav > li > a,
-    .nav-collapse .dropdown-menu a {
-        color: #fff;
-    }
-
-    .dropdown-menu > li > a:hover,
-    .dropdown-menu > li > a:focus,
-    .dropdown-submenu:hover > a,
-    .dropdown-submenu:focus > a {
-        background: none;
-        color: #000;
-        background-color: #ededee !important;
-    }
-
-
-}
-
 .navbar .brand {
     margin-top: 5px;
     font-weight: 600;
@@ -210,6 +162,50 @@ hr {
     background-color: #052049 !important;
 }
 
+/* hide navigation in header */
+@media (min-width: 980px) {
+    .navbar .nav {
+        visibility: hidden;
+        height: 0;
+    }
+}
+
+@media (max-width: 979px) {
+    /* accesshide header title */
+    .navbar .brand {
+        position: absolute;
+        left: -10000px;
+        font-size: 1em;
+        font-weight: normal;
+    }
+
+    .navbar .nav > li > a:hover {
+        color: #000;
+    }
+
+    .navbar .nav-collapse.in {
+        background-color: #052049;
+    }
+
+    .navbar .nav li.dropdown > a:hover .caret {
+        border-top-color: #000;
+        border-bottom-color: #000;
+    }
+
+    .dropdown-menu > li > a:hover,
+    .dropdown-menu > li > a:focus,
+    .dropdown-submenu:hover > a,
+    .dropdown-submenu:focus > a {
+        background: none;
+        color: #000;
+        background-color: #ededee !important;
+    }
+
+    .nav-collapse .nav > li > a,
+    .nav-collapse .dropdown-menu a {
+        color: #fff;
+    }
+}
 
 /* user menu */
 .jsenabled .usermenu .moodle-actionmenu.show .menu a:hover {
