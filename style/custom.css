@@ -888,6 +888,38 @@ body#page-my-index .page-context-header {
     #region-main {padding:0 20px;}
 }
 
+/* Miscellaneous
+-------------------------*/
+
+/* Widens rightmost column of assign roles table */
+.leftalign.roleholder.cell.c3.lastcol {
+    width: 20%;
+}
+
+/* Increase spacing after user name on profile page */
+.userprofile .page-context-header .page-header-headings {
+    margin-bottom: 0px;
+}
+
+/* Adjusts OU Blog - Blog Usage block text */
+.oublog-accordion li .oublog_statsview_title h2 {
+    font-size: 1.0em;
+    line-height: 20px;
+}
+
+.oublog_statsview_content p {
+    font-size: 12px;
+}
+
+#id_timefilter_commentpoststats {
+    font-size: 12px;
+}
+
+#id_submitbutton_commentpoststats {
+    font-size: 12px;
+}
+
+
 /* Custom CSS Settings
 -------------------------*/
 [[setting:customcss]]
