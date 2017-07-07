@@ -289,6 +289,10 @@ hr {
 
 /*------------------------------------------------------------------------------------*/
 /* Page Context Header */
+/* Increase padding before buttons on user profile REPLACES the one below */
+.page-context-header .header-button-group {
+    padding-top: 20px;
+}
 
 .page-context-header .page-header-headings {
     margin-bottom: -15px;
@@ -891,14 +895,14 @@ body#page-my-index .page-context-header {
 /* Miscellaneous
 -------------------------*/
 
+/* Widens enrollment methods table */
+.boxwidthnormal {
+    width: 80%;
+}
+
 /* Widens rightmost column of assign roles table */
 .leftalign.roleholder.cell.c3.lastcol {
     width: 20%;
-}
-
-/* Increase spacing after user name on profile page */
-.userprofile .page-context-header .page-header-headings {
-    margin-bottom: 0px;
 }
 
 /* Adjusts OU Blog - Blog Usage block text */
