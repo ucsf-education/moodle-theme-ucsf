@@ -902,6 +902,11 @@ body#page-my-index .page-context-header {
     width: 80%;
 }
 
+/* Widens assign roles table */
+.path-admin #assignrole {
+    width: 80%;
+}
+
 /* Widens rightmost column of assign roles table */
 .leftalign.roleholder.cell.c3.lastcol {
     width: 20%;
