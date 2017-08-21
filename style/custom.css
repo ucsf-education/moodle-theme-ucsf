@@ -762,7 +762,6 @@ body#page-my-index .page-context-header {
     #page-mod-quiz-view #region-main.span8,
     .editing #region-main.span8,
     .empty-region-side-post.used-region-side-pre #region-main.span8,
-    .empty-region-side-pre.used-region-side-post #region-main.span8,
     .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
     .jsenabled.used-region-side-pre #region-main.span8,
     .pagelayout-coursecategory #region-main.span8,
@@ -800,7 +799,14 @@ body#page-my-index .page-context-header {
         padding-right: 20px;
     }
 
+    /* @see https://github.com/ucsf-ckm/moodle-theme-ucsf/issues/88 */
+    .empty-region-side-pre.used-region-side-post #region-main {
+        width: 100%;
+    }
+
     #region-main {padding:0 20px;}
+
+
 }
 
 @media (min-width: 770px) and (max-width: 1199px) {
@@ -853,7 +859,6 @@ body#page-my-index .page-context-header {
     #page-mod-quiz-view #region-main.span8,
     .editing #region-main.span8,
     .empty-region-side-post.used-region-side-pre #region-main.span8,
-    .empty-region-side-pre.used-region-side-post #region-main.span8,
     .jsenabled.docked-region-side-post.used-region-side-pre #region-main.span8,
     .pagelayout-coursecategory #region-main.span8,
     .pagelayout-mydashboard #region-main.span8,
@@ -889,6 +894,11 @@ body#page-my-index .page-context-header {
     .used-region-side-post .row-fluid .span9 {
         width: calc(100% - 185px - 20px);
         padding-right: 20px;
+    }
+
+    /* @see https://github.com/ucsf-ckm/moodle-theme-ucsf/issues/88 */
+    .empty-region-side-pre.used-region-side-post #region-main {
+        width: 100%;
     }
 
     #region-main {padding:0 20px;}
