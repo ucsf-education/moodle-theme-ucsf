@@ -66,17 +66,19 @@
     {{>theme_ucsfx/header}}
 
     <div id="page" class="container-fluid">
+
+        {{>theme_ucsfx/custom_menu}}
+
         {{{ output.full_header }}}
 
         <div id="page-content" class="row">
             <div id="region-main-box" class="col-xs-12">
+
                 {{#hasregionmainsettingsmenu}}
                 <div id="region-main-settings-menu" class="hidden-print {{#hasblocks}}has-blocks{{/hasblocks}}">
                     <div> {{{ output.region_main_settings_menu }}} </div>
                 </div>
                 {{/hasregionmainsettingsmenu}}
-
-                {{>theme_ucsfx/custom_menu}}
 
                 <section id="region-main" {{#hasblocks}}class="has-blocks"{{/hasblocks}}>
                     <div class="card card-block">
