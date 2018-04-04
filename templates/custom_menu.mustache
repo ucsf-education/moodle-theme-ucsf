@@ -1,18 +1,24 @@
-<div class="custom_menu">
-    <nav class="nav navbar-nav hidden-md-down">
-        <!-- custom_menu -->
-        {{{ output.custom_menu }}}
-    </nav>
-    <nav class="nav navbar-nav hidden-md-up">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="icon fa fa-bars fa-fw " aria-hidden="true" aria-label=""></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            {{# output.custom_menu_flat }}
-                <ul class="list-unstyled p-t-1">
-                    {{> theme_boost/custom_menu_footer }}
-                </ul>
-            {{/ output.custom_menu_flat }}
+<div class="custom_menu row">
+    <div class="col-xs-12 p-a-1">
+        <div class="card">
+            <div class="card-block">
+                <nav class="nav navbar-nav hidden-md-down">
+                    <!-- custom_menu -->
+                    {{{ output.custom_menu }}}
+                </nav>
+                <nav class="nav navbar-nav hidden-lg-up">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="icon fa fa-bars fa-fw " aria-hidden="true" aria-label=""></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        {{# output.custom_menu_flat }}
+                            <ul class="list-unstyled p-t-1">
+                                {{> theme_boost/custom_menu_footer }}
+                            </ul>
+                        {{/ output.custom_menu_flat }}
+                    </div>
+                </nav>
+            </div>
         </div>
-    </nav>
+    </div>
 </div>
