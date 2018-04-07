@@ -23,7 +23,22 @@ defined('MOODLE_INTERNAL') || die;
  * @copyright 2018 The Regents of the University of California
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class core_renderer extends \theme_boost\output\core_renderer
 {
+    /**
+     * Returns a help menu.
+     *
+     * @param \stdClass $menu
+     *
+     * @return string The help menu HTML, or a blank string if the given menu data is empty.
+     * @throws \moodle_exception
+     */
+    public function help_menu(\stdClass $menu)
+    {
+        if (empty($menu) || empty($menu->items)) {
+            return '';
+        }
+
+        return $this->render_from_template('theme_ucsfx/helpmenu_popover', $menu);
+    }
 }

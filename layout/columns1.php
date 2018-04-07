@@ -26,10 +26,14 @@ defined('MOODLE_INTERNAL') || die();
 
 $bodyattributes = $OUTPUT->body_attributes([]);
 
+$helpmenu = $OUTPUT->help_menu(theme_ucsfx_get_helpmenu($PAGE));
+
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
-    'bodyattributes' => $bodyattributes
+    'bodyattributes' => $bodyattributes,
+    'helpmenu' => $helpmenu,
+    'hashelpmenu' => !empty($helpmenu)
 ];
 
 echo $OUTPUT->render_from_template('theme_ucsfx/columns1', $templatecontext);

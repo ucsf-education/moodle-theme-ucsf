@@ -93,4 +93,86 @@ if ($ADMIN->fulltree) {
     $page->add($setting);
 
     $settings->add($page);
+
+    // Helpmenu
+
+    $page = new admin_settingpage('theme_ucsfx_helpmenu', get_string('helpfeedbacksettings', 'theme_ucsfx'));
+
+    // Enable/Disable Help/Feedback links;.
+    $name = 'theme_ucsfx/helpfeedbackenabled';
+    $title = get_string('helpfeedbackenabled', 'theme_ucsfx');
+    $description = get_string('helpfeedbackenableddesc', 'theme_ucsfx');
+    $default = false;
+    $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
+    // Help/Feedback button title
+    $name = 'theme_ucsfx/helpfeedbacktitle';
+    $title = get_string('helpfeedbacktitle', 'theme_ucsfx');
+    $description = get_string('helpfeedbacktitledesc', 'theme_ucsfx');
+    $default = 'Help/Feedback';
+    $setting = new admin_setting_configtext($name, $title, $description, $default);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
+    // Select the number of links
+    $name = 'theme_ucsfx/helpfeedbacknumlinks';
+    $title = get_string('helpfeedbacknumlinks', 'theme_ucsfx');
+    $description = '';
+    $default = 0;
+    $helpfeedbackchoices = array(
+        0 => '0',
+        1 => '1',
+        2 => '2',
+        3 => '3',
+        4 => '4',
+        5 => '5',
+        6 => '6',
+        7 => '7',
+        8 => '8',
+        9 => '9',
+        10 => '10'
+    );
+
+    $setting = new admin_setting_configselect($name, $title, $description, $default, $helpfeedbackchoices);
+    $page->add($setting);
+
+    // Draw input field for desired number of slides
+    $numberoflinks = intval(get_config('theme_ucsfx', 'helpfeedbacknumlinks'), 10);
+    for ($i = 1; $i <= $numberoflinks; $i++) {
+
+        $name = 'theme_ucsfx/helpfeedback' . $i . 'heading';
+        $heading = get_string('helpfeedbackno', 'theme_ucsfx', array('help' => $i));
+        $information = "";
+        $setting = new admin_setting_heading($name, $heading, $information);
+        $page->add($setting);
+
+        $name = 'theme_ucsfx/helpfeedback' . $i . 'link';
+        $title = get_string('helpfeedbacklink', 'theme_ucsfx');
+        $description = get_string('helpfeedbacklinkdesc', 'theme_ucsfx');
+        $default = '';
+        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        $name = 'theme_ucsfx/helpfeedback' . $i . 'linklabel';
+        $title = get_string('helpfeedbacklinklabel', 'theme_ucsfx');
+        $description = get_string('helpfeedbacklinklabeldesc', 'theme_ucsfx');
+        $default = '';
+        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        // Help/Feedback link target
+        $name = 'theme_ucsfx/helpfeedback' . $i . 'linktarget';
+        $title = get_string('helpfeedbacklinktarget' , 'theme_ucsfx');
+        $description = get_string('helpfeedbacklinktargetdesc', 'theme_ucsfx');
+        $default = '0';
+        $setting = new admin_setting_configselect($name, $title, $description, $default, array('0' => "No", '1' => 'Yes'));
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
+
+    $settings->add($page);
 }

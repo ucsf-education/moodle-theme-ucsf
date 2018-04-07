@@ -48,3 +48,68 @@ function theme_ucsfx_get_main_scss_content($theme) {
     // Combine them together.
     return $pre . "\n" . $scss . "\n" . $post;
 }
+
+/**
+ * Returns the help menu data as an object, or NULL if none could be if the help menu has been disabled.
+ *
+ * @param moodle_page $page
+ *
+ * @return \stdClass|null
+ *
+ * @throws coding_exception
+ */
+function theme_ucsfx_get_helpmenu(moodle_page $page)
+{
+    $theme_settings = $page->theme->settings;
+
+    if (! _theme_ucsfx_get_setting($theme_settings, 'helpfeedbackenabled')) {
+        return null;
+    }
+
+    $menu = new \stdClass();
+
+    $title = _theme_ucsfx_get_setting($theme_settings, 'helpfeedbacktitle', '');
+    $menu->title = empty($title) ? get_string('helpmenutitle', 'theme_ucsfx') : $title;
+
+    $menu->items = array();
+    $number_of_links = (int) _theme_ucsfx_get_setting($theme_settings, 'helpfeedbacknumlinks', 0);
+    for ($i = 1; $i <= $number_of_links; $i++) {
+        $url = _theme_ucsfx_get_setting($theme_settings, 'helpfeedback' . $i . 'link', '');
+        $title = _theme_ucsfx_get_setting($theme_settings, 'helpfeedback' . $i . 'linklabel', '');
+        $target = _theme_ucsfx_get_setting($theme_settings, 'helpfeedback' . $i . 'linktarget');
+
+        if (! empty($url)) {
+            $menu->items[] = array(
+                'url'     => $url,
+                'title'   => $title,
+                'options' => array(
+                    'target' => empty($target) ? '_self' : '_blank',
+                ),
+            );
+        }
+    }
+
+    if (empty($menu->items)) {
+        return null;
+    }
+
+    return $menu;
+}
+
+/**
+ * Retrieves a theme setting.
+ *
+ * @param stdClass $theme_settings The theme settings object
+ * @param string   $setting        The name of the setting.
+ * @param mixed    $default        A default value, to be used as fallback if the setting is not defined.
+ *
+ * @return mixed The setting's value, or the given default if the setting has not been defined.
+ */
+function _theme_ucsfx_get_setting($theme_settings, $setting, $default = false)
+{
+    if (! isset($theme_settings->$setting)) {
+        return $default;
+    }
+
+    return $theme_settings->$setting;
+}

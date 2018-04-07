@@ -44,3 +44,27 @@ $string['rawscss_desc'] = 'Use this field to provide SCSS or CSS code which will
 $string['rawscsspre'] = 'Raw initial SCSS';
 $string['rawscsspre_desc'] = 'In this field you can provide initialising SCSS code, it will be injected before everything else. Most of the time you will use this setting to define variables.';
 $string['region-side-pre'] = 'Right';
+
+/* Help/Feedback */
+$string['helpfeedbacksettings'] = 'Help/Feedback settings';
+$string['helpfeedback'] = 'Help/Feedback';
+$string['helpfeedbacktitle'] = 'Enter Help/Feedback title';
+$string['helpfeedbacktitledesc'] = 'Enter desired text for Help/Feedback button';
+$string['helpfeedbacknumlinks'] = 'Select number of links';
+$string['helpfeedbackenabled'] = 'Enable Help/Feedback menu';
+$string['helpfeedbackenableddesc'] = ' Click to enable Help/Feedback menu';
+$string['helpfeedbackno'] = 'Help/Feedback {$a->help}';
+$string['helpfeedbacklinklabel'] = "Enter label name";
+$string['helpfeedbacklinklabeldesc'] = "Custom label name";
+$string['helpfeedbacklink'] = 'Help/Feedback link to a static page';
+$string['helpfeedbacklinkdesc'] = 'Help/Feedback link to a static page. Example: http://www.ucsf.edu/static/help.html';
+$string['helpfeedbacklinktarget'] = 'Open Help/Feedback link in new window';
+$string['helpfeedbacklinktargetdesc'] = 'Should Help/Feedback link opens in a new window';
+
+// Help menu popup
+$string['showhelpmenuwindow'] = 'Show help menu window';
+$string['hidehelpmenuwindow'] = 'Hide help menu window';
+$string['togglehelpmenu'] = 'Toggle help menu';
+$string['helpmenuwindow'] = 'Help menu window';
+$string['helpmenu'] = 'Help menu';
+$string['helpmenutitle'] = 'Help/Feedback';
