@@ -33,7 +33,7 @@ class core_renderer extends \theme_boost\output\core_renderer
      * @return string The help menu HTML, or a blank string if the given menu data is empty.
      * @throws \moodle_exception
      */
-    public function help_menu(\stdClass $menu)
+    public function help_menu(\stdClass $menu = null)
     {
         if (empty($menu) || empty($menu->items)) {
             return '';
