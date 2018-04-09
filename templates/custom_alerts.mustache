@@ -1,0 +1,39 @@
+{{!
+    @template theme_ucsfx/custom_alerts
+
+    This template will render all given custom alerts.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * All data attributes are required
+
+    Context variables required for this template:
+    * url The URL to the server-side callback script for clearing alerts from the user session.
+    * alerts The list of alerts.
+
+    Example context (json):
+    {
+        "title: "http://localhost/theme/ucsfx/alert.php",
+        "alerts": [
+            { "type": "info", "title": "Achtung!": "text": "Lorem Ipsum" },
+            { "type": "warning", "title": "Fair Warning": "text": "Foo Bar Baz" },
+        ]
+    }
+
+}}
+{{#alerts}}
+    <div class="custom-alerts row">
+        <div class="col-xs-12">
+            <div class="alert alert-{{type}} alert-dismissible ucsfx-alert" role="alert" data-ucsfx-alert-id="alert{{id}}"
+                 data-ucsfx-target-url="{{url}}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" title="Dismiss Alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>{{title}}</strong>
+                {{{text}}}
+            </div>
+        </div>
+    </div>
+{{/alerts}}

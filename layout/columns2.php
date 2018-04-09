@@ -41,6 +41,7 @@ $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
 $helpmenu = $OUTPUT->help_menu(theme_ucsfx_get_helpmenu($PAGE));
+$custom_alerts = $OUTPUT->custom_alerts(theme_ucsfx_get_custom_alerts($PAGE));
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
@@ -51,12 +52,14 @@ $templatecontext = [
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'helpmenu' => $helpmenu,
-    'hashelpmenu' => !empty($helpmenu)
+    'hashelpmenu' => !empty($helpmenu),
+    'customalerts' => $custom_alerts,
 ];
 
 $templatecontext['flatnavigation'] = $PAGE->flatnav;
 
 $PAGE->requires->js('/theme/ucsfx/javascript/datepicker.js');
+$PAGE->requires->js('/theme/ucsfx/javascript/custom_alerts.js');
 
 echo $OUTPUT->render_from_template('theme_ucsfx/columns2', $templatecontext);
 

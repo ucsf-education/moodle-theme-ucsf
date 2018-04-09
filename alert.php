@@ -15,31 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A one column layout for the ucsfx theme.
- *
+ * Callback script to clear custom alerts from user session.
  * @package   theme_ucsfx
  * @copyright 2018 The Regents of the University of California
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+require_once(__DIR__ . '/../../config.php');
 
-$bodyattributes = $OUTPUT->body_attributes([]);
-
-$helpmenu = $OUTPUT->help_menu(theme_ucsfx_get_helpmenu($PAGE));
-$custom_alerts = $OUTPUT->custom_alerts(theme_ucsfx_get_custom_alerts($PAGE));
-
-$templatecontext = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output' => $OUTPUT,
-    'bodyattributes' => $bodyattributes,
-    'helpmenu' => $helpmenu,
-    'hashelpmenu' => !empty($helpmenu),
-    'customalerts' => $custom_alerts,
-];
-
-$PAGE->requires->js('/theme/ucsfx/javascript/datepicker.js');
-$PAGE->requires->js('/theme/ucsfx/javascript/custom_alerts.js');
-
-
-echo $OUTPUT->render_from_template('theme_ucsfx/columns1', $templatecontext);
+if (array_key_exists('alert', $_GET)) {
+    $alert = strip_tags($_GET["alert"]);
+    if (array_key_exists('alerts', $_SESSION) && array_key_exists($alert, $_SESSION['alerts'])) {
+        $_SESSION['alerts'][$alert] = true;
+    }
+}

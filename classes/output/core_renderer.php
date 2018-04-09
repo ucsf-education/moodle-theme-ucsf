@@ -41,4 +41,27 @@ class core_renderer extends \theme_boost\output\core_renderer
 
         return $this->render_from_template('theme_ucsfx/helpmenu_popover', $menu);
     }
+
+    /**
+     * Returns the custom alerts.
+     *
+     * @param array $alerts
+     *
+     * @return string The custom alerts HTML, or a blank string if no alerts were given.
+     * @throws \moodle_exception
+     */
+    public function custom_alerts($alerts = array())
+    {
+        global $CFG;
+
+        if (empty($alerts)) {
+            return '';
+        }
+
+        $context         = new \stdClass();
+        $context->alerts = $alerts;
+        $context->url    = $CFG->wwwroot.'/theme/ucsfx/alert.php';
+
+        return $this->render_from_template('theme_ucsfx/custom_alerts', $context);
+    }
 }
