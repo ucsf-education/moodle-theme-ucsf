@@ -55,5 +55,8 @@ $templatecontext = [
 ];
 
 $templatecontext['flatnavigation'] = $PAGE->flatnav;
+
+$PAGE->requires->js('/theme/ucsfx/javascript/datepicker.js');
+
 echo $OUTPUT->render_from_template('theme_ucsfx/columns2', $templatecontext);
 

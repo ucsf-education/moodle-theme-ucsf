@@ -36,5 +36,6 @@ $templatecontext = [
     'hashelpmenu' => !empty($helpmenu)
 ];
 
-echo $OUTPUT->render_from_template('theme_ucsfx/columns1', $templatecontext);
+$PAGE->requires->js('/theme/ucsfx/javascript/datepicker.js');
 
+echo $OUTPUT->render_from_template('theme_ucsfx/columns1', $templatecontext);

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<libraries>
+    <library>
+        <location>amd/build/bootstrap-datepicker.min.js</location>
+        <name>Datepicker for Bootstrap</name>
+        <license>Apache</license>
+        <version>1.8.0</version>
+        <licenseversion>2.0</licenseversion>
+    </library>
+    <library>
+        <location>amd/src/bootstrap-datepicker.js</location>
+        <name>Datepicker for Bootstrap</name>
+        <license>Apache</license>
+        <version>1.8.0</version>
+        <licenseversion>2.0</licenseversion>
+    </library>
+    <library>
+        <location>style/bootstrap-datepicker.css</location>
+        <name>Datepicker for Bootstrap</name>
+        <license>Apache</license>
+        <version>1.8.0</version>
+        <licenseversion>2.0</licenseversion>
+    </library>
+</libraries>
