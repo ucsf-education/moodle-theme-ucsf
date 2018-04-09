@@ -176,10 +176,10 @@ class theme_ucsfx_datepicker extends admin_setting {
         // Start form for date input.
         $return  = '<div class="form-text defaultsnext">';
         // Datepicker.
-        $return .= '<input type="text" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['datepicker']).'" size="15"><span id="required">Required</span><br />';
+        $return .= '<input type="text" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['datepicker']).'" size="15"><br />';
 
         // Datepicker.
-        $return .= '<input type="text" id="' . $this->get_id() . 'end_datepicker" name="' . $this->get_full_name() . '[end_datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['end_datepicker']).'" size="15"><span id="required">Required</span>';
+        $return .= '<input type="text" id="' . $this->get_id() . 'end_datepicker" name="' . $this->get_full_name() . '[end_datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['end_datepicker']).'" size="15">';
 
         $return .= '</div>';
 
@@ -317,7 +317,7 @@ class theme_ucsfx_datepicker_time extends admin_setting {
             $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
             $return .= '<option value="' . $i . '" ' . ($i == $data['start_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
         }
-        $return .= '</select><span id="required">Required</span>';
+        $return .= '</select>';
         $return .= '</br>';
 
         // End output for hour select box.
@@ -336,7 +336,7 @@ class theme_ucsfx_datepicker_time extends admin_setting {
             $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
             $return .= '<option value="' . $i . '" ' . ($i == $data['end_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
         }
-        $return .= '</select><span id="required">Required</span>';
+        $return .= '</select>';
 
 
         $return .= '</div>';
@@ -500,7 +500,7 @@ class theme_ucsfx_datepicker_with_validation extends admin_setting {
             $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
             $return .= '<option value="' . $i . '" ' . ($i == $data['start_minute'] ? ' selected="selected"' : '') . ' >' . $writeminute . '</option>';
         }
-        $return .= '</select><span id="required">Required</span>';
+        $return .= '</select>';
         $return .= '<br />';
 
 
@@ -521,7 +521,7 @@ class theme_ucsfx_datepicker_with_validation extends admin_setting {
             $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
             $return .= '<option value="' . $i . '" ' . ($i == $data['end_minute'] ? ' selected="selected"' : '') . '>' . $writeminute . '</option>';
         }
-        $return .= '</select><span id="required">Required</span>';
+        $return .= '</select>';
 
 
         $return .= '</div>';
