@@ -117,7 +117,7 @@ if ($ADMIN->fulltree) {
     $page->add($setting);
 
     // Select the number of links
-    $name = 'theme_ucsfx/helpfeedbacknumlinks';
+    $name = 'theme_ucsfx/numberoflinks';
     $title = get_string('helpfeedbacknumlinks', 'theme_ucsfx');
     $description = '';
     $default = 0;
@@ -139,7 +139,7 @@ if ($ADMIN->fulltree) {
     $page->add($setting);
 
     // Draw input field for desired number of slides
-    $numberoflinks = intval(get_config('theme_ucsfx', 'helpfeedbacknumlinks'), 10);
+    $numberoflinks = intval(get_config('theme_ucsfx', 'numberoflinks'), 10);
     for ($i = 1; $i <= $numberoflinks; $i++) {
 
         $name = 'theme_ucsfx/helpfeedback' . $i . 'heading';

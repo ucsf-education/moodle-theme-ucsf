@@ -72,7 +72,7 @@ function theme_ucsfx_get_helpmenu(moodle_page $page)
     $menu->title = empty($title) ? get_string('helpmenutitle', 'theme_ucsfx') : $title;
 
     $menu->items = array();
-    $number_of_links = (int) _theme_ucsfx_get_setting($theme_settings, 'helpfeedbacknumlinks', 0);
+    $number_of_links = (int) _theme_ucsfx_get_setting($theme_settings, 'numberoflinks', 0);
     for ($i = 1; $i <= $number_of_links; $i++) {
         $url = _theme_ucsfx_get_setting($theme_settings, 'helpfeedback' . $i . 'link', '');
         $title = _theme_ucsfx_get_setting($theme_settings, 'helpfeedback' . $i . 'linklabel', '');
