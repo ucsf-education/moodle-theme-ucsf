@@ -137,7 +137,7 @@ class theme_ucsfx_datepicker extends admin_setting {
             return ($result ? '' : get_string('errorsetting', 'admin'));
         } else {
             if (is_null($data['datepicker']) || is_null($data['end_datepicker']) || $data['datepicker'] == "" || $data['end_datepicker'] ==""){
-                return (get_string('empdyDateFieldError', 'theme_ucsfx'));
+                return (get_string('emptyDateFieldError', 'theme_ucsfx'));
             } else {
                 return (get_string('oneTimeStartEndDateError', 'theme_ucsfx'));
             }
@@ -444,7 +444,7 @@ class theme_ucsfx_datepicker_with_validation extends admin_setting {
             return ($result ? '' : get_string('errorsetting', 'admin'));
         } else {
             if (is_null($data['datepicker']) || is_null($data['end_datepicker']) || $data['datepicker'] == "" || $data['end_datepicker'] ==""){
-                return (get_string('empdyDateFieldError', 'theme_ucsfx'));
+                return (get_string('emptyDateFieldError', 'theme_ucsfx'));
             } else {
                 return (get_string('oneTimeStartEndDateError', 'theme_ucsfx'));
             }

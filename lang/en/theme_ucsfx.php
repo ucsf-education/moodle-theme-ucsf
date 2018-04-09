@@ -79,7 +79,7 @@ $string['enablealertdesc'] = 'Enable or disable alerts';
 
 $string['oneTimeStartEndDateError'] = 'Could not update the alert! It is set to end before it starts!';
 $string['oneTimeStartEndTimeError'] = 'Could not update the alert! It is set to end before it starts!';
-$string['empdyDateFieldError'] = 'Could not update the alert! The date field cannot be empty!';
+$string['emptyDateFieldError'] = 'Could not update the alert! The date field cannot be empty!';
 
 
 $string['alert1'] = 'Alert One';
