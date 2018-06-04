@@ -199,7 +199,28 @@ $string['addcategorycustomizationheadingdesc'] = '';
 $string['categorieslist'] = 'Add category / subcategory';
 $string['categorieslistdesc'] = "Adds category for customization. If category is already added to customization, it won't be displayed in the list.";
 $string['categorycustomizationheading'] = 'Category Customizations';
+$string['categorylabel'] = 'Category label';
+$string['categorylabeldesc'] = 'Category label';
 $string['removecategorieslist'] = 'Remove category / subcategory';
 $string['removecategorieslistdesc'] = 'List of all categories / subcategories currently available for customization / removal';
 $string['removecategorycustomizationheading'] = 'Remove category';
 $string['removecategorycustomizationheadingdesc'] = '';
+
+$string['customcsssubsectiontitle'] = 'CSS and Menu Bar';
+$string['custommenusubsectiontitle'] = 'Menu Bar Items';
+$string['categorylabelsubsectiontitle'] = 'Category Label';
+$string['helpfeedbacksubsectiontitle'] = 'Help and Feedback';
+$string['headerimagesubsectiontitle'] = 'Header Image and Label';
+
+
+$string['categorylabel'] = 'Category label';
+$string['categorylabeldesc'] = 'Category label';
+
+$string['linklabeltocategorypage'] = 'Link label to category page';
+$string['linklabeltocategorypagedesc'] = 'Link label to category page';
+
+$string['custommenu'] = 'Custom menu';
+$string['custommenudesc'] = 'Custom menu';
+
+$string['logoinfo'] = 'Logo';
+$string['logoinfodesc'] = 'Logo desc';
