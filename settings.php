@@ -28,71 +28,76 @@ if ($ADMIN->fulltree) {
     // Get all categories
     $categories = get_config('theme_ucsf');
     $all_categories = '';
-    if(!empty($categories->all_categories))
+    if (!empty($categories->all_categories)) {
         $all_categories = $categories->all_categories;
+    }
     $all_categories_array = explode(",", $all_categories);
 
     // Get all categories
     $get_recurring_alerts = get_config('theme_ucsf');
     $all_categories = '';
-    if(!empty($get_recurring_alerts->all_categories))
+    if (!empty($get_recurring_alerts->all_categories)) {
         $all_categories = $get_recurring_alerts->all_categories;
+    }
     $all_categories_array = explode(",", $all_categories);
 
     $sql = "SELECT cc.id, cc.name
         FROM {course_categories} cc
         WHERE cc.parent = 0
         ORDER BY cc.sortorder";
-    $course_categories =  $DB->get_records_sql($sql);
+    $course_categories = $DB->get_records_sql($sql);
 
     $sql2 = "SELECT ccp.id, cc.name, ccp.name as parentname
         FROM {course_categories} cc
         INNER JOIN {course_categories} ccp
         WHERE ccp.parent = cc.id
         ORDER BY cc.sortorder";
-    $course_subcategories =  $DB->get_records_sql($sql2);
+    $course_subcategories = $DB->get_records_sql($sql2);
 
     $choices = array();
-    $choices[0]="None";
+    $choices[0] = "None";
 
     $remove_categories_list = array();
-    $remove_categories_list[0]="Site wide";
+    $remove_categories_list[0] = "Site wide";
 
     $alert_category_array = array();
-    $alert_category_array[0]="None";
+    $alert_category_array[0] = "None";
 
     foreach ($course_categories as $alert_category_arrays) {
-        $alert_category_array[$alert_category_arrays->id]=$alert_category_arrays->name;
+        $alert_category_array[$alert_category_arrays->id] = $alert_category_arrays->name;
     }
 
     foreach ($course_subcategories as $alert_category_arrays) {
         foreach ($all_categories_array as $all_cats) {
             if ($all_cats == $alert_category_arrays->id) {
-                $alert_category_array[$alert_category_arrays->id]=$alert_category_arrays->name . ' / ' .$alert_category_arrays->parentname ;
+                $alert_category_array[$alert_category_arrays->id] = $alert_category_arrays->name.' / '.$alert_category_arrays->parentname;
             }
         }
-        if(!in_array($alert_category_arrays->id, $all_categories_array))
-            $alert_category_array[$alert_category_arrays->id]=$alert_category_arrays->name . ' / ' .$alert_category_arrays->parentname;
+        if (!in_array($alert_category_arrays->id, $all_categories_array)) {
+            $alert_category_array[$alert_category_arrays->id] = $alert_category_arrays->name.' / '.$alert_category_arrays->parentname;
+        }
     }
 
     foreach ($course_categories as $cat) {
         foreach ($all_categories_array as $all_cats) {
             if ($all_cats == $cat->id) {
-                $remove_categories_list[$cat->id]=$cat->name;
+                $remove_categories_list[$cat->id] = $cat->name;
             }
         }
-        if(!in_array($cat->id, $all_categories_array))
-            $choices[$cat->id]=$cat->name;
+        if (!in_array($cat->id, $all_categories_array)) {
+            $choices[$cat->id] = $cat->name;
+        }
     }
 
     foreach ($course_subcategories as $cat) {
         foreach ($all_categories_array as $all_cats) {
             if ($all_cats == $cat->id) {
-                $remove_categories_list[$cat->id]=$cat->name . ' / ' .$cat->parentname ;
+                $remove_categories_list[$cat->id] = $cat->name.' / '.$cat->parentname;
             }
         }
-        if(!in_array($cat->id, $all_categories_array))
-            $choices[$cat->id]=$cat->name . ' / ' .$cat->parentname;
+        if (!in_array($cat->id, $all_categories_array)) {
+            $choices[$cat->id] = $cat->name.' / '.$cat->parentname;
+        }
     }
 
     /* GENERAL SETTINGS
@@ -206,7 +211,7 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
-    
+
     // Preset.
     $name = 'theme_ucsf/preset';
     $title = get_string('preset', 'theme_ucsf');
@@ -231,11 +236,13 @@ if ($ADMIN->fulltree) {
 
     // Preset files setting.
     $name = 'theme_ucsf/presetfiles';
-    $title = get_string('presetfiles','theme_ucsf');
+    $title = get_string('presetfiles', 'theme_ucsf');
     $description = get_string('presetfiles_desc', 'theme_ucsf');
 
-    $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
-        array('maxfiles' => 20, 'accepted_types' => array('.scss')));
+    $setting = new admin_setting_configstoredfile(
+        $name, $title, $description, 'preset', 0,
+        array('maxfiles' => 20, 'accepted_types' => array('.scss'))
+    );
     $page->add($setting);
 
     // Background image setting.
@@ -264,14 +271,18 @@ if ($ADMIN->fulltree) {
     $page = new admin_settingpage('theme_ucsf_advanced', get_string('advancedsettings', 'theme_ucsf'));
 
     // Raw SCSS to include before the content.
-    $setting = new admin_setting_scsscode('theme_ucsf/scsspre',
-        get_string('rawscsspre', 'theme_ucsf'), get_string('rawscsspre_desc', 'theme_ucsf'), '', PARAM_RAW);
+    $setting = new admin_setting_scsscode(
+        'theme_ucsf/scsspre',
+        get_string('rawscsspre', 'theme_ucsf'), get_string('rawscsspre_desc', 'theme_ucsf'), '', PARAM_RAW
+    );
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Raw SCSS to include after the content.
-    $setting = new admin_setting_scsscode('theme_ucsf/scss', get_string('rawscss', 'theme_ucsf'),
-        get_string('rawscss_desc', 'theme_ucsf'), '', PARAM_RAW);
+    $setting = new admin_setting_scsscode(
+        'theme_ucsf/scss', get_string('rawscss', 'theme_ucsf'),
+        get_string('rawscss_desc', 'theme_ucsf'), '', PARAM_RAW
+    );
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
@@ -325,13 +336,13 @@ if ($ADMIN->fulltree) {
     $numberoflinks = intval(get_config('theme_ucsf', 'numberoflinks'), 10);
     for ($i = 1; $i <= $numberoflinks; $i++) {
 
-        $name = 'theme_ucsf/helpfeedback' . $i . 'heading';
+        $name = 'theme_ucsf/helpfeedback'.$i.'heading';
         $heading = get_string('helpfeedbackno', 'theme_ucsf', array('help' => $i));
         $information = "";
         $setting = new admin_setting_heading($name, $heading, $information);
         $page->add($setting);
 
-        $name = 'theme_ucsf/helpfeedback' . $i . 'link';
+        $name = 'theme_ucsf/helpfeedback'.$i.'link';
         $title = get_string('helpfeedbacklink', 'theme_ucsf');
         $description = get_string('helpfeedbacklinkdesc', 'theme_ucsf');
         $default = '';
@@ -339,7 +350,7 @@ if ($ADMIN->fulltree) {
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
-        $name = 'theme_ucsf/helpfeedback' . $i . 'linklabel';
+        $name = 'theme_ucsf/helpfeedback'.$i.'linklabel';
         $title = get_string('helpfeedbacklinklabel', 'theme_ucsf');
         $description = get_string('helpfeedbacklinklabeldesc', 'theme_ucsf');
         $default = '';
@@ -348,11 +359,17 @@ if ($ADMIN->fulltree) {
         $page->add($setting);
 
         // Help/Feedback link target
-        $name = 'theme_ucsf/helpfeedback' . $i . 'linktarget';
-        $title = get_string('helpfeedbacklinktarget' , 'theme_ucsf');
+        $name = 'theme_ucsf/helpfeedback'.$i.'linktarget';
+        $title = get_string('helpfeedbacklinktarget', 'theme_ucsf');
         $description = get_string('helpfeedbacklinktargetdesc', 'theme_ucsf');
         $default = '0';
-        $setting = new admin_setting_configselect($name, $title, $description, $default, array('0' => "No", '1' => 'Yes'));
+        $setting = new admin_setting_configselect(
+            $name,
+            $title,
+            $description,
+            $default,
+            array('0' => "No", '1' => 'Yes')
+        );
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
     }
@@ -365,7 +382,7 @@ if ($ADMIN->fulltree) {
     $page = new admin_settingpage('theme_ucsf_alerts', get_string('alertsheading', 'theme_ucsf'));
 
     $name = 'theme_ucsf/number_of_alerts';
-    $title = get_string('number_of_alerts' , 'theme_ucsf');
+    $title = get_string('number_of_alerts', 'theme_ucsf');
     $description = get_string('number_of_alertsdesc', 'theme_ucsf');
     $default = '0';
     $number_of_alerts = array(
@@ -406,14 +423,15 @@ if ($ADMIN->fulltree) {
 
         // Recurring alerts.
         $name = 'theme_ucsf/recurring_alert'.$i;
-        $title = get_string('recurring_alert' , 'theme_ucsf');
+        $title = get_string('recurring_alert', 'theme_ucsf');
         $description = get_string('recurring_alertdesc', 'theme_ucsf');
         $default = '1';
         $recurring_alerts = array(
-            '1'=> get_string('never_end', 'theme_ucsf'),
-            '2'=> get_string('one_time', 'theme_ucsf'),
-            '3'=> get_string('daily', 'theme_ucsf'),
-            '4'=> get_string('weekly', 'theme_ucsf'));
+            '1' => get_string('never_end', 'theme_ucsf'),
+            '2' => get_string('one_time', 'theme_ucsf'),
+            '3' => get_string('daily', 'theme_ucsf'),
+            '4' => get_string('weekly', 'theme_ucsf')
+        );
         $setting = new admin_setting_configselect($name, $title, $description, $default, $recurring_alerts);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
@@ -441,7 +459,18 @@ if ($ADMIN->fulltree) {
             $endminute = 'end_minute'.$i;
             $description = get_string('start_datedesc', 'theme_ucsf');
             $default = null;
-            $setting = new theme_ucsf_datepicker_with_validation($name, $date, $hour, $minute, $enddate, $endhour, $endminute, $title,  $description, $default);
+            $setting = new theme_ucsf_datepicker_with_validation(
+                $name,
+                $date,
+                $hour,
+                $minute,
+                $enddate,
+                $endhour,
+                $endminute,
+                $title,
+                $description,
+                $default
+            );
             $setting->set_updatedcallback('theme_reset_all_caches');
             $page->add($setting);
 
@@ -467,7 +496,16 @@ if ($ADMIN->fulltree) {
             $minute_end = 'end_minute_daily'.$i;
             $description = get_string('start_hour_and_minute_dailydesc', 'theme_ucsf');
             $default = null;
-            $setting = new theme_ucsf_datepicker_time($name, $hour_start, $minute_start, $hour_end, $minute_end, $title, $description, $default);
+            $setting = new theme_ucsf_datepicker_time(
+                $name,
+                $hour_start,
+                $minute_start,
+                $hour_end,
+                $minute_end,
+                $title,
+                $description,
+                $default
+            );
             $setting->set_updatedcallback('theme_reset_all_caches');
             $page->add($setting);
 
@@ -493,13 +531,22 @@ if ($ADMIN->fulltree) {
             $start_minute = 'start_minute_weekly'.$i;
             $default = null;
             $description = get_string('end_weeklydesc', 'theme_ucsf');
-            $setting = new theme_ucsf_datepicker_time($name, $start_hour, $start_minute, $hour, $minute, $title, $description, $default);
+            $setting = new theme_ucsf_datepicker_time(
+                $name,
+                $start_hour,
+                $start_minute,
+                $hour,
+                $minute,
+                $title,
+                $description,
+                $default
+            );
             $setting->set_updatedcallback('theme_reset_all_caches');
             $page->add($setting);
 
             // Select day in week to show an alert.
             $name = 'theme_ucsf/show_week_day'.$i;
-            $title = get_string('show_week_day' , 'theme_ucsf');
+            $title = get_string('show_week_day', 'theme_ucsf');
             $description = get_string('show_week_daydesc', 'theme_ucsf');
             $default = '0';
             $weekdays = array(
@@ -518,7 +565,7 @@ if ($ADMIN->fulltree) {
 
         //Add category - list.
         $name = 'theme_ucsf/categories_list_alert'.$i;
-        $title = get_string('categories_list_alert' , 'theme_ucsf');
+        $title = get_string('categories_list_alert', 'theme_ucsf');
         $description = get_string('categories_list_alertdesc', 'theme_ucsf');
         $default = '0';
         $setting = new admin_setting_configselect($name, $title, $description, $default, $remove_categories_list);
@@ -527,13 +574,13 @@ if ($ADMIN->fulltree) {
 
         // Alert Type.
         $name = 'theme_ucsf/alert'.$i.'type';
-        $title = get_string('alerttype' , 'theme_ucsf');
+        $title = get_string('alerttype', 'theme_ucsf');
         $description = get_string('alerttypedesc', 'theme_ucsf');
         $alert_info = get_string('alert_info', 'theme_ucsf');
         $alert_warning = get_string('alert_warning', 'theme_ucsf');
         $alert_general = get_string('alert_general', 'theme_ucsf');
         $default = 'info';
-        $alert_choices = array('info'=>$alert_info, 'error'=>$alert_warning, 'success'=>$alert_general);
+        $alert_choices = array('info' => $alert_info, 'error' => $alert_warning, 'success' => $alert_general);
         $setting = new admin_setting_configselect($name, $title, $description, $default, $alert_choices);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
@@ -558,4 +605,5 @@ if ($ADMIN->fulltree) {
     }
 
     $settings->add($page);
+
 }
