@@ -161,3 +161,45 @@ $string['show_monthdesc'] = 'Set month that you want your alert to show.';
 $string['never_end'] = 'Never end';
 $string['number_of_alerts'] = 'Number of alerts';
 $string['number_of_alertsdesc'] = 'Set number of alert you want to have.';
+
+/* General Settings */
+$string['categorycustomizationheading'] = 'Category Customizations';
+$string['customcatcssdesc'] = 'Whatever CSS rules you add to this textarea will be reflected in every page in this category, making for easier customization of this theme.';
+$string['customcss'] = 'Custom CSS';
+$string['customcssdesc'] = 'Whatever CSS rules you add to this textarea will be reflected in every page, making for easier customization of this theme.';
+$string['copyright'] = 'Copyright';
+$string['copyrightdesc'] = 'UCSF Copyright.';
+$string['customheaderenabled'] = 'Enable header image and label customizations';
+$string['customheaderenableddesc'] = 'Check this to enable category-specific customizations to the header image and label.';
+$string['enablecustomcatcssdesc'] = 'This allows CSS customizations, including menu-related image changes, to be saved but not applied to the category unless checked.';
+$string['enablecustomcss'] = 'Enable CSS customisations';
+$string['enablecustomcssdesc'] = 'This allows CSS customizations to be saved but not applied to the site unless checked.';
+$string['enablecustomization'] = 'Enable category customizations';
+$string['enablecustomizationdesc'] = 'If "Enable category customizations" is checked, then Moodle will use these customizations. If it is NOT checked, then the regular site-level theme settings are used and all customizations here are ignored (though they remain). It is possible to configure custom categories yet not use them (if the enable checkbox is unchecked).';
+$string['footnote'] = 'Footnote';
+$string['footnotedesc'] = 'Whatever you add to this textarea will be displayed in the footer throughout your Moodle site.';
+$string['headerimage'] = 'Header image';
+$string['headerimagealt'] = 'Header image alt text';
+$string['headerimagealtdesc'] = 'Alt text attribute of the header image.';
+$string['headerimagedesc'] = 'An image in the page header.';
+$string['headerimagelink'] = 'Header image link';
+$string['headerimagelinkdesc'] = 'A URL that the header image links to.';
+$string['headerimagelinktarget'] = 'Header image link target';
+$string['headerimagelinktargetdesc'] = 'If checked, the header image link will open in a new browser window when clicked.';
+$string['headerimagetitle'] = 'Header image title';
+$string['headerimagetitledesc'] = 'Title attribute of the header image in px.';
+$string['headerlabel'] = 'Header label';
+$string['headerlabeldesc'] = 'The title that appears next to the image in the page header.';
+$string['toplevelcategorylabel'] = 'Top-level category label';
+$string['toplevelcategorylabeldesc'] = 'Top-level = Default. All other categories get this label and menu, unless customizations are specified below.';
+
+/* Category Customizations */
+$string['addcategorycustomizationheading'] = 'Add category';
+$string['addcategorycustomizationheadingdesc'] = '';
+$string['categorieslist'] = 'Add category / subcategory';
+$string['categorieslistdesc'] = "Adds category for customization. If category is already added to customization, it won't be displayed in the list.";
+$string['categorycustomizationheading'] = 'Category Customizations';
+$string['removecategorieslist'] = 'Remove category / subcategory';
+$string['removecategorieslistdesc'] = 'List of all categories / subcategories currently available for customization / removal';
+$string['removecategorycustomizationheading'] = 'Remove category';
+$string['removecategorycustomizationheadingdesc'] = '';
