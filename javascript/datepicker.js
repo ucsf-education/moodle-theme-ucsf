@@ -1,3 +1,3 @@
-require(['jquery', 'theme_ucsfx/bootstrap-datepicker'], function($) {
+require(['jquery', 'theme_ucsf/bootstrap-datepicker'], function($) {
     $('.datepicker').datepicker();
 });

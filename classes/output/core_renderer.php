@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace theme_ucsfx\output;
+namespace theme_ucsf\output;
 
 defined('MOODLE_INTERNAL') || die;
 
 /**
- * @package   theme_ucsfx
+ * @package   theme_ucsf
  * @copyright 2018 The Regents of the University of California
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -39,7 +39,7 @@ class core_renderer extends \theme_boost\output\core_renderer
             return '';
         }
 
-        return $this->render_from_template('theme_ucsfx/helpmenu_popover', $menu);
+        return $this->render_from_template('theme_ucsf/helpmenu_popover', $menu);
     }
 
     /**
@@ -60,8 +60,8 @@ class core_renderer extends \theme_boost\output\core_renderer
 
         $context         = new \stdClass();
         $context->alerts = $alerts;
-        $context->url    = $CFG->wwwroot.'/theme/ucsfx/alert.php';
+        $context->url    = $CFG->wwwroot.'/theme/ucsf/alert.php';
 
-        return $this->render_from_template('theme_ucsfx/custom_alerts', $context);
+        return $this->render_from_template('theme_ucsf/custom_alerts', $context);
     }
 }

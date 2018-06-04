@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A one column layout for the ucsfx theme.
+ * A one column layout for the ucsf theme.
  *
- * @package   theme_ucsfx
+ * @package   theme_ucsf
  * @copyright 2018 The Regents of the University of California
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,8 +26,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $bodyattributes = $OUTPUT->body_attributes([]);
 
-$helpmenu = $OUTPUT->help_menu(theme_ucsfx_get_helpmenu($PAGE));
-$custom_alerts = $OUTPUT->custom_alerts(theme_ucsfx_get_custom_alerts($PAGE));
+$helpmenu = $OUTPUT->help_menu(theme_ucsf_get_helpmenu($PAGE));
+$custom_alerts = $OUTPUT->custom_alerts(theme_ucsf_get_custom_alerts($PAGE));
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
@@ -38,8 +38,8 @@ $templatecontext = [
     'customalerts' => $custom_alerts,
 ];
 
-$PAGE->requires->js('/theme/ucsfx/javascript/datepicker.js');
-$PAGE->requires->js('/theme/ucsfx/javascript/custom_alerts.js');
+$PAGE->requires->js('/theme/ucsf/javascript/datepicker.js');
+$PAGE->requires->js('/theme/ucsf/javascript/custom_alerts.js');
 
 
-echo $OUTPUT->render_from_template('theme_ucsfx/columns1', $templatecontext);
+echo $OUTPUT->render_from_template('theme_ucsf/columns1', $templatecontext);

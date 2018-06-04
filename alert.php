@@ -16,7 +16,7 @@
 
 /**
  * Callback script to clear custom alerts from user session.
- * @package   theme_ucsfx
+ * @package   theme_ucsf
  * @copyright 2018 The Regents of the University of California
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

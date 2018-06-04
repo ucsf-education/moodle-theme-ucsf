@@ -17,7 +17,7 @@
 /**
  * UCSF Theme
  *
- * @package   theme_ucsfx
+ * @package   theme_ucsf
  * @copyright 2018 The Regents of the University of California
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2018040300;
 $plugin->requires  = 2017110800;
-$plugin->component = 'theme_ucsfx';
+$plugin->component = 'theme_ucsf';
 
 $plugin->dependencies = [
     'theme_boost' => 2017111300

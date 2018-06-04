@@ -15,11 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package   theme_ucsfx
+ * @package   theme_ucsf
  * @copyright 2018 The Regents of the University of California
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class theme_ucsfx_add_category_customization extends admin_setting_configselect
+class theme_ucsf_add_category_customization extends admin_setting_configselect
 {
 
     /**
@@ -28,16 +28,16 @@ class theme_ucsfx_add_category_customization extends admin_setting_configselect
     public function write_setting($data)
     {
 
-        $categories = get_config('theme_ucsfx');
+        $categories = get_config('theme_ucsf');
 
         if ($data != 0) {
-            set_config('displaycoursetitle'.$data, 1, 'theme_ucsfx');
+            set_config('displaycoursetitle'.$data, 1, 'theme_ucsf');
         }
 
         if ( ! empty($categories->all_categories)) {
-            set_config('all_categories', $categories->all_categories.','.$data, 'theme_ucsfx');
+            set_config('all_categories', $categories->all_categories.','.$data, 'theme_ucsf');
         } else {
-            set_config('all_categories', $data, 'theme_ucsfx');
+            set_config('all_categories', $data, 'theme_ucsf');
         }
 
         return parent::write_setting(0);
@@ -45,7 +45,7 @@ class theme_ucsfx_add_category_customization extends admin_setting_configselect
     }
 }
 
-class theme_ucsfx_remove_category_customization extends admin_setting_configselect
+class theme_ucsf_remove_category_customization extends admin_setting_configselect
 {
 
     /**
@@ -54,7 +54,7 @@ class theme_ucsfx_remove_category_customization extends admin_setting_configsele
     public function write_setting($data)
     {
 
-        $categories = get_config('theme_ucsfx');
+        $categories = get_config('theme_ucsf');
 
         if ( ! empty($categories->all_categories)) {
             $temp_array = explode(",", $categories->all_categories);
@@ -63,7 +63,7 @@ class theme_ucsfx_remove_category_customization extends admin_setting_configsele
                 $arr = array_diff($temp_array, array($data));
                 $fin = implode(",", $arr);
 
-                set_config('all_categories', $fin, 'theme_ucsfx');
+                set_config('all_categories', $fin, 'theme_ucsf');
             }
         }
 
@@ -81,7 +81,7 @@ class theme_ucsfx_remove_category_customization extends admin_setting_configsele
  * @author Sasa Prsir <sasa.prsir@lambdasolutions.net>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class theme_ucsfx_datepicker extends admin_setting {
+class theme_ucsf_datepicker extends admin_setting {
     /** @var string Used for setting year, month, date, out and minut select. */
     public $start_date;
     public $end_date;
@@ -137,9 +137,9 @@ class theme_ucsfx_datepicker extends admin_setting {
             return ($result ? '' : get_string('errorsetting', 'admin'));
         } else {
             if (is_null($data['datepicker']) || is_null($data['end_datepicker']) || $data['datepicker'] == "" || $data['end_datepicker'] ==""){
-                return (get_string('emptyDateFieldError', 'theme_ucsfx'));
+                return (get_string('emptyDateFieldError', 'theme_ucsf'));
             } else {
-                return (get_string('oneTimeStartEndDateError', 'theme_ucsfx'));
+                return (get_string('oneTimeStartEndDateError', 'theme_ucsf'));
             }
         }
 
@@ -198,7 +198,7 @@ class theme_ucsfx_datepicker extends admin_setting {
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-class theme_ucsfx_datepicker_time extends admin_setting {
+class theme_ucsf_datepicker_time extends admin_setting {
     public $start_minute;
     public $start_hour;
     public $end_minute;
@@ -267,7 +267,7 @@ class theme_ucsfx_datepicker_time extends admin_setting {
                       && $this->config_write($this->end_minute, isset($data['end_minute']) ? $data['end_minute'] : '');
             return ($result ? '' : get_string('errorsetting', 'admin'));
         } else {
-            return (get_string('oneTimeStartEndTimeError', 'theme_ucsfx'));
+            return (get_string('oneTimeStartEndTimeError', 'theme_ucsf'));
         }
 
     }
@@ -302,7 +302,7 @@ class theme_ucsfx_datepicker_time extends admin_setting {
         $return = '<div class="form-select defaultsnext">';
 
         // Start output for hour select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_hour">' . get_string('start_hour', 'theme_ucsfx') . '</label>';
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_hour">' . get_string('start_hour', 'theme_ucsf') . '</label>';
         $return .= ' Hour: <select id="' . $this->get_id() . 'start_hour" name="' . $this->get_full_name() . '[start_hour]" class="custom-select">';
         for ($i = 0; $i <= 23; $i++) {
             $writeHour = str_pad($i, 2, '0', STR_PAD_LEFT);
@@ -311,7 +311,7 @@ class theme_ucsfx_datepicker_time extends admin_setting {
         $return .= '</select>';
 
         // Start output for minute select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_minute">' . get_string('start_minute', 'theme_ucsfx') . '</label>';
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_minute">' . get_string('start_minute', 'theme_ucsf') . '</label>';
         $return .= ' Minute: <select id="' . $this->get_id() . 'start_minute" name="' . $this->get_full_name() . '[start_minute]" class="custom-select">';
         for ($i = 0; $i < 60; $i += 5) {
             $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
@@ -321,7 +321,7 @@ class theme_ucsfx_datepicker_time extends admin_setting {
         $return .= '</br>';
 
         // End output for hour select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_hour">' . get_string('end_hour', 'theme_ucsfx') . '</label>';
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_hour">' . get_string('end_hour', 'theme_ucsf') . '</label>';
         $return .= ' Hour: <select id="' . $this->get_id() . 'end_hour" name="' . $this->get_full_name() . '[end_hour]" class="custom-select">';
         for ($i = 0; $i <= 23; $i++) {
             $writeHour = str_pad($i, 2, '0', STR_PAD_LEFT);
@@ -330,7 +330,7 @@ class theme_ucsfx_datepicker_time extends admin_setting {
         $return .= '</select>';
 
         // End output for minute select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_minute">' . get_string('end_minute', 'theme_ucsfx') . '</label>';
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_minute">' . get_string('end_minute', 'theme_ucsf') . '</label>';
         $return .= ' Minute: <select id="' . $this->get_id() . 'end_minute" name="' . $this->get_full_name() . '[end_minute]" class="custom-select">';
         for ($i = 0; $i < 60; $i += 5) {
             $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
@@ -354,7 +354,7 @@ class theme_ucsfx_datepicker_time extends admin_setting {
  * @author Sasa Prsir <sasa.prsir@lambdasolutions.net>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class theme_ucsfx_datepicker_with_validation extends admin_setting {
+class theme_ucsf_datepicker_with_validation extends admin_setting {
     /** @var string Used for setting year, month, date, out and minut select. */
     public $start_date;
     public $start_hour;
@@ -444,9 +444,9 @@ class theme_ucsfx_datepicker_with_validation extends admin_setting {
             return ($result ? '' : get_string('errorsetting', 'admin'));
         } else {
             if (is_null($data['datepicker']) || is_null($data['end_datepicker']) || $data['datepicker'] == "" || $data['end_datepicker'] ==""){
-                return (get_string('emptyDateFieldError', 'theme_ucsfx'));
+                return (get_string('emptyDateFieldError', 'theme_ucsf'));
             } else {
-                return (get_string('oneTimeStartEndDateError', 'theme_ucsfx'));
+                return (get_string('oneTimeStartEndDateError', 'theme_ucsf'));
             }
         }
 
@@ -485,7 +485,7 @@ class theme_ucsfx_datepicker_with_validation extends admin_setting {
         $return  = '<div class="form-select defaultsnext">';
         // Datepicker.
         $return .= '<input type="text" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['datepicker']).'" size="15">';
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_hour">' . get_string('start_hour', 'theme_ucsfx') . '</label>';
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_hour">' . get_string('start_hour', 'theme_ucsf') . '</label>';
         $return .= ' Hour: <select id="' . $this->get_id() . 'start_hour" name="' . $this->get_full_name() . '[start_hour]" class="custom-select">';
         for ($i = 0; $i <= 23; $i++) {
             $writeHour = str_pad($i, 2, '0', STR_PAD_LEFT);
@@ -494,7 +494,7 @@ class theme_ucsfx_datepicker_with_validation extends admin_setting {
         $return .= '</select>';
 
         // Start output for minute select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_minute">' . get_string('start_minute', 'theme_ucsfx') . '</label>';
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_minute">' . get_string('start_minute', 'theme_ucsf') . '</label>';
         $return .= ' Minute: <select id="' . $this->get_id() . 'start_minute" name="' . $this->get_full_name() . '[start_minute]" class="custom-select">';
         for ($i = 0; $i < 60; $i += 5) {
             $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);
@@ -506,7 +506,7 @@ class theme_ucsfx_datepicker_with_validation extends admin_setting {
 
         // Datepicker.
         $return .= '<input type="text" id="' . $this->get_id() . 'end_datepicker" name="' . $this->get_full_name() . '[end_datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['end_datepicker']).'" size="15">';
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_hour">' . get_string('end_hour', 'theme_ucsfx') . '</label>';
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_hour">' . get_string('end_hour', 'theme_ucsf') . '</label>';
         $return .= ' Hour: <select id="' . $this->get_id() . 'end_hour" name="' . $this->get_full_name() . '[end_hour]" class="custom-select">';
         for ($i = 0; $i <= 23; $i++) {
             $writeHour = str_pad($i, 2, '0', STR_PAD_LEFT);
@@ -515,7 +515,7 @@ class theme_ucsfx_datepicker_with_validation extends admin_setting {
         $return .= '</select>';
 
         // Start output for minute select box.
-        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_minute">' . get_string('end_minute', 'theme_ucsfx') . '</label>';
+        $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_minute">' . get_string('end_minute', 'theme_ucsf') . '</label>';
         $return .= ' Minute: <select id="' . $this->get_id() . 'end_minute" name="' . $this->get_full_name() . '[end_minute]" class="custom-select">';
         for ($i = 0; $i < 60; $i += 5) {
             $writeminute = str_pad($i, 2, '0', STR_PAD_LEFT);

@@ -1,11 +1,11 @@
 /**
  * Controls the message popover in the nav bar.
  *
- * See template: theme_ucsfx/helpmenu_popover
+ * See template: theme_ucsf/helpmenu_popover
  *
- * @module     theme_ucsfx/helpmenu_popover_controller
+ * @module     theme_ucsf/helpmenu_popover_controller
  * @class      helpmenu_popover_controller
- * @package    theme_ucsfx
+ * @package    theme_ucsf
  */
 define(['jquery', 'core/templates', 'core/str', 'core/custom_interaction_events', 'core/popover_region_controller' ],
     function($, Templates, Str, CustomEvents, PopoverController) {
@@ -39,11 +39,11 @@ define(['jquery', 'core/templates', 'core/str', 'core/custom_interaction_events'
          */
         HelpmenuPopoverController.prototype.updateButtonAriaLabel = function() {
             if (this.isMenuOpen()) {
-                Str.get_string('hidehelpmenuwindow', 'theme_ucsfx').done(function(string) {
+                Str.get_string('hidehelpmenuwindow', 'theme_ucsf').done(function(string) {
                     this.menuToggle.attr('aria-label', string);
                 }.bind(this));
             } else {
-                 Str.get_string('showhelpmenuwindow', 'theme_ucsfx').done(function(string) {
+                 Str.get_string('showhelpmenuwindow', 'theme_ucsf').done(function(string) {
                     this.menuToggle.attr('aria-label', string);
                 }.bind(this));
             }
