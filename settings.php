@@ -430,8 +430,8 @@ if ($ADMIN->fulltree) {
 
         $alert_settings = 'recurring_alert'.$i;
 
-        if (isset($get_recurring_alerts->$alert_settings)) {
-            $alert_choice = $get_recurring_alerts->$alert_settings;
+        if (isset($categories->$alert_settings)) {
+            $alert_choice = $categories->$alert_settings;
         } else {
             $alert_choice = null;
         }
