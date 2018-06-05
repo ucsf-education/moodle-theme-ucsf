@@ -26,12 +26,11 @@ if ($ADMIN->fulltree) {
     require_once($CFG->dirroot.'/theme/ucsf/locallib.php');
 
     // Get all categories
-    $categories = get_config('theme_ucsf');
-    $all_categories = '';
-    if (!empty($categories->all_categories)) {
-        $all_categories = $categories->all_categories;
+    $theme_config = get_config('theme_ucsf');
+    $all_category_ids = [];
+    if (property_exists($theme_config , 'all_categories')) {
+        $all_category_ids = array_unique(array_filter(explode(",", trim($theme_config->all_categories))));
     }
-    $all_categories_array = array_unique(explode(",", $all_categories));
 
     $sql = "SELECT cc.id, cc.name
         FROM {course_categories} cc
@@ -55,39 +54,39 @@ if ($ADMIN->fulltree) {
     $alert_category_array = array();
     $alert_category_array[0] = "None";
 
-    foreach ($course_categories as $alert_category_arrays) {
-        $alert_category_array[$alert_category_arrays->id] = $alert_category_arrays->name;
+    foreach ($course_categories as $cat) {
+        $alert_category_array[$cat->id] = $cat->name;
     }
 
-    foreach ($course_subcategories as $alert_category_arrays) {
-        foreach ($all_categories_array as $all_cats) {
-            if ($all_cats == $alert_category_arrays->id) {
-                $alert_category_array[$alert_category_arrays->id] = $alert_category_arrays->name.' / '.$alert_category_arrays->parentname;
+    foreach ($course_subcategories as $cat) {
+        foreach ($all_category_ids as $category_id) {
+            if ($category_id === $cat->id) {
+                $alert_category_array[$cat->id] = $cat->name.' / ' . $cat->parentname;
             }
         }
-        if (!in_array($alert_category_arrays->id, $all_categories_array)) {
-            $alert_category_array[$alert_category_arrays->id] = $alert_category_arrays->name.' / '.$alert_category_arrays->parentname;
+        if (! in_array($cat->id, $all_category_ids)) {
+            $alert_category_array[$cat->id] = $cat->name.' / ' . $cat->parentname;
         }
     }
 
     foreach ($course_categories as $cat) {
-        foreach ($all_categories_array as $all_cats) {
-            if ($all_cats == $cat->id) {
+        foreach ($all_category_ids as $category_id) {
+            if ($category_id === $cat->id) {
                 $remove_categories_list[$cat->id] = $cat->name;
             }
         }
-        if (!in_array($cat->id, $all_categories_array)) {
+        if (! in_array($cat->id, $all_category_ids)) {
             $category_choices[$cat->id] = $cat->name;
         }
     }
 
     foreach ($course_subcategories as $cat) {
-        foreach ($all_categories_array as $all_cats) {
-            if ($all_cats == $cat->id) {
+        foreach ($all_category_ids as $category_id) {
+            if ($category_id === $cat->id) {
                 $remove_categories_list[$cat->id] = $cat->name.' / '.$cat->parentname;
             }
         }
-        if (!in_array($cat->id, $all_categories_array)) {
+        if (! in_array($cat->id, $all_category_ids)) {
             $category_choices[$cat->id] = $cat->name.' / '.$cat->parentname;
         }
     }
@@ -430,8 +429,8 @@ if ($ADMIN->fulltree) {
 
         $alert_settings = 'recurring_alert'.$i;
 
-        if (isset($categories->$alert_settings)) {
-            $alert_choice = $categories->$alert_settings;
+        if (isset($theme_config->$alert_settings)) {
+            $alert_choice = $theme_config->$alert_settings;
         } else {
             $alert_choice = null;
         }
@@ -645,7 +644,7 @@ if ($ADMIN->fulltree) {
     $settings->add($page);
 
     /* CATEGORIES & SUBCATEGORIES */
-    foreach ($all_categories_array as $category_id) {
+    foreach ($all_category_ids as $category_id) {
         foreach (array_merge($course_categories, $course_subcategories) as $cat) {
             if ($category_id === $cat->id) {
 
