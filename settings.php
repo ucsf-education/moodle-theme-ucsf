@@ -650,7 +650,7 @@ if ($ADMIN->fulltree) {
 
                 $page_title = 'Cat - ' . $cat->name;
                 if (property_exists($cat, 'parentname')) {
-                    $page_title = $page_title . '/' . $cat->parentname;
+                    $page_title = $page_title . ' / ' . $cat->parentname;
                 }
                 $page = new admin_settingpage('theme_ucsf_' . $cat->id, $page_title);
 
