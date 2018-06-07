@@ -379,6 +379,30 @@ function theme_ucsf_get_custom_alerts(moodle_page $page)
 }
 
 /**
+ * Returns the custom menu for a given page.
+ * @param moodle_page $page
+ * @return string
+ * @throws dml_exception
+ */
+function theme_ucsf_get_custom_menu(moodle_page $page)
+{
+    global $COURSE;
+
+    $theme_settings = $page->theme->settings;
+
+    $menu_items = '';
+
+    if (_theme_ucsf_get_setting($theme_settings, 'enablecustomization')) {
+        $categories = _theme_ucsf_get_category_roots(_theme_ucsf_get_current_course_category($page, $COURSE));
+        $course_category = _theme_ucsf_find_first_configured_category($theme_settings, $categories, 'custommenu');
+        $menu_items = _theme_ucsf_get_setting($theme_settings, "custommenu" . $course_category, '');
+    }
+
+    return $menu_items;
+
+}
+
+/**
  * Retrieves a theme setting.
  *
  * @param stdClass $theme_settings The theme settings object
@@ -495,4 +519,42 @@ function _theme_ucsf_get_all_category_ids()
     $categories = array_keys($DB->get_records_sql($sql));
 
     return $categories;
+}
+
+/**
+ * Find and returns the first category (from the bottom) in a given category hierarchy
+ * that has a customized setting in a given theme.
+ *
+ * Example:
+ *  1. The category hierarchy is (top) id = 1 >> id = 2 >> id = 5 >> id = 7 (bottom).
+ *  2. We're searching the theme settings for all entries pertaining to custom labels (all config keys starting with "customlabel").
+ *  3. The theme settings contains entries keyed of by 'customlabel1' an 'customlabel5'.
+ *  4. This method will return 5, since 'customlabel5' matches the lowest category id = 5 in the hierarchy.
+ *
+ * @param object $theme_settings     The theme settings.
+ * @param array  $category_hierarchy A hierarchy of category ids, sorted bottom to top.
+ * @param string $config_key_prefix  Configuration settings key prefix.
+ *
+ * @return int The first matching category id. 0 if no matching category can be found.
+ * @see _theme_ucsf_get_category_roots()
+ */
+function _theme_ucsf_find_first_configured_category($theme_settings, array $category_hierarchy, $config_key_prefix)
+{
+    // get a list of all categories that have customizations enabled.
+    $enabled_categories = array();
+    if (! empty($theme_settings->all_categories)) {
+        $enabled_categories = explode(",", $theme_settings->all_categories);
+    }
+
+    // find first matching
+    foreach ($category_hierarchy as $category_id) {
+        if (in_array($category_id, $enabled_categories)) {
+            $config_key = $config_key_prefix . $category_id;
+            if (! empty($theme_settings->$config_key)) {
+                return $category_id;
+            }
+        }
+    }
+
+    return 0;
 }

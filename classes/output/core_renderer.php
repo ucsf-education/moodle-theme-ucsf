@@ -16,6 +16,9 @@
 
 namespace theme_ucsf\output;
 
+use custom_menu;
+use moodle_url;
+
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -63,5 +66,52 @@ class core_renderer extends \theme_boost\output\core_renderer
         $context->url    = $CFG->wwwroot.'/theme/ucsf/alert.php';
 
         return $this->render_from_template('theme_ucsf/custom_alerts', $context);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function custom_menu($custommenuitems = '') {
+
+        if (empty($custommenuitems)) {
+            return '';
+        }
+
+        $custommenu = new custom_menu($custommenuitems, current_language());
+        return $this->render_custom_menu($custommenu);
+    }
+
+    /**
+     * We want to show the custom menus as a list of links for mobile devices/smaller screens.
+     * Just return the menu object exported so we can render it differently.
+     * @param string $custommenuitems
+     * @return \stdClass|null
+     * @throws \coding_exception
+     * @throws \moodle_exception
+     */
+    public function custom_menu_mobile($custommenuitems = '') {
+        if (empty($custommenuitems)) {
+            return null;
+        }
+
+        $custommenu = new custom_menu($custommenuitems, current_language());
+        $langs = get_string_manager()->get_list_of_translations();
+        $haslangmenu = $this->lang_menu() != '';
+
+        if ($haslangmenu) {
+            $strlang = get_string('language');
+            $currentlang = current_language();
+            if (isset($langs[$currentlang])) {
+                $currentlang = $langs[$currentlang];
+            } else {
+                $currentlang = $strlang;
+            }
+            $this->language = $custommenu->add($currentlang, new moodle_url('#'), $strlang, 10000);
+            foreach ($langs as $langtype => $langname) {
+                $this->language->add($langname, new moodle_url($this->page->url, array('lang' => $langtype)), $langname);
+            }
+        }
+
+        return $custommenu->export_for_template($this);
     }
 }
