@@ -115,6 +115,7 @@ function theme_ucsf_get_main_scss_content($theme) {
     return $pre . "\n" . $scss . "\n" . $post . "\n" . $categories_scss;
 }
 
+
 /**
  * Returns the help menu data as an object, or NULL if none could be if the help menu has been disabled.
  *
