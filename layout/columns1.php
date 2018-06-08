@@ -37,9 +37,7 @@ $templatecontext = [
     'output' => $OUTPUT,
     'bodyattributes' => $bodyattributes,
     'helpmenu' => $helpmenu,
-    'hashelpmenu' => !empty($helpmenu),
     'customalerts' => $custom_alerts,
-    'hascustommenu' => !empty($custom_menu),
     'custommenu' => $custom_menu,
     'custommenumobile' => $custom_menu_mobile,
 ];
