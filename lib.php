@@ -400,7 +400,38 @@ function theme_ucsf_get_custom_menu(moodle_page $page)
     }
 
     return $menu_items;
+}
 
+/**
+ * Returns the title for the primary page header.
+ * @param moodle_page $page
+ * @return string The rendered markup.
+ * @throws dml_exception
+ */
+function theme_ucsf_get_header_title(moodle_page $page) {
+    global $COURSE;
+
+    $theme_settings = $page->theme->settings;
+
+    $rhett = '';
+
+    if (_theme_ucsf_get_setting($theme_settings, 'enablecustomization')) {
+        // category-specific settings
+        $current_category = _theme_ucsf_get_current_course_category($page, $COURSE);
+        if ($current_category) {
+            $parent_categories = _theme_ucsf_get_category_roots($current_category);
+            $category = _theme_ucsf_find_first_configured_category($theme_settings, $parent_categories, 'customheaderenabled');
+            if ($category) {
+                $rhett = _theme_ucsf_get_setting($theme_settings, "headerlabel{$category}", '');
+            }
+        }
+    }
+    // fallback to site-wide settings
+    if (empty($rhett)) {
+        $rhett = _theme_ucsf_get_setting($theme_settings, "headerlabel", '');
+    }
+
+    return $rhett;
 }
 
 /**
