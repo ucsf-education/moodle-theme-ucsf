@@ -18,6 +18,7 @@ namespace theme_ucsf\output;
 
 use custom_menu;
 use moodle_url;
+use html_writer;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -113,5 +114,41 @@ class core_renderer extends \theme_boost\output\core_renderer
         }
 
         return $custommenu->export_for_template($this);
+    }
+
+    /**
+     * Returns the rendered markup for the page header brand. This includes the header title and logo.
+     * @param array $brand assoc. array with items 'logo', 'link' and 'title'.
+     * @return string
+     */
+    public function header_brand(array $brand) {
+
+        $logo = $brand['logo'];
+        $title = $brand['title'];
+        $link = $brand['link'];
+
+        $out = '';
+        if (! empty($logo['src'])) {
+            $out .= html_writer::span(
+                html_writer::img($logo['src'], $title, array('title' => $logo['title'])),
+                'logo hidden-xs-down'
+            );
+        }
+
+        $out .= html_writer::span($title, 'site-name hidden-sm-down');
+
+        $classes = array('navbar-brand');
+        if (! empty($logo)) {
+            $classes[] = 'has-logo';
+        }
+
+        $linktarget = ! empty($logo['target']) ? $logo['target'] : '_self';
+
+        $out = html_writer::link($link, $out, array(
+            'class' => implode(' ', $classes),
+            'target' => $linktarget
+        ));
+
+        return $out;
     }
 }

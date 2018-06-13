@@ -17,6 +17,50 @@
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
+
+/**
+ * Serves any files associated with the theme settings.
+ *
+ * @param stdClass $course
+ * @param stdClass $cm
+ * @param context $context
+ * @param string $filearea
+ * @param array $args
+ * @param bool $forcedownload
+ * @param array $options
+ *
+ * @return bool
+ * @throws coding_exception
+ * @throws dml_exception
+ */
+function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array())
+{
+    global $DB;
+    $whitelist = array('logo', 'headerimage');
+
+    $sql = "SELECT cc.id FROM {course_categories} cc";
+    $course_categories = $DB->get_records_sql($sql);
+    $prefixes = array(
+        'headerimage',
+    );
+    foreach ($course_categories as $cat) {
+        foreach ($prefixes as $prefix) {
+            $whitelist[] = $prefix . $cat->id;
+        }
+    }
+
+    if ($context->contextlevel == CONTEXT_SYSTEM) {
+        $theme = theme_config::load('ucsf');
+        if (in_array($filearea, $whitelist)) {
+            return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+        } else {
+            send_file_not_found();
+        }
+    } else {
+        send_file_not_found();
+    }
+}
+
 /**
  * @param $theme
  *
@@ -403,17 +447,25 @@ function theme_ucsf_get_custom_menu(moodle_page $page)
 }
 
 /**
- * Returns the title for the primary page header.
+ * Returns the branding logo and title for the primary header.
+ *
  * @param moodle_page $page
- * @return string The rendered markup.
+ *
+ * @return array an associative array, containing the logo, title and link for the header brand.
  * @throws dml_exception
  */
-function theme_ucsf_get_header_title(moodle_page $page) {
-    global $COURSE;
+function theme_ucsf_get_header_brand(moodle_page $page) {
+    global $CFG, $COURSE;
 
     $theme_settings = $page->theme->settings;
 
-    $rhett = '';
+    $rhett = array();
+
+    // defaults
+    $rhett['logo'] = array();
+    $rhett['link'] = $CFG->wwwroot;
+    $rhett['title']  = _theme_ucsf_get_setting($theme_settings, "headerlabel", '');
+
 
     if (_theme_ucsf_get_setting($theme_settings, 'enablecustomization')) {
         // category-specific settings
@@ -422,13 +474,30 @@ function theme_ucsf_get_header_title(moodle_page $page) {
             $parent_categories = _theme_ucsf_get_category_roots($current_category);
             $category = _theme_ucsf_find_first_configured_category($theme_settings, $parent_categories, 'customheaderenabled');
             if ($category) {
-                $rhett = _theme_ucsf_get_setting($theme_settings, "headerlabel{$category}", '');
+                $logo = _theme_ucsf_get_setting($theme_settings, "headerimage{$category}");
+                if ($logo) {
+                    $rhett['logo']['src'] = $page->theme->setting_file_url("headerimage{$category}", "headerimage{$category}");
+                    $rhett['logo']['alt'] = _theme_ucsf_get_setting($theme_settings, "headerimagealt{$category}", '');
+                    $rhett['logo']['title'] = _theme_ucsf_get_setting($theme_settings, "headerimagetitle{$category}", '');
+                    $rhett['logo']['target'] = _theme_ucsf_get_setting($theme_settings, "headerimagelinktarget{$category}") ? '_blank' : '_self';
+                    $rhett['link'] = _theme_ucsf_get_setting($theme_settings, "headerimagelink{$category}", $CFG->wwwroot);
+
+                }
+                $rhett['title'] = _theme_ucsf_get_setting($theme_settings, "headerlabel{$category}", '');
             }
         }
     }
+
     // fallback to site-wide settings
-    if (empty($rhett)) {
-        $rhett = _theme_ucsf_get_setting($theme_settings, "headerlabel", '');
+    if (empty($rhett['logo'])) {
+        $logo = _theme_ucsf_get_setting($theme_settings, "headerimage");
+        if ($logo) {
+            $rhett['logo']['src'] = $page->theme->setting_file_url("headerimage","headerimage");
+            $rhett['logo']['alt'] = _theme_ucsf_get_setting($theme_settings, "headerimagealt", '');
+            $rhett['logo']['title'] = _theme_ucsf_get_setting($theme_settings, "headerimagetitle", '');
+            $rhett['logo']['target'] = _theme_ucsf_get_setting($theme_settings, "headerimagelinktarget") ? '_blank' : '_self';
+            $rhett['link'] = _theme_ucsf_get_setting($theme_settings, "headerimagelink", $CFG->wwwroot);
+        }
     }
 
     return $rhett;
