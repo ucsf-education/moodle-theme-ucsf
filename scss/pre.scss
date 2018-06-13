@@ -1,15 +1,51 @@
 // Pre SCSS for the theme.
+$cle-blue: #565c80;
+
+/* HEADER */
+
+.site-name {
+  color: $cle-blue;
+  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: larger;
+  font-weight: 600;
+  padding-left: 1rem;
+}
 
 /* CUSTOM MENU */
 
 .ucsf_custom_menu {
+  .card-block {
+
+    background-color: $cle-blue;
+    color: #fff;
+    padding: .25rem 0;
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+  }
+
   .category_label {
-    padding-top: .425rem;
+    padding: .425rem 1rem;
     font-weight: bold;
-    padding-right: 1rem;
+  }
+
+  .navbar-collapse {
+
+    li {
+      padding: .25rem 0 .25rem 1rem;
+
+      &:hover {
+        background-color: #fff;
+        color: $cle-blue;
+      }
+    }
   }
 }
-
 
 /* FOOTER */
 
