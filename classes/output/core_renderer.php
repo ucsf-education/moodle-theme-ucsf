@@ -151,4 +151,28 @@ class core_renderer extends \theme_boost\output\core_renderer
 
         return $out;
     }
+
+    /**
+     * Renders a given category label.
+     *
+     * @param array $label
+     * @return string The rendered markup.
+     */
+    public function category_label(array $label) {
+        $out = '';
+        $title = $label['title'];
+        $link = $label['link'];
+
+        if (empty($title)) {
+            return $out;
+        }
+
+        $out = $title;
+
+        if (!empty($link)) {
+            $out = html_writer::link($link, $out);
+        }
+
+        return html_writer::div($out, 'category_label pull-left');
+    }
 }

@@ -504,6 +504,54 @@ function theme_ucsf_get_header_brand(moodle_page $page) {
 }
 
 /**
+ * Returns the category label for the custom navigation.
+ * @param moodle_page $page
+ * @return array An associative array, holding the category label title and link. Empty array if n/a.
+ * @throws dml_exception
+ */
+function theme_ucsf_get_category_label(moodle_page $page)
+{
+    global $COURSE, $CFG;
+
+    $theme_settings = $page->theme->settings;
+
+    $rhett = array(
+        'title' => '',
+        'link' => '',
+    );
+
+    if (! _theme_ucsf_get_setting($theme_settings, 'enablecustomization')) {
+        return $rhett;
+    }
+
+    // category-specific label
+    $current_category = _theme_ucsf_get_current_course_category($page, $COURSE);
+    if ($current_category) {
+        $parent_categories = _theme_ucsf_get_category_roots($current_category);
+        $category = _theme_ucsf_find_first_configured_category($theme_settings, $parent_categories, 'categorylabel');
+        if ($category) {
+            $title = _theme_ucsf_get_setting($theme_settings, "categorylabel{$category}", '');
+            $link = _theme_ucsf_get_setting($theme_settings, "linklabeltocategorypage{$category}");
+            if ($link) {
+                $link = $CFG->wwwroot . '/course/index.php?categoryid=' . $category;
+            }
+
+            $rhett['title'] = $title;
+            $rhett['link'] = $link;
+            return $rhett;
+        }
+    }
+
+    // fallback to site-wide category label
+    $title = _theme_ucsf_get_setting($theme_settings, 'toplevelcategorylabel');
+    if ($title) {
+        $rhett['title'] = $title;
+    }
+
+    return $rhett;
+}
+
+/**
  * Retrieves a theme setting.
  *
  * @param stdClass $theme_settings The theme settings object

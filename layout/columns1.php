@@ -32,6 +32,7 @@ $custom_menu_items = theme_ucsf_get_custom_menu($PAGE);
 $custom_menu = $OUTPUT->custom_menu($custom_menu_items);
 $custom_menu_mobile = $OUTPUT->custom_menu_mobile($custom_menu_items);
 $headerbrand = $OUTPUT->header_brand(theme_ucsf_get_header_brand($PAGE));
+$categorylabel = $OUTPUT->category_label(theme_ucsf_get_category_label($PAGE));
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
@@ -42,6 +43,7 @@ $templatecontext = [
     'custommenu' => $custom_menu,
     'custommenumobile' => $custom_menu_mobile,
     'headerbrand' => $headerbrand,
+    'categorylabel' => $categorylabel,
 ];
 
 $PAGE->requires->js('/theme/ucsf/javascript/datepicker.js');

@@ -51,6 +51,7 @@ $custom_menu_mobile = $OUTPUT->custom_menu_mobile($custom_menu_items);
 $copyright = property_exists($theme_settings, 'copyright') ? $theme_settings->copyright : '';
 $footnote = property_exists($theme_settings, 'footnote') ? $theme_settings->footnote : '';
 $headerbrand = $OUTPUT->header_brand(theme_ucsf_get_header_brand($PAGE));
+$categorylabel = $OUTPUT->category_label(theme_ucsf_get_category_label($PAGE));
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
@@ -68,6 +69,7 @@ $templatecontext = [
     'footnote' => $footnote,
     'copyright' => $copyright,
     'headerbrand' => $headerbrand,
+    'categorylabel' => $categorylabel,
 ];
 
 $templatecontext['flatnavigation'] = $PAGE->flatnav;

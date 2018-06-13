@@ -1,7 +1,18 @@
 // Pre SCSS for the theme.
 
-/*------------------------------------------------------------------------------------*/
+/* CUSTOM MENU */
+
+.ucsf_custom_menu {
+  .category_label {
+    padding-top: .425rem;
+    font-weight: bold;
+    padding-right: 1rem;
+  }
+}
+
+
 /* FOOTER */
+
 .ucsf_footer_text {
     float: left;
     width: 50%;
