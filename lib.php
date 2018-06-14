@@ -552,6 +552,16 @@ function theme_ucsf_get_category_label(moodle_page $page)
 }
 
 /**
+ * Get icon mapping for font-awesome.
+ * @link https://docs.moodle.org/dev/Moodle_icons#Font_awesome_icons
+ */
+function theme_ucsf_get_fontawesome_icon_map() {
+    return array(
+        'core:t/mymedia' => 'fa-video-camera',
+    );
+}
+
+/**
  * Retrieves a theme setting.
  *
  * @param stdClass $theme_settings The theme settings object
