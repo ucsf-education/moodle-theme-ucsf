@@ -48,6 +48,20 @@ $cle-blue: #565c80;
   }
 }
 
+/* NAV DRAWER */
+
+#nav-drawer {
+  // hide the 'My Courses' menu item
+  .list-group-item[data-key="mycourses"] {
+    display: none;
+  }
+  // hide the 'My Courses' sub-menu items
+  .list-group-item[data-parent-key="mycourses"] {
+    display: none;
+  }
+}
+
+
 /* FOOTER */
 
 .ucsf_footer_text {
