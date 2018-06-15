@@ -135,7 +135,7 @@ class core_renderer extends \theme_boost\output\core_renderer
             );
         }
 
-        $out .= html_writer::span($title, 'site-name hidden-sm-down');
+        $out .= html_writer::span($title, 'site-name hidden-md-down');
 
         $classes = array('navbar-brand');
         if (! empty($logo)) {
