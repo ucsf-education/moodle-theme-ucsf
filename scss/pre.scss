@@ -101,6 +101,11 @@ $cle-blue: #565c80;
 
 .custom-alerts {
 
+  .alert {
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+
   .alert:before {
     font-family: "FontAwesome";
   }
@@ -123,19 +128,9 @@ $cle-blue: #565c80;
     padding-right: 15px;
   }
 
-  .alert-info {
-    background: #fcf8e3;
-    border-color: #f7ecb5;
-    color: #c09853;
-  }
-
   .alert-info::before {
-    background-color: #c09853;
-    border-radius: 20px;
-    color: #fcf8e3;
-    content: "\f129 ";
-    padding: 3px 7px;
-    margin-left: 1px;
-    margin-right: 15px;
+    content: "\f05a ";
+    font-size: 20px;
+    padding-right: 15px;
   }
 }
