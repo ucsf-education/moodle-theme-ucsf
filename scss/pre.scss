@@ -104,7 +104,8 @@ $cle-blue: #565c80;
   .alert {
     border-radius: 0;
     margin-bottom: 0;
-    padding: .5rem;
+    padding-bottom: 0;
+    padding-top: 0;
   }
 
   .alert:before {
