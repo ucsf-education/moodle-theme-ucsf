@@ -17,8 +17,8 @@
     {
         "title: "http://localhost/theme/ucsf/alert.php",
         "alerts": [
-            { "type": "info", "title": "Achtung!": "text": "Lorem Ipsum" },
-            { "type": "warning", "title": "Fair Warning": "text": "Foo Bar Baz" },
+            { "type": "info", "text": "Lorem Ipsum" },
+            { "type": "warning", "text": "Foo Bar Baz" },
         ]
     }
 
@@ -31,7 +31,6 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" title="Dismiss Alert">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <strong>{{title}}</strong>
                 {{{text}}}
             </div>
         </div>

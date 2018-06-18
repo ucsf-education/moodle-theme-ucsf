@@ -554,15 +554,6 @@ if ($ADMIN->fulltree) {
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
-        // Alert Title.
-        $name = 'theme_ucsf/alert'.$i.'title';
-        $title = get_string('alerttitle', 'theme_ucsf');
-        $description = get_string('alerttitledesc', 'theme_ucsf');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
-        $setting->set_updatedcallback('theme_reset_all_caches');
-        $page->add($setting);
-
         // Alert Text.
         $name = 'theme_ucsf/alert'.$i.'text';
         $title = get_string('alerttext', 'theme_ucsf');
