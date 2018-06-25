@@ -29,7 +29,7 @@
 
 {{$togglelabel}}{{#str}} showhelpmenuwindow, theme_ucsf {{/str}}{{/togglelabel}}
 {{$togglecontent}}
-{{#pix}} a/help, core, {{#str}} togglehelpmenu, theme_ucsf {{/str}} {{/pix}}
+{{#pix}} e/help, core, {{#str}} togglehelpmenu, theme_ucsf {{/str}} {{/pix}}
 {{/togglecontent}}
 
 {{$containerlabel}}{{#str}} helpmenuwindow, theme_ucsf {{/str}}{{/containerlabel}}
@@ -38,23 +38,23 @@
 
 {{$content}}
 <div class="helpmenu" data-region="helpmenu" role="log" aria-busy="false" aria-atomic="false" aria-relevant="additions">
-<ul role="menu">
+  <ul role="menu">
     {{#items}}
-        <li role="presentation">
-            <a href="{{url}}" target="{{options.target}}{{^options.target}}_self{{/options.target}}" title="{{title}}">
-                {{title}}{{^title}}{{url}}{{/title}}
-            </a>
-        </li>
+      <li role="presentation">
+        <a href="{{url}}" target="{{options.target}}{{^options.target}}_self{{/options.target}}" title="{{title}}">
+          {{title}}{{^title}}{{url}}{{/title}}
+        </a>
+      </li>
     {{/items}}
-</ul>
+  </ul>
 </div>
 {{/content}}
 {{/ core/popover_region }}
 {{#js}}
-    require(['jquery', 'theme_ucsf/helpmenu_popover_controller'], function($, controller) {
-    var container = $('#nav-helpmenu-popover-container');
-    var controller = new controller(container);
-    controller.registerEventListeners();
-    controller.registerListNavigationEventListeners();
-    });
+  require(['jquery', 'theme_ucsf/helpmenu_popover_controller'], function($, controller) {
+  var container = $('#nav-helpmenu-popover-container');
+  var controller = new controller(container);
+  controller.registerEventListeners();
+  controller.registerListNavigationEventListeners();
+  });
 {{/js}}

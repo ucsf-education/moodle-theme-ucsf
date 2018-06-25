@@ -15,21 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Moodle's Clean theme, an example of how to make a Bootstrap theme
- *
- * DO NOT MODIFY THIS THEME!
- * COPY IT FIRST, THEN RENAME THE COPY AND MODIFY IT INSTEAD.
- *
- * For full information about creating Moodle themes, see:
- * http://docs.moodle.org/dev/Themes_2.0
- *
- * @package    theme
- * @subpackage UCSF
- * @author     Lambda Soulutions
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Callback script to clear custom alerts from user session.
+ * @package   theme_ucsf
+ * @copyright 2018 The Regents of the University of California
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once('../../config.php');
+require_once(__DIR__ . '/../../config.php');
 
 if (array_key_exists('alert', $_GET)) {
     $alert = strip_tags($_GET["alert"]);
