@@ -1,0 +1,36 @@
+/* CUSTOM MENU */
+
+.ucsf_custom_menu {
+  .card-block {
+
+    background-color: $cle-blue;
+    color: white;
+    padding: .25rem 0;
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+  }
+
+  .category_label {
+    padding: .425rem 1rem;
+    font-weight: bold;
+  }
+
+  .navbar-collapse {
+
+    li {
+      padding: .25rem 0 .25rem 0;
+      text-indent: 1rem;
+    }
+
+    li.item:hover {
+      background-color: #fff;
+      color: $cle-blue;
+    }
+  }
+}

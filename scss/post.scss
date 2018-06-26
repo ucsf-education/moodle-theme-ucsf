@@ -1,4 +1,13 @@
+// Post SCSS for the theme.
+
+// Variables
+$cle-blue: #565c80;
+
+// Includes
+@import "components/custom-alerts";
 @import "components/helpmenu";
+@import "components/ucsf-custom-menu";
+
 
 /** General Styles
 -------------------------*/
@@ -105,7 +114,9 @@ h1, h2, h3, h4, h5, h6 {
 /* site name formatting mods */
 .site-name {
   color: #052049;
+  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.3rem;
+  font-weight: 600;
   padding-left: 1.5rem;
 }
 
@@ -140,7 +151,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /** Footer
 -------------------------*/
-
 .bg-inverse {
   color: #333 !important;
   background-color: #fff !important;
@@ -166,6 +176,38 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
 }
 
+.ucsf_footer_text {
+  float: left;
+  width: 50%;
+  text-align: left;
+}
+
+.ucsf_footer_links_container {
+  float: left;
+  width: 50%;
+  text-align: right;
+
+  p {
+    text-align: right;
+  }
+}
+
+@media ( max-width: 560px) {
+  .ucsf_footer_text {
+    text-align: center;
+    width: 100%;
+    clear: both;
+  }
+  .ucsf_footer_links_container {
+    clear: both;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    p {
+      text-align: center !important;
+    }
+  }
+}
 
 /** Custom menu
 -------------------------*/
@@ -457,69 +499,77 @@ h3.categoryname {
   color: #ccc;
 }
 
-
-
 /** Nav Drawer
 -------------------------*/
 
-/* adjusts background color, whitespace of nav drawer */
-[data-region="drawer"] {
+#nav-drawer {
+  /* adjusts background color, whitespace of nav drawer */
   background-color: #fafafc;
   top: 40px;  /* removes white space above nav drawer */
-  /* font-size:  1rem; */
+
+  a[data-key='coursehome'] {
+    font-size: 1rem;
+  }
+
+  a[data-key='myhome'] {
+    background-color: #f3fafc;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  a[data-key='home'],
+  a[data-key='calendar'],
+  a[data-key='privatefiles'],
+  a[data-key='mymedia'] {
+    background-color: #f3fafc;
+    text-transform: uppercase;
+  }
+
+  a[data-key='sitesettings'] {
+    text-transform: uppercase;
+  }
+
+  a[data-key='addblock'] {
+    text-transform: uppercase;
+  }
+
+  /* adjusts section links in nav drawer */
+  a[data-type='30'] {
+    font-size: .85rem;
+  }
+
+  /* Hides My Courses in nav drawer */
+  a[data-parent-key='mycourses'] {
+    display: none;
+  }
+
+  [data-key='mycourses'] {
+    display: none;
+  }
+
+  /* Nav drawer adjustments - hover color */
+  .list-group-item-action:focus, .list-group-item-action:hover {
+    color: #fff;
+    background-color: #506380;
+  }
+
+  /* Nav drawer adjustments - icon hover color */
+  .list-group-item-action:focus, .list-group-item-action:hover .icon {
+    color: #fff;
+  }
+
+  // hide the 'My Courses' menu item
+  .list-group-item[data-key="mycourses"] {
+    display: none;
+  }
+  // hide the 'My Courses' sub-menu items
+  .list-group-item[data-parent-key="mycourses"] {
+    display: none;
+  }
 }
 
-a[data-key='coursehome'] {
-  font-size: 1rem;
-}
 
-a[data-key='myhome'] {
-  background-color: #f3fafc;
-  font-size: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-a[data-key='home'],
-a[data-key='calendar'],
-a[data-key='privatefiles'],
-a[data-key='mymedia'] {
-  background-color: #f3fafc;
-  text-transform: uppercase;
-}
-
-a[data-key='sitesettings'] {
-  text-transform: uppercase;
-}
-
-a[data-key='addblock'] {
-  text-transform: uppercase;
-}
-
-/* adjusts section links in nav drawer */
-a[data-type='30'] {
-  font-size: .85rem;
-}
-
-/* Hides My Courses in nav drawer */
-a[data-parent-key='mycourses'] {
-  display: none;
-}
-
-[data-key='mycourses'] {
-  display: none;
-}
-
-/* Nav drawer adjustments - hover color */
-.list-group-item-action:focus, .list-group-item-action:hover {
-  color: #fff;
-  background-color: #506380;
-}
-
-/* Nav drawer adjustments - icon hover color */
-.list-group-item-action:focus, .list-group-item-action:hover .icon {
-  color: #fff;
-}
 
 
 /** Messaging
