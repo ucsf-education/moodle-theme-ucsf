@@ -62,6 +62,34 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
 }
 
 /**
+ * @see theme_boost_css_tree_post_processor()
+ */
+function theme_ucsf_css_tree_post_processor($tree, $theme) {
+    theme_boost_css_tree_post_processor($tree, $theme);
+}
+
+/**
+ * @see theme_boost_get_extra_scss()
+ */
+function theme_ucsf_get_extra_scss($theme) {
+    return theme_boost_get_extra_scss($theme);
+}
+
+/**
+ * @see theme_boost_get_pre_scss()
+ */
+function theme_ucsf_get_pre_scss($theme) {
+    return theme_boost_get_pre_scss($theme);
+}
+
+/**
+ * @see theme_boost_get_precompiled_css()
+ */
+function theme_ucsf_get_precompiled_css() {
+    return theme_boost_get_precompiled_css();
+}
+
+/**
  * @param $theme
  *
  * @return string
@@ -101,56 +129,57 @@ function theme_ucsf_get_main_scss_content($theme) {
 
     // get all categories that are configured for customizations
     $theme_settings = $theme->settings;
-    if (empty($theme_settings->all_categories)) {
-        return '';
-    }
-    $customized_category_ids = explode(',', $theme_settings->all_categories);
-    // filter out any categories that don't have CSS customizations turned on
-    $customized_category_ids = array_filter(
-        $customized_category_ids,
-        function ($id) use ($theme_settings) {
-            $enabled_key = 'customcssenabled' . (int) $id;
-
-            return ! empty($theme_settings->$enabled_key);
-        }
-    );
-
-    $customized_category_ids = array_values($customized_category_ids);
-
-    // generate SCSS rules by category
     $categories_scss = array();
-    foreach ($all_category_ids as $category_id) {
-        $category_scss = [];
+    if (! empty($theme_settings->all_categories)) {
+        $customized_category_ids = explode(',', $theme_settings->all_categories);
+        // filter out any categories that don't have CSS customizations turned on
+        $customized_category_ids = array_filter(
+            $customized_category_ids,
+            function ($id) use ($theme_settings) {
+                $enabled_key = 'customcssenabled' . (int) $id;
 
-        // get parent categories that are enabled for css customization
-        $ids = array_values(
-            array_filter(
-                _theme_ucsf_get_category_roots($category_id),
-                function ($id) use ($customized_category_ids) {
-                    return in_array($id, $customized_category_ids);
-                }
-            )
+                return ! empty($theme_settings->$enabled_key);
+            }
         );
 
-        // Generic custom CSS
-        //
-        // "inherit" any rules that may have been defined/enabled by parent categories.
-        foreach ($ids as $id) {
-            $scss_key = 'customcss' . (int) $id;
-            if (property_exists($theme_settings, $scss_key)) {
-                $custom_scss = $theme_settings->$scss_key;
-                if (trim($custom_scss)) {
-                    $category_scss[] = $custom_scss;
+        $customized_category_ids = array_values($customized_category_ids);
+
+        // generate SCSS rules by category
+        $categories_scss = array();
+        foreach ($all_category_ids as $category_id) {
+            $category_scss = [];
+
+            // get parent categories that are enabled for css customization
+            $ids = array_values(
+                array_filter(
+                    _theme_ucsf_get_category_roots($category_id),
+                    function ($id) use ($customized_category_ids) {
+                        return in_array($id, $customized_category_ids);
+                    }
+                )
+            );
+
+            // Generic custom CSS
+            //
+            // "inherit" any rules that may have been defined/enabled by parent categories.
+            foreach ($ids as $id) {
+                $scss_key = 'customcss' . (int) $id;
+                if (property_exists($theme_settings, $scss_key)) {
+                    $custom_scss = $theme_settings->$scss_key;
+                    if (trim($custom_scss)) {
+                        $category_scss[] = $custom_scss;
+                    }
                 }
             }
-        }
 
-        // Finally, scope category specific rules with a class selector anchored of the <body> tag.
-        if (! empty($category_scss)) {
-            $category_scss = implode("\n", array_reverse($category_scss));
-            $categories_scss[] = "body.category-{$category_id} {\n{$category_scss}\n}";
+            // Finally, scope category specific rules with a class selector anchored of the <body> tag.
+            if (! empty($category_scss)) {
+                $category_scss = implode("\n", array_reverse($category_scss));
+                $categories_scss[] = "body.category-{$category_id} {\n{$category_scss}\n}";
+            }
         }
     }
+
 
     $categories_scss = implode("\n", $categories_scss);
 
