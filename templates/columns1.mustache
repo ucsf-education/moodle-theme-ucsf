@@ -36,15 +36,7 @@
          "bodyattributes":""
     }
 }}
-{{{ output.doctype }}}
-<html {{{ output.htmlattributes }}}>
-<head>
-    <title>{{{ output.page_title }}}</title>
-    <link rel="shortcut icon" href="{{{ output.favicon }}}" />
-    <link href="//fonts.googleapis.com/css?family=Open Sans:400,600,700,Bold,italic" rel="stylesheet" type="text/css"/>
-    {{{ output.standard_head_html }}}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+{{> theme_ucsf/head }}
 
 <body {{{ bodyattributes }}}>
 
@@ -59,13 +51,15 @@
         {{>theme_ucsf/custom_menu}}
 
         <div id="page-content" class="row">
-            <div id="region-main-box" class="col-xs-12">
+            <div id="region-main-box" class="col-12">
                 <section id="region-main">
-                    <div class="card card-block">
-                    {{{ output.course_content_header }}}
-                    {{{ output.main_content }}}
-                    {{{ output.activity_navigation }}}
-                    {{{ output.course_content_footer }}}
+                    <div class="card">
+                      <div class="card-body">
+                        {{{ output.course_content_header }}}
+                        {{{ output.main_content }}}
+                        {{{ output.activity_navigation }}}
+                        {{{ output.course_content_footer }}}
+                      </div>
                     </div>
                 </section>
             </div>
