@@ -741,3 +741,16 @@ h3.categoryname {
 #id_submitbutton_commentpoststats {
   font-size: .8rem;
 }
+
+/* Fix for Chrome/large gradebook editing issue. https://app.asana.com/0/187871667484662/869052205792061 */
+.path-grade-report-grader a,
+.path-grade-report-grader area,
+.path-grade-report-grader button,
+.path-grade-report-grader [role="button"],
+.path-grade-report-grader input,
+.path-grade-report-grader label,
+.path-grade-report-grader select,
+.path-grade-report-grader summary,
+.path-grade-report-grader textarea {
+    touch-action: auto;
+}
