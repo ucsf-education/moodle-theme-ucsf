@@ -176,10 +176,10 @@ class theme_ucsf_datepicker extends admin_setting {
         // Start form for date input.
         $return  = '<div class="form-text defaultsnext">';
         // Datepicker.
-        $return .= '<input type="date" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['datepicker']).'" size="15"><br />';
+        $return .= '<input type="text" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['datepicker']).'" size="15"><br />';
 
         // Datepicker.
-        $return .= '<input type="date" id="' . $this->get_id() . 'end_datepicker" name="' . $this->get_full_name() . '[end_datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['end_datepicker']).'" size="15">';
+        $return .= '<input type="text" id="' . $this->get_id() . 'end_datepicker" name="' . $this->get_full_name() . '[end_datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['end_datepicker']).'" size="15">';
 
         $return .= '</div>';
 
@@ -484,7 +484,7 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
         // Start form for date input.
         $return  = '<div class="form-select defaultsnext">';
         // Datepicker.
-        $return .= '<input type="date" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['datepicker']).'" size="15">';
+        $return .= '<input type="text" id="' . $this->get_id() . 'datepicker" name="' . $this->get_full_name() . '[datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['datepicker']).'" size="15">';
         $return .= '<label class="accesshide" for="' . $this->get_id() . 'start_hour">' . get_string('start_hour', 'theme_ucsf') . '</label>';
         $return .= ' Hour: <select id="' . $this->get_id() . 'start_hour" name="' . $this->get_full_name() . '[start_hour]" class="custom-select">';
         for ($i = 0; $i <= 23; $i++) {
@@ -505,7 +505,7 @@ class theme_ucsf_datepicker_with_validation extends admin_setting {
 
 
         // Datepicker.
-        $return .= '<input type="date" id="' . $this->get_id() . 'end_datepicker" name="' . $this->get_full_name() . '[end_datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['end_datepicker']).'" size="15">';
+        $return .= '<input type="text" id="' . $this->get_id() . 'end_datepicker" name="' . $this->get_full_name() . '[end_datepicker]" class="form-control text-ltr datepicker" value="'.s( $data['end_datepicker']).'" size="15">';
         $return .= '<label class="accesshide" for="' . $this->get_id() . 'end_hour">' . get_string('end_hour', 'theme_ucsf') . '</label>';
         $return .= ' Hour: <select id="' . $this->get_id() . 'end_hour" name="' . $this->get_full_name() . '[end_hour]" class="custom-select">';
         for ($i = 0; $i <= 23; $i++) {

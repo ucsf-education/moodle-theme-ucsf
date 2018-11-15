@@ -46,6 +46,6 @@ $templatecontext = [
     'categorylabel' => $categorylabel,
 ];
 
-$PAGE->requires->js('/theme/ucsf/javascript/custom_alerts.js');
+$PAGE->requires->js('/theme/ucsf/js/custom_alerts.js');
 
 echo $OUTPUT->render_from_template('theme_ucsf/columns1', $templatecontext);
