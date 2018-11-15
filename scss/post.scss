@@ -213,36 +213,45 @@ h1, h2, h3, h4, h5, h6 {
 -------------------------*/
 
 /* modifies category label in custom menu - removes border and hover underline when linked */
-.category_label.pull-left a {
-  border: 0;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1rem;
-  padding-left: 0;
-  padding-right: .1rem;
+.ucsf_custom_menu {
+
+  .category_label.pull-left a {
+    border: 0;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    padding-left: 0;
+    padding-right: .1rem;
+  }
+
+  /* modifies category label in custom menu - set to same size and weight as when linked */
+  .category_label.pull-left {
+    font-weight: 700;
+    font-size: 1rem;
+    padding-right: 2.1rem;
+  }
+
+  /* adds extra spacing between custom menu links */
+  .navbar-nav .nav-item {
+    padding-right: .6rem;
+  }
+
+  /** left-align mobile nav hamburger */
+  .navbar-toggler {
+    text-align: left;
+  }
+
+  /* modifies custom menu link hover color */
+  a.nav-item.nav-link:hover {
+    color: #fd0;
+  }
+
+  /* modifies custom menu dropdown link hover color */
+  a.dropdown-toggle.nav-link:hover, a.dropdown-toggle.nav-link:focus, a.dropdown-toggle.nav-link:active {
+    color: #fd0;
+  }
 }
 
-/* modifies category label in custom menu - set to same size and weight as when linked */
-.category_label.pull-left {
-  font-weight: 700;
-  font-size: 1rem;
-  padding-right: 2.1rem;
-}
-
-/* adds extra spacing between custom menu links */
-.navbar-nav .nav-item {
-  padding-right: .6rem;
-}
-
-/* modifies custom menu link hover color */
-a.nav-item.nav-link:hover {
-  color: #fd0;
-}
-
-/* modifies custom menu dropdown link hover color */
-a.dropdown-toggle.nav-link:hover, a.dropdown-toggle.nav-link:focus, a.dropdown-toggle.nav-link:active {
-  color: #fd0;
-}
 
 
 /** Course, favorite, recent blocks hanging indent; other mods
