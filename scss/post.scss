@@ -568,6 +568,11 @@ h3.categoryname {
     display: none;
   }
 
+  /* Active nav drawer items */
+  .list-group-item-action.active {
+    color: #495057;
+  }
+
   /* Nav drawer adjustments - hover color */
   .list-group-item-action:focus, .list-group-item-action:hover {
     color: #fff;
@@ -587,6 +592,8 @@ h3.categoryname {
   .list-group-item[data-parent-key="mycourses"] {
     display: none;
   }
+
+
 }
 
 
