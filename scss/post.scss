@@ -114,6 +114,11 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #fafafc;
   border-bottom: 1px solid #e5e5e5;
 
+  /* drawer hamburger */
+  div[data-region="drawer-toggle"] .btn {
+    background-color: #fff;
+  }
+
   /* changes icon color in header */
   .icon {
     color: #506380;
