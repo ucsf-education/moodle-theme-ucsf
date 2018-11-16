@@ -109,50 +109,51 @@ h1, h2, h3, h4, h5, h6 {
 .navbar {
   max-height: 43px;
   padding: .2rem 1rem;
-}
 
-/* site name formatting mods */
-.site-name {
-  color: #052049;
-  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-  padding-left: 1.5rem;
-}
-
-/* adjusts background color and border of header */
-.navbar-light {
+  /* adjusts background color and border of header */
   background-color: #fafafc;
   border-bottom: 1px solid #e5e5e5;
+
+  /* changes icon color in header */
+  .icon {
+    color: #506380;
+  }
+
+  /* site name formatting mods */
+  .site-name {
+    color: #052049;
+    font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding-left: 1.5rem;
+  }
+
+  /* modifies user name formatting in header */
+  .usertext {
+    color: #777;
+    font-weight: 600;
+  }
+
+  /* Resizes user picture in header */
+  .page-header-image .userpicture {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Horizontally align search box icon ("magnifying glass") with rest of toolbar icons */
+  .search-input-wrapper>div .icon {
+    margin-top: 7px;
+  }
 }
 
-/* changes icon color in header */
-.container-fluid.navbar-nav .icon {
-  color: #506380;
-}
 
-/* modifies user name formatting in header */
-.usertext {
-  color: #777;
-  font-weight: 600;
-}
-
-/* Resizes user picture in header */
-.page-header-image .userpicture {
-  width: 50px;
-  height: 50px;
-}
+/** User Picture
+-------------------------*/
 
 /* Removes rounded corners on user picture everywhere */
 .userpicture {
   border-radius: 0%;
 }
-
-/* Horizontally align search box icon ("magnifying glass") with rest of toolbar icons */
-.search-input-wrapper>div .icon {
-  margin-top: 7px;
-}
-
 
 /** Footer
 -------------------------*/
