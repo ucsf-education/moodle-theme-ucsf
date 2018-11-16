@@ -131,11 +131,11 @@ class core_renderer extends \theme_boost\output\core_renderer
         if (! empty($logo['src'])) {
             $out .= html_writer::span(
                 html_writer::img($logo['src'], $title, array('title' => $logo['title'])),
-                'logo hidden-xs-down'
+                'logo d-none d-sm-inline'
             );
         }
 
-        $out .= html_writer::span($title, 'site-name hidden-md-down');
+        $out .= html_writer::span($title, 'site-name d-none d-lg-inline');
 
         $classes = array('navbar-brand');
         if (! empty($logo)) {
