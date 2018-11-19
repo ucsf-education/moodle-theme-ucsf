@@ -109,45 +109,61 @@ h1, h2, h3, h4, h5, h6 {
 .navbar {
   max-height: 43px;
   padding: .2rem 1rem;
-}
 
-/* site name formatting mods */
-.site-name {
-  color: #052049;
-  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-  padding-left: 1.5rem;
-}
-
-/* adjusts background color and border of header */
-.navbar-light {
+  /* adjusts background color and border of header */
   background-color: #fafafc;
   border-bottom: 1px solid #e5e5e5;
+
+  /* drawer hamburger */
+  div[data-region="drawer-toggle"] .btn {
+    background-color: #fff;
+
+    &:focus {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+
+  /* changes icon color in header */
+  .icon {
+    color: #506380;
+  }
+
+  /* site name formatting mods */
+  .site-name {
+    color: #052049;
+    font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding-left: 1.5rem;
+  }
+
+  /* modifies user name formatting in header */
+  .usertext {
+    color: #777;
+    font-weight: 600;
+  }
+
+  /* Resizes user picture in header */
+  .page-header-image .userpicture {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Horizontally align search box icon ("magnifying glass") with rest of toolbar icons */
+  .search-input-wrapper>div .icon {
+    margin-top: 7px;
+  }
 }
 
-/* changes icon color in header */
-.container-fluid.navbar-nav .icon {
-  color: #506380;
-}
 
-/* modifies user name formatting in header */
-.usertext {
-  color: #777;
-  font-weight: 600;
-}
-
-/* Resizes user picture in header */
-.page-header-image .userpicture {
-  width: 50px;
-  height: 50px;
-}
+/** User Picture
+-------------------------*/
 
 /* Removes rounded corners on user picture everywhere */
 .userpicture {
-  border-radius: 0%;
+  border-radius: 0;
 }
-
 
 /** Footer
 -------------------------*/
@@ -213,36 +229,45 @@ h1, h2, h3, h4, h5, h6 {
 -------------------------*/
 
 /* modifies category label in custom menu - removes border and hover underline when linked */
-.category_label.pull-left a {
-  border: 0;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1rem;
-  padding-left: 0;
-  padding-right: .1rem;
+.ucsf_custom_menu {
+
+  .category_label.pull-left a {
+    border: 0;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    padding-left: 0;
+    padding-right: .1rem;
+  }
+
+  /* modifies category label in custom menu - set to same size and weight as when linked */
+  .category_label.pull-left {
+    font-weight: 700;
+    font-size: 1rem;
+    padding-right: 2.1rem;
+  }
+
+  /* adds extra spacing between custom menu links */
+  .navbar-nav .nav-item {
+    padding-right: .6rem;
+  }
+
+  /** left-align mobile nav hamburger */
+  .navbar-toggler {
+    text-align: left;
+  }
+
+  /* modifies custom menu link hover color */
+  a.nav-item.nav-link:hover {
+    color: #fd0;
+  }
+
+  /* modifies custom menu dropdown link hover color */
+  a.dropdown-toggle.nav-link:hover, a.dropdown-toggle.nav-link:focus, a.dropdown-toggle.nav-link:active {
+    color: #fd0;
+  }
 }
 
-/* modifies category label in custom menu - set to same size and weight as when linked */
-.category_label.pull-left {
-  font-weight: 700;
-  font-size: 1rem;
-  padding-right: 2.1rem;
-}
-
-/* adds extra spacing between custom menu links */
-.navbar-nav .nav-link {
-  padding-right: .6rem;
-}
-
-/* modifies custom menu link hover color */
-a.nav-item.nav-link:hover {
-  color: #fd0;
-}
-
-/* modifies custom menu dropdown link hover color */
-a.dropdown-toggle.nav-link:hover, a.dropdown-toggle.nav-link:focus, a.dropdown-toggle.nav-link:active {
-  color: #fd0;
-}
 
 
 /** Course, favorite, recent blocks hanging indent; other mods
@@ -548,6 +573,11 @@ h3.categoryname {
     display: none;
   }
 
+  /* Active nav drawer items */
+  .list-group-item-action.active {
+    color: #495057;
+  }
+
   /* Nav drawer adjustments - hover color */
   .list-group-item-action:focus, .list-group-item-action:hover {
     color: #fff;
@@ -567,6 +597,8 @@ h3.categoryname {
   .list-group-item[data-parent-key="mycourses"] {
     display: none;
   }
+
+
 }
 
 

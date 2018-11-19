@@ -74,8 +74,9 @@ $templatecontext = [
 
 $templatecontext['flatnavigation'] = $PAGE->flatnav;
 
-$PAGE->requires->js('/theme/ucsf/javascript/datepicker.js');
-$PAGE->requires->js('/theme/ucsf/javascript/custom_alerts.js');
+$PAGE->requires->js('/theme/ucsf/js/custom_alerts.js');
+$PAGE->requires->js('/theme/ucsf/js/datepicker.js');
+
 
 echo $OUTPUT->render_from_template('theme_ucsf/columns2', $templatecontext);
 
