@@ -456,9 +456,10 @@ h3.categoryname {
 -------------------------*/
 
 /* modifies block title header formatting */
-.block-region .card-block .card-title {
+.block-region .block .card-title {
   background-color: #506380;
   color: #fff;
+  display: block !important; /* KLUDGE! the alternative would be to override the block template. lame. [ST 2018/11/19]*/
   font-weight: 600;
   padding-top: .5rem;
   padding-left: .5rem;
@@ -468,13 +469,13 @@ h3.categoryname {
 }
 
 /* modifies block color and formatting */
-.block .card-block {
+.block {
   background-color: #f3fafc;
   padding: .5rem;  /* added to reduce padding in blocks */
 }
 
 /* modifies course info box on dashboard - top-half gets white background; must follow ".block .card-block" above */
-.card-block .course-info-container {
+.block .course-info-container {
   background-color: #fff;
 }
 
@@ -484,11 +485,11 @@ h3.categoryname {
 }
 
 /* modifies color of block header menu icons */
-.block .card-block .menubar .icon {
+.block .menubar .icon {
   color: #fff;
 }
 
-.block .card-block .menubar .dropdown-menu .icon {
+.block .menubar .dropdown-menu .icon {
   color: #000;
 }
 
