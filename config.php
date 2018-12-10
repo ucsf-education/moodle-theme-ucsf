@@ -42,7 +42,7 @@ $THEME->yuicssmodules = array();
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->requiredblocks = '';
 $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
-$THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
+$THEME->iconsystem = '\theme_ucsf\util\icon_system';
 $THEME->scss = function($theme) {
     return theme_ucsf_get_main_scss_content($theme);
 };
