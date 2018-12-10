@@ -114,6 +114,24 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
 }
 
+/* Modified blue circle formatting on dashboard page - course cards */
+.progress-chart-container .no-progress .icon {
+    top: 110%;
+    left: 27%;
+    color: #116492;
+    height: 45px;
+    width: 5px;
+    font-size: 25px;
+}
+/* Removes the large grey circle and moves the blue circle icon for courses in the course overview block that
+   are not using completion */
+.progress-chart-container .no-progress {
+    height: 20px;
+    background-color: #fff;
+}
+
+
+
 /** Breadcrumbs
 -------------------------*/
 
