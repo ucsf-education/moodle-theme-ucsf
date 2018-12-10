@@ -22,47 +22,18 @@ body {
   font-size: .9rem;
 }
 
-/* adjusts width of blocks column - in conjunction with main column adjustment */
-[data-region="blocks-column"] {
-  width: 210px;
-}
-
-/* adjusts width of main column - in conjunction with blocks column adjustment */
-#region-main-settings-menu.has-blocks, #region-main.has-blocks {
-  width: calc(100% - 240px);
-}
-
-/* column adjustments require changing media settings for proper responsiveness */
-@media (max-width:999px) {
-  #region-main-settings-menu.has-blocks, #region-main.has-blocks {
-    width: 100%
-  }
-}
-
-@media (max-width:999px) {
-  [data-region="blocks-column"] {
-    width: 100%
-  }
-}
-
 /* changes link color */
-a {
+a, a:hover {
   color: #116492;
 }
 
-/* indents ol ul dl lists */
-ol, ul, dl {
-  margin-left: 15px;
-}
-
-/* Removes the large grey circle and moves the blue circle icon for courses in the course overview block that are not using completion */
-.progress-chart-container .no-progress {
-  height: 20px;
-  background-color: #fff;
+/* indents ul lists */
+ul {
+  margin-left: 24px;
 }
 
 /* modifies heading font weights */
-h1, h2, h3, h4, h5, h6, .h1, .h2, .path-calendar .maincalendar .calendar-controls .current, .h3, .h4, .h5, .h6 {
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-weight: 700;
 }
 
@@ -71,7 +42,7 @@ h1, .h1 {
   font-size: 2rem;
 }
 
-h2, .h2, .path-calendar .maincalendar .calendar-controls .current {
+h2, .h2 {
   font-size: 1.5rem;
 }
 
@@ -83,7 +54,7 @@ h4, .h4 {
   font-size: 1.1rem;
 }
 
-h5, .h5  {
+h5, .h5 {
   font-size: 1rem;
 }
 
@@ -93,14 +64,85 @@ h6, .h6 {
 
 /* modifies heading color */
 h1, h2, h3, h4, h5, h6 {
-  color:#052049;
+  color: #052049;
 }
 
-/* modifies tag color, e.g., Hidden, Available but not shown tags */
-.tag-info {
-  background-color: #3a87ad;
+/** Layout and responsive formatting
+-------------------------*/
+
+/* adjusts width of blocks column - in conjunction with main column adjustment */
+[data-region="blocks-column"] {
+  width: 210px;
 }
 
+/* adjusts width of main column - in conjunction with blocks column adjustment */
+#region-main-settings-menu.has-blocks, #region-main.has-blocks {
+  width: calc(100% - 240px);
+}
+
+/* column adjustments require changing media settings for proper responsiveness */
+@media (max-width: 999px) {
+  #region-main-settings-menu.has-blocks, #region-main.has-blocks {
+    width: 100%
+  }
+}
+
+@media (max-width: 999px) {
+  [data-region="blocks-column"] {
+    width: 100%
+  }
+}
+
+/** Dashboard
+-------------------------*/
+
+/* Resizes user picture on dashboard etc. */
+.page-header-image .userpicture {
+  width: 50px;
+  height: 50px;
+}
+
+/* Hides colored-course tiles on dashboard */
+.card-deck .myoverviewimg {
+  height: 0px;
+}
+
+/* Hides Moodle image and link on unauthenticated front page */
+.sitelink {
+  display: none;
+}
+
+/* Hides site box on front page; also hides settings menu, which is problematic for admins */
+#page-site-index #page-header .card {
+  display: none;
+}
+
+/** Breadcrumbs
+-------------------------*/
+
+/* adjusts breadcrumb formatting */
+.breadcrumb {
+  background-color: #fff;
+  font-size: .85rem;
+  font-weight: 500;
+  padding: .25rem .75rem;
+}
+
+/* unlinked breadcrumb items appear grey */
+.breadcrumb > li {
+  color: #999999;
+}
+
+/* adjusts color of breadcrumb links */
+.breadcrumb a {
+  color: #506380;
+}
+
+/* changes breadcrumb separator, and color */
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "▶︎";
+  color: #ccc;
+}
 
 /** Header
 -------------------------*/
@@ -144,26 +186,12 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
   }
 
-  /* Resizes user picture in header */
-  .page-header-image .userpicture {
-    width: 50px;
-    height: 50px;
-  }
-
   /* Horizontally align search box icon ("magnifying glass") with rest of toolbar icons */
-  .search-input-wrapper>div .icon {
+  .search-input-wrapper > div .icon {
     margin-top: 7px;
   }
 }
 
-
-/** User Picture
--------------------------*/
-
-/* Removes rounded corners on user picture everywhere */
-.userpicture {
-  border-radius: 0;
-}
 
 /** Footer
 -------------------------*/
@@ -208,7 +236,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media ( max-width: 560px) {
+@media (max-width: 560px) {
   .ucsf_footer_text {
     text-align: center;
     width: 100%;
@@ -219,6 +247,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     text-align: center;
     margin-bottom: 10px;
+
     p {
       text-align: center !important;
     }
@@ -268,268 +297,22 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-
-
-/** Course, favorite, recent blocks hanging indent; other mods
--------------------------*/
-
-/* fixes hanging indent in course block */
-.block_course_list .content li {
-  text-indent: -32px;
-}
-
-.block_course_list .unlist li {
-  padding-left: 30px;
-}
-
-.block_course_list .footer {
-  text-align: center;
-}
-
-/* fixes hanging indent in recent courses block */
-.block_course_recent .content li {
-  text-indent: -32px;
-}
-
-.block_course_recent .unlist li {
-  padding-left: 30px;
-}
-
-.block_course_recent .footer {
-  margin-top: 5px;
-  text-align: center;
-}
-
-/* fixes hanging indent in favorite courses block */
-.block_course_favourites .content li {
-  text-indent: -32px;
-}
-
-.block_course_favourites .unlist li {
-  padding-left: 30px;
-}
-
-.block_course_favourites .footer {
-  margin-top: 5px;
-  text-align: center;
-}
-
-
-/** Content area
--------------------------*/
-
-/* Category page adjustments
-.category {
-    padding-bottom: 1px;
-}
-*/
-
-/* increases padding of top-level category names on category page */
-h3.categoryname {
-  line-height: 30px;
-}
-
-/* adds grey box formatting to category list on category page */
-.course_category_tree .category > .info {
-  margin-bottom: 3px;
-  background-color: #f5f5f5;
-  border: 1px solid #e3e3e3;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
-  border-color: #e3e3e3;
-  margin: 3px 0;
-  clear: both;
-}
-
-/* removes border around course area */
-#region-main > .card {
-  border: 0;
-}
-
-/* modifies course title formatting */
-.page-context-header .page-header-headings h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-/* adjusts section title formatting */
-.course-content .sectionname {
-  font-size: 1.15rem !important;
-  line-height: 1.25rem;
-  font-weight: 700;
-}
-
-/* adjusts color of small round question icons */
-.text-info, .highlight {
-  color:#052049 !important;
-}
-
-/* modifies course section formatting - increases hztl line width - top margin adjustment */
-.course-content ul li.section.main {
-  border-bottom: 1px solid #b3becb;
-  margin-top: .5rem;
-}
-
-/* moves hidden tag for labels to the left - its improperly placed by default */
-.section .activity.label .availabilityinfo.ishidden {
-  margin-left: 32px;
-}
-
-/* adds spacing above labels */
-.section .activity.modtype_label.label {
-  padding-top: 10px;
-}
-
-/* removed 24px padding that precedes labels, for some reason */
-.section .label .mod-indent-outer {
-  padding-left: 0px;
-}
-
-/* resizes the dashboard course title size and weight */
-.media .media-body h4 {
-  font-size: 1.3rem;
-  font-weight: 500;
-}
-
-/* removes underline in action menu links */
-.dropdown-item a {
-  text-decoration: none;
-}
-
-/* modifies formatting at bottom of course sections */
-.course-content ul li.section.main {
-  border-bottom: 2px solid #ddd;
-}
-
-/* modifies last modified formatting at bottom of page text */
-.modified {
-  text-align: center;
-  font-size: .8rem;
-}
-
-/* section summaries left padding increased from 5 to 15 */
-.course-content .section-summary .summarytext {
-  margin: 2px 5px 2px 15px;
-}
-
-/* adds boxes around course section links when set to single section per page */
-.course-content .single-section .section-navigation .mdl-left a, .course-content .single-section .section-navigation .mdl-right a {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-weight: 700;
-  padding: 5px 10px;
-}
-
-/* adds space above jump menu on single course section pages */
-.course-content .single-section .section-navigation .mdl-align  {
-  padding-top: 30px;
-}
-
-/* adds padding to the top of section name when set to single section per page */
-.single-section h3.sectionname {
-  padding-top: 15px;
-}
-
-/* Shortens creator and modifier columns on question page */
-.header.creatorname, .header.modifiername {
-  width: 20%;
-}
-
-/* increases font weight for course settings labels */
-.col-form-label.d-inline {
-  font-weight: 600;
-}
-
-/* removes underline on red exclamations on course settings - question mark cursor changed to arrow */
-.initialism.text-danger {
-  border: none;
-  cursor: auto;
-}
-
-
-/** Blocks - General
--------------------------*/
-
-/* modifies block title header formatting */
-.block-region .block .card-title {
-  background-color: #506380;
-  color: #fff;
-  display: block !important; /* KLUDGE! the alternative would be to override the block template. lame. [ST 2018/11/19]*/
-  font-weight: 600;
-  padding-top: .5rem;
-  padding-left: .5rem;
-  padding-bottom: .5rem;
-  font-size: .85rem;
-  text-transform: uppercase;
-}
-
-/* modifies block color and formatting */
-.block {
-  background-color: #f3fafc;
-  padding: .5rem;  /* added to reduce padding in blocks */
-}
-
-/* modifies course info box on dashboard - top-half gets white background; must follow ".block .card-block" above */
-.block .course-info-container {
-  background-color: #fff;
-}
-
-/* removes corner rounding for blocks */
-.card, #page-enrol-users #filterform, .que .history, .userprofile .profile_tree section, .groupinfobox, .forumpost, .yui-skin-sam .yui-layout.path-mod-chat-gui_ajax .yui-layout-unit-right, .yui-skin-sam .yui-layout.path-mod-chat-gui_ajax .yui-layout-unit-bottom, .yui-skin-sam .yui-layout.path-mod-chat-gui_ajax #chat-messages .chat-message.course-theme, .well {
-  border-radius: 0;
-}
-
-/* modifies color of block header menu icons */
-.block .menubar .icon {
-  color: #000;
-}
-
-.block .menubar .dropdown-menu .icon {
-  color: #000;
-}
-
-.block .block-controls .dropdown-toggle {
-  color: #000;
-}
-
-
-/** Breadcrumbs
--------------------------*/
-
-/* adjusts breadcrumb formatting */
-.breadcrumb {
-  background-color: #fff;
-  font-size: .85rem;
-  font-weight: 500;
-  padding: .25rem .75rem;
-}
-
-/* unlinked breadcrumb items appear grey */
-.breadcrumb > li {
-  color: #999999;
-}
-
-/* adjusts color of breadcrumb links */
-.breadcrumb a {
-  color: #506380;
-}
-
-/* changes breadcrumb separator, and color */
-.breadcrumb-item + .breadcrumb-item::before {
-  content: "▶︎";
-  color: #ccc;
-}
-
 /** Nav Drawer
 -------------------------*/
 
 #nav-drawer {
   /* adjusts background color, whitespace of nav drawer */
   background-color: #fafafc;
-  top: 40px;  /* removes white space above nav drawer */
+  top: 40px; /* removes white space above nav drawer */
 
   a[data-key='coursehome'] {
     font-size: 1rem;
+    font-weight: 600;
+
+    /* hide icon next to course name */
+    .fa-circle {
+      display: none
+    }
   }
 
   a[data-key='myhome'] {
@@ -571,7 +354,9 @@ h3.categoryname {
 
   /* Active nav drawer items */
   .list-group-item-action.active {
+    background-color: #f3fafc;
     color: #495057;
+    border-color: #506380;
   }
 
   /* Nav drawer adjustments - hover color */
@@ -589,16 +374,210 @@ h3.categoryname {
   .list-group-item[data-key="mycourses"] {
     display: none;
   }
+
   // hide the 'My Courses' sub-menu items
   .list-group-item[data-parent-key="mycourses"] {
     display: none;
   }
-
-
 }
 
+/** Action Menu formatting
+-------------------------*/
 
+/* changes color of active selection on menus */
+.dropdown-item:active {
+  background-color: #f3fafc;
+  color: #16181b;
+}
 
+/* removes underline in action menu links */
+.dropdown-item a {
+  text-decoration: none;
+}
+
+/** Category pages
+-------------------------*/
+
+/* Hides UCSF CLE heading on top-level category page */
+#page-course-index #page-header .page-header-headings {
+  display: none;
+}
+
+/* Hides UCSF CLE heading on category pages */
+#page-course-index-category #page-header .page-header-headings {
+  display: none;
+}
+
+/* increases padding of top-level category names on category page */
+h3.categoryname {
+  line-height: 30px;
+}
+
+/* adds grey box formatting to category list on category page */
+.course_category_tree .category > .info {
+  margin-bottom: 3px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+  border-color: #e3e3e3;
+  margin: 3px 0;
+  clear: both;
+}
+
+/** Course, favorite, recent blocks hanging indent; other mods
+-------------------------*/
+
+/* fixes hanging indent in course block */
+.block_course_list .content li {
+  text-indent: -15px;
+}
+
+.block_course_list .unlist li {
+  padding-left: 25px;
+}
+
+.block_course_list .icon {
+  margin-right: -.2rem;
+}
+
+.block_course_list .footer {
+  text-align: center;
+}
+
+/* fixes hanging indent in recent courses block */
+.block_course_recent .content li {
+  text-indent: -23px;
+}
+
+.block_course_recent .unlist li {
+  padding-left: 23px;
+}
+
+.block_course_recent .footer {
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* fixes hanging indent in favorite courses block  */
+.block_course_favourites .content li {
+  text-indent: -23px;
+}
+
+.block_course_favourites .unlist li {
+  padding-left: 23px;
+}
+
+.block_course_favourites .footer {
+  margin-top: 5px;
+  text-align: center;
+}
+
+/** Content area
+-------------------------*/
+
+/* removes border around course area */
+#region-main > .card {
+  border: 0;
+}
+
+/* modifies course title formatting */
+.page-context-header .page-header-headings h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* adjusts section title formatting */
+.course-content .sectionname {
+  font-size: 1.15rem !important;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+/* section (one per page) title top padding increased from 2 to 15 */
+.course-content .section-summary .section-title {
+  margin: 10px 5px 10px 5px;
+}
+
+/* modifies links at bottom of activities pages */
+.btn-link {
+  color: #116492;
+  font-size: .9rem;
+}
+
+/* adjusts color of small round question icons */
+.text-info, .highlight {
+  color:#052049 !important;
+}
+
+/* removes 24px padding that precedes labels, for some reason */
+.section .label .mod-indent-outer {
+  padding-left: 0px;
+}
+
+/* modifies tag color, e.g., Hidden, Available but not shown tags */
+.tag-info {
+  background-color: #3a87ad;
+}
+
+/* increases font weight for course settings labels */
+.col-form-label.d-inline {
+  font-weight: 600;
+}
+
+/* adds hztl line between course section when set to one section per page */
+.course-content ul li.section.main:last-child {
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Shortens creator and modifier columns on question page */
+.header.creatorname, .header.modifiername {
+  width: 20%;
+}
+
+/* modifies formatting of participant number label on participants list */
+.userlist p {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* adds grey background to forum posts */
+.forumpost {
+  background-color: #fafafa;
+}
+
+/** Blocks - General
+-------------------------*/
+
+/* modifies block title header formatting */
+.block-region .card-body .card-title {
+  background-color: #506380;
+  color: #fff;
+  display: block !important;  /* KLUDGE! the alternative would be to override the block template. lame. [ST 2018/11/19] */
+  font-weight: 600;
+  padding-top: .5rem;
+  padding-left: .5rem;
+  padding-bottom: .5rem;
+  font-size: .85rem;
+  text-transform: uppercase;
+}
+
+/* modifies block color and formatting */
+.block .card-body {
+  background-color: #f3fafc;
+  padding: .5rem;  /* added to reduce padding in blocks */
+}
+
+/* modifies course info box on dashboard - changes to white background; must follow ".block .card-body" above */
+.card-body .course-info-container {
+  background-color: #fff;
+}
+
+/* modifies course title formatting on course info box on dashboard; must follow ".block .card-body" above */
+.card-body .course-info-container h4 {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
 
 /** Messaging
 -------------------------*/
@@ -637,13 +616,12 @@ h3.categoryname {
   color: #fff;
 }
 
-
 /** Collapsed Topics format
 -------------------------*/
 
 /* Collapsed topics format - section restricted badges now have white text */
 .content.sectionhidden .availabilityinfo.isrestricted .tag-info,
-.course-content ul.ctopics li.section .content .toggle span  .availabilityinfo.isrestricted .tag-info,
+.course-content ul.ctopics li.section .content .toggle span .availabilityinfo.isrestricted .tag-info,
 .course-content ul.ctopics li.section .content.sectionhidden .availabilityinfo.isrestricted .tag-info {
   color: #fff;
 }
@@ -658,6 +636,11 @@ h3.categoryname {
 /* Collapsed topics format - modified restricted note formatting */
 .course-content ul.ctopics li.section .content .toggle span.the_toggle, .course-content ul.ctopics li.section .content.sectionhidden {
   font-weight: 500;
+}
+
+/* Collapsed topics format - activity edit menus moved to right on same line */
+body.format-topcoll.editing ul.ctopics .section .activity .actions {
+  position: absolute;
 }
 
 
@@ -737,7 +720,6 @@ h3.categoryname {
 /* adjusts RSS block formatting */
 .block_rss_client .list li {
   border-top: 1px rgba(0, 0, 0, .05) solid;
-  padding: 2px;
 }
 
 /* Recent activity block adjustments */
@@ -750,25 +732,26 @@ h3.categoryname {
 }
 
 /* Adjusts OU Blog - Blog Usage block text */
-.oublog-post-title {
+.oublog_statsview_content h3 {
   font-size: .9rem;
   font-weight: 600;
   padding-left: 10px;
 }
 
-.oublog_statsview_subtitle {
-  font-size: 1rem;
-  font-weight: 500;
-  padding-left: 10px;
+/* OU Blog - formatting timeline fix */
+.col-form-label.d-inline[for="id_timefilter_commentpoststats"] {
+  display: flex !important;
+  line-height: 1rem;
 }
 
-#id_timefilter_commentpoststats {
-  font-size: .8rem;
+.oublog_statsview_content .mform > .form-group {
+  margin-left: -1rem;
 }
 
-#id_submitbutton_commentpoststats {
-  font-size: .8rem;
+.oublog_statsview_content form .fitem .felement {
+  margin-left: 0em;
 }
+
 
 /* Fix for Chrome/large gradebook editing issue. https://app.asana.com/0/187871667484662/869052205792061 */
 .path-grade-report-grader a,
@@ -780,5 +763,5 @@ h3.categoryname {
 .path-grade-report-grader select,
 .path-grade-report-grader summary,
 .path-grade-report-grader textarea {
-    touch-action: auto;
+  touch-action: auto;
 }
