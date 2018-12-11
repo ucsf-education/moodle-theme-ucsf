@@ -216,14 +216,16 @@ h1, h2, h3, h4, h5, h6 {
   border-top: 1px solid #d4d4d4;
 }
 
-#page-footer a {
-  color: #116492;
-  text-decoration: none;
-}
+#page-footer {
+  a {
+    color: #116492;
+    text-decoration: none;
+  }
 
-#page-footer a:hover {
-  color: #116492;
-  text-decoration: underline;
+  a:hover {
+    color: #116492;
+    text-decoration: underline;
+  }
 }
 
 .logininfo {
