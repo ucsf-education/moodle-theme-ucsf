@@ -217,6 +217,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #page-footer {
+  /* Footer - adds line at top of footer */
+  border-top: 1px solid #d4d4d4;
+
   a {
     color: #116492;
     text-decoration: none;
