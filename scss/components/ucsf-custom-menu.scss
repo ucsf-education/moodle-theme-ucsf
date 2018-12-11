@@ -1,36 +1,36 @@
 /* CUSTOM MENU */
 
 .ucsf_custom_menu {
-  .card-block {
+    .card-block {
 
-    background-color: #565c80;
-    color: white;
-    padding: .25rem 0;
+        background-color: #565c80;
+        color: white;
+        padding: .25rem 0;
 
-    a {
-      color: inherit;
+        a {
+            color: inherit;
+        }
+
+        button {
+            color: inherit;
+        }
     }
 
-    button {
-      color: inherit;
-    }
-  }
-
-  .category_label {
-    padding: .425rem 1rem;
-    font-weight: bold;
-  }
-
-  .navbar-collapse {
-
-    li {
-      padding: .25rem 0 .25rem 0;
-      text-indent: 1rem;
+    .category_label {g
+        padding: .425rem 1rem;
+        font-weight: bold;
     }
 
-    li.item:hover {
-      background-color: #fff;
-      color: #565c80;
+    .navbar-collapse {
+
+        li {
+            padding: .25rem 0 .25rem 0;
+            text-indent: 1rem;
+        }
+
+        li.item:hover {
+            background-color: #fff;
+            color: #565c80;
+        }
     }
-  }
 }

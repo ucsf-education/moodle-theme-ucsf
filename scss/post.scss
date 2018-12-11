@@ -1,5 +1,4 @@
 // Post SCSS for the theme.
-
 // Includes
 @import "components/custom-alerts";
 @import "components/helpmenu";
@@ -10,58 +9,81 @@
 -------------------------*/
 
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
-  /* color:#1e1e1e; */
-  font-size: .9rem;
+    font-family: "Open Sans", sans-serif;
+    /* color:#1e1e1e; */
+    font-size: .9rem;
 }
 
 /* changes link color */
-a, a:hover {
-  color: #116492;
+a,
+a:hover {
+    color: #116492;
 }
 
 /* indents ul lists */
 ul {
-  margin-left: 24px;
+    margin-left: 24px;
 }
 
 /* modifies heading font weights */
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-weight: 700;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-weight: 700;
 }
 
 /* modifies heading sizes */
-h1, .h1 {
-  font-size: 2rem;
+h1,
+.h1 {
+    font-size: 2rem;
 }
 
-h2, .h2 {
-  font-size: 1.5rem;
+h2,
+.h2 {
+    font-size: 1.5rem;
 }
 
-h3, .h3 {
-  font-size: 1.2rem;
+h3,
+.h3 {
+    font-size: 1.2rem;
 }
 
-h4, .h4 {
-  font-size: 1.1rem;
+h4,
+.h4 {
+    font-size: 1.1rem;
 }
 
-h5, .h5 {
-  font-size: 1rem;
+h5,
+.h5 {
+    font-size: 1rem;
 }
 
-h6, .h6 {
-  font-size: .9rem;
+h6,
+.h6 {
+    font-size: .9rem;
 }
 
 /* modifies heading color */
-h1, h2, h3, h4, h5, h6 {
-  color: #052049;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #052049;
 }
 
 /** Layout and responsive formatting
@@ -69,25 +91,27 @@ h1, h2, h3, h4, h5, h6 {
 
 /* adjusts width of blocks column - in conjunction with main column adjustment */
 [data-region="blocks-column"] {
-  width: 210px;
+    width: 210px;
 }
 
 /* adjusts width of main column - in conjunction with blocks column adjustment */
-#region-main-settings-menu.has-blocks, #region-main.has-blocks {
-  width: calc(100% - 240px);
+#region-main-settings-menu.has-blocks,
+#region-main.has-blocks {
+    width: calc(100% - 240px);
 }
 
 /* column adjustments require changing media settings for proper responsiveness */
 @media (max-width: 999px) {
-  #region-main-settings-menu.has-blocks, #region-main.has-blocks {
-    width: 100%
-  }
+    #region-main-settings-menu.has-blocks,
+    #region-main.has-blocks {
+        width: 100%;
+    }
 }
 
 @media (max-width: 999px) {
-  [data-region="blocks-column"] {
-    width: 100%
-  }
+    [data-region="blocks-column"] {
+        width: 100%;
+    }
 }
 
 /** Dashboard
@@ -95,23 +119,23 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Resizes user picture on dashboard etc. */
 .page-header-image .userpicture {
-  width: 50px;
-  height: 50px;
+    width: 50px;
+    height: 50px;
 }
 
 /* Hides colored-course tiles on dashboard */
 .card-deck .myoverviewimg {
-  height: 0px;
+    height: 0;
 }
 
 /* Hides Moodle image and link on unauthenticated front page */
 .sitelink {
-  display: none;
+    display: none;
 }
 
 /* Hides site box on front page; also hides settings menu, which is problematic for admins */
 #page-site-index #page-header .card {
-  display: none;
+    display: none;
 }
 
 /* Modified blue circle formatting on dashboard page - course cards */
@@ -123,6 +147,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 5px;
     font-size: 25px;
 }
+
 /* Removes the large grey circle and moves the blue circle icon for courses in the course overview block that
    are not using completion */
 .progress-chart-container .no-progress {
@@ -131,32 +156,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
 /** Breadcrumbs
 -------------------------*/
 
 /* adjusts breadcrumb formatting */
 .breadcrumb {
-  background-color: #fff;
-  font-size: .85rem;
-  font-weight: 500;
-  padding: .25rem .75rem;
+    background-color: #fff;
+    font-size: .85rem;
+    font-weight: 500;
+    padding: .25rem .75rem;
 }
 
 /* unlinked breadcrumb items appear grey */
 .breadcrumb > li {
-  color: #999999;
+    color: #999;
 }
 
 /* adjusts color of breadcrumb links */
 .breadcrumb a {
-  color: #506380;
+    color: #506380;
 }
 
 /* changes breadcrumb separator, and color */
 .breadcrumb-item + .breadcrumb-item::before {
-  content: "▶︎";
-  color: #ccc;
+    content: "▶︎";
+    color: #ccc;
 }
 
 /** Header
@@ -164,114 +188,114 @@ h1, h2, h3, h4, h5, h6 {
 
 /* narrows the header nav bar */
 .navbar {
-  max-height: 43px;
-  padding: .2rem 1rem;
+    max-height: 43px;
+    padding: .2rem 1rem;
 
-  /* adjusts background color and border of header */
-  background-color: #fafafc;
-  border-bottom: 1px solid #e5e5e5;
+    /* adjusts background color and border of header */
+    background-color: #fafafc;
+    border-bottom: 1px solid #e5e5e5;
 
-  /* drawer hamburger */
-  div[data-region="drawer-toggle"] .btn {
-    background-color: #fff;
+    /* drawer hamburger */
+    div[data-region="drawer-toggle"] .btn {
+        background-color: #fff;
 
-    &:focus {
-      -webkit-box-shadow: none;
-      box-shadow: none;
+        &:focus {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
     }
-  }
 
-  /* changes icon color in header */
-  .icon {
-    color: #506380;
-  }
+    /* changes icon color in header */
+    .icon {
+        color: #506380;
+    }
 
-  /* site name formatting mods */
-  .site-name {
-    color: #052049;
-    font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    padding-left: 1.5rem;
-  }
+    /* site name formatting mods */
+    .site-name {
+        color: #052049;
+        font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        padding-left: 1.5rem;
+    }
 
-  /* modifies user name formatting in header */
-  .usertext {
-    color: #777;
-    font-weight: 600;
-  }
+    /* modifies user name formatting in header */
+    .usertext {
+        color: #777;
+        font-weight: 600;
+    }
 
-  /* Horizontally align search box icon ("magnifying glass") with rest of toolbar icons */
-  .search-input-wrapper > div .icon {
-    margin-top: 7px;
-  }
+    /* Horizontally align search box icon ("magnifying glass") with rest of toolbar icons */
+    .search-input-wrapper > div .icon {
+        margin-top: 7px;
+    }
 }
 
 
 /** Footer
 -------------------------*/
 .bg-inverse {
-  color: #333 !important;
-  background-color: #fff !important;
-  border-top: 1px solid #d4d4d4;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-top: 1px solid #d4d4d4;
 }
 
 #page-footer {
-  /* Footer - adds line at top of footer */
-  border-top: 1px solid #d4d4d4;
+    /* Footer - adds line at top of footer */
+    border-top: 1px solid #d4d4d4;
 
-  a {
-    color: #116492;
-    text-decoration: none;
-  }
+    a {
+        color: #116492;
+        text-decoration: none;
+    }
 
-  a:hover {
-    color: #116492;
-    text-decoration: underline;
-  }
+    a:hover {
+        color: #116492;
+        text-decoration: underline;
+    }
 }
 
 .logininfo {
-  text-align: center;
+    text-align: center;
 }
 
 /* hides home link in the footer */
 .homelink {
-  display: none;
+    display: none;
 }
 
 .ucsf_footer_text {
-  float: left;
-  width: 50%;
-  text-align: left;
+    float: left;
+    width: 50%;
+    text-align: left;
 }
 
 .ucsf_footer_links_container {
-  float: left;
-  width: 50%;
-  text-align: right;
-
-  p {
+    float: left;
+    width: 50%;
     text-align: right;
-  }
+
+    p {
+        text-align: right;
+    }
 }
 
 @media (max-width: 560px) {
-  .ucsf_footer_text {
-    text-align: center;
-    width: 100%;
-    clear: both;
-  }
-  .ucsf_footer_links_container {
-    clear: both;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 10px;
-
-    p {
-      text-align: center !important;
+    .ucsf_footer_text {
+        text-align: center;
+        width: 100%;
+        clear: both;
     }
-  }
+    .ucsf_footer_links_container {
+        clear: both;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+
+        p {
+            text-align: center !important;
+        }
+    }
 }
 
 /** Custom menu
@@ -280,126 +304,130 @@ h1, h2, h3, h4, h5, h6 {
 /* modifies category label in custom menu - removes border and hover underline when linked */
 .ucsf_custom_menu {
 
-  .category_label.pull-left a {
-    border: 0;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    padding-left: 0;
-    padding-right: .1rem;
-  }
+    .category_label.pull-left a {
+        border: 0;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        padding-left: 0;
+        padding-right: .1rem;
+    }
 
-  /* modifies category label in custom menu - set to same size and weight as when linked */
-  .category_label.pull-left {
-    font-weight: 700;
-    font-size: 1rem;
-    padding-right: 2.1rem;
-    padding-left: 0;
-  }
+    /* modifies category label in custom menu - set to same size and weight as when linked */
+    .category_label.pull-left {
+        font-weight: 700;
+        font-size: 1rem;
+        padding-right: 2.1rem;
+        padding-left: 0;
+    }
 
-  /* adds extra spacing between custom menu links */
-  .navbar-nav .nav-link {
-    padding-right: 1.1rem;
-  }
+    /* adds extra spacing between custom menu links */
+    .navbar-nav .nav-link {
+        padding-right: 1.1rem;
+    }
 
-  /** left-align mobile nav hamburger */
-  .navbar-toggler {
-    text-align: left;
-  }
+    /** left-align mobile nav hamburger */
+    .navbar-toggler {
+        text-align: left;
+    }
 
-  /* modifies custom menu link hover color */
-  a.nav-item.nav-link:hover {
-    color: #fd0;
-  }
+    /* modifies custom menu link hover color */
+    a.nav-item.nav-link:hover {
+        color: #fd0;
+    }
 
-  /* modifies custom menu dropdown link hover color */
-  a.dropdown-toggle.nav-link:hover, a.dropdown-toggle.nav-link:focus, a.dropdown-toggle.nav-link:active {
-    color: #fd0;
-  }
+    /* modifies custom menu dropdown link hover color */
+    a.dropdown-toggle.nav-link:hover,
+    a.dropdown-toggle.nav-link:focus,
+    a.dropdown-toggle.nav-link:active {
+        color: #fd0;
+    }
 }
 
 /** Nav Drawer
 -------------------------*/
 
 #nav-drawer {
-  /* adjusts background color, whitespace of nav drawer */
-  background-color: #fafafc;
-  top: 40px; /* removes white space above nav drawer */
+    /* adjusts background color, whitespace of nav drawer */
+    background-color: #fafafc;
+    top: 40px; /* removes white space above nav drawer */
 
-  a[data-key='coursehome'] {
-    font-size: 1rem;
-    font-weight: 600;
+    a[data-key='coursehome'] {
+        font-size: 1rem;
+        font-weight: 600;
 
-    /* hide icon next to course name */
-    .fa-circle {
-      display: none
+        /* hide icon next to course name */
+        .fa-circle {
+            display: none;
+        }
     }
-  }
 
-  a[data-key='myhome'] {
-    background-color: #f3fafc;
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
+    a[data-key='myhome'] {
+        background-color: #f3fafc;
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
 
-  a[data-key='home'],
-  a[data-key='calendar'],
-  a[data-key='privatefiles'],
-  a[data-key='mymedia'] {
-    background-color: #f3fafc;
-    text-transform: uppercase;
-  }
+    a[data-key='home'],
+    a[data-key='calendar'],
+    a[data-key='privatefiles'],
+    a[data-key='mymedia'] {
+        background-color: #f3fafc;
+        text-transform: uppercase;
+    }
 
-  a[data-key='sitesettings'] {
-    text-transform: uppercase;
-  }
+    a[data-key='sitesettings'] {
+        text-transform: uppercase;
+    }
 
-  a[data-key='addblock'] {
-    text-transform: uppercase;
-  }
+    a[data-key='addblock'] {
+        text-transform: uppercase;
+    }
 
-  /* adjusts section links in nav drawer */
-  a[data-type='30'] {
-    font-size: .85rem;
-  }
+    /* adjusts section links in nav drawer */
+    a[data-type='30'] {
+        font-size: .85rem;
+    }
 
-  /* Hides My Courses in nav drawer */
-  a[data-parent-key='mycourses'] {
-    display: none;
-  }
+    /* Hides My Courses in nav drawer */
+    a[data-parent-key='mycourses'] {
+        display: none;
+    }
 
-  [data-key='mycourses'] {
-    display: none;
-  }
+    [data-key='mycourses'] {
+        display: none;
+    }
 
-  /* Active nav drawer items */
-  .list-group-item-action.active {
-    background-color: #f3fafc;
-    color: #495057;
-    border-color: #506380;
-  }
+    /* Active nav drawer items */
+    .list-group-item-action.active {
+        background-color: #f3fafc;
+        color: #495057;
+        border-color: #506380;
+    }
 
-  /* Nav drawer adjustments - hover color */
-  .list-group-item-action:focus, .list-group-item-action:hover {
-    color: #fff;
-    background-color: #506380;
-  }
+    /* Nav drawer adjustments - hover color */
+    .list-group-item-action:focus,
+    .list-group-item-action:hover {
+        color: #fff;
+        background-color: #506380;
+    }
 
-  /* Nav drawer adjustments - icon hover color */
-  .list-group-item-action:focus, .list-group-item-action:hover .icon {
-    color: #fff;
-  }
+    /* Nav drawer adjustments - icon hover color */
+    .list-group-item-action:focus,
+    .list-group-item-action:hover .icon {
+        color: #fff;
+    }
 
-  // hide the 'My Courses' menu item
-  .list-group-item[data-key="mycourses"] {
-    display: none;
-  }
+    // hide the 'My Courses' menu item
+    .list-group-item[data-key="mycourses"] {
+        display: none;
+    }
 
-  // hide the 'My Courses' sub-menu items
-  .list-group-item[data-parent-key="mycourses"] {
-    display: none;
-  }
+    // hide the 'My Courses' sub-menu items
+    .list-group-item[data-parent-key="mycourses"] {
+        display: none;
+    }
 }
 
 /** Action Menu formatting
@@ -407,13 +435,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* changes color of active selection on menus */
 .dropdown-item:active {
-  background-color: #f3fafc;
-  color: #16181b;
+    background-color: #f3fafc;
+    color: #16181b;
 }
 
 /* removes underline in action menu links */
 .dropdown-item a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 /** Category pages
@@ -421,29 +449,29 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hides UCSF CLE heading on top-level category page */
 #page-course-index #page-header .page-header-headings {
-  display: none;
+    display: none;
 }
 
 /* Hides UCSF CLE heading on category pages */
 #page-course-index-category #page-header .page-header-headings {
-  display: none;
+    display: none;
 }
 
 /* increases padding of top-level category names on category page */
 h3.categoryname {
-  line-height: 30px;
+    line-height: 30px;
 }
 
 /* adds grey box formatting to category list on category page */
 .course_category_tree .category > .info {
-  margin-bottom: 3px;
-  background-color: #f5f5f5;
-  border: 1px solid #e3e3e3;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
-  border-color: #e3e3e3;
-  margin: 3px 0;
-  clear: both;
+    background-color: #f5f5f5;
+    border-color: #e3e3e3;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    margin: 3px 0;
+    clear: both;
 }
 
 /** Course, favorite, recent blocks hanging indent; other mods
@@ -451,49 +479,49 @@ h3.categoryname {
 
 /* fixes hanging indent in course block */
 .block_course_list .content li {
-  text-indent: -15px;
+    text-indent: -15px;
 }
 
 .block_course_list .unlist li {
-  padding-left: 25px;
+    padding-left: 25px;
 }
 
 .block_course_list .icon {
-  margin-right: -.2rem;
-  font-size: 8px;
-  height: 8px;
+    margin-right: -.2rem;
+    font-size: 8px;
+    height: 8px;
 }
 
 .block_course_list .footer {
-  text-align: center;
+    text-align: center;
 }
 
 /* fixes hanging indent in recent courses block */
 .block_course_recent .content li {
-  text-indent: -23px;
+    text-indent: -23px;
 }
 
 .block_course_recent .unlist li {
-  padding-left: 23px;
+    padding-left: 23px;
 }
 
 .block_course_recent .footer {
-  margin-top: 5px;
-  text-align: center;
+    margin-top: 5px;
+    text-align: center;
 }
 
 /* fixes hanging indent in favorite courses block  */
 .block_course_favourites .content li {
-  text-indent: -23px;
+    text-indent: -23px;
 }
 
 .block_course_favourites .unlist li {
-  padding-left: 23px;
+    padding-left: 23px;
 }
 
 .block_course_favourites .footer {
-  margin-top: 5px;
-  text-align: center;
+    margin-top: 5px;
+    text-align: center;
 }
 
 /** Content area
@@ -501,72 +529,74 @@ h3.categoryname {
 
 /* removes border around course area */
 #region-main > .card {
-  border: 0;
+    border: 0;
 }
 
 /* modifies course title formatting */
 .page-context-header .page-header-headings h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 /* adjusts section title formatting */
 .course-content .sectionname {
-  font-size: 1.15rem !important;
-  line-height: 1.25rem;
-  font-weight: 700;
+    font-size: 1.15rem !important;
+    line-height: 1.25rem;
+    font-weight: 700;
 }
 
 /* section (one per page) title top padding increased from 2 to 15 */
 .course-content .section-summary .section-title {
-  margin: 10px 5px 10px 5px;
+    margin: 10px 5px 10px 5px;
 }
 
 /* modifies links at bottom of activities pages */
 .btn-link {
-  color: #116492;
-  font-size: .9rem;
+    color: #116492;
+    font-size: .9rem;
 }
 
 /* adjusts color of small round question icons */
-.text-info, .highlight {
-  color:#052049 !important;
+.highlight,
+.text-info {
+    color: #052049 !important;
 }
 
 /* removes 24px padding that precedes labels, for some reason */
 .section .label .mod-indent-outer {
-  padding-left: 0px;
+    padding-left: 0;
 }
 
 /* modifies tag color, e.g., Hidden, Available but not shown tags */
 .tag-info {
-  background-color: #3a87ad;
+    background-color: #3a87ad;
 }
 
 /* increases font weight for course settings labels */
 .col-form-label.d-inline {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 /* adds hztl line between course section when set to one section per page */
 .course-content ul li.section.main:last-child {
-  border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
 }
 
 /* Shortens creator and modifier columns on question page */
-.header.creatorname, .header.modifiername {
-  width: 20%;
+.header.creatorname,
+.header.modifiername {
+    width: 20%;
 }
 
 /* modifies formatting of participant number label on participants list */
 .userlist p {
-  font-weight: 600;
-  font-size: 1rem;
+    font-weight: 600;
+    font-size: 1rem;
 }
 
 /* adds grey background to forum posts */
 .forumpost {
-  background-color: #fafafa;
+    background-color: #fafafa;
 }
 
 /** Blocks - General
@@ -574,69 +604,69 @@ h3.categoryname {
 
 /* modifies block title header formatting */
 .block-region .card-body .card-title {
-  background-color: #506380;
-  color: #fff;
-  display: block !important;  /* KLUDGE! the alternative would be to override the block template. lame. [ST 2018/11/19] */
-  font-weight: 600;
-  padding-top: .5rem;
-  padding-left: .5rem;
-  padding-bottom: .5rem;
-  font-size: .85rem;
-  text-transform: uppercase;
+    background-color: #506380;
+    color: #fff;
+    display: block !important; /* KLUDGE! the alternative would be to override the block template. lame. [ST 2018/11/19] */
+    font-weight: 600;
+    padding-top: .5rem;
+    padding-left: .5rem;
+    padding-bottom: .5rem;
+    font-size: .85rem;
+    text-transform: uppercase;
 }
 
 /* modifies block color and formatting */
 .block .card-body {
-  background-color: #f3fafc;
-  padding: .5rem;  /* added to reduce padding in blocks */
+    background-color: #f3fafc;
+    padding: .5rem; /* added to reduce padding in blocks */
 }
 
 /* modifies course info box on dashboard - changes to white background; must follow ".block .card-body" above */
 .card-body .course-info-container {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 /* modifies course title formatting on course info box on dashboard; must follow ".block .card-body" above */
 .card-body .course-info-container h4 {
-  font-size: 1.2rem;
-  font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 /** Messaging
 -------------------------*/
 
 .messaging-area-container .messaging-area .messages-area .messages .message .content {
-  border-radius: 4px;
+    border-radius: 4px;
 }
 
 .messaging-area-container .messaging-area .messages-area .messages .message .content.right {
-  border: 1px solid #4f94cd;
+    border: 1px solid #4f94cd;
 }
 
 .messaging-area-container .messaging-area .messages-area .messages .message .content.left {
-  border: 1px solid #ededee;
+    border: 1px solid #ededee;
 }
 
 .messaging-area-container .messaging-area .messages-area .messages .message .content.right {
-  background-color: #4f94cd;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
+    background-color: #4f94cd;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .messaging-area-container .messaging-area .messages-area .messages .message .content.left {
-  background-color: #ededee;
-  color: #000;
-  font-size: 13px;
-  font-weight: 600;
+    background-color: #ededee;
+    color: #000;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .messaging-area-container .messaging-area .messages-area .messages .message .content.left .timesent {
-  color: #000;
+    color: #000;
 }
 
 .messaging-area-container .messaging-area .messages-area .messages .message .content.right .timesent {
-  color: #fff;
+    color: #fff;
 }
 
 /** Collapsed Topics format
@@ -646,24 +676,25 @@ h3.categoryname {
 .content.sectionhidden .availabilityinfo.isrestricted .tag-info,
 .course-content ul.ctopics li.section .content .toggle span .availabilityinfo.isrestricted .tag-info,
 .course-content ul.ctopics li.section .content.sectionhidden .availabilityinfo.isrestricted .tag-info {
-  color: #fff;
+    color: #fff;
 }
 
 /* Collapsed topics format - section hidden badges now have white text */
 .content.sectionhidden .availabilityinfo.ishidden .tag-info,
 .course-content ul.ctopics li.section .content .toggle span .availabilityinfo.ishidden .tag-info,
 .course-content ul.ctopics li.section .content.sectionhidden .availabilityinfo.ishidden .tag-info {
-  color: #fff;
+    color: #fff;
 }
 
 /* Collapsed topics format - modified restricted note formatting */
-.course-content ul.ctopics li.section .content .toggle span.the_toggle, .course-content ul.ctopics li.section .content.sectionhidden {
-  font-weight: 500;
+.course-content ul.ctopics li.section .content .toggle span.the_toggle,
+.course-content ul.ctopics li.section .content.sectionhidden {
+    font-weight: 500;
 }
 
 /* Collapsed topics format - activity edit menus moved to right on same line */
 body.format-topcoll.editing ul.ctopics .section .activity .actions {
-  position: absolute;
+    position: absolute;
 }
 
 
@@ -672,27 +703,27 @@ body.format-topcoll.editing ul.ctopics .section .activity .actions {
 
 /* increases potential users box on manual enrollment page */
 #potentialcell {
-  width: 35%;
+    width: 35%;
 }
 
 /* Widens enrollment methods table */
 .boxwidthnormal {
-  width: 80%;
+    width: 80%;
 }
 
 /* Widens assign roles table */
 .path-admin #assignrole {
-  width: 80%;
+    width: 80%;
 }
 
 /* Widens rightmost column of assign roles table */
 .leftalign.roleholder.cell.c3.lastcol {
-  width: 20%;
+    width: 20%;
 }
 
 /* Widens rightmost column of define roles page */
 .header.c3.lastcol.leftalign {
-  width: 13%;
+    width: 13%;
 }
 
 
@@ -701,17 +732,17 @@ body.format-topcoll.editing ul.ctopics .section .activity .actions {
 
 /* modifies formatting for Atto form content */
 .editor_atto_content.form-control {
-  font-size: .9rem;
-  line-height: 1.3rem;
+    font-size: .9rem;
+    line-height: 1.3rem;
 }
 
 /* tightens color menus in Atto toolbar */
 .open.atto_fontcolor_button.atto_menu {
-  line-height: .3rem;
+    line-height: .3rem;
 }
 
 .open.atto_backcolor_button.atto_menu {
-  line-height: .3rem;
+    line-height: .3rem;
 }
 
 
@@ -720,59 +751,59 @@ body.format-topcoll.editing ul.ctopics .section .activity .actions {
 
 /* adjusts Recent News block formatting */
 .block_news_items .post {
-  border-top: 1px rgba(0, 0, 0, .05) solid;
-  padding: 2px;
+    border-top: 1px rgba(0, 0, 0, .05) solid;
+    padding: 2px;
 }
 
 .block_news_items .date {
-  font-size: .8rem;
+    font-size: .8rem;
 }
 
 .block_news_items .name {
-  font-size: .8rem;
+    font-size: .8rem;
 }
 
 .block_news_items .newlink {
-  padding-bottom: 5px;
+    padding-bottom: 5px;
 }
 
 .block_news_items .footer {
-  text-align: center;
+    text-align: center;
 }
 
 /* adjusts RSS block formatting */
 .block_rss_client .list li {
-  border-top: 1px rgba(0, 0, 0, .05) solid;
+    border-top: 1px rgba(0, 0, 0, .05) solid;
 }
 
 /* Recent activity block adjustments */
 .block_recent_activity h3 {
-  color: #999;
-  text-transform: uppercase;
-  font-size: 1rem;
-  padding-top: 7px;
-  padding-left: 7px;
+    color: #999;
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding-top: 7px;
+    padding-left: 7px;
 }
 
 /* Adjusts OU Blog - Blog Usage block text */
 .oublog_statsview_content h3 {
-  font-size: .9rem;
-  font-weight: 600;
-  padding-left: 10px;
+    font-size: .9rem;
+    font-weight: 600;
+    padding-left: 10px;
 }
 
 /* OU Blog - formatting timeline fix */
 .col-form-label.d-inline[for="id_timefilter_commentpoststats"] {
-  display: flex !important;
-  line-height: 1rem;
+    display: flex !important;
+    line-height: 1rem;
 }
 
 .oublog_statsview_content .mform > .form-group {
-  margin-left: -1rem;
+    margin-left: -1rem;
 }
 
 .oublog_statsview_content form .fitem .felement {
-  margin-left: 0em;
+    margin-left: 0;
 }
 
 
@@ -786,5 +817,5 @@ body.format-topcoll.editing ul.ctopics .section .activity .actions {
 .path-grade-report-grader select,
 .path-grade-report-grader summary,
 .path-grade-report-grader textarea {
-  touch-action: auto;
+    touch-action: auto;
 }

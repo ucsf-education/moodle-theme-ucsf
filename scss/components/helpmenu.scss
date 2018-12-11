@@ -2,29 +2,29 @@
  * Styles for help menu in header bar.
  */
 .popover-region-helpmenu {
-  .helpmenu {
-    a {
-      color: inherit;
-      display: block;
-      text-decoration: none;
-    }
+    .helpmenu {
+        a {
+            color: inherit;
+            display: block;
+            text-decoration: none;
+        }
 
-    li {
-      border-bottom: 1px solid #ccc;
-      color: #00699e;
-      padding: .5em;
-      list-style: none;
-    }
+        li {
+            border-bottom: 1px solid #ccc;
+            color: #00699e;
+            padding: .5em;
+            list-style: none;
+        }
 
 
-    li:hover {
-      background-color: #00699e;
-      color: #fff;
-    }
+        li:hover {
+            background-color: #00699e;
+            color: #fff;
+        }
 
-    ul {
-      margin-left: 0;
+        ul {
+            margin-left: 0;
+        }
     }
-  }
 }
 
