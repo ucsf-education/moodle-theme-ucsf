@@ -7,7 +7,7 @@
  * @class      helpmenu_popover_controller
  * @package    theme_ucsf
  */
-define(['jquery', 'core/templates', 'core/str', 'core/custom_interaction_events', 'core/popover_region_controller' ],
+define(['jquery', 'core/templates', 'core/str', 'core/custom_interaction_events', 'core/popover_region_controller'],
     function($, Templates, Str, CustomEvents, PopoverController) {
 
         /**
