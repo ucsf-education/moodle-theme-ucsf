@@ -399,6 +399,16 @@ h6 {
         display: none;
     }
 
+    /* Hides CLE HOME in nav drawer - on course pages */
+    a[data-key='home'] {
+        display: none;
+    }
+
+    /* Hides CLE HOME in nav drawer - on site-wide pages */
+    #nav-drawer a[data-key='home'] {
+       display: none;
+    }
+
     /* Active nav drawer items */
     .list-group-item-action.active {
         background-color: #f3fafc;
@@ -824,4 +834,9 @@ body.format-topcoll.editing ul.ctopics .section .activity .actions {
 .path-grade-report-grader summary,
 .path-grade-report-grader textarea {
     touch-action: auto;
+}
+
+/* Restores quiz nav block - re-adds color */
+.path-mod-quiz #mod_quiz_navblock .qnbutton {
+     color: #373a3c;
 }
