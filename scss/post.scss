@@ -399,6 +399,16 @@ h6 {
         display: none;
     }
 
+    /* Hides CLE HOME in nav drawer - on course pages */
+    a[data-key='home'] {
+        display: none;
+    }
+
+    /* Hides CLE HOME in nav drawer - on site-wide pages */
+    #nav-drawer a[data-key='home'] {
+       display: none;
+    }
+
     /* Active nav drawer items */
     .list-group-item-action.active {
         background-color: #f3fafc;
