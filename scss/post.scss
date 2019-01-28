@@ -825,3 +825,8 @@ body.format-topcoll.editing ul.ctopics .section .activity .actions {
 .path-grade-report-grader textarea {
     touch-action: auto;
 }
+
+/* Restores quiz nav block - re-adds color */
+.path-mod-quiz #mod_quiz_navblock .qnbutton {
+     color: #373a3c;
+}
