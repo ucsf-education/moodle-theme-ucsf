@@ -24,10 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2019012800;
+$plugin->version   = 2019020400;
 $plugin->requires  = 2018050800;
 $plugin->component = 'theme_ucsf';
 
 $plugin->dependencies = [
-    'theme_boost' => 2017111300
+    'theme_boost' => 2018051400
 ];
