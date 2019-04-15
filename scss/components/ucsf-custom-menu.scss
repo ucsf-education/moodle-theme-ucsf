@@ -21,6 +21,24 @@
         font-weight: bold;
     }
 
+    /* modifies category label in custom menu - removes border and hover underline when linked */
+    .category_label.pull-left a {
+        border: 0;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        padding-left: 0;
+        padding-right: .1rem;
+    }
+
+    /* modifies category label in custom menu - set to same size and weight as when linked */
+    .category_label.pull-left {
+        font-weight: 700;
+        font-size: 1rem;
+        padding-right: 2.1rem;
+        padding-left: 0;
+    }
+
     .navbar-collapse {
 
         li {
@@ -32,5 +50,27 @@
             background-color: #fff;
             color: #565c80;
         }
+    }
+
+    /* adds extra spacing between custom menu links */
+    .navbar-nav .nav-link {
+        padding-right: 1.1rem;
+    }
+
+    /** left-align mobile nav hamburger */
+    .navbar-toggler {
+        text-align: left;
+    }
+
+    /* modifies custom menu link hover color */
+    a.nav-item.nav-link:hover {
+        color: #fd0;
+    }
+
+    /* modifies custom menu dropdown link hover color */
+    a.dropdown-toggle.nav-link:hover,
+    a.dropdown-toggle.nav-link:focus,
+    a.dropdown-toggle.nav-link:active {
+        color: #fd0;
     }
 }

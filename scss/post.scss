@@ -3,7 +3,7 @@
 @import "components/custom-alerts";
 @import "components/helpmenu";
 @import "components/ucsf-custom-menu";
-
+@import "components/ucsf-footer";
 
 /** General Styles
 -------------------------*/
@@ -23,88 +23,11 @@
 /** Footer
 -------------------------*/
 
-.ucsf_footer_text {
-    float: left;
-    width: 50%;
-    text-align: left;
-}
-
-.ucsf_footer_links_container {
-    float: left;
-    width: 50%;
-    text-align: right;
-
-    p {
-        text-align: right;
-    }
-}
-
-@media (max-width: 560px) {
-    .ucsf_footer_text {
-        text-align: center;
-        width: 100%;
-        clear: both;
-    }
-    .ucsf_footer_links_container {
-        clear: both;
-        width: 100%;
-        text-align: center;
-        margin-bottom: 10px;
-
-        p {
-            text-align: center !important;
-        }
-    }
-}
-
 /** User menu
 -------------------------*/
 
 /** Custom menu
 -------------------------*/
-
-/* modifies category label in custom menu - removes border and hover underline when linked */
-.ucsf_custom_menu {
-
-    .category_label.pull-left a {
-        border: 0;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1rem;
-        padding-left: 0;
-        padding-right: .1rem;
-    }
-
-    /* modifies category label in custom menu - set to same size and weight as when linked */
-    .category_label.pull-left {
-        font-weight: 700;
-        font-size: 1rem;
-        padding-right: 2.1rem;
-        padding-left: 0;
-    }
-
-    /* adds extra spacing between custom menu links */
-    .navbar-nav .nav-link {
-        padding-right: 1.1rem;
-    }
-
-    /** left-align mobile nav hamburger */
-    .navbar-toggler {
-        text-align: left;
-    }
-
-    /* modifies custom menu link hover color */
-    a.nav-item.nav-link:hover {
-        color: #fd0;
-    }
-
-    /* modifies custom menu dropdown link hover color */
-    a.dropdown-toggle.nav-link:hover,
-    a.dropdown-toggle.nav-link:focus,
-    a.dropdown-toggle.nav-link:active {
-        color: #fd0;
-    }
-}
 
 /** Nav Drawer
 -------------------------*/
