@@ -5,61 +5,594 @@
 @import "components/ucsf-custom-menu";
 @import "components/ucsf-footer";
 
+/** BOOST CSS CHANGES, MOODLE 3.6, 043019, v.1.9 **/
+
+
 /** General Styles
 -------------------------*/
+
+body {
+  font-size: .85rem;
+}
+
+/* changes link color */
+a, a:hover {
+  color: #0D4B6E;
+}
+
+/* indents ul lists -- corrects the fact that they're not indented at all */
+ul {
+  margin-left: 24px;
+}
+
+/* darkens text within selection boxes; e.g., dashboard course overview block */
+.btn-outline-secondary {
+  color: #3b3f42;
+}
+
 
 /** Layout and responsive formatting
 -------------------------*/
 
+/* adjusts width of blocks column - in conjunction with main column adjustment */
+[data-region="blocks-column"] {
+  width: 240px;
+}
+
+/* adjusts width of main column - in conjunction with blocks column adjustment */
+#region-main-settings-menu.has-blocks,
+#region-main.has-blocks {
+  width: calc(100% - 260px);
+}
+
+/* column adjustments require changing media settings for proper responsiveness */
+@media (max-width: 1000px) {
+  #region-main-settings-menu.has-blocks,
+  #region-main.has-blocks {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  #region-main-settings-menu.has-blocks,
+  #region-main.has-blocks {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 1000px) {
+  [data-region="blocks-column"] {
+    width: 100%;
+  }
+}
+
+
 /** Dashboard
 -------------------------*/
+
+/* changes dashboard page color to light blue */
+#page-my-index #page-wrapper #page {
+  background-color: #f3fafc;
+}
+
+/* modifies dashboard center content area block title header formatting */
+#block-region-content .card-body .card-title {
+  background-color: #3b6c8c;
+  color: #fff;
+  display: block !important; /* KLUDGE! the alternative would be to override the block template. lame. [ST 2018/11/19] */
+  padding-top: .5rem;
+  padding-left: .5rem;
+  padding-bottom: .5rem;
+  font-size: .95rem;
+}
+
+/* modifies course name formatting in dashboard course blocks */
+.block .block-cards .course-info-container {
+  font-weight: 400;
+  color: #0D4B6E;
+  font-size: .95rem;
+}
+
+/* Hides site box on front page; also hides settings menu, which is problematic for admins */
+#page-site-index #page-header .card {
+  display: none;
+}
+
 
 /** Breadcrumbs
 -------------------------*/
 
+/* reduces breadcrumb font size */
+.breadcrumb {
+  font-size: .75rem;
+}
+
+/* unlinked breadcrumb items appear grey */
+.breadcrumb > li {
+  color: #999;
+}
+
+
 /** Header
 -------------------------*/
+
+/* narrows the header nav bar */
+.navbar {
+  /* max-height: 43px; REMOVE -- NOT NEEDED in 3.6 */
+  /* padding: .2rem 1rem;  REMOVE -- NOT NEEDED in 3.6 */
+
+  /* adjusts background color and border of header */
+  background-color: #fafafc!important;
+  border-bottom: 1px solid #e5e5e5;
+
+
+  /* REMOVE THE HAMBURGER MODS - NOT NEEDED IN 3.6 */
+  /* drawer hamburger
+  div[data-region="drawer-toggle"] .btn {
+      background-color: #fff;
+
+      &:focus {
+          -webkit-box-shadow: none;
+          box-shadow: none;
+      }
+  }
+  */
+
+
+  /* changes icon color in header */
+  .icon {
+    color: #0D4B6E;
+  }
+
+  /* site name formatting mods */
+  .site-name {
+    color: #0D4B6E;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-left: 1.1rem;
+  }
+
+  /* modifies user name formatting in header */
+  .usertext {
+    color: #5e5e5e;
+    font-weight: 600;
+    font-size: .9rem;
+  }
+
+  /* modifies log in link in header - improve readability */
+  .usermenu .login a {
+    color: #116492;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* Horizontally align search box icon ("magnifying glass") with rest of toolbar icons */
+  .search-input-wrapper > div .icon {
+    margin-top: 9px;
+  }
+}
+
 
 /** Footer
 -------------------------*/
 
-/** User menu
--------------------------*/
+/* waiting for updated UCSF theme integration into Moodle 3.6
+Will add these when updated theme for 3.6 is ready */
+
+
 
 /** Custom menu
 -------------------------*/
 
+/* modifies category label in custom menu - removes border and hover underline when linked */
+.ucsf_custom_menu {
+
+  .category_label.pull-left a {
+    border: 0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: .95rem;
+    padding-left: 0;
+    padding-right: .1rem;
+  }
+
+  /* modifies category label in custom menu - set to same size and weight as when linked */
+  .category_label.pull-left {
+    font-weight: 600;
+    font-size: .95rem;
+    padding-right: 2.1rem;
+    padding-left: 0;
+  }
+
+  /* adds extra spacing between custom menu links */
+  .navbar-nav .nav-link {
+    padding-right: 1.1rem;
+  }
+
+  /** left-align mobile nav hamburger */
+  .navbar-toggler {
+    text-align: left;
+  }
+
+  /* modifies custom menu link hover color */
+  a.nav-item.nav-link:hover {
+    color: #fd0;
+  }
+
+  /* modifies custom menu dropdown link hover color */
+  a.dropdown-toggle.nav-link:hover,
+  a.dropdown-toggle.nav-link:focus,
+  a.dropdown-toggle.nav-link:active {
+    color: #fd0;
+  }
+}
+
+
 /** Nav Drawer
 -------------------------*/
+
+#nav-drawer {
+  /* adjusts background color, whitespace of nav drawer; lightens */
+  background-color: #fafafc;
+  top: 45px;  /* removes extra space above nav drawer */
+
+  /* hide mortar board fa in nav drawer course name */
+  .fa-graduation-cap {
+    display: none;
+  }
+
+  /* changes menu highlight color in nav drawer */
+  .list-group-item.active {
+    background-color: #3b6c8c;
+    border-color: #3b6c8c;
+  }
+
+  /* modifies nav drawer course home text formatting */
+  a[data-key='coursehome'] {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* modifies nav drawer dashboard section  */
+  a[data-key='myhome'],
+  a[data-key='calendar'],
+  a[data-key='privatefiles'],
+  a[data-key='mymedia'] {
+    /* background-color: #F3FAFC; */
+    text-transform: uppercase;
+  }
+
+  /* modifies nav drawer dashboard menu item formatting */
+  a[data-key='myhome'] {
+    font-weight: 500;
+    font-size: .95rem;
+  }
+
+  /* modifies Add a Block nav drawer link */
+  a[data-key='addblock'] {
+    text-transform: uppercase;
+  }
+
+  /* hides site home menu item in nav drawer  */
+  a[data-key='home'] {
+    display: none;
+  }
+
+  // hide the 'My Courses' menu item
+  .list-group-item[data-key="mycourses"] {
+    display: none;
+  }
+  // hide the 'My Courses' sub-menu items
+  .list-group-item[data-parent-key="mycourses"] {
+    display: none;
+  }
+
+}
 
 
 /** Action Menu formatting
 -------------------------*/
 
+/* removes underline in action menu links */
+.dropdown-item a {
+  text-decoration: none;
+}
+
+/* makes sure hover status of action menu items follows overall hover change */
+.dropdown-item a:hover {
+  color: inherit;
+}
+
+
 /** Category pages
 -------------------------*/
 
-/** Course, favorite, recent blocks hanging indent; other mods
+/* Hides site name heading on top-level category page */
+#page-course-index #page-header .page-header-headings {
+  display: none;
+}
+
+/* Hides site name heading on category pages */
+#page-course-index-category #page-header .page-header-headings {
+  display: none;
+}
+
+/* modifies course name formatting on category pages */
+h3.coursename {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+/* increases padding of top-level category names on category page */
+h3.categoryname {
+  line-height: 30px;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+/* adds grey box formatting to category list on category page */
+.course_category_tree .category > .info {
+  margin-bottom: 3px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+  border-color: #e3e3e3;
+  margin: 3px 0;
+  clear: both;
+}
+
+
+/** Course block hanging indent, etc.
 -------------------------*/
+
+/* fixes hanging indent in course block, reduces space between course list items */
+.block_course_list .content li {
+  text-indent: -15px;
+  margin-bottom: 0em;
+}
+
+.block_course_list .unlist li {
+  padding-left: 25px;
+}
+
+/* mortarboard icon class will need to be replaced with the circle icon */
+.block_course_list .fa-graduation-cap {
+  margin-right: -.2rem;
+  font-size: 8px;
+  height: 8px;
+}
+
+.block_course_list .footer {
+  text-align: center;
+}
+
 
 /** Content area
 -------------------------*/
 
+/* modifies course title formatting on course pages */
+.page-context-header .page-header-headings h1 {
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+/* modifies summary section title formatting */
+.summary h3 {
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+
+/* removes 24px padding that precedes labels, for some reason */
+.section .label .mod-indent-outer {
+  padding-left: 0px;
+}
+
+/* changes topic section formatting */
+h3.sectionname {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+/* changes topic section formatting - one section per page */
+h3.section-title {
+  font-weight: 500;
+  font-size: 1.3rem;
+  padding-top: .5rem;
+}
+
+/* adds hztl line between course section when set to one section per page */
+.course-content ul li.section.main:last-child {
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* modifies formatting of Last Updated link at bottom of pages, etc. */
+.modified {
+  text-align: center;
+  font-size: .7rem;
+}
+
+/* modifies formatting of next activity/resource links at page bottom */
+.activity-navigation .btn {
+  color: #0D4B6E;
+  font-size: .85rem;
+}
+
+
 /** Blocks - General
 -------------------------*/
+
+/* remove border around course area block */
+#region-main {
+  border: 0;
+}
+
+/* modifies block header title formatting */
+.card-title {
+  text-transform: uppercase;
+  font-weight:  700;
+  font-size:  .85rem;
+  color: #0D4B6E;
+}
+
+/* modifies block color on course pages (not dashboard/home) - adds background shading */
+.path-course-view #block-region-side-pre .card-body {
+  background-color: #F3FAFC;
+}
+
+/* modifies block color on category pages (not dashboard/home) - adds background shading */
+.path-course-index #block-region-side-pre .card-body {
+  background-color: #F3FAFC;
+}
+
+
+/** Question/Quiz styles
+-------------------------*/
+
+/* changes question text color - improves readability */
+.qtext {
+  color: #062637;
+}
+
+/* changes answers text color - improves readability */
+.answer {
+  color: #062637;
+}
+
+/* changes question prompts text color - improves readability */
+.prompt {
+  color: #062637;
+}
+
+/* modify quiz name heading in quiz nav block */
+h3.mod_quiz-section-heading {
+  font-size: 1.25rem;
+}
 
 
 /** Messaging
 -------------------------*/
 
+/* No customizations here for updated theme; existing ones can be removed */
+
+
 /** Collapsed Topics format
 -------------------------*/
+
+/* No customizations here for updated theme; existing ones can be removed */
+
 
 /** User tables - enrollment, roles
 -------------------------*/
 
+/* No customizations here for updated theme; existing ones can be removed */
+
+
 /** Atto
 -------------------------*/
 
+/* tightens color menus in Atto toolbar */
+.open.atto_fontcolor_button.atto_menu, .open.atto_backcolor_button.atto_menu {
+  line-height: .3rem;
+}
+
+
 /** Special block formatting adjustments
 -------------------------*/
+
+/* adds grey background to forum posts */
+.forumpost {
+  background-color: #fafafa;
+}
+
+/* BEGIN adjusts Recent News block formatting */
+.block_news_items .post {
+  border-top: 1px rgba(0, 0, 0, .05) solid;
+  padding: 2px;
+}
+
+.block_news_items .date {
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.block_news_items .name {
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.block_news_items .newlink {
+  padding-bottom: 5px;
+}
+
+.block_news_items .footer {
+  text-align: center;
+}
+/* END adjusts Recent News block formatting */
+
+/* Recent activity block adjustments */
+.block_recent_activity h3 {
+  text-transform: uppercase;
+  font-size: .9rem;
+  padding-top: 7px;
+}
+
+/* adjusts RSS block formatting */
+.block_rss_client .list li {
+  border-top: 1px rgba(0, 0, 0, .05) solid;
+}
+
+/* BEGIN adjusts OU Blog block formatting */
+/* Adjusts OU Blog - Blog Usage block text */
+.oublog_statsview_content h3 {
+  font-size: .9rem;
+  font-weight: 600;
+  padding-left: 10px;
+}
+
+/* OU Blog - formatting timeline fix */
+.col-form-label.d-inline[for="id_timefilter_commentpoststats"] {
+  display: flex !important;
+  line-height: 1rem;
+}
+
+.oublog_statsview_content .mform > .form-group {
+  margin-left: -1rem;
+}
+
+.oublog_statsview_content form .fitem .felement {
+  margin-left: 0;
+}
+
+/* modifies block color on OU Blog pages (not dashboard/home) - adds background shading */
+.path-mod-oublog #block-region-side-pre .card-body {
+  background-color: #F3FAFC;
+}
+/* END adjusts OU Blog block formatting */
+
+
+/** Special formatting, fixes
+-------------------------*/
+
+/* Fix for Chrome/large gradebook editing issue.
+NEED TO TEST IN 3.6 TO SEE IF STILL NEEDED
+https://app.asana.com/0/187871667484662/869052205792061
+.path-grade-report-grader a,
+.path-grade-report-grader area,
+.path-grade-report-grader button,
+.path-grade-report-grader [role="button"],
+.path-grade-report-grader input,
+.path-grade-report-grader label,
+.path-grade-report-grader select,
+.path-grade-report-grader summary,
+.path-grade-report-grader textarea {
+    touch-action: auto;
+}
+*/
+
+
+/* Restores quiz nav block - re-adds color  REMOVE FROM UPDATED THEME; NO LONGER NEEDED
+.path-mod-quiz #mod_quiz_navblock .qnbutton {
+     color: #373a3c;
+}
+*/
