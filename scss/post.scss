@@ -5,9 +5,6 @@
 @import "components/ucsf-custom-menu";
 @import "components/ucsf-footer";
 
-/** BOOST CSS CHANGES, MOODLE 3.6, 043019, v.1.9 **/
-
-
 /** General Styles
 -------------------------*/
 
@@ -180,54 +177,6 @@ ul {
 Will add these when updated theme for 3.6 is ready */
 
 
-
-/** Custom menu
--------------------------*/
-
-/* modifies category label in custom menu - removes border and hover underline when linked */
-.ucsf_custom_menu {
-
-  .category_label.pull-left a {
-    border: 0;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: .95rem;
-    padding-left: 0;
-    padding-right: .1rem;
-  }
-
-  /* modifies category label in custom menu - set to same size and weight as when linked */
-  .category_label.pull-left {
-    font-weight: 600;
-    font-size: .95rem;
-    padding-right: 2.1rem;
-    padding-left: 0;
-  }
-
-  /* adds extra spacing between custom menu links */
-  .navbar-nav .nav-link {
-    padding-right: 1.1rem;
-  }
-
-  /** left-align mobile nav hamburger */
-  .navbar-toggler {
-    text-align: left;
-  }
-
-  /* modifies custom menu link hover color */
-  a.nav-item.nav-link:hover {
-    color: #fd0;
-  }
-
-  /* modifies custom menu dropdown link hover color */
-  a.dropdown-toggle.nav-link:hover,
-  a.dropdown-toggle.nav-link:focus,
-  a.dropdown-toggle.nav-link:active {
-    color: #fd0;
-  }
-}
-
-
 /** Nav Drawer
 -------------------------*/
 
@@ -238,6 +187,11 @@ Will add these when updated theme for 3.6 is ready */
 
   /* hide mortar board fa in nav drawer course name */
   .fa-graduation-cap {
+    display: none;
+  }
+
+  /* hide circle fa in nav drawer course name */
+  .fa-circle {
     display: none;
   }
 
@@ -363,10 +317,14 @@ h3.categoryname {
   height: 8px;
 }
 
+.block_course_list .icon {
+  margin-right: 0rem;
+  font-size: 9px;
+}
+
 .block_course_list .footer {
   text-align: center;
 }
-
 
 /** Content area
 -------------------------*/
@@ -418,6 +376,38 @@ h3.section-title {
   font-size: .85rem;
 }
 
+/** Page Footer
+-------------------------*/
+#page-footer {
+  background-color: #fff!important;
+  color: #333!important;
+  border-top: 1px solid #d4d4d4;
+
+  a {
+    color: #116492;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #116492;
+    text-decoration: underline;
+  }
+
+  /* hides home link in the footer */
+  .homelink {
+    display: none;
+  }
+
+  /* centers logged in as link */
+  .logininfo {
+    text-align: center;
+  }
+
+  /* Hides Moodle image and link on front page footer */
+  .sitelink {
+    display: none;
+  }
+}
 
 /** Blocks - General
 -------------------------*/
