@@ -62,15 +62,22 @@
         text-align: left;
     }
 
-    /* modifies custom menu link hover color */
-    a.nav-item.nav-link:hover {
+    /* modifies custom menu link color */
+    a.nav-item.nav-link:active {
         color: #fff;
     }
 
-    /* modifies custom menu dropdown link hover color */
-    a.dropdown-toggle.nav-link:hover,
-    a.dropdown-toggle.nav-link:focus,
+    a.nav-item.nav-link:hover {
+        color: #fd0;
+    }
+
+    /* modifies custom menu dropdown link color */
     a.dropdown-toggle.nav-link:active {
         color: #fff;
+    }
+
+    a.dropdown-toggle.nav-link:focus,
+    a.dropdown-toggle.nav-link:hover {
+        color: #fd0;
     }
 }
