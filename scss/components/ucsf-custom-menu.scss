@@ -80,4 +80,9 @@
     a.dropdown-toggle.nav-link:hover {
         color: #fd0;
     }
+
+    /* dropdown item link color */
+    a.dropdown-item:active {
+        color: #fff;
+    }
 }
