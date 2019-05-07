@@ -300,26 +300,25 @@ h3.categoryname {
 /** Course block hanging indent, etc.
 -------------------------*/
 
+.block_course_list .content .column {
+  line-height: 16px;
+  padding-top: 3px;
+}
+
 /* fixes hanging indent in course block, reduces space between course list items */
 .block_course_list .content li {
-  text-indent: -15px;
-  margin-bottom: 0em;
+  text-indent: -13px;
+  margin-bottom: 0;
 }
 
 .block_course_list .unlist li {
-  padding-left: 25px;
-}
-
-/* mortarboard icon class will need to be replaced with the circle icon */
-.block_course_list .fa-graduation-cap {
-  margin-right: -.2rem;
-  font-size: 8px;
-  height: 8px;
+  padding-left: 15px;
 }
 
 .block_course_list .icon {
-  margin-right: 0rem;
-  font-size: 9px;
+  margin-right: -.2rem;
+  font-size: 8px;
+  height: 8px;
 }
 
 .block_course_list .footer {
