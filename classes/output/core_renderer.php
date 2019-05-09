@@ -16,6 +16,7 @@
 
 namespace theme_ucsf\output;
 
+use context_course;
 use custom_menu;
 use moodle_url;
 use html_writer;
@@ -174,5 +175,109 @@ class core_renderer extends \theme_boost\output\core_renderer
         }
 
         return html_writer::div($out, 'category_label pull-left');
+    }
+
+    /**
+     * @inheritdoc
+     * @throws \coding_exception
+     * @throws \moodle_exception
+     */
+    public function full_header() {
+        global $CFG, $COURSE, $USER, $PAGE;
+
+        $html = parent::full_header();
+
+        // Show a hint for users that view the course with guest access.
+        // We also check that the user did not switch the role. This is a special case for roles that can fully access the course
+        // without being enrolled. A role switch would show the guest access hint additionally in that case and this is not
+        // intended
+        if (is_guest(\context_course::instance($COURSE->id), $USER->id)
+            && $PAGE->has_set_url()
+            && $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)
+            && !is_role_switched($COURSE->id)
+        ) {
+            $html .= html_writer::start_tag('div', array('class' => 'course-guestaccess-infobox alert alert-warning'));
+            $html .= html_writer::tag('i', null, array('class' => 'fa fa-exclamation-circle fa-3x fa-pull-left'));
+            $html .= get_string('showhintcourseguestaccessgeneral', 'theme_ucsf',
+                array('role' => role_get_name(get_guest_role())));
+            $html .= $this->get_course_guest_access_hint($COURSE->id);
+            $html .= html_writer::end_tag('div');
+        }
+
+
+        // Check if the user did a role switch.
+        // If not, adding this section would make no sense and, even worse,
+        // user_get_user_navigation_info() will throw an exception due to the missing user object.
+        if (is_role_switched($COURSE->id)) {
+            // Get the role name switched to.
+            $opts = \user_get_user_navigation_info($USER, $this->page);
+            $role = $opts->metadata['rolename'];
+            // Get the URL to switch back (normal role).
+            $url = new moodle_url('/course/switchrole.php',
+                array('id'        => $COURSE->id, 'sesskey' => sesskey(), 'switchrole' => 0,
+                      'returnurl' => $this->page->url->out_as_local_url(false)));
+            $html .= html_writer::start_tag('div', array('class' => 'switched-role-infobox alert alert-info'));
+            $html .= html_writer::tag('i', null, array('class' => 'fa fa-user-circle fa-3x fa-pull-left'));
+            $html .= html_writer::start_tag('div');
+            $html .= get_string('switchedroleto', 'theme_ucsf');
+            // Give this a span to be able to address via CSS.
+            $html .= html_writer::tag('span', $role, array('class' => 'switched-role'));
+            $html .= html_writer::end_tag('div');
+            // Return to normal role link.
+            $html .= html_writer::start_tag('div');
+            $html .= html_writer::tag('a', get_string('switchrolereturn', 'core'),
+                array('class' => 'switched-role-backlink', 'href' => $url));
+            $html .= html_writer::end_tag('div'); // Return to normal role link: end div.
+            $html .= html_writer::end_tag('div');
+
+        }
+
+        // If the visibility of the course is hidden, a hint for the visibility will be shown.
+        if ($COURSE->visible == false
+            && $PAGE->has_set_url()
+            && $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)
+        ) {
+            $html .= html_writer::start_tag('div', array('class' => 'course-hidden-infobox alert alert-warning'));
+            $html .= html_writer::tag('i', null, array('class' => 'fa fa-exclamation-circle fa-3x fa-pull-left'));
+            $html .= get_string('showhintcoursehiddengeneral', 'theme_ucsf', $COURSE->id);
+            // If the user has the capability to change the course settings, an additional link to the course settings is shown.
+            if (has_capability('moodle/course:update', context_course::instance($COURSE->id))) {
+                $html .= html_writer::tag('div', get_string('showhintcoursehiddensettingslink',
+                    'theme_ucsf', array('url' => $CFG->wwwroot.'/course/edit.php?id='. $COURSE->id)));
+            }
+            $html .= html_writer::end_tag('div');
+        }
+
+        return $html;
+    }
+
+    /**
+     * Build the guest access hint HTML code.
+     *
+     * @param int $courseid The course ID.
+     *
+     * @return string.
+     * @throws \coding_exception
+     */
+    protected function get_course_guest_access_hint($courseid) {
+        global $CFG;
+        require_once($CFG->dirroot . '/enrol/self/lib.php');
+
+        $html = '';
+        $instances = enrol_get_instances($courseid, true);
+        $plugins = enrol_get_plugins(true);
+        foreach ($instances as $instance) {
+            if (!isset($plugins[$instance->enrol])) {
+                continue;
+            }
+            $plugin = $plugins[$instance->enrol];
+            if ($plugin->show_enrolme_link($instance)) {
+                $html = html_writer::tag('div', get_string('showhintcourseguestaccesslink',
+                    'theme_ucsf', array('url' => $CFG->wwwroot . '/enrol/index.php?id=' . $courseid)));
+                break;
+            }
+        }
+
+        return $html;
     }
 }
