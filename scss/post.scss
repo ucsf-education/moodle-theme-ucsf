@@ -169,6 +169,22 @@ ul {
   }
 }
 
+/* Don't display switched role information in the user menu */
+.userswitchedrole .usermenu {
+  .usertext {
+    float: inherit;
+    text-align: inherit;
+    margin-right: inherit;
+    height: inherit;
+  }
+  span.meta.role {
+    display: none;
+  }
+  .avatar img {
+    margin-left: 1rem;
+    margin-right: .5rem;
+  }
+}
 
 /** Footer
 -------------------------*/
@@ -634,4 +650,31 @@ https://app.asana.com/0/187871667484662/869052205792061
 }
 #back-to-top::before {
   vertical-align: 0.3rem;
+}
+
+/*
+ * If set in showswitchedroleincourse, the switched role information will be displayed
+ * in the course header instead of next to the user name.
+ */
+
+.switched-role-infobox span.switched-role {
+  font-weight: bold;
+  padding-left: 0.5em;
+}
+
+/* Setting to show a hint for hidden courses, and others. */
+/* Because the Font Awesome icon is set to fa-3x, we need a minimum size for the container. */
+.course-hidden-infobox,
+.switched-role-infobox,
+.course-guestaccess-infobox {
+  min-height: 4rem;
+}
+
+/* TODO: Remove when MDL-61319 is fixed */
+/* This is needed because a bug leads to a mess with fa.fa-pull-left/right rules. */
+.fa-pull-left {
+  margin-right: 0.3em;
+}
+.fa-pull-right {
+  margin-left: 0.3em;
 }
