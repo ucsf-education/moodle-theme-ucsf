@@ -375,6 +375,34 @@ h3.section-title {
   font-size: .85rem;
 }
 
+/** Collapsed Topics format
+-------------------------*/
+
+/* Collapsed topics format - section restricted badges now have white text */
+.content.sectionhidden .availabilityinfo.isrestricted .tag-info,
+.course-content ul.ctopics li.section .content .toggle span .availabilityinfo.isrestricted .tag-info,
+.course-content ul.ctopics li.section .content.sectionhidden .availabilityinfo.isrestricted .tag-info {
+  color: #fff;
+}
+
+/* Collapsed topics format - section hidden badges now have white text */
+.content.sectionhidden .availabilityinfo.ishidden .tag-info,
+.course-content ul.ctopics li.section .content .toggle span .availabilityinfo.ishidden .tag-info,
+.course-content ul.ctopics li.section .content.sectionhidden .availabilityinfo.ishidden .tag-info {
+  color: #fff;
+}
+
+/* Collapsed topics format - modified restricted note formatting */
+.course-content ul.ctopics li.section .content .toggle span.the_toggle,
+.course-content ul.ctopics li.section .content.sectionhidden {
+  font-weight: 500;
+}
+
+/* Collapsed topics format - activity edit menus moved to right on same line */
+body.format-topcoll.editing ul.ctopics .section .activity .actions {
+  position: absolute;
+}
+
 /** Page Footer
 -------------------------*/
 #page-footer {
