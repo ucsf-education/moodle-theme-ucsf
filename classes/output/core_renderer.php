@@ -20,6 +20,7 @@ use context_course;
 use custom_menu;
 use moodle_url;
 use html_writer;
+use stdClass;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -185,7 +186,17 @@ class core_renderer extends \theme_boost\output\core_renderer
     public function full_header() {
         global $CFG, $COURSE, $USER, $PAGE;
 
-        $html = parent::full_header();
+        /* copy/pasted from parent function */
+        $header = new stdClass();
+        $header->settingsmenu = $this->context_header_settings_menu();
+        $header->contextheader = $this->context_header();
+        $header->hasnavbar = empty($PAGE->layout_options['nonavbar']);
+        $header->navbar = $this->navbar();
+        $header->pageheadingbutton = $this->page_heading_button();
+        $header->courseheader = $this->course_header();
+
+        // use overriden template instead
+        $html = $this->render_from_template('theme_ucsf/header', $header);
 
         // Show a hint for users that view the course with guest access.
         // We also check that the user did not switch the role. This is a special case for roles that can fully access the course
@@ -279,5 +290,17 @@ class core_renderer extends \theme_boost\output\core_renderer
         }
 
         return $html;
+    }
+
+    /**
+     * Overrides Boost's core_renderer here to bring the Edit button back.
+     *
+     * Returns HTML to display a "Turn editing on/off" button in a form.
+     *
+     * @param moodle_url $url The URL + params to send through when clicking the button
+     * @return string HTML the button
+     */
+    public function edit_button(moodle_url $url) {
+        return \core_renderer::edit_button($url);
     }
 }

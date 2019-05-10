@@ -312,6 +312,18 @@ h3.categoryname {
   clear: both;
 }
 
+/*------------------------------------
+  Course header
+  -------------------------------------*/
+
+/* Remove margin from the pageheadingbuttons in the course header. */
+#page-header {
+  .breadcrumb,
+  .singlebutton form {
+    margin: 0;
+  }
+}
+
 
 /** Course block hanging indent, etc.
 -------------------------*/
