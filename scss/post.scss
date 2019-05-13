@@ -316,11 +316,23 @@ h3.categoryname {
   Course header
   -------------------------------------*/
 
-/* Remove margin from the pageheadingbuttons in the course header. */
 #page-header {
+
+  /* Remove margin from the pageheadingbuttons in the course header. */
   .breadcrumb,
   .singlebutton form {
     margin: 0;
+  }
+
+  /* modifies button color in page header */
+  .singlebutton .btn-secondary {
+    background-color: #D6F9D2;
+    border-color: #D6F9D2;
+  }
+
+  .singlebutton .btn-secondary:hover {
+    background-color: #adf3a5;
+    border-color: #adf3a5;
   }
 }
 
