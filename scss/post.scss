@@ -702,3 +702,8 @@ https://app.asana.com/0/187871667484662/869052205792061
 .fa-pull-right {
   margin-left: 0.3em;
 }
+
+/* modifies text color on slide-down upload status message when editing is turned on */
+#dndupload-status {
+  color: #000;
+}
