@@ -156,6 +156,12 @@ ul {
     font-size: .9rem;
   }
 
+
+  /* modifies usermenu login text */
+  .usermenu .login {
+    font-size: .9rem;
+  }
+
   /* modifies log in link in header - improve readability */
   .usermenu .login a {
     color: #116492;
@@ -326,13 +332,15 @@ h3.categoryname {
 
   /* modifies button color in page header */
   .singlebutton .btn-secondary {
-    background-color: #D6F9D2;
-    border-color: #D6F9D2;
+    background-color: #B5C8D4;
+    border-color: #B5C8D4;
+    font-weight: 600;
   }
 
   .singlebutton .btn-secondary:hover {
-    background-color: #adf3a5;
-    border-color: #adf3a5;
+    background-color: #CEDAE2;
+    border-color: #CEDAE2;
+    font-weight: 600;
   }
 }
 
@@ -362,6 +370,30 @@ h3.categoryname {
 }
 
 .block_course_list .footer {
+  text-align: center;
+}
+
+/* fixes hanging indent in recent courses block */
+.block_course_recent .content li {
+  text-indent: -19px;
+  margin-bottom: 0;
+}
+
+.block_course_recent .unlist li {
+  padding-left: 15px;
+}
+
+.block_course_recent .icon {
+  margin-right: .2rem;
+}
+
+.block_course_recent .content .column {
+  line-height: 16px;
+  padding-top: 3px;
+}
+
+.block_course_recent .footer {
+  margin-top: 5px;
   text-align: center;
 }
 
