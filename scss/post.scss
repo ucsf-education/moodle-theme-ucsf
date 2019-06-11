@@ -373,6 +373,30 @@ h3.categoryname {
   text-align: center;
 }
 
+/* fixes hanging indent in recent courses block */
+.block_course_recent .content li {
+  text-indent: -19px;
+  margin-bottom: 0;
+}
+
+.block_course_recent .unlist li {
+  padding-left: 15px;
+}
+
+.block_course_recent .icon {
+  margin-right: .2rem;
+}
+
+.block_course_recent .content .column {
+  line-height: 16px;
+  padding-top: 3px;
+}
+
+.block_course_recent .footer {
+  margin-top: 5px;
+  text-align: center;
+}
+
 /** Content area
 -------------------------*/
 
