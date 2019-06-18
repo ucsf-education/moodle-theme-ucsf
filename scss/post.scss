@@ -369,6 +369,12 @@ h3.categoryname {
   height: 8px;
 }
 
+/* resizes the control icons in block_course to their proper size */
+.block_course_list .block-controls .menubar .icon {
+  font-size: 16px;
+  margin-right: .3rem;
+}
+
 .block_course_list .footer {
   text-align: center;
 }
@@ -396,6 +402,7 @@ h3.categoryname {
   margin-top: 5px;
   text-align: center;
 }
+
 
 /** Content area
 -------------------------*/
