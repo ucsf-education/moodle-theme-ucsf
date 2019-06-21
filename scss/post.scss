@@ -638,6 +638,15 @@ h3.mod_quiz-section-heading {
   border-top: 1px rgba(0, 0, 0, .05) solid;
 }
 
+/** fixes a problem with huge zoom svg in the recently accessed items block - workaround; to be removed
+when svg is fixed on Zoom plugin site
+@see https://github.com/ucla/moodle-mod_zoom/issues/60
+-------------------------*/
+.block_recentlyaccesseditems img.icon {
+  height: 24px;
+  width: 24px;
+}
+
 /* BEGIN adjusts OU Blog block formatting */
 /* Adjusts OU Blog - Blog Usage block text */
 .oublog_statsview_content h3 {
