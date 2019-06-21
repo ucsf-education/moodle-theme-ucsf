@@ -518,6 +518,16 @@ body.format-topcoll.editing ul.ctopics .section .activity .actions {
 /** Blocks - General
 -------------------------*/
 
+
+/* reduces left indent for ul and ol lists in HTML block */
+.block_html ul {
+  margin-left: 5px;
+}
+
+.block_html ol  {
+  margin-left: -16px;
+}
+
 /* remove border around course area block */
 #region-main {
   border: 0;
