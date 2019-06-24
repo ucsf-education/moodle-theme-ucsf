@@ -454,6 +454,11 @@ h3.section-title {
   font-size: .85rem;
 }
 
+/* shifts jump menu at page bottom so it doesn't bleed into previous-next links */
+.activity-navigation .form-inline {
+  margin-top: 25px;
+}
+
 /** Collapsed Topics format
 -------------------------*/
 
