@@ -556,6 +556,11 @@ body.format-topcoll.editing ul.ctopics .section .activity .actions {
   background-color: #F3FAFC;
 }
 
+/* modifies block color on course MOD pages (not dashboard/home; e.g., forum) - adds background shading */
+.path-mod #block-region-side-pre .card-body {
+  background-color: #F3FAFC;
+}
+
 
 /** Question/Quiz styles
 -------------------------*/
