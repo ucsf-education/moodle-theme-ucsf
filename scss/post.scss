@@ -22,6 +22,12 @@ ul {
   margin-left: 24px;
 }
 
+
+/* increase font weight for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
 /* darkens text within selection boxes; e.g., dashboard course overview block */
 .btn-outline-secondary {
   color: #3b3f42;
