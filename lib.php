@@ -292,6 +292,13 @@ function theme_ucsf_get_custom_alerts(moodle_page $page)
 
         $alert_category = _theme_ucsf_get_setting($theme_settings, 'categories_list_alert' . $n);
         $alert_type = _theme_ucsf_get_setting($theme_settings, 'recurring_alert' . $n);
+
+        // If this alert is supposed to appear on the dashboard only, and this page is NOT the dashboard,
+        // then skip over it.
+        if ('dashboard' === $alert_category && 'mydashboard' !== $page->pagelayout) {
+            continue;
+        }
+
         // check if this alert is applies site-wide,
         // or if it matches this page's course category or any of its parent categories.
         // if none of these apply, then skip this alert.
