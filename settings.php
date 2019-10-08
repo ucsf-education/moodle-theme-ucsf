@@ -58,7 +58,7 @@ if ($ADMIN->fulltree) {
 
     foreach ($categories as $cat) {
         $alert_category_array[$cat->id] = $cat->name;
-        
+
         if (! in_array($cat->id, $category_ids)) {
             $add_categories_list[$cat->id] = $cat->name;
         } else {
@@ -533,11 +533,12 @@ if ($ADMIN->fulltree) {
         }
 
         //Add category - list.
+        $alert_categories = array_merge(['dashboard' => 'Dashboard Only'], $remove_categories_list);
         $name = 'theme_ucsf/categories_list_alert'.$i;
         $title = get_string('categories_list_alert', 'theme_ucsf');
         $description = get_string('categories_list_alertdesc', 'theme_ucsf');
-        $default = '0';
-        $setting = new admin_setting_configselect($name, $title, $description, $default, $remove_categories_list);
+        $default = 'dashboard';
+        $setting = new admin_setting_configselect($name, $title, $description, $default, $alert_categories);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
