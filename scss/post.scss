@@ -413,6 +413,11 @@ h3.categoryname {
 /** Content area
 -------------------------*/
 
+/* changes badge text color to white */
+.badge-info {
+  color: #fff;
+}
+
 /* modifies course title formatting on course pages */
 .page-context-header .page-header-headings h1 {
   font-size: 1.7rem;
@@ -464,17 +469,17 @@ h3.section-title {
 -------------------------*/
 
 /* Collapsed topics format - section restricted badges now have white text */
-.content.sectionhidden .availabilityinfo.isrestricted .tag-info,
-.course-content ul.ctopics li.section .content .toggle span .availabilityinfo.isrestricted .tag-info,
-.course-content ul.ctopics li.section .content.sectionhidden .availabilityinfo.isrestricted .tag-info {
-  color: #fff;
+.content.sectionhidden .availabilityinfo.isrestricted .badge-info,
+.course-content ul.ctopics li.section .content .toggle span .availabilityinfo.isrestricted .badge-info,
+.course-content ul.ctopics li.section .content.sectionhidden .availabilityinfo.isrestricted .badge-info {
+    color: #fff;
 }
 
 /* Collapsed topics format - section hidden badges now have white text */
-.content.sectionhidden .availabilityinfo.ishidden .tag-info,
-.course-content ul.ctopics li.section .content .toggle span .availabilityinfo.ishidden .tag-info,
-.course-content ul.ctopics li.section .content.sectionhidden .availabilityinfo.ishidden .tag-info {
-  color: #fff;
+.content.sectionhidden .availabilityinfo.ishidden .badge-info,
+.course-content ul.ctopics li.section .content .toggle span .availabilityinfo.ishidden .badge-info,
+.course-content ul.ctopics li.section .content.sectionhidden .availabilityinfo.ishidden .badge-info {
+    color: #fff;
 }
 
 /* Collapsed topics format - modified restricted note formatting */
@@ -486,6 +491,11 @@ h3.section-title {
 /* Collapsed topics format - activity edit menus moved to right on same line */
 body.format-topcoll.editing ul.ctopics .section .activity .actions {
   position: absolute;
+}
+
+/* Collapsed topics format - adds border at end of each section */
+.course-content ul.ctopics li.section.main {
+  border-bottom: 1px solid #dee2e6;
 }
 
 /** Page Footer
