@@ -669,6 +669,14 @@ h3.mod_quiz-section-heading {
   border-top: 1px rgba(0, 0, 0, .05) solid;
 }
 
+/* modifies forum post actions, discussion nav, settings, and Advanced (when replying) links formatting to match site link format */
+.post-actions .btn, .discussion-nav .btn,
+.discussion-settings-menu .btn,
+.btn[data-action="forum-advanced-reply"] {
+  color: #0D4B6E;
+  font-size: .85rem;
+}
+
 /** fixes a problem with huge zoom svg in the recently accessed items block - workaround; to be removed
 when svg is fixed on Zoom plugin site
 @see https://github.com/ucla/moodle-mod_zoom/issues/60
