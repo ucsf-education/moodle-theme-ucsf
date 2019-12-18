@@ -101,6 +101,15 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
 }
 
+/* reduces category name font size in course overview block */
+.course-info-container .categoryname {
+  font-size: .85rem;
+}
+/* reduces category name font size in recently accessed courses block */
+[data-region="recentlyaccessedcourses-view"] .text-truncate .text-muted {
+  font-size: .85rem;
+}
+
 
 /** Breadcrumbs
 -------------------------*/
