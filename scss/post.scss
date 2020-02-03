@@ -238,6 +238,17 @@ Will add these when updated theme for 3.6 is ready */
     border-color: #3b6c8c;
   }
 
+  /* changes color of lower nav drawer items */
+  .mt-1 .list-group-item {
+    background-color: #f3fafc;
+  }
+  .mt-1 .list-group-item-action:hover {
+    background-color: #dff2f7;
+  }
+  .mt-1 .list-group-item-action:active {
+    background-color: #bae3ee;
+  }
+
   /* modifies nav drawer course home text formatting */
   a[data-key='coursehome'] {
     font-size: 1rem;
@@ -277,7 +288,6 @@ Will add these when updated theme for 3.6 is ready */
   .list-group-item[data-parent-key="mycourses"] {
     display: none;
   }
-
 }
 
 
