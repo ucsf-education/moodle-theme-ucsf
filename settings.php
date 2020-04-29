@@ -533,7 +533,7 @@ if ($ADMIN->fulltree) {
         }
 
         //Add category - list.
-        $alert_categories = array_merge(['dashboard' => 'Dashboard Only'], $remove_categories_list);
+        $alert_categories = ['dashboard' => 'Dashboard Only'] + $remove_categories_list;
         $name = 'theme_ucsf/categories_list_alert'.$i;
         $title = get_string('categories_list_alert', 'theme_ucsf');
         $description = get_string('categories_list_alertdesc', 'theme_ucsf');
