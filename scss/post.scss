@@ -517,6 +517,18 @@ body.format-topcoll.editing ul.ctopics .section .activity .actions {
   border-bottom: 1px solid #dee2e6;
 }
 
+/* improves spacing in single topic view - fixes section name overlap */
+.format-topcoll .course-content .single-section .section-navigation .mdl-left,
+.format-topcoll .course-content .single-section .section-navigation .mdl-right {
+  position: relative;
+}
+.course-content .single-section .section-navigation .mdl-left {
+  float: left!important;
+}
+.course-content .single-section .section-navigation .mdl-right {
+  float: right!important;
+}
+
 /** Page Footer
 -------------------------*/
 #page-footer {
