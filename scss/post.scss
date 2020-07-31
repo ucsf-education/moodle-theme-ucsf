@@ -484,6 +484,12 @@ h3.section-title {
   font-size: .85rem;
 }
 
+/* reduces height of participants row - fix for when there is only one participant */
+.userlist table#participants td,
+.userlist table#participants th {
+  min-height: 5em;
+}
+
 /** Collapsed Topics format
 -------------------------*/
 
