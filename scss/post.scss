@@ -484,10 +484,10 @@ h3.section-title {
   font-size: .85rem;
 }
 
-/* reduces height of participants row - fix for when there is only one participant */
-.userlist table#participants td,
-.userlist table#participants th {
-  min-height: 5em;
+/* participants table - the full name column in the table body is rendered using table header cells. */
+/* adjust its alignment to match the rest of the cells in each row */
+.userlist table#participants tbody th {
+  vertical-align: middle;
 }
 
 /** Collapsed Topics format
