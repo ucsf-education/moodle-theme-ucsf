@@ -490,6 +490,11 @@ h3.section-title {
   vertical-align: middle;
 }
 
+/* reduces minimum height of participants table */
+.userlist table#participants  {
+  min-height: 5em;
+}
+
 /** Collapsed Topics format
 -------------------------*/
 
