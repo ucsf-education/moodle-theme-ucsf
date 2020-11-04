@@ -291,16 +291,4 @@ class core_renderer extends \theme_boost\output\core_renderer
 
         return $html;
     }
-
-    /**
-     * Overrides Boost's core_renderer here to bring the Edit button back.
-     *
-     * Returns HTML to display a "Turn editing on/off" button in a form.
-     *
-     * @param moodle_url $url The URL + params to send through when clicking the button
-     * @return string HTML the button
-     */
-    public function edit_button(moodle_url $url) {
-        return \core_renderer::edit_button($url);
-    }
 }
