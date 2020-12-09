@@ -218,6 +218,11 @@ Will add these when updated theme for 3.6 is ready */
 -------------------------*/
 
 #nav-drawer {
+  /* modifies nav drawer dashboard section; capitalizes Content Bank label  */
+  a[data-key='contentbank'] {
+    text-transform: uppercase;
+  }
+
   /* adjusts background color, whitespace of nav drawer; lightens */
   background-color: #fafafc;
   top: 45px;  /* removes extra space above nav drawer */
