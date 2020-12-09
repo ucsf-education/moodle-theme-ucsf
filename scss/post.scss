@@ -762,6 +762,22 @@ h3.mod_quiz-section-heading {
 /** Special formatting, fixes
 -------------------------*/
 
+#page-mod-questionnaire-complete {
+  /** adds the border back around the editor in the questionnaire mod (in certain contexts)
+  since the 3.8.6 upgrade addressed an issue that the questionnaire mod needs to implement
+  https://app.asana.com/0/187871667484662/1198700308833921 **/
+  .editor_atto_content_wrap {
+    border: 1px solid #bbb;
+    border-top: none;
+  }
+
+  /** removes the fullscreen toggle icon on the "Answer the questions" page on the questionnaire
+  mod so that the "Print blank" link is accessible; fullscreen toggle isn't needed on this page **/
+  .local-fullscreen-padding {
+    display: none;
+  }
+}
+
 /*------------------------------------
   Additional Elements
   -------------------------------------*/
