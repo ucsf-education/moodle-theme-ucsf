@@ -778,6 +778,27 @@ h3.mod_quiz-section-heading {
   }
 }
 
+/** Go-To-Top Widget
+-------------------------*/
+#goto-top-link {
+  bottom: 10px;
+  right: 10px;
+
+  .btn-light {
+    color: #FFFFFF;
+    background-color: #1177d1;
+    border-color:  #1177d1;
+  }
+
+  #goto-top-link .btn {
+    border-radius: 100px;
+
+    .icon {
+      font-size: 26px;
+    }
+  }
+}
+
 /*------------------------------------
   Additional Elements
   -------------------------------------*/
