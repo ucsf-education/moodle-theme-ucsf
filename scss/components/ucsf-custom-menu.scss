@@ -82,7 +82,11 @@
     }
 
     /* dropdown item link color */
-    a.dropdown-item:active {
-        color: #fff;
+    a.dropdown-item {
+        &:active,
+        &:focus,
+        &:hover {
+            color: #fff;
+        }
     }
 }
