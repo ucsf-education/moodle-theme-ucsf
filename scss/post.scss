@@ -299,6 +299,12 @@ Will add these when updated theme for 3.6 is ready */
 /** Action Menu formatting
 -------------------------*/
 
+/* makes the icons in the user menu match the text when hover or focus */
+.dropdown-item:hover .icon,
+.dropdown-item:focus .icon  {
+  color: #fff;
+}
+
 /* removes underline in action menu links */
 .dropdown-item a {
   text-decoration: none;
@@ -308,7 +314,6 @@ Will add these when updated theme for 3.6 is ready */
 .dropdown-item a:hover {
   color: inherit;
 }
-
 
 /** Category pages
 -------------------------*/
