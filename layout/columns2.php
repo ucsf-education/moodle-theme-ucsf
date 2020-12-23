@@ -42,7 +42,9 @@ $theme_settings = $PAGE->theme->settings;
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
-$regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
+$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions();
+// If the settings menu will be included in the header then don't add it here.
+$regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $helpmenu = $OUTPUT->help_menu(theme_ucsf_get_helpmenu($PAGE));
 $custom_alerts = $OUTPUT->custom_alerts(theme_ucsf_get_custom_alerts($PAGE));
 $custom_menu_items = theme_ucsf_get_custom_menu($PAGE);
@@ -52,7 +54,6 @@ $copyright = property_exists($theme_settings, 'copyright') ? $theme_settings->co
 $footnote = property_exists($theme_settings, 'footnote') ? $theme_settings->footnote : '';
 $headerbrand = $OUTPUT->header_brand(theme_ucsf_get_header_brand($PAGE));
 $categorylabel = $OUTPUT->category_label(theme_ucsf_get_category_label($PAGE));
-
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
@@ -72,7 +73,9 @@ $templatecontext = [
     'categorylabel' => $categorylabel,
 ];
 
-$templatecontext['flatnavigation'] = $PAGE->flatnav;
+$nav = $PAGE->flatnav;
+$templatecontext['flatnavigation'] = $nav;
+$templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
 
 $PAGE->requires->js('/theme/ucsf/js/custom_alerts.js');
 $PAGE->requires->js('/theme/ucsf/js/datepicker.js');

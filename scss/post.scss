@@ -218,6 +218,11 @@ Will add these when updated theme for 3.6 is ready */
 -------------------------*/
 
 #nav-drawer {
+  /* modifies nav drawer dashboard section; capitalizes Content Bank label  */
+  a[data-key='contentbank'] {
+    text-transform: uppercase;
+  }
+
   /* adjusts background color, whitespace of nav drawer; lightens */
   background-color: #fafafc;
   top: 45px;  /* removes extra space above nav drawer */
@@ -294,6 +299,12 @@ Will add these when updated theme for 3.6 is ready */
 /** Action Menu formatting
 -------------------------*/
 
+/* makes the icons in the user menu match the text when hover or focus */
+.dropdown-item:hover .icon,
+.dropdown-item:focus .icon  {
+  color: #fff;
+}
+
 /* removes underline in action menu links */
 .dropdown-item a {
   text-decoration: none;
@@ -303,7 +314,6 @@ Will add these when updated theme for 3.6 is ready */
 .dropdown-item a:hover {
   color: inherit;
 }
-
 
 /** Category pages
 -------------------------*/
@@ -494,6 +504,12 @@ h3.section-title {
 .userlist table#participants  {
   min-height: 5em;
 }
+
+/* modifies Add an activity or resource link; color change  */
+.section-modchooser-text {
+  color: #0D4B6E;
+}
+
 
 /** Collapsed Topics format
 -------------------------*/
@@ -719,15 +735,6 @@ h3.mod_quiz-section-heading {
   font-size: .85rem;
 }
 
-/** fixes a problem with huge zoom svg in the recently accessed items block - workaround; to be removed
-when svg is fixed on Zoom plugin site
-@see https://github.com/ucla/moodle-mod_zoom/issues/60
--------------------------*/
-.block_recentlyaccesseditems img.icon {
-  height: 24px;
-  width: 24px;
-}
-
 /* BEGIN adjusts OU Blog block formatting */
 /* Adjusts OU Blog - Blog Usage block text */
 .oublog_statsview_content h3 {
@@ -760,50 +767,46 @@ when svg is fixed on Zoom plugin site
 /** Special formatting, fixes
 -------------------------*/
 
-/* Fix for Chrome/large gradebook editing issue.
-NEED TO TEST IN 3.6 TO SEE IF STILL NEEDED
-https://app.asana.com/0/187871667484662/869052205792061
-.path-grade-report-grader a,
-.path-grade-report-grader area,
-.path-grade-report-grader button,
-.path-grade-report-grader [role="button"],
-.path-grade-report-grader input,
-.path-grade-report-grader label,
-.path-grade-report-grader select,
-.path-grade-report-grader summary,
-.path-grade-report-grader textarea {
-    touch-action: auto;
-}
-*/
+#page-mod-questionnaire-complete {
+  /** adds the border back around the editor in the questionnaire mod (in certain contexts)
+  since the 3.8.6 upgrade addressed an issue that the questionnaire mod needs to implement
+  https://app.asana.com/0/187871667484662/1198700308833921 **/
+  .editor_atto_content_wrap {
+    border: 1px solid #bbb;
+    border-top: none;
+  }
 
-
-/* Restores quiz nav block - re-adds color  REMOVE FROM UPDATED THEME; NO LONGER NEEDED
-.path-mod-quiz #mod_quiz_navblock .qnbutton {
-     color: #373a3c;
+  /** removes the fullscreen toggle icon on the "Answer the questions" page on the questionnaire
+  mod so that the "Print blank" link is accessible; fullscreen toggle isn't needed on this page **/
+  .local-fullscreen-padding {
+    display: none;
+  }
 }
-*/
+
+/** Go-To-Top Widget
+-------------------------*/
+#goto-top-link {
+  bottom: 10px;
+  right: 10px;
+
+  .btn-light {
+    color: #FFFFFF;
+    background-color: #1177d1;
+    border-color:  #1177d1;
+  }
+
+  .btn {
+    border-radius: 100px;
+
+    .icon {
+      font-size: 26px;
+    }
+  }
+}
 
 /*------------------------------------
   Additional Elements
   -------------------------------------*/
-
-/* Back to top button */
-#back-to-top {
-  display: none;
-  position: fixed;
-  padding: 0.5rem;
-  bottom: 0.5em;
-  right: 0.5em;
-  line-height: 1.7rem;
-  color: #fff;
-  background-color: $brand-primary;
-  border-radius: 100px;
-  cursor: pointer;
-  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
-}
-#back-to-top::before {
-  vertical-align: 0.3rem;
-}
 
 /*
  * If set in showswitchedroleincourse, the switched role information will be displayed
