@@ -78,6 +78,12 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #f3fafc;
 }
 
+/* removes border and background color from header card (containing the "customize this page" button) */
+.pagelayout-mydashboard #page-header .card {
+  background-color: transparent;
+  border: 0;
+}
+
 /* modifies dashboard center content area block title header formatting */
 #block-region-content .card-body .card-title {
   background-color: #3b6c8c;
