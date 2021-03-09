@@ -74,8 +74,14 @@ h1, h2, h3, h4, h5, h6 {
 -------------------------*/
 
 /* changes dashboard page color to light blue */
-#page-my-index #page-wrapper #page {
+.pagelayout-mydashboard #page-wrapper #page {
   background-color: #f3fafc;
+}
+
+/* removes border and background color from header card (containing the "customize this page" button) */
+.pagelayout-mydashboard #page-header .card {
+  background-color: transparent;
+  border: 0;
 }
 
 /* modifies dashboard center content area block title header formatting */
@@ -187,6 +193,10 @@ h1, h2, h3, h4, h5, h6 {
   /* Horizontally align search box icon ("magnifying glass") with rest of toolbar icons */
   .search-input-wrapper > div .icon {
     margin-top: 9px;
+  }
+
+ .popover-region {
+    float: left;
   }
 }
 

@@ -35,7 +35,6 @@ $THEME->usefallback = true;
 
 $THEME->parents = ['boost'];
 $THEME->enable_dock = false;
-$THEME->csstreepostprocessor = 'theme_ucsf_css_tree_post_processor';
 $THEME->extrascsscallback = 'theme_ucsf_get_extra_scss';
 $THEME->prescsscallback = 'theme_ucsf_get_pre_scss';
 $THEME->precompiledcsscallback = 'theme_ucsf_get_precompiled_css';
