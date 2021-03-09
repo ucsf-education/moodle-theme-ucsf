@@ -62,13 +62,6 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
 }
 
 /**
- * @see theme_boost_css_tree_post_processor()
- */
-function theme_ucsf_css_tree_post_processor($tree, $theme) {
-    theme_boost_css_tree_post_processor($tree, $theme);
-}
-
-/**
  * @see theme_boost_get_extra_scss()
  */
 function theme_ucsf_get_extra_scss($theme) {
