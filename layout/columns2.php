@@ -71,6 +71,7 @@ $templatecontext = [
     'copyright' => $copyright,
     'headerbrand' => $headerbrand,
     'categorylabel' => $categorylabel,
+    'islandingpage' => false !== strpos($bodyattributes, 'page-site-index')
 ];
 
 $nav = $PAGE->flatnav;
