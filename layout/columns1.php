@@ -44,6 +44,7 @@ $templatecontext = [
     'custommenumobile' => $custom_menu_mobile,
     'headerbrand' => $headerbrand,
     'categorylabel' => $categorylabel,
+    'islandingpage' => false !== strpos($bodyattributes, 'page-site-index')
 ];
 
 $PAGE->requires->js('/theme/ucsf/js/custom_alerts.js');
