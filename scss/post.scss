@@ -417,6 +417,10 @@ h3.categoryname {
     line-height: 1.0;
 }
 
+/* reduces completion badge font size */
+.pagelayout-course .automatic-completion-conditions .badge {
+    font-size: 85%;
+}
 
 /** Course block hanging indent, etc.
 -------------------------*/
