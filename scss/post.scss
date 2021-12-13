@@ -389,6 +389,34 @@ h3.categoryname {
   }
 }
 
+/** Activity completion conditions format changes - course page only
+-------------------------------------------*/
+
+/* tightens spacing and removes line after activity completion */
+.section li.activity.hasinfo {
+    border-bottom: 0px;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+}
+
+/* left-indents buttons and labels, activity completion */
+.pagelayout-course .activity-information {
+    padding-top: 0px;
+    padding-left: 30px;
+}
+
+/* lightens the gray background of completion badge */
+.activity-information .badge-secondary {
+     background-color: #e1e7ec;
+}
+
+/* reduces button size and spacing, activity completion */
+.pagelayout-course .activity-information .btn {
+    padding: .15rem .15rem;
+    font-size: .8rem;
+    line-height: 1.0;
+}
+
 
 /** Course block hanging indent, etc.
 -------------------------*/
