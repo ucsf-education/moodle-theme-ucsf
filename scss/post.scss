@@ -696,6 +696,25 @@ h3.mod_quiz-section-heading {
   font-size: 1.25rem;
 }
 
+/** Special block formatting adjustments
+-------------------------*/
+
+/* reduces font size in mass actions block */
+#block-massaction {
+  font-size: .75rem;
+}
+
+/* reduces width of move and duplicates menus in mass actions block */
+#block-massaction-control-section-list-moveto,
+#block-massaction-control-section-list-duplicateto {
+  width: 75%;
+}
+
+/* reduces width of section selection menu in mass actions block */
+#block-massaction-control-section-list-select {
+  width: 80%;
+}
+
 
 /** Messaging
 -------------------------*/
