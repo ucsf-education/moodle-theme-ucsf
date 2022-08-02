@@ -70,7 +70,7 @@ class core_renderer extends \theme_boost\output\core_renderer
 
         return html_writer::div(
             $this->render($am),
-            'd-inline-block nav-link',
+            'd-inline-block nav-link ucsf-helpmenu',
         );
     }
 
