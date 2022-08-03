@@ -45,7 +45,33 @@ class core_renderer extends \theme_boost\output\core_renderer
             return '';
         }
 
-        return $this->render_from_template('theme_ucsf/helpmenu_popover', $menu);
+        $am = new \action_menu();
+        $am->set_menu_trigger(
+            html_writer::span(
+                $this->pix_icon(
+                    'e/help',
+                    get_string('togglehelpmenu', 'theme_ucsf'),
+                    'core'
+                )
+            )
+        );
+        $am->set_action_label(get_string('togglehelpmenu', 'theme_ucsf'));
+        $am->set_alignment(\action_menu::TR, \action_menu::BR);
+        $am->set_nowrap_on_items();
+        foreach ($menu->items as $item) {
+            $al = new \action_menu_link_secondary(
+                new moodle_url($item['url']),
+                null,
+                $item['title'],
+                $item['options'],
+            );
+            $am->add($al);
+        }
+
+        return html_writer::div(
+            $this->render($am),
+            'd-inline-block nav-link ucsf-helpmenu',
+        );
     }
 
     /**

@@ -1,0 +1,10 @@
+.ucsf-helpmenu {
+
+  /* hide the caret on the dropdown toggle */
+  .dropdown-toggle .caret {
+    display: none;
+  }
+  .dropdown-toggle::after {
+    content: none;
+  }
+}

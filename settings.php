@@ -269,15 +269,6 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
-    // Help/Feedback button title
-    $name = 'theme_ucsf/helpfeedbacktitle';
-    $title = get_string('helpfeedbacktitle', 'theme_ucsf');
-    $description = get_string('helpfeedbacktitledesc', 'theme_ucsf');
-    $default = 'Help/Feedback';
-    $setting = new admin_setting_configtext($name, $title, $description, $default);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
-
     // Select the number of links
     $name = 'theme_ucsf/numberoflinks';
     $title = get_string('helpfeedbacknumlinks', 'theme_ucsf');

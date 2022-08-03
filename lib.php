@@ -201,9 +201,6 @@ function theme_ucsf_get_helpmenu(moodle_page $page)
 
     $menu = new \stdClass();
 
-    $title = _theme_ucsf_get_setting($theme_settings, 'helpfeedbacktitle', '');
-    $menu->title = empty($title) ? get_string('helpmenutitle', 'theme_ucsf') : $title;
-
     $menu->items = array();
     $number_of_links = (int) _theme_ucsf_get_setting($theme_settings, 'numberoflinks', 0);
     for ($i = 1; $i <= $number_of_links; $i++) {
