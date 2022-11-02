@@ -15,19 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * UCSF Theme
- *
- * @package   theme_ucsf
- * @copyright 2018 The Regents of the University of California
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package theme_ucsf
+ * @copyright 2022 The Regents of the University of California
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2022080400;
-$plugin->requires  = 2021051100;
 $plugin->component = 'theme_ucsf';
-
-$plugin->dependencies = [
-    'theme_boost' => 2021051700
-];
+$plugin->version = 2022110200;
+$plugin->release = 'v4.0-alpha';
+$plugin->requires = 2022041900;
+$plugin->supported = [400, 400];
+//$plugin->maturity = MATURITY_ALPHA;
+$plugin->dependencies = ['theme_boost' => 2022041900];
