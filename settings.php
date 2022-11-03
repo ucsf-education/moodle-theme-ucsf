@@ -52,7 +52,7 @@ if ($ADMIN->fulltree) {
     $choices['default.scss'] = 'default.scss';
     $choices['plain.scss'] = 'plain.scss';
 
-    $setting = new admin_setting_configthemepreset($name, $title, $description, $default, $choices, 'boost');
+    $setting = new admin_setting_configthemepreset($name, $title, $description, $default, $choices, 'ucsf');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
