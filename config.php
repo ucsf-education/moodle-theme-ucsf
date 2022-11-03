@@ -28,7 +28,7 @@ $THEME->editor_sheets = [];
 $THEME->editor_scss = ['editor'];
 $THEME->usefallback = true;
 $THEME->scss = function($theme) {
-    return theme_boost_get_main_scss_content($theme);
+    return theme_ucsf_get_main_scss_content($theme);
 };
 
 $THEME->parents = ['boost'];
