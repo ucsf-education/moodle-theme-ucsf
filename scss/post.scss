@@ -1,1 +1,91 @@
 // Post SCSS for the theme.
+
+/*=======================================
+ * Variables
+ ======================================*/
+
+$ucsf-navbar-height: 40px; // height of UCSF navbar
+
+/*=======================================
+ * Layout
+ ======================================*/
+
+// makes room for UCSF navbar
+.drawer,
+.navbar {
+  margin-top: $ucsf-navbar-height;
+}
+
+// adjust positioning of drawer toggles for UCSF navbar
+.drawer-toggles {
+  .drawer-toggler {
+    top: calc(#{$navbar-height + $ucsf-navbar-height} + 0.7rem);
+  }
+}
+
+
+/*=======================================
+ * Components
+ ======================================*/
+
+/*---------------------------------------
+ * UCSF Banner Navigation
+---------------------------------------*/
+
+.ucsf-banner-nav {
+  background-color: #052049;
+  font-family: "Helvetica Neue", "arial", sans-serif;
+  min-height: $ucsf-navbar-height;
+  overflow: hidden;
+
+  .top-header-container {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    ul.menu {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+
+      li {
+        display: inline-block;
+        float: right;
+        font-size: 14px;
+        padding: 12px 10px 12px;
+
+        &.first {
+          background-image: url([[pix:theme|ucsf-logo-banner]]);
+          background-position: 0 35%;
+          background-position-x: 0;
+          background-position-y: 35%;
+          background-repeat: no-repeat;
+          float: left;
+          padding: 12px 0 12px 58px;
+        }
+
+        a {
+          color: #fff;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm)  {
+  .ucsf-banner-nav .top-header-container ul.menu li {
+    display: none;
+
+    &.first {
+      display: inline-block;
+      overflow: hidden;
+      text-indent: 100%;
+      white-space: nowrap;
+    }
+  }
+}
+
