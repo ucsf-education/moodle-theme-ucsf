@@ -4,6 +4,8 @@
  * Variables
  ======================================*/
 
+$ucsf-brand-primary-color: #052049; // background color for UCSF header nav and custom footer
+$ucsf-brand-fonts: "Helvetica Neue", "arial", sans-serif; // UCSF brand fonts
 $ucsf-navbar-height: 40px; // height of UCSF navbar
 
 /*=======================================
@@ -33,12 +35,12 @@ $ucsf-navbar-height: 40px; // height of UCSF navbar
 ---------------------------------------*/
 
 .ucsf-banner-nav {
-  background-color: #052049;
-  font-family: "Helvetica Neue", "arial", sans-serif;
+  background-color: $ucsf-brand-primary-color;
+  font-family: $ucsf-brand-fonts;
   min-height: $ucsf-navbar-height;
   overflow: hidden;
 
-  .top-header-container {
+  .container {
     padding-left: 15px;
     padding-right: 15px;
 
@@ -66,10 +68,6 @@ $ucsf-navbar-height: 40px; // height of UCSF navbar
         a {
           color: #fff;
           text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-          }
         }
       }
     }
@@ -89,3 +87,16 @@ $ucsf-navbar-height: 40px; // height of UCSF navbar
   }
 }
 
+/*---------------------------------------
+ * UCSF Footer
+---------------------------------------*/
+.ucsf-footer {
+  @include border-radius();
+  color: #fff;
+  background-color: $ucsf-brand-primary-color;
+  font-family: $ucsf-brand-fonts;
+
+  a {
+    color: #fff;
+  }
+}
