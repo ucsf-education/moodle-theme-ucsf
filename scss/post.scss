@@ -85,8 +85,8 @@ body.pagelayout-login {
   }
 }
 
-@include media-breakpoint-down(sm)  {
-  .ucsf-banner-nav .top-header-container ul.menu li {
+@include media-breakpoint-down(sm) {
+  .ucsf-banner-nav .container ul.menu li {
     display: none;
 
     &.first {
