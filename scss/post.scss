@@ -18,11 +18,22 @@ $ucsf-navbar-height: 40px; // height of UCSF navbar
   margin-top: $ucsf-navbar-height;
 }
 
+// on the login page, add padding to the entire html body on top
+// to prevent overlap from the UCSF navbar.
+body.pagelayout-login {
+  padding-top: $ucsf-navbar-height;
+}
+
 // adjust positioning of drawer toggles for UCSF navbar
 .drawer-toggles {
   .drawer-toggler {
     top: calc(#{$navbar-height + $ucsf-navbar-height} + 0.7rem);
   }
+}
+
+// give more room for page content on pages that use the drawers layout
+#page.drawers {
+  margin-top: $navbar-height + $ucsf-navbar-height;
 }
 
 
