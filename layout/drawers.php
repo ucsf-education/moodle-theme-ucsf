@@ -30,9 +30,6 @@ require_once($CFG->dirroot . '/course/lib.php');
 // Add block button in editing mode.
 $addblockbutton = $OUTPUT->addblockbutton();
 
-$current_course_category = _theme_ucsf_get_current_course_category($PAGE, $COURSE);
-$parent_categories = _theme_ucsf_get_category_roots($current_course_category);
-
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
 user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
