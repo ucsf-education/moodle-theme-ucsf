@@ -111,5 +111,4 @@ $templatecontext = [
 $PAGE->requires->js('/theme/ucsf/js/datepicker.js');
 $PAGE->requires->js('/theme/ucsf/js/usereditform.js');
 
-
 echo $OUTPUT->render_from_template('theme_ucsf/drawers', $templatecontext);
