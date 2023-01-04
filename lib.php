@@ -99,32 +99,6 @@ function _theme_ucsf_get_setting($theme_settings, $setting, $default = false)
 }
 
 /**
- * Recursively retrieve all ancestral categories for a given category, including the category itself.
- *
- * @param int $id The category id.
- * @param array $categories A partial list of ancestral category ids.
- *
- * @return array A list full list of ancestral category ids, including the given id itself.
- * @throws dml_exception
- */
-function _theme_ucsf_recursively_get_category_roots($id, $categories = array())
-{
-    global $DB;
-
-    $sql = "SELECT cc.parent, cc.name FROM {course_categories} cc WHERE cc.id = ?";
-    $cats = $DB->get_records_sql($sql, array($id));
-
-    if (empty($cats)) {
-        return $categories;
-    }
-
-    $categories[] = $id;
-    $cat = array_shift($cats);
-
-    return _theme_ucsf_recursively_get_category_roots($cat->parent, $categories);
-}
-
-/**
  * Returns a list of all ancestral categories of a given category.
  * The first element in that list is the given category itself, followed by its parent, the parent's parent and so on.
  *
@@ -135,6 +109,7 @@ function _theme_ucsf_recursively_get_category_roots($id, $categories = array())
  */
 function _theme_ucsf_get_category_roots($id)
 {
+    global $DB;
     static $cache = null;
 
     if (! isset($cache)) {
@@ -142,8 +117,9 @@ function _theme_ucsf_get_category_roots($id)
     }
 
     if (! array_key_exists($id, $cache)) {
-        $ids = _theme_ucsf_recursively_get_category_roots($id);
-        $cache[$id] = _theme_ucsf_recursively_get_category_roots($id);
+        $category = $DB->get_record('course_categories', array("id" => $id));
+        $ids = array_reverse(explode("/",trim( $category->path, "/")));
+        $cache[$id] = $ids;
         array_shift($ids);
         // cache category roots of all ancestors in that category hierarchy while at it.
         for ($i = 0, $n = count($ids); $i < $n; $i++) {
@@ -157,7 +133,6 @@ function _theme_ucsf_get_category_roots($id)
 
     return $cache[$id];
 }
-
 
 /**
  * Retrieves the current course category id.
