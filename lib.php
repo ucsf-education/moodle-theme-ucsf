@@ -118,6 +118,9 @@ function _theme_ucsf_get_category_roots($id)
 
     if (! array_key_exists($id, $cache)) {
         $category = $DB->get_record('course_categories', array("id" => $id));
+        if (false === $category) {
+            return array();
+        }
         $ids = array_reverse(explode("/",trim( $category->path, "/")));
         $cache[$id] = $ids;
         array_shift($ids);
