@@ -15,64 +15,6 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package   theme_ucsf
- * @copyright 2018 The Regents of the University of California
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-class theme_ucsf_add_category_customization extends admin_setting_configselect
-{
-
-    /**
-     * @inheritdoc
-     */
-    public function write_setting($data)
-    {
-
-        $categories = get_config('theme_ucsf');
-
-        if ($data != 0) {
-            set_config('displaycoursetitle'.$data, 1, 'theme_ucsf');
-        }
-
-        if ( ! empty($categories->all_categories)) {
-            set_config('all_categories', $categories->all_categories.','.$data, 'theme_ucsf');
-        } else {
-            set_config('all_categories', $data, 'theme_ucsf');
-        }
-
-        return parent::write_setting(0);
-
-    }
-}
-
-class theme_ucsf_remove_category_customization extends admin_setting_configselect
-{
-
-    /**
-     * @inheritdoc
-     */
-    public function write_setting($data)
-    {
-
-        $categories = get_config('theme_ucsf');
-
-        if ( ! empty($categories->all_categories)) {
-            $temp_array = explode(",", $categories->all_categories);
-            if (in_array($data, $temp_array)) {
-
-                $arr = array_diff($temp_array, array($data));
-                $fin = implode(",", $arr);
-
-                set_config('all_categories', $fin, 'theme_ucsf');
-            }
-        }
-
-        return parent::write_setting(0);
-    }
-}
-
-
-/**
  * YEAR, MONTH, DATE, HOUR AND MINUTE jquery selector
  *
  * Class that stores selected year, month, date, hour and minute

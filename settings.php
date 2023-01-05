@@ -23,6 +23,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
+
+    require_once($CFG->dirroot . '/theme/ucsf/locallib.php');
+
+    $theme_config = get_config('theme_ucsf');
     $settings = new theme_boost_admin_settingspage_tabs('themesettingucsf', get_string('configtitle', 'theme_ucsf'));
     $page = new admin_settingpage('theme_ucsf_general', get_string('generalsettings', 'theme_ucsf'));
 
@@ -31,7 +35,7 @@ if ($ADMIN->fulltree) {
     // Section links.
     $default = 'navigation,settings,course_list,section_links';
     $setting = new admin_setting_configtext('theme_ucsf/unaddableblocks',
-        get_string('unaddableblocks', 'theme_ucsf'), get_string('unaddableblocks_desc', 'theme_ucsf'), $default, PARAM_TEXT);
+            get_string('unaddableblocks', 'theme_ucsf'), get_string('unaddableblocks_desc', 'theme_ucsf'), $default, PARAM_TEXT);
     $page->add($setting);
 
     // Preset.
@@ -58,11 +62,11 @@ if ($ADMIN->fulltree) {
 
     // Preset files setting.
     $name = 'theme_ucsf/presetfiles';
-    $title = get_string('presetfiles','theme_ucsf');
+    $title = get_string('presetfiles', 'theme_ucsf');
     $description = get_string('presetfiles_desc', 'theme_ucsf');
 
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
-        array('maxfiles' => 20, 'accepted_types' => array('.scss')));
+            array('maxfiles' => 20, 'accepted_types' => array('.scss')));
     $page->add($setting);
 
     // Background image setting.
@@ -98,13 +102,34 @@ if ($ADMIN->fulltree) {
 
     // Raw SCSS to include before the content.
     $setting = new admin_setting_scsscode('theme_ucsf/scsspre',
-        get_string('rawscsspre', 'theme_ucsf'), get_string('rawscsspre_desc', 'theme_ucsf'), '', PARAM_RAW);
+            get_string('rawscsspre', 'theme_ucsf'), get_string('rawscsspre_desc', 'theme_ucsf'), '', PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Raw SCSS to include after the content.
     $setting = new admin_setting_scsscode('theme_ucsf/scss', get_string('rawscss', 'theme_ucsf'),
-        get_string('rawscss_desc', 'theme_ucsf'), '', PARAM_RAW);
+            get_string('rawscss_desc', 'theme_ucsf'), '', PARAM_RAW);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
+    $settings->add($page);
+
+    // ----------------------------------------------------
+    // Category Customizations
+    // ----------------------------------------------------
+    $page = new admin_settingpage(
+            'theme_ucsf_category_customizations',
+            get_string('categorycustomizationsheading', 'theme_ucsf')
+    );
+
+    $categories = core_course_category::make_categories_list('', 0, ' | ');
+    $setting = new admin_setting_configmulticheckbox(
+            'theme_ucsf/allcategories',
+            get_string('categorycustomizations', 'theme_ucsf'),
+            get_string('categorycustomizationsdesc', 'theme_ucsf'),
+            array(),
+            $categories
+    );
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
