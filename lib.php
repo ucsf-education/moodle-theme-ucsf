@@ -20,6 +20,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_ucsf\helpmenu;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -78,6 +80,47 @@ function theme_ucsf_get_main_scss_content($theme) {
 
     // Combine them together.
     return $pre . "\n" . $scss . "\n" . $post;
+}
+
+/**
+ * Returns the help menu data as an object, or NULL if none could be if the help menu has been disabled.
+ *
+ * @param moodle_page $page
+ * @return stdClass|null
+ */
+function theme_ucsf_get_helpmenu(moodle_page $page)
+{
+    $theme_settings = $page->theme->settings;
+
+    if (! _theme_ucsf_get_setting($theme_settings, 'helpfeedbackenabled')) {
+        return null;
+    }
+
+    $menu = new stdClass();
+
+    $menu->items = array();
+    $number_of_links = (int) _theme_ucsf_get_setting($theme_settings, 'numberoflinks', 0);
+    for ($i = 1; $i <= $number_of_links; $i++) {
+        $url = _theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'link', '');
+        $title = _theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'linklabel', '');
+        $target = _theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'linktarget');
+
+        if (! empty($url)) {
+            $menu->items[] = array(
+                    'url'     => $url,
+                    'title'   => $title,
+                    'options' => array(
+                            'target' => empty($target) ? '_self' : '_blank',
+                    ),
+            );
+        }
+    }
+
+    if (empty($menu->items)) {
+        return null;
+    }
+
+    return $menu;
 }
 
 /**
@@ -213,4 +256,19 @@ function _theme_ucsf_find_first_configured_category($theme_settings, array $cate
     }
 
     return 0;
+}
+
+/**
+ * Callback to the  for injecting our help menu into the nav bar.
+ * @link https://docs.moodle.org/dev/Output_callbacks#render_navbar_output
+ * @param renderer_base $renderer
+ * @return string
+ */
+function theme_ucsf_render_navbar_output(\renderer_base $renderer) {
+    global $CFG, $PAGE;
+
+    //require_once($CFG->dirroot . '/theme/ucsf/classes/navigation/output/helpmenu.php');
+
+    $helpmenu = new helpmenu($PAGE);
+    return $renderer->render($helpmenu);
 }

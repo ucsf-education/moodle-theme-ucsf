@@ -16,16 +16,34 @@
 
 namespace theme_ucsf\output;
 
+use coding_exception;
+use moodle_exception;
 use theme_boost\output\core_renderer as boost_core_renderer;
+use theme_ucsf\helpmenu;
 
 defined('MOODLE_INTERNAL') || die;
 
 /**
  * Theme renderer.
+ *
  * @package   theme_ucsf
  * @copyright 2023 The Regents of the University of California
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class core_renderer extends boost_core_renderer
-{
+class core_renderer extends boost_core_renderer {
+
+    /**
+     * Renders the help menu.
+     *
+     * @return string The help menu HTML, or a blank string if the given menu is empty.
+     * @throws coding_exception
+     * @throws moodle_exception
+     */
+    public function render_helpmenu(helpmenu $menu): string {
+            $m = $menu->export_for_template($this);
+            if (empty($m->items)) {
+                return '';
+            }
+            return $this->render_from_template('theme_ucsf/helpmenu', $m);
+        }
 }
