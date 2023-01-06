@@ -259,16 +259,26 @@ function _theme_ucsf_find_first_configured_category($theme_settings, array $cate
 }
 
 /**
- * Callback to the  for injecting our help menu into the nav bar.
+ * Output callback for injecting our help menu into the nav bar.
+ *
  * @link https://docs.moodle.org/dev/Output_callbacks#render_navbar_output
  * @param renderer_base $renderer
  * @return string
+ * @throws coding_exception
  */
-function theme_ucsf_render_navbar_output(\renderer_base $renderer) {
-    global $CFG, $PAGE;
-
-    //require_once($CFG->dirroot . '/theme/ucsf/classes/navigation/output/helpmenu.php');
-
+function theme_ucsf_render_navbar_output(renderer_base $renderer): string {
+    global $PAGE;
     $helpmenu = new helpmenu($PAGE);
     return $renderer->render($helpmenu);
+}
+
+
+/**
+ * Output callback for injecting custom JS into each page.
+ * @link https://docs.moodle.org/dev/Output_callbacks#before_footer
+ */
+function theme_ucsf_before_footer(): void {
+    global $PAGE;
+    $PAGE->requires->js('/theme/ucsf/js/datepicker.js');
+    $PAGE->requires->js('/theme/ucsf/js/usereditform.js');
 }
