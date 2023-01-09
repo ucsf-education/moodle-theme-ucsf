@@ -205,7 +205,7 @@ if ($ADMIN->fulltree) {
 
     $categories = core_course_category::make_categories_list('', 0, ' | ');
     $setting = new admin_setting_configmulticheckbox(
-            'theme_ucsf/allcategories',
+            'theme_ucsf/all_categories',
             get_string('categorycustomizations', 'theme_ucsf'),
             get_string('categorycustomizationsdesc', 'theme_ucsf'),
             array(),
