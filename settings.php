@@ -30,6 +30,8 @@ if ($ADMIN->fulltree) {
     $settings = new theme_boost_admin_settingspage_tabs('themesettingucsf', get_string('configtitle', 'theme_ucsf'));
     $page = new admin_settingpage('theme_ucsf_general', get_string('generalsettings', 'theme_ucsf'));
 
+    $categories = core_course_category::make_categories_list('', 0, ' | ');
+
     // Unaddable blocks.
     // Blocks to be excluded when this theme is enabled in the "Add a block" list: Administration, Navigation, Courses and
     // Section links.
@@ -114,7 +116,6 @@ if ($ADMIN->fulltree) {
 
     $settings->add($page);
 
-
     // ----------------------------------------------------
     // Helpmenu
     // ----------------------------------------------------
@@ -155,13 +156,13 @@ if ($ADMIN->fulltree) {
     $numberoflinks = intval(get_config('theme_ucsf', 'numberoflinks'), 10);
     for ($i = 1; $i <= $numberoflinks; $i++) {
 
-        $name = 'theme_ucsf/helpfeedback'.$i.'heading';
+        $name = 'theme_ucsf/helpfeedback' . $i . 'heading';
         $heading = get_string('helpfeedbackno', 'theme_ucsf', array('help' => $i));
         $information = "";
         $setting = new admin_setting_heading($name, $heading, $information);
         $page->add($setting);
 
-        $name = 'theme_ucsf/helpfeedback'.$i.'link';
+        $name = 'theme_ucsf/helpfeedback' . $i . 'link';
         $title = get_string('helpfeedbacklink', 'theme_ucsf');
         $description = get_string('helpfeedbacklinkdesc', 'theme_ucsf');
         $default = '';
@@ -169,7 +170,7 @@ if ($ADMIN->fulltree) {
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
-        $name = 'theme_ucsf/helpfeedback'.$i.'linklabel';
+        $name = 'theme_ucsf/helpfeedback' . $i . 'linklabel';
         $title = get_string('helpfeedbacklinklabel', 'theme_ucsf');
         $description = get_string('helpfeedbacklinklabeldesc', 'theme_ucsf');
         $default = '';
@@ -178,7 +179,7 @@ if ($ADMIN->fulltree) {
         $page->add($setting);
 
         // Help/Feedback link target
-        $name = 'theme_ucsf/helpfeedback'.$i.'linktarget';
+        $name = 'theme_ucsf/helpfeedback' . $i . 'linktarget';
         $title = get_string('helpfeedbacklinktarget', 'theme_ucsf');
         $description = get_string('helpfeedbacklinktargetdesc', 'theme_ucsf');
         $default = '0';
@@ -196,6 +197,223 @@ if ($ADMIN->fulltree) {
     $settings->add($page);
 
     // ----------------------------------------------------
+    // Banner Alerts
+    // ----------------------------------------------------
+
+    $page = new admin_settingpage('theme_ucsf_alerts', get_string('alertsheading', 'theme_ucsf'));
+
+    $name = 'theme_ucsf/number_of_alerts';
+    $title = get_string('number_of_alerts', 'theme_ucsf');
+    $description = get_string('number_of_alertsdesc', 'theme_ucsf');
+    $default = '0';
+    $number_of_alerts = array(
+            0 => '0',
+            1 => '1',
+            2 => '2',
+            3 => '3',
+            4 => '4',
+            5 => '5',
+            6 => '6',
+            7 => '7',
+            8 => '8',
+            9 => '9',
+            10 => '10'
+    );
+    $setting = new admin_setting_configselect($name, $title, $description, $default, $number_of_alerts);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
+    $numberofalerts = get_config('theme_ucsf', 'number_of_alerts');
+    for ($i = 1; $i <= $numberofalerts; $i++) {
+        // This is the descriptor for Alert One
+        $name = 'theme_ucsf/alert' . $i . 'info';
+        $heading = get_string('alert' . $i, 'theme_ucsf');
+        $information = "";
+        $setting = new admin_setting_heading($name, $heading, $information);
+        $page->add($setting);
+
+        // Enable Alert
+        $name = 'theme_ucsf/enable' . $i . 'alert';
+        $title = get_string('enablealert', 'theme_ucsf');
+        $description = get_string('enablealertdesc', 'theme_ucsf');
+        $default = false;
+        $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        // Recurring alerts.
+        $name = 'theme_ucsf/recurring_alert' . $i;
+        $title = get_string('recurring_alert', 'theme_ucsf');
+        $description = get_string('recurring_alertdesc', 'theme_ucsf');
+        $default = '1';
+        $recurring_alerts = array(
+                '1' => get_string('never_end', 'theme_ucsf'),
+                '2' => get_string('one_time', 'theme_ucsf'),
+                '3' => get_string('daily', 'theme_ucsf'),
+                '4' => get_string('weekly', 'theme_ucsf')
+        );
+        $setting = new admin_setting_configselect($name, $title, $description, $default, $recurring_alerts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        $alert_settings = 'recurring_alert' . $i;
+
+        if (isset($theme_config->$alert_settings)) {
+            $alert_choice = $theme_config->$alert_settings;
+        } else {
+            $alert_choice = null;
+        }
+        if ($alert_choice == '1') {
+            $null = '';
+
+        } else if ($alert_choice == '2') {
+
+            // Start date.
+            $name = 'theme_ucsf/start_date' . $i;
+            $title = get_string('startenddate', 'theme_ucsf');
+            $date = 'start_date' . $i;
+            $hour = 'start_hour' . $i;
+            $minute = 'start_minute' . $i;
+            $enddate = 'end_date' . $i;
+            $endhour = 'end_hour' . $i;
+            $endminute = 'end_minute' . $i;
+            $description = get_string('startenddatedesc', 'theme_ucsf');
+            $setting = new theme_ucsf_datetimepicker(
+                    $name,
+                    $date,
+                    $hour,
+                    $minute,
+                    $enddate,
+                    $endhour,
+                    $endminute,
+                    $title,
+                    $description
+            );
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);
+
+        } else if ($alert_choice == '3') {
+
+            // Start/end daily date picker
+            $name = 'theme_ucsf/start_date_daily' . $i;
+            $title = get_string('startenddate', 'theme_ucsf');
+            $date_start = 'start_date_daily' . $i;
+            $date_end = 'end_date_daily' . $i;
+            $description = get_string('startenddatedesc', 'theme_ucsf');
+            $setting = new theme_ucsf_datepicker($name, $date_start, $date_end, $title, $description);
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);
+
+            //Start/end daily time picker
+            $name = 'theme_ucsf/start_hour_and_minute_daily' . $i;
+            $title = get_string('end_date_weekly', 'theme_ucsf');
+            $hour_start = 'start_hour_daily' . $i;
+            $minute_start = 'start_minute_daily' . $i;
+            $hour_end = 'end_hour_daily' . $i;
+            $minute_end = 'end_minute_daily' . $i;
+            $description = get_string('start_hour_and_minute_dailydesc', 'theme_ucsf');
+            $setting = new theme_ucsf_timepicker(
+                    $name,
+                    $hour_start,
+                    $minute_start,
+                    $hour_end,
+                    $minute_end,
+                    $title,
+                    $description
+            );
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);
+
+        } else if ($alert_choice == '4') {
+
+            // Start/end weekly date picker
+            $name = 'theme_ucsf/start_date_weekly' . $i;
+            $title = get_string('startenddate', 'theme_ucsf');
+            $date = 'start_date_weekly' . $i;
+            $enddate = 'end_date_weekly' . $i;
+            $default = null;
+            $description = get_string('startenddatedesc', 'theme_ucsf');
+            $setting = new theme_ucsf_datepicker($name, $date, $enddate, $title, $description, $default);
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);
+
+            // Start/end weekly date picker
+            $name = 'theme_ucsf/set_weekly_time' . $i;
+            $title = get_string('end_date_weekly', 'theme_ucsf');
+            $hour = 'end_hour_weekly' . $i;
+            $minute = 'end_minute_weekly' . $i;
+            $start_hour = 'start_hour_weekly' . $i;
+            $start_minute = 'start_minute_weekly' . $i;
+            $default = array();
+            $description = get_string('end_weeklydesc', 'theme_ucsf');
+            $setting = new theme_ucsf_timepicker(
+                    $name,
+                    $start_hour,
+                    $start_minute,
+                    $hour,
+                    $minute,
+                    $title,
+                    $description,
+                    $default
+            );
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);
+
+            // Select day in week to show an alert.
+            $name = 'theme_ucsf/show_week_day' . $i;
+            $title = get_string('show_week_day', 'theme_ucsf');
+            $description = get_string('show_week_daydesc', 'theme_ucsf');
+            $default = '0';
+            $weekdays = array(
+                    0 => new lang_string('sunday', 'calendar'),
+                    1 => new lang_string('monday', 'calendar'),
+                    2 => new lang_string('tuesday', 'calendar'),
+                    3 => new lang_string('wednesday', 'calendar'),
+                    4 => new lang_string('thursday', 'calendar'),
+                    5 => new lang_string('friday', 'calendar'),
+                    6 => new lang_string('saturday', 'calendar')
+            );
+            $setting = new admin_setting_configselect($name, $title, $description, $default, $weekdays);
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);
+        }
+
+        //Add category - list.
+        $alert_categories = ['dashboard' => 'Dashboard Only'] + $categories;
+        $name = 'theme_ucsf/categories_list_alert' . $i;
+        $title = get_string('categories_list_alert', 'theme_ucsf');
+        $description = get_string('categories_list_alertdesc', 'theme_ucsf');
+        $default = 'dashboard';
+        $setting = new admin_setting_configselect($name, $title, $description, $default, $alert_categories);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        // Alert Type.
+        $name = 'theme_ucsf/alert' . $i . 'type';
+        $title = get_string('alerttype', 'theme_ucsf');
+        $description = get_string('alerttypedesc', 'theme_ucsf');
+        $alert_info = get_string('alert_info', 'theme_ucsf');
+        $alert_warning = get_string('alert_warning', 'theme_ucsf');
+        $alert_general = get_string('alert_general', 'theme_ucsf');
+        $default = 'info';
+        $alert_choices = array('info' => $alert_info, 'error' => $alert_warning, 'success' => $alert_general);
+        $setting = new admin_setting_configselect($name, $title, $description, $default, $alert_choices);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        // Alert Text.
+        $name = 'theme_ucsf/alert' . $i . 'text';
+        $title = get_string('alerttext', 'theme_ucsf');
+        $description = get_string('alerttextdesc', 'theme_ucsf');
+        $default = '';
+        $setting = new admin_setting_configtextarea($name, $title, $description, $default);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
+
+    $settings->add($page);
+
+    // ----------------------------------------------------
     // Category Customizations
     // ----------------------------------------------------
     $page = new admin_settingpage(
@@ -203,7 +421,6 @@ if ($ADMIN->fulltree) {
             get_string('categorycustomizationsheading', 'theme_ucsf')
     );
 
-    $categories = core_course_category::make_categories_list('', 0, ' | ');
     $setting = new admin_setting_configmulticheckbox(
             'theme_ucsf/all_categories',
             get_string('categorycustomizations', 'theme_ucsf'),
