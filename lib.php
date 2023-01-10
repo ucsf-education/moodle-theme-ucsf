@@ -19,8 +19,7 @@
  * @copyright 2022 The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-use theme_ucsf\helpmenu;
+use theme_ucsf\output\helpmenu;
 
 defined('MOODLE_INTERNAL') || die();
 

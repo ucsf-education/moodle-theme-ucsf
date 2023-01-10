@@ -19,7 +19,6 @@ namespace theme_ucsf\output;
 use coding_exception;
 use moodle_exception;
 use theme_boost\output\core_renderer as boost_core_renderer;
-use theme_ucsf\helpmenu;
 
 defined('MOODLE_INTERNAL') || die;
 

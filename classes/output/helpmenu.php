@@ -14,13 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace theme_ucsf;
+namespace theme_ucsf\output;
 
 use moodle_page;
 use renderable;
 use renderer_base;
 use stdClass;
 use templatable;
+use theme_ucsf\constants;
 
 /**
  * Help menu.
@@ -43,19 +44,18 @@ class helpmenu implements renderable, templatable {
     /**
      * Retrieve menu items.
      *
-     * @return array menu items. Empty if no menu items are configured or if the menu is disabled.
+     * @param renderer_base $output
+     * @return stdClass
      */
     public function export_for_template(renderer_base $output): stdClass {
-        if (!$this->show_menu()) {
-            return array();
-        }
-
         $menu = new stdClass();
         $menu->items = [];
 
-        $number_of_items = $this->get_number_of_items();
+        if (!$this->show_menu()) {
+            return $menu;
+        }
 
-        for ($i = 1; $i <= $number_of_items; $i++) {
+        for ($i = 1; $i <= constants::THEME_UCSF_SETTING_HELPMENU_ITEMS_COUNT; $i++) {
             $url = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'link', '');
             $title = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'linklabel', '');
             $target = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'linktarget');
@@ -72,14 +72,6 @@ class helpmenu implements renderable, templatable {
     }
 
     /**
-     * Retrieves the number of configured help menu items.
-     * @return int
-     */
-    protected function get_number_of_items(): int {
-        return (int) _theme_ucsf_get_setting($this->theme_settings, 'numberoflinks', 0);
-    }
-
-    /**
      * Determine if the help menu should be shown.
      * @return bool
      */
@@ -87,14 +79,9 @@ class helpmenu implements renderable, templatable {
         if (! _theme_ucsf_get_setting($this->theme_settings, 'helpfeedbackenabled')) {
             return false;
         }
-        $number_of_items = $this->get_number_of_items();
-
-        if (! $number_of_items) {
-            return false;
-        }
 
         // check if at least one of the menu items actually contains a link
-        for ($i = 1; $i <= $number_of_items; $i++) {
+        for ($i = 1; $i <= constants::THEME_UCSF_SETTING_HELPMENU_ITEMS_COUNT; $i++) {
             $url = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'link', '');
             if (!empty($url)) {
                 return true;

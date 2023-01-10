@@ -20,6 +20,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_ucsf\constants;
+
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
@@ -130,36 +132,10 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
-    // Select the number of links
-    $name = 'theme_ucsf/numberoflinks';
-    $title = get_string('helpfeedbacknumlinks', 'theme_ucsf');
-    $description = '';
-    $default = 0;
-    $helpfeedbackchoices = array(
-            0 => '0',
-            1 => '1',
-            2 => '2',
-            3 => '3',
-            4 => '4',
-            5 => '5',
-            6 => '6',
-            7 => '7',
-            8 => '8',
-            9 => '9',
-            10 => '10'
-    );
-
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $helpfeedbackchoices);
-    $page->add($setting);
-
-    // Draw input field for desired number of slides
-    $numberoflinks = intval(get_config('theme_ucsf', 'numberoflinks'), 10);
-    for ($i = 1; $i <= $numberoflinks; $i++) {
-
+    for ($i = 1; $i <= constants::THEME_UCSF_SETTING_HELPMENU_ITEMS_COUNT; $i++) {
         $name = 'theme_ucsf/helpfeedback' . $i . 'heading';
-        $heading = get_string('helpfeedbackno', 'theme_ucsf', array('help' => $i));
-        $information = "";
-        $setting = new admin_setting_heading($name, $heading, $information);
+        $heading = get_string('helpfeedbackno', 'theme_ucsf', $i));
+        $setting = new admin_setting_heading($name, $heading, '');
         $page->add($setting);
 
         $name = 'theme_ucsf/helpfeedback' . $i . 'link';
@@ -178,7 +154,6 @@ if ($ADMIN->fulltree) {
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
-        // Help/Feedback link target
         $name = 'theme_ucsf/helpfeedback' . $i . 'linktarget';
         $title = get_string('helpfeedbacklinktarget', 'theme_ucsf');
         $description = get_string('helpfeedbacklinktargetdesc', 'theme_ucsf');
