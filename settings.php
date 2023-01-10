@@ -204,21 +204,19 @@ if ($ADMIN->fulltree) {
     for ($i = 1; $i <= 10; $i++) {
         // This is the descriptor for Alert One
         $name = 'theme_ucsf/alert' . $i . 'info';
-        $heading = get_string('alert' . $i, 'theme_ucsf');
-        $information = "";
-        $setting = new admin_setting_heading($name, $heading, $information);
+        $heading = get_string('alertnumber', 'theme_ucsf', $i);
+        $setting = new admin_setting_heading($name, $heading, '');
         $page->add($setting);
 
         // Enable Alert
         $name = 'theme_ucsf/enable' . $i . 'alert';
         $title = get_string('enablealert', 'theme_ucsf');
         $description = get_string('enablealertdesc', 'theme_ucsf');
-        $default = false;
-        $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
+        $setting = new admin_setting_configcheckbox($name, $title, $description, '0');
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
-        // Recurring alerts.
+        // Recurrence pattern.
         $name = 'theme_ucsf/recurring_alert' . $i;
         $title = get_string('recurring_alert', 'theme_ucsf');
         $description = get_string('recurring_alertdesc', 'theme_ucsf');
