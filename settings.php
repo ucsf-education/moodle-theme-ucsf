@@ -201,30 +201,7 @@ if ($ADMIN->fulltree) {
     // ----------------------------------------------------
 
     $page = new admin_settingpage('theme_ucsf_alerts', get_string('alertsheading', 'theme_ucsf'));
-
-    $name = 'theme_ucsf/number_of_alerts';
-    $title = get_string('number_of_alerts', 'theme_ucsf');
-    $description = get_string('number_of_alertsdesc', 'theme_ucsf');
-    $default = '0';
-    $number_of_alerts = array(
-            0 => '0',
-            1 => '1',
-            2 => '2',
-            3 => '3',
-            4 => '4',
-            5 => '5',
-            6 => '6',
-            7 => '7',
-            8 => '8',
-            9 => '9',
-            10 => '10'
-    );
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $number_of_alerts);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
-
-    $numberofalerts = get_config('theme_ucsf', 'number_of_alerts');
-    for ($i = 1; $i <= $numberofalerts; $i++) {
+    for ($i = 1; $i <= 10; $i++) {
         // This is the descriptor for Alert One
         $name = 'theme_ucsf/alert' . $i . 'info';
         $heading = get_string('alert' . $i, 'theme_ucsf');
