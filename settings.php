@@ -134,7 +134,7 @@ if ($ADMIN->fulltree) {
 
     for ($i = 1; $i <= constants::THEME_UCSF_SETTING_HELPMENU_ITEMS_COUNT; $i++) {
         $name = 'theme_ucsf/helpfeedback' . $i . 'heading';
-        $heading = get_string('helpfeedbackno', 'theme_ucsf', $i));
+        $heading = get_string('helpfeedbackno', 'theme_ucsf', $i);
         $setting = new admin_setting_heading($name, $heading, '');
         $page->add($setting);
 
@@ -371,7 +371,18 @@ if ($ADMIN->fulltree) {
             get_string('categorycustomizationsheading', 'theme_ucsf')
     );
 
-    $setting = new admin_setting_configmulticheckbox(
+    /* With close to a thousand course categories in production, check boxes won't cut it.
+       So let's use a multi-select dropdown instead, at the expense of making selections more finicky.
+       @todo Revisit if/whenever sanity is restored in on this. [ST 2023/01/10]
+    */
+    //$setting = new admin_setting_configmulticheckbox(
+    //        'theme_ucsf/all_categories',
+    //        get_string('categorycustomizations', 'theme_ucsf'),
+    //        get_string('categorycustomizationsdesc', 'theme_ucsf'),
+    //        array(),
+    //        $categories
+    //);
+    $setting = new admin_setting_configmultiselect(
             'theme_ucsf/all_categories',
             get_string('categorycustomizations', 'theme_ucsf'),
             get_string('categorycustomizationsdesc', 'theme_ucsf'),
