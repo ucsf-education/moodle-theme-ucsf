@@ -55,11 +55,11 @@ class helpmenu implements renderable, templatable {
             return $menu;
         }
 
-        for ($i = 1; $i <= constants::THEME_UCSF_SETTING_HELPMENU_ITEMS_COUNT; $i++) {
+        for ($i = 1; $i <= constants::HELPMENU_ITEMS_COUNT; $i++) {
             $url = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'link', '');
             $title = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'linklabel', '');
             $target = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'linktarget');
-            if (! empty($url)) {
+            if (!empty($url)) {
                 $menu->items[] = array(
                         'url' => $url,
                         'title' => $title,
@@ -73,15 +73,16 @@ class helpmenu implements renderable, templatable {
 
     /**
      * Determine if the help menu should be shown.
+     *
      * @return bool
      */
     protected function show_menu(): bool {
-        if (! _theme_ucsf_get_setting($this->theme_settings, 'helpfeedbackenabled')) {
+        if (!_theme_ucsf_get_setting($this->theme_settings, 'helpfeedbackenabled')) {
             return false;
         }
 
         // check if at least one of the menu items actually contains a link
-        for ($i = 1; $i <= constants::THEME_UCSF_SETTING_HELPMENU_ITEMS_COUNT; $i++) {
+        for ($i = 1; $i <= constants::HELPMENU_ITEMS_COUNT; $i++) {
             $url = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'link', '');
             if (!empty($url)) {
                 return true;

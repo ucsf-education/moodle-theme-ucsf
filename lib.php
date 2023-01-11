@@ -280,4 +280,5 @@ function theme_ucsf_before_footer(): void {
     global $PAGE;
     $PAGE->requires->js('/theme/ucsf/js/datepicker.js');
     $PAGE->requires->js('/theme/ucsf/js/usereditform.js');
+    $PAGE->requires->js('/theme/ucsf/js/banneralerts.js');
 }

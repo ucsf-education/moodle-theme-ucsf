@@ -32,17 +32,39 @@ defined('MOODLE_INTERNAL') || die;
 class core_renderer extends boost_core_renderer {
 
     /**
-     * Renders the help menu.
+     * Renders the given help menu.
      *
+     * @param helpmenu $menu
      * @return string The help menu HTML, or a blank string if the given menu is empty.
      * @throws coding_exception
      * @throws moodle_exception
      */
     public function render_helpmenu(helpmenu $menu): string {
-            $m = $menu->export_for_template($this);
-            if (empty($m->items)) {
-                return '';
-            }
-            return $this->render_from_template('theme_ucsf/helpmenu', $m);
+        $obj = $menu->export_for_template($this);
+        if (empty($obj->items)) {
+            return '';
         }
+        return $this->render_from_template('theme_ucsf/helpmenu', $obj);
+    }
+
+    /**
+     * Renders the given help menu.
+     *
+     * @param banneralerts $banneralerts
+     * @return string The banner alerts HTML, or a blank string if no alerts are given.
+     * @throws coding_exception
+     * @throws moodle_exception
+     */
+    public function render_banneralerts(banneralerts $banneralerts): string {
+        global $CFG;
+        $obj = $banneralerts->export_for_template($this);
+        if (empty($obj->alerts)) {
+            return '';
+        }
+
+        // bolt the callback URL on to the output object
+        $obj->url = $CFG->wwwroot.'/theme/ucsf/banneralerts.php';
+
+        return $this->render_from_template('theme_ucsf/banneralerts', $obj);
+    }
 }

@@ -133,7 +133,7 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
-    for ($i = 1; $i <= constants::THEME_UCSF_SETTING_HELPMENU_ITEMS_COUNT; $i++) {
+    for ($i = 1; $i <= constants::HELPMENU_ITEMS_COUNT; $i++) {
         $heading = get_string('helpfeedbackno', 'theme_ucsf', $i);
         $setting = new admin_setting_heading(
                 'theme_ucsf/helpfeedback' . $i . 'heading',
@@ -176,7 +176,7 @@ if ($ADMIN->fulltree) {
     // ----------------------------------------------------
     $page = new admin_settingpage('theme_ucsf_alerts', get_string('alertsheading', 'theme_ucsf'));
 
-    for ($i = 1; $i <= constants::THEME_UCSF_SETTING_BANNERALERT_ITEMS_COUNT; $i++) {
+    for ($i = 1; $i <= constants::BANNERALERT_ITEMS_COUNT; $i++) {
         $setting = new admin_setting_heading(
                 'theme_ucsf/alert' . $i . 'info',
                 get_string('alertnumber', 'theme_ucsf', $i),
@@ -197,12 +197,12 @@ if ($ADMIN->fulltree) {
                 'theme_ucsf/recurring_alert' . $i,
                 get_string('recurring_alert', 'theme_ucsf'),
                 get_string('recurring_alertdesc', 'theme_ucsf'),
-                constants::THEME_UCSF_SETTING_BANNERALERT_TYPE_UNBOUND,
+                constants::BANNERALERT_TYPE_UNBOUND,
                 array(
-                        constants::THEME_UCSF_SETTING_BANNERALERT_TYPE_UNBOUND => get_string('never_end', 'theme_ucsf'),
-                        constants::THEME_UCSF_SETTING_BANNERALERT_TYPE_DATEBOUND => get_string('one_time', 'theme_ucsf'),
-                        constants::THEME_UCSF_SETTING_BANNERALERT_TYPE_RECURRENCE_DAILY => get_string('daily', 'theme_ucsf'),
-                        constants::THEME_UCSF_SETTING_BANNERALERT_TYPE_RECURRENCE_WEEKLY => get_string('weekly', 'theme_ucsf')
+                        constants::BANNERALERT_TYPE_UNBOUND => get_string('never_end', 'theme_ucsf'),
+                        constants::BANNERALERT_TYPE_DATEBOUND => get_string('one_time', 'theme_ucsf'),
+                        constants::BANNERALERT_TYPE_RECURRENCE_DAILY => get_string('daily', 'theme_ucsf'),
+                        constants::BANNERALERT_TYPE_RECURRENCE_WEEKLY => get_string('weekly', 'theme_ucsf')
                 )
         );
         $setting->set_updatedcallback('theme_reset_all_caches');
@@ -210,7 +210,7 @@ if ($ADMIN->fulltree) {
 
         $alert_type = get_config('theme_ucsf', 'recurring_alert' . $i) ?: '';
         switch ($alert_type) {
-            case constants::THEME_UCSF_SETTING_BANNERALERT_TYPE_DATEBOUND:
+            case constants::BANNERALERT_TYPE_DATEBOUND:
                 $setting = new theme_ucsf_datetimepicker(
                         'theme_ucsf/datebound_datepicker' . $i,
                         'start_date' . $i,
@@ -226,7 +226,7 @@ if ($ADMIN->fulltree) {
                 $page->add($setting);
                 break;
 
-            case constants::THEME_UCSF_SETTING_BANNERALERT_TYPE_RECURRENCE_DAILY:
+            case constants::BANNERALERT_TYPE_RECURRENCE_DAILY:
                 $name = 'theme_ucsf/daily_datepicker' . $i;
                 $title = get_string('startenddate', 'theme_ucsf');
                 $description = get_string('startenddatedesc', 'theme_ucsf');
@@ -255,7 +255,7 @@ if ($ADMIN->fulltree) {
                 $page->add($setting);
                 break;
 
-            case constants::THEME_UCSF_SETTING_BANNERALERT_TYPE_RECURRENCE_WEEKLY:
+            case constants::BANNERALERT_TYPE_RECURRENCE_WEEKLY:
                 $setting = new theme_ucsf_datepicker(
                         'theme_ucsf/weekly_datepicker' . $i,
                         'start_date_weekly' . $i,
@@ -282,22 +282,22 @@ if ($ADMIN->fulltree) {
                         'theme_ucsf/show_week_day' . $i,
                         get_string('show_week_day', 'theme_ucsf'),
                         get_string('show_week_daydesc', 'theme_ucsf'),
-                        constants::THEME_UCSF_SETTING_BANNERALERT_WEEKDAYS_SUNDAY,
+                        constants::BANNERALERT_WEEKDAYS_SUNDAY,
                         array(
-                                constants::THEME_UCSF_SETTING_BANNERALERT_WEEKDAYS_SUNDAY => new lang_string('sunday', 'calendar'),
-                                constants::THEME_UCSF_SETTING_BANNERALERT_WEEKDAYS_MONDAY => new lang_string('monday', 'calendar'),
-                                constants::THEME_UCSF_SETTING_BANNERALERT_WEEKDAYS_TUESDAY => new lang_string('tuesday','calendar'),
-                                constants::THEME_UCSF_SETTING_BANNERALERT_WEEKDAYS_WEDNESDAY => new lang_string('wednesday','calendar'),
-                                constants::THEME_UCSF_SETTING_BANNERALERT_WEEKDAYS_THURSDAY => new lang_string('thursday','calendar'),
-                                constants::THEME_UCSF_SETTING_BANNERALERT_WEEKDAYS_FRIDAY => new lang_string('friday', 'calendar'),
-                                constants::THEME_UCSF_SETTING_BANNERALERT_WEEKDAYS_SATURDAY => new lang_string('saturday','calendar')
+                                constants::BANNERALERT_WEEKDAYS_SUNDAY => new lang_string('sunday', 'calendar'),
+                                constants::BANNERALERT_WEEKDAYS_MONDAY => new lang_string('monday', 'calendar'),
+                                constants::BANNERALERT_WEEKDAYS_TUESDAY => new lang_string('tuesday','calendar'),
+                                constants::BANNERALERT_WEEKDAYS_WEDNESDAY => new lang_string('wednesday','calendar'),
+                                constants::BANNERALERT_WEEKDAYS_THURSDAY => new lang_string('thursday','calendar'),
+                                constants::BANNERALERT_WEEKDAYS_FRIDAY => new lang_string('friday', 'calendar'),
+                                constants::BANNERALERT_WEEKDAYS_SATURDAY => new lang_string('saturday','calendar')
                         )
                 );
                 $setting->set_updatedcallback('theme_reset_all_caches');
                 $page->add($setting);
                 break;
 
-            case constants::THEME_UCSF_SETTING_BANNERALERT_TYPE_UNBOUND:
+            case constants::BANNERALERT_TYPE_UNBOUND:
             default:
                 // do nothing
         }
@@ -306,10 +306,10 @@ if ($ADMIN->fulltree) {
                 'theme_ucsf/categories_list_alert' . $i,
                 get_string('categories_list_alert', 'theme_ucsf'),
                 get_string('categories_list_alertdesc', 'theme_ucsf'),
-                constants::THEME_UCSF_SETTING_BANNERALERT_TARGET_DASHBOARD,
+                constants::BANNERALERT_TARGET_DASHBOARD,
                 array(
-                        constants::THEME_UCSF_SETTING_BANNERALERT_TARGET_DASHBOARD => get_string('dashboardonly', 'theme_ucsf'),
-                        constants::THEME_UCSF_SETTING_BANNERALERT_TARGET_SITEWIDE => get_string('sitewide', 'theme_ucsf'),
+                        constants::BANNERALERT_TARGET_DASHBOARD => get_string('dashboardonly', 'theme_ucsf'),
+                        constants::BANNERALERT_TARGET_SITEWIDE => get_string('sitewide', 'theme_ucsf'),
                 ) + $categories
         );
         $setting->set_updatedcallback('theme_reset_all_caches');
@@ -319,11 +319,11 @@ if ($ADMIN->fulltree) {
                 'theme_ucsf/alert' . $i . 'type',
                 get_string('alerttype', 'theme_ucsf'),
                 get_string('alerttypedesc', 'theme_ucsf'),
-                constants::THEME_UCSF_SETTING_BANNERALERT_LEVEL_INFORMATION,
+                constants::BANNERALERT_LEVEL_INFORMATION,
                 array(
-                        constants::THEME_UCSF_SETTING_BANNERALERT_LEVEL_INFORMATION => get_string('alert_info', 'theme_ucsf'),
-                        constants::THEME_UCSF_SETTING_BANNERALERT_LEVEL_WARNING => get_string('alert_warning', 'theme_ucsf'),
-                        constants::THEME_UCSF_SETTING_BANNERALERT_LEVEL_ANNOUNCEMENT => get_string('alert_general', 'theme_ucsf'),
+                        constants::BANNERALERT_LEVEL_INFORMATION => get_string('alert_info', 'theme_ucsf'),
+                        constants::BANNERALERT_LEVEL_WARNING => get_string('alert_warning', 'theme_ucsf'),
+                        constants::BANNERALERT_LEVEL_ANNOUNCEMENT => get_string('alert_general', 'theme_ucsf'),
                 )
         );
         $setting->set_updatedcallback('theme_reset_all_caches');

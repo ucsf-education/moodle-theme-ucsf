@@ -47,6 +47,7 @@ $string['choosereadme'] = 'UCSF is a Boost-based Moodle theme.';
 $string['configtitle'] = 'UCSF';
 $string['dashboardonly'] = 'Dashboard Only';
 $string['daily'] = 'Daily';
+$string['dismissmessage'] = 'Dismiss this message.';
 $string['emptyenddate'] = 'Could not update the alert! The end date field cannot be empty!';
 $string['emptystartandenddate'] = 'Could not update the alert! The start and end date fields cannot be empty!';
 $string['emptystartdate'] = 'Could not update the alert! The start date field cannot be empty!';

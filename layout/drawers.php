@@ -15,13 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A drawer based layout for the boost theme.
+ * UCSF Theme - Drawers page layout.
  *
- * @package   theme_boost
- * @copyright 2021 Bas Brands
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * This layout file is based on theme/boost/layout/drawers.php
+ *
+ * @package theme_ucsf
+ * @copyright 2023 The Regents of the University of California
+ * @copyright based on code from theme_boost by Bas Brands
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/behat/lib.php');
@@ -107,5 +109,7 @@ $templatecontext = [
     'headercontent' => $headercontent,
     'addblockbutton' => $addblockbutton
 ];
+
+require_once(__DIR__ . '/includes/banneralerts.php');
 
 echo $OUTPUT->render_from_template('theme_ucsf/drawers', $templatecontext);

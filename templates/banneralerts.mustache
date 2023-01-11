@@ -1,0 +1,46 @@
+{{!
+    @template theme_ucsf/banneralerts
+
+    This template will render all given banner alerts.
+
+    Classes required for JS:
+    * ucsf-banneralerts-alert
+
+    Data attributes required for JS:
+    * All data attributes are required
+
+    Context variables required for this template:
+    * callbackurl - The URL to the server-side callback script for clearing alerts from the user session.
+    * alerts - The list of alerts.
+
+    Example context (json):
+    {
+        "callbackurl: "http://localhost/theme/ucsf/banneralert.php",
+        "alerts": [
+            { "id": "1", "classes": "alert-info", "message": "Lorem Ipsum" },
+            { "type": "2": "classes": "alert-warning", "message": "Foo Bar Baz" },
+        ]
+    }
+
+}}
+<div class="ucsf-banneralerts-container row pt-3">
+    {{#alerts}}
+        <div class="col-12">
+            <div class="alert alert-dismissible ucsf-banneralerts-alert {{classes}}"
+                 role="alert"
+                 data-ucsf-banneralerts-alert-id="{{id}}"
+                 data-ucsf-banneralert-dismiss-callback-url="{{url}}"
+            >
+                <button type="button"
+                        class="close"
+                        data-dismiss="alert"
+                        aria-label="{{#str}}dismissmessage, theme_ucsf{{/str}}"
+                        title="{{#str}}dismissmessage, theme_ucsf{{/str}}"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{{message}}}
+            </div>
+        </div>
+    {{/alerts}}
+</div>
