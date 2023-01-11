@@ -308,7 +308,8 @@ if ($ADMIN->fulltree) {
                 get_string('categories_list_alertdesc', 'theme_ucsf'),
                 constants::THEME_UCSF_SETTING_BANNERALERT_TARGET_DASHBOARD,
                 array(
-                        constants::THEME_UCSF_SETTING_BANNERALERT_TARGET_DASHBOARD => get_string('dashboardonly', 'theme_ucsf')
+                        constants::THEME_UCSF_SETTING_BANNERALERT_TARGET_DASHBOARD => get_string('dashboardonly', 'theme_ucsf'),
+                        constants::THEME_UCSF_SETTING_BANNERALERT_TARGET_SITEWIDE => get_string('sitewide', 'theme_ucsf'),
                 ) + $categories
         );
         $setting->set_updatedcallback('theme_reset_all_caches');

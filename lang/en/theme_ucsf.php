@@ -103,6 +103,7 @@ $string['show_month'] = 'Set month';
 $string['show_monthdesc'] = 'Set month that you want your alert to show.';
 $string['show_week_day'] = 'Set day';
 $string['show_week_daydesc'] = 'Set day in a week when you want your alert to show.';
+$string['sitewide'] = 'Site-wide';
 $string['start_date_monthly'] = 'Set monthly alert';
 $string['start_date_weekly'] = 'Start date';
 $string['start_datedailydesc'] = 'Set start date when you want your alert to show up once a day.';
