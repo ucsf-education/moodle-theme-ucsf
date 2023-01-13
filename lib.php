@@ -25,6 +25,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Serves any files associated with the theme settings.
+ * @link https://moodledev.io/docs/apis/subsystems/files
  *
  * @param stdClass $course
  * @param stdClass $cm
@@ -49,7 +50,14 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
     }
 }
 
-function theme_ucsf_get_main_scss_content($theme) {
+/**
+ * Returns the main SCSS content.
+ *
+ * @param theme_config $theme The theme config object.
+ * @link https://docs.moodle.org/dev/Creating_a_theme_based_on_boost
+ * @return string
+ */
+function theme_ucsf_get_main_scss_content(theme_config $theme): string {
     global $CFG;
 
     $scss = '';
