@@ -20,8 +20,6 @@ use coding_exception;
 use moodle_exception;
 use theme_boost\output\core_renderer as boost_core_renderer;
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Theme renderer.
  *
