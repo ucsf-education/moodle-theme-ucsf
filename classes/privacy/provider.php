@@ -14,17 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * @package theme_ucsf
- * @copyright 2022 The Regents of the University of California
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace theme_ucsf\privacy;
 
 /**
  * @package theme_ucsf
- * @copyright 2022 The Regents of the University of California
+ * @copyright 2023 The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {
