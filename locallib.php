@@ -241,8 +241,8 @@ class theme_ucsf_timepicker extends admin_setting {
 
         $start_hour = ('' !== trim($data[self::START_HOUR])) ? trim($data[self::START_HOUR]) : '';
         $start_minute = ('' !== trim($data[self::START_MINUTE])) ? trim($data[self::START_MINUTE]): '';
-        $end_hour = ('' === trim($data[self::END_HOUR])) ? trim($data[self::END_HOUR]) : '';
-        $end_minute = ('' === trim($data[self::END_MINUTE])) ? trim($data[self::END_MINUTE]) : '';
+        $end_hour = ('' !== trim($data[self::END_HOUR])) ? trim($data[self::END_HOUR]) : '';
+        $end_minute = ('' !== trim($data[self::END_MINUTE])) ? trim($data[self::END_MINUTE]) : '';
         $validate = $this->validate($start_hour, $start_minute, $end_hour, $end_minute);
         if ('' === $validate) {
             $result = $this->config_write($this->start_hour_setting_name, $start_hour)
@@ -267,7 +267,7 @@ class theme_ucsf_timepicker extends admin_setting {
     protected function validate(string $start_hour, string $start_minute, string $end_hour, string $end_minute): string {
         $time_start = (int) $start_hour * 3600 + (int) $start_minute * 60;
         $time_end = (int) $end_hour * 3600 + (int) $end_minute * 60;
-        if ($time_start < $time_end) {
+        if ($time_start > $time_end) {
             return (get_string('startsbeforeitends', 'theme_ucsf'));
         }
         return '';
@@ -321,7 +321,7 @@ class theme_ucsf_timepicker extends admin_setting {
                 'id' => $this->get_id() . '_' . self::START_MINUTE,
                 'name' => $this->get_full_name() . '[' . self::START_MINUTE . ']',
         ));
-        for ($i = 0; $i <= 60; $i += 5) {
+        for ($i = 0; $i < 60; $i += 5) {
             $attrs = array('value' => $i);
             if ($i === (int) $data[self::START_MINUTE]) {
                 $attrs['selected'] = 'selected';
@@ -361,7 +361,7 @@ class theme_ucsf_timepicker extends admin_setting {
                 'id' => $this->get_id() . self::END_MINUTE,
                 'name' => $this->get_full_name() . '[' . self::END_MINUTE . ']',
         ));
-        for ($i = 0; $i <= 60; $i += 5) {
+        for ($i = 0; $i < 60; $i += 5) {
             $attrs = array('value' => $i);
             if ($i === (int) $data[self::END_MINUTE]) {
                 $attrs['selected'] = 'selected';
@@ -608,7 +608,7 @@ class theme_ucsf_datetimepicker extends admin_setting {
                 'id' => $this->get_id() . '_' . self::START_MINUTE,
                 'name' => $this->get_full_name() . '[' . self::START_MINUTE . ']',
         ));
-        for ($i = 0; $i <= 60; $i += 5) {
+        for ($i = 0; $i < 60; $i += 5) {
             $attrs = array('value' => $i);
             if ($i === (int) $data[self::START_MINUTE]) {
                 $attrs['selected'] = 'selected';
