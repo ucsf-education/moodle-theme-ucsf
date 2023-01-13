@@ -20,13 +20,14 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_ucsf\admin_setting_daterange;
+use theme_ucsf\admin_setting_datetimerange;
+use theme_ucsf\admin_setting_timerange;
 use theme_ucsf\constants;
 
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
-    require_once($CFG->dirroot . '/theme/ucsf/locallib.php');
-
     $settings = new theme_boost_admin_settingspage_tabs('themesettingucsf', get_string('configtitle', 'theme_ucsf'));
     $page = new admin_settingpage('theme_ucsf_general', get_string('generalsettings', 'theme_ucsf'));
 
@@ -211,7 +212,7 @@ if ($ADMIN->fulltree) {
         $alert_type = get_config('theme_ucsf', 'recurring_alert' . $i) ?: '';
         switch ($alert_type) {
             case constants::BANNERALERT_TYPE_DATEBOUND:
-                $setting = new theme_ucsf_datetimepicker(
+                $setting = new admin_setting_datetimerange(
                         'theme_ucsf/datebound_datepicker' . $i,
                         'start_date' . $i,
                         'start_hour' . $i,
@@ -232,7 +233,7 @@ if ($ADMIN->fulltree) {
                 $description = get_string('startenddatedesc', 'theme_ucsf');
                 $start_date = 'start_date_daily' . $i;
                 $end_date = 'end_date_daily' . $i;
-                $setting = new theme_ucsf_datepicker(
+                $setting = new admin_setting_daterange(
                         $name,
                         $start_date,
                         $end_date,
@@ -242,7 +243,7 @@ if ($ADMIN->fulltree) {
                 $setting->set_updatedcallback('theme_reset_all_caches');
                 $page->add($setting);
 
-                $setting = new theme_ucsf_timepicker(
+                $setting = new admin_setting_timerange(
                         'theme_ucsf/daily_timepicker' . $i,
                         'start_hour_daily' . $i,
                         'start_minute_daily' . $i,
@@ -256,7 +257,7 @@ if ($ADMIN->fulltree) {
                 break;
 
             case constants::BANNERALERT_TYPE_RECURRENCE_WEEKLY:
-                $setting = new theme_ucsf_datepicker(
+                $setting = new admin_setting_daterange(
                         'theme_ucsf/weekly_datepicker' . $i,
                         'start_date_weekly' . $i,
                         'end_date_weekly' . $i,
@@ -266,7 +267,7 @@ if ($ADMIN->fulltree) {
                 $setting->set_updatedcallback('theme_reset_all_caches');
                 $page->add($setting);
 
-                $setting = new theme_ucsf_timepicker(
+                $setting = new admin_setting_timerange(
                         'theme_ucsf/weekly_timepicker' . $i,
                         'start_hour_weekly' . $i,
                         'start_minute_weekly' . $i,
