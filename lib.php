@@ -90,47 +90,6 @@ function theme_ucsf_get_main_scss_content(theme_config $theme): string {
 }
 
 /**
- * Returns the help menu data as an object, or NULL if none could be if the help menu has been disabled.
- *
- * @param moodle_page $page
- * @return stdClass|null
- */
-function theme_ucsf_get_helpmenu(moodle_page $page)
-{
-    $theme_settings = $page->theme->settings;
-
-    if (! _theme_ucsf_get_setting($theme_settings, 'helpfeedbackenabled')) {
-        return null;
-    }
-
-    $menu = new stdClass();
-
-    $menu->items = array();
-    $number_of_links = (int) _theme_ucsf_get_setting($theme_settings, 'numberoflinks', 0);
-    for ($i = 1; $i <= $number_of_links; $i++) {
-        $url = _theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'link', '');
-        $title = _theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'linklabel', '');
-        $target = _theme_ucsf_get_setting($theme_settings, 'helpfeedback' . $i . 'linktarget');
-
-        if (! empty($url)) {
-            $menu->items[] = array(
-                    'url'     => $url,
-                    'title'   => $title,
-                    'options' => array(
-                            'target' => empty($target) ? '_self' : '_blank',
-                    ),
-            );
-        }
-    }
-
-    if (empty($menu->items)) {
-        return null;
-    }
-
-    return $menu;
-}
-
-/**
  * Retrieves a theme setting.
  *
  * @param stdClass $theme_settings The theme settings object
