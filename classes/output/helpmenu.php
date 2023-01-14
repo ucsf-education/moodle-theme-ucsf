@@ -50,14 +50,14 @@ class helpmenu implements renderable, templatable {
         }
 
         for ($i = 1; $i <= constants::HELPMENU_ITEMS_COUNT; $i++) {
-            $url = config::get_setting('helpfeedback' . $i . 'link', '');
-            $title = config::get_setting('helpfeedback' . $i . 'linklabel', '');
-            $target = config::get_setting('helpfeedback' . $i . 'linktarget');
-            if (!empty($url)) {
+            $url = trim(config::get_setting('helpfeedback' . $i . 'link', ''));
+            $title = trim(config::get_setting('helpfeedback' . $i . 'linklabel', ''));
+            $target = (bool) config::get_setting('helpfeedback' . $i . 'linktarget');
+            if ('' !== $url) {
                 $menu->items[] = array(
                         'url' => $url,
                         'title' => $title,
-                        'target' => empty($target) ? '_self' : '_blank',
+                        'target' => $target ? '_self' : '_blank',
                 );
             }
         }
