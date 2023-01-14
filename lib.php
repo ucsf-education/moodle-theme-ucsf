@@ -20,6 +20,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 use theme_ucsf\output\helpmenu;
+use theme_ucsf\utils\config;
 
 /**
  * Serves any files associated with the theme settings.
@@ -121,14 +122,11 @@ function theme_ucsf_before_footer(): void {
  * @param mixed    $default        A default value, to be used as fallback if the setting is not defined.
  *
  * @return mixed The setting's value, or the given default if the setting has not been defined.
+ * @deprecated use <code>\theme_ucsf\utils\config::get()</code> instead.
  */
 function _theme_ucsf_get_setting($theme_settings, $setting, $default = false)
 {
-    if (! isset($theme_settings->$setting)) {
-        return $default;
-    }
-
-    return $theme_settings->$setting;
+    return config::get_setting($setting, $default);
 }
 
 /**
