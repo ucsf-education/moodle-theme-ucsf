@@ -116,12 +116,12 @@ function theme_ucsf_before_footer(): void {
  * Returns a list of all ancestral categories of a given category.
  * The first element in that list is the given category itself, followed by its parent, the parent's parent and so on.
  *
- * @param int $id The category id.
+ * @param string $id The category id.
  *
  * @return array A list of category ids, will be empty if the given category is bogus.
  * @throws dml_exception
  */
-function _theme_ucsf_get_category_roots($id)
+function _theme_ucsf_get_category_roots(string $id): array
 {
     global $DB;
     static $cache = null;
@@ -131,11 +131,11 @@ function _theme_ucsf_get_category_roots($id)
     }
 
     if (! array_key_exists($id, $cache)) {
-        $category = $DB->get_record('course_categories', array("id" => $id));
+        $category = $DB->get_record('course_categories', array('id' => $id));
         if (false === $category) {
             return array();
         }
-        $ids = array_reverse(explode("/",trim( $category->path, "/")));
+        $ids = array_reverse(explode('/',trim( $category->path, '/')));
         $cache[$id] = $ids;
         array_shift($ids);
         // cache category roots of all ancestors in that category hierarchy while at it.
@@ -155,11 +155,11 @@ function _theme_ucsf_get_category_roots($id)
  * Retrieves the current course category id.
  *
  * @param moodle_page $page   The current page object.
- * @param stdClass    $course The current course object.
+ * @param stdClass $course The current course object.
  *
  * @return string The course category id.
  */
-function _theme_ucsf_get_current_course_category(moodle_page $page, $course)
+function _theme_ucsf_get_current_course_category(moodle_page $page, stdClass $course): string
 {
     // ACHTUNG!
     // Unbelievably crappy code to follow.
