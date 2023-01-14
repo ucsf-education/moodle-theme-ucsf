@@ -161,11 +161,8 @@ function _theme_ucsf_get_category_roots(string $id): array
  */
 function _theme_ucsf_get_current_course_category(moodle_page $page, stdClass $course): string
 {
-    // ACHTUNG!
-    // Unbelievably crappy code to follow.
     // For course category pages, peel the category out of the URL request parameter.
     // In all other cases, take it from the current course.
-    // @todo Clean this horrid mess up [ST 2016/03/24]
     if ($page->pagelayout == "coursecategory" && isset($_REQUEST["categoryid"])) {
         return $_REQUEST["categoryid"];
     }
