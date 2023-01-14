@@ -97,9 +97,7 @@ function theme_ucsf_get_main_scss_content(theme_config $theme): string {
  * @throws coding_exception
  */
 function theme_ucsf_render_navbar_output(renderer_base $renderer): string {
-    global $PAGE;
-    $helpmenu = new helpmenu($PAGE);
-    return $renderer->render($helpmenu);
+    return $renderer->render(new helpmenu());
 }
 
 
