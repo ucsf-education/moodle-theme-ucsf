@@ -20,7 +20,6 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 use theme_ucsf\output\helpmenu;
-use theme_ucsf\utils\config;
 
 /**
  * Serves any files associated with the theme settings.
