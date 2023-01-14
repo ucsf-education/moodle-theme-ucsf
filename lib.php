@@ -176,24 +176,6 @@ function _theme_ucsf_get_current_course_category(moodle_page $page, $course)
 }
 
 /**
- * Retrieve a list of all course category ids,
- * since Moodle's course API does not appear to provide such a method.
- *
- * @return array A list course ids, sorted by ID in descending order (newest first).
- *
- * @throws dml_exception
- */
-function _theme_ucsf_get_all_category_ids()
-{
-    global $DB;
-
-    $sql = "SELECT cc.id FROM {course_categories} cc ORDER BY cc.id DESC";
-    $categories = array_keys($DB->get_records_sql($sql));
-
-    return $categories;
-}
-
-/**
  * Find and returns the first category (from the bottom) in a given category hierarchy
  * that has a customized setting in a given theme.
  *
