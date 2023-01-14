@@ -35,7 +35,6 @@ use theme_ucsf\utils\config;
  */
 class banneralerts implements renderable, templatable {
 
-    protected stdClass $theme_settings;
     protected moodle_page $page;
 
     const ALERT_LEVEL_CSS_CLASSES_MAP = [
@@ -49,7 +48,6 @@ class banneralerts implements renderable, templatable {
      */
     public function __construct(moodle_page $page) {
         $this->page = $page;
-        $this->theme_settings = $page->theme->settings;
     }
 
     /**
