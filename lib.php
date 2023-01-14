@@ -16,12 +16,10 @@
 
 /**
  * @package theme_ucsf
- * @copyright 2022 The Regents of the University of California
+ * @copyright 2023 The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 use theme_ucsf\output\helpmenu;
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Serves any files associated with the theme settings.
@@ -87,6 +85,32 @@ function theme_ucsf_get_main_scss_content(theme_config $theme): string {
 
     // Combine them together.
     return $pre . "\n" . $scss . "\n" . $post;
+}
+
+/**
+ * Output callback for injecting our help menu into the nav bar.
+ *
+ * @link https://docs.moodle.org/dev/Output_callbacks#render_navbar_output
+ * @param renderer_base $renderer
+ * @return string
+ * @throws coding_exception
+ */
+function theme_ucsf_render_navbar_output(renderer_base $renderer): string {
+    global $PAGE;
+    $helpmenu = new helpmenu($PAGE);
+    return $renderer->render($helpmenu);
+}
+
+
+/**
+ * Output callback for injecting custom JS into each page.
+ * @link https://docs.moodle.org/dev/Output_callbacks#before_footer
+ */
+function theme_ucsf_before_footer(): void {
+    global $PAGE;
+    $PAGE->requires->js('/theme/ucsf/js/datepicker.js');
+    $PAGE->requires->js('/theme/ucsf/js/usereditform.js');
+    $PAGE->requires->js('/theme/ucsf/js/banneralerts.js');
 }
 
 /**
@@ -222,30 +246,4 @@ function _theme_ucsf_find_first_configured_category($theme_settings, array $cate
     }
 
     return 0;
-}
-
-/**
- * Output callback for injecting our help menu into the nav bar.
- *
- * @link https://docs.moodle.org/dev/Output_callbacks#render_navbar_output
- * @param renderer_base $renderer
- * @return string
- * @throws coding_exception
- */
-function theme_ucsf_render_navbar_output(renderer_base $renderer): string {
-    global $PAGE;
-    $helpmenu = new helpmenu($PAGE);
-    return $renderer->render($helpmenu);
-}
-
-
-/**
- * Output callback for injecting custom JS into each page.
- * @link https://docs.moodle.org/dev/Output_callbacks#before_footer
- */
-function theme_ucsf_before_footer(): void {
-    global $PAGE;
-    $PAGE->requires->js('/theme/ucsf/js/datepicker.js');
-    $PAGE->requires->js('/theme/ucsf/js/usereditform.js');
-    $PAGE->requires->js('/theme/ucsf/js/banneralerts.js');
 }
