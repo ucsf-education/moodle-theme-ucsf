@@ -16,12 +16,16 @@
 
 namespace theme_ucsf\privacy;
 
+use core_privacy\local\metadata\null_provider;
+
 /**
+ * The theme's privacy information provider.
+ *
  * @package theme_ucsf
  * @copyright 2023 The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements \core_privacy\local\metadata\null_provider {
+class provider implements null_provider {
 
     public static function get_reason() : string {
         return 'privacy:metadata';
