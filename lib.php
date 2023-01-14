@@ -115,21 +115,6 @@ function theme_ucsf_before_footer(): void {
 }
 
 /**
- * Retrieves a theme setting.
- *
- * @param stdClass $theme_settings The theme settings object
- * @param string   $setting        The name of the setting.
- * @param mixed    $default        A default value, to be used as fallback if the setting is not defined.
- *
- * @return mixed The setting's value, or the given default if the setting has not been defined.
- * @deprecated use <code>\theme_ucsf\utils\config::get()</code> instead.
- */
-function _theme_ucsf_get_setting($theme_settings, $setting, $default = false)
-{
-    return config::get_setting($setting, $default);
-}
-
-/**
  * Returns a list of all ancestral categories of a given category.
  * The first element in that list is the given category itself, followed by its parent, the parent's parent and so on.
  *

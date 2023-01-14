@@ -24,6 +24,7 @@ use renderer_base;
 use stdClass;
 use templatable;
 use theme_ucsf\constants;
+use theme_ucsf\utils\config;
 
 /**
  * Banner alerts.
@@ -73,23 +74,23 @@ class banneralerts implements renderable, templatable {
             }
 
             // skip if the alert has not been enabled
-            if (!_theme_ucsf_get_setting($this->theme_settings, 'enable' . $i . 'alert')) {
+            if (!config::get_setting('enable' . $i . 'alert')) {
                 continue;
             }
 
-            $alert_message = trim(_theme_ucsf_get_setting($this->theme_settings, "alert{$i}text", ''));
+            $alert_message = trim(config::get_setting("alert{$i}text", ''));
             // skip if the alert has no message
             if ('' === $alert_message) {
                 continue;
             }
 
-            $alert_target = _theme_ucsf_get_setting($this->theme_settings, 'categories_list_alert' . $i, '');
+            $alert_target = config::get_setting('categories_list_alert' . $i, '');
             // skip if no target is configured
             if ('' === $alert_target) {
                 continue;
             }
 
-            $alert_type = _theme_ucsf_get_setting($this->theme_settings, 'recurring_alert' . $i, '');
+            $alert_type = config::get_setting('recurring_alert' . $i, '');
             // skip if no alert type is configured
             if ('' === $alert_type) {
                 continue;
@@ -206,7 +207,7 @@ class banneralerts implements renderable, templatable {
                     $alert_is_within_datetime_boundaries = true;
                     break;
                 case constants::BANNERALERT_TYPE_RECURRENCE_WEEKLY:
-                    $day_of_the_week = _theme_ucsf_get_setting($this->theme_settings, 'show_week_day' . $i, '');
+                    $day_of_the_week = config::get_setting('show_week_day' . $i, '');
 
                     // skip if no day of week was configured
                     if ('' === $day_of_the_week) {
@@ -266,10 +267,7 @@ class banneralerts implements renderable, templatable {
             // ----------
             // This alert should be displayed! Add it to the output.
             // ----------
-            $alert_level = _theme_ucsf_get_setting(
-                    $this->theme_settings,
-                    "alert{$i}type",
-                    constants::BANNERALERT_LEVEL_INFORMATION);
+            $alert_level = config::get_setting("alert{$i}type", constants::BANNERALERT_LEVEL_INFORMATION);
 
             $alert_classes = array_key_exists($alert_level, self::ALERT_LEVEL_CSS_CLASSES_MAP)
                     ? self::ALERT_LEVEL_CSS_CLASSES_MAP[$alert_level]
@@ -285,14 +283,30 @@ class banneralerts implements renderable, templatable {
         return $obj;
     }
 
+    /**
+     * Retrieves the date and time values for banner alerts from the theme configuration.
+     *
+     * @param int $index The alert number.
+     * @param string $suffix Config setting name suffix, depends on the type of alert.
+     * @return array
+     *  $data = [
+     *    'start_date' => (string) the start date
+     *    'start_hour'=> (string) the start hour
+     *    'start_minute' => (string) the start minute
+     *    'end_date' => (string) the end date
+     *    'end_hour' => (string) then end minute
+     *    'end_minute' => (string) the end minute
+     *  ]
+     * @throws dml_exception
+     */
     protected function get_date_config(int $index, string $suffix = ''): array {
         return array(
-                'start_date' => _theme_ucsf_get_setting($this->theme_settings,'start_date' . $suffix . $index,''),
-                'start_hour' => (int) _theme_ucsf_get_setting($this->theme_settings, 'start_hour' . $suffix . $index, 0),
-                'start_minute' => (int) _theme_ucsf_get_setting($this->theme_settings,'start_minute' . $suffix . $index,0),
-                'end_date' => _theme_ucsf_get_setting($this->theme_settings,'end_date' . $suffix . $index, ''),
-                'end_hour' => (int) _theme_ucsf_get_setting($this->theme_settings, 'end_hour' . $suffix . $index, 0),
-                'end_minute' => (int) _theme_ucsf_get_setting($this->theme_settings, 'end_minute' . $suffix . $index,0),
+                'start_date' => config::get_setting('start_date' . $suffix . $index, ''),
+                'start_hour' => (int) config::get_setting('start_hour' . $suffix . $index, 0),
+                'start_minute' => (int) config::get_setting('start_minute' . $suffix . $index, 0),
+                'end_date' => config::get_setting('end_date' . $suffix . $index, ''),
+                'end_hour' => (int) config::get_setting('end_hour' . $suffix . $index, 0),
+                'end_minute' => (int) config::get_setting('end_minute' . $suffix . $index, 0),
         );
     }
 }

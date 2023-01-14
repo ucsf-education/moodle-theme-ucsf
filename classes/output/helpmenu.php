@@ -16,15 +16,17 @@
 
 namespace theme_ucsf\output;
 
+use dml_exception;
 use moodle_page;
 use renderable;
 use renderer_base;
 use stdClass;
 use templatable;
 use theme_ucsf\constants;
+use theme_ucsf\utils\config;
 
 /**
- * Help menu.
+ * Help menu output component.
  *
  * @package theme_ucsf
  * @copyright 2023 The Regents of the University of California
@@ -32,20 +34,12 @@ use theme_ucsf\constants;
  */
 class helpmenu implements renderable, templatable {
 
-    protected stdClass $theme_settings;
-
-    /**
-     * @param moodle_page $page
-     */
-    public function __construct(moodle_page $page) {
-        $this->theme_settings = $page->theme->settings;
-    }
-
     /**
      * Retrieve menu items.
      *
      * @param renderer_base $output
      * @return stdClass
+     * @throws dml_exception
      */
     public function export_for_template(renderer_base $output): stdClass {
         $menu = new stdClass();
@@ -56,9 +50,9 @@ class helpmenu implements renderable, templatable {
         }
 
         for ($i = 1; $i <= constants::HELPMENU_ITEMS_COUNT; $i++) {
-            $url = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'link', '');
-            $title = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'linklabel', '');
-            $target = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'linktarget');
+            $url = config::get_setting('helpfeedback' . $i . 'link', '');
+            $title = config::get_setting('helpfeedback' . $i . 'linklabel', '');
+            $target = config::get_setting('helpfeedback' . $i . 'linktarget');
             if (!empty($url)) {
                 $menu->items[] = array(
                         'url' => $url,
@@ -75,15 +69,16 @@ class helpmenu implements renderable, templatable {
      * Determine if the help menu should be shown.
      *
      * @return bool
+     * @throws dml_exception
      */
     protected function show_menu(): bool {
-        if (!_theme_ucsf_get_setting($this->theme_settings, 'helpfeedbackenabled')) {
+        if (!config::get_setting('helpfeedbackenabled')) {
             return false;
         }
 
         // check if at least one of the menu items actually contains a link
         for ($i = 1; $i <= constants::HELPMENU_ITEMS_COUNT; $i++) {
-            $url = _theme_ucsf_get_setting($this->theme_settings, 'helpfeedback' . $i . 'link', '');
+            $url = config::get_setting('helpfeedback' . $i . 'link', '');
             if (!empty($url)) {
                 return true;
             }
