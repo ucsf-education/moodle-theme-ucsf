@@ -52,8 +52,9 @@ function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forced
  * Returns the main SCSS content.
  *
  * @param theme_config $theme The theme config object.
- * @link https://docs.moodle.org/dev/Creating_a_theme_based_on_boost
  * @return string
+ * @throws dml_exception
+ * @link https://docs.moodle.org/dev/Creating_a_theme_based_on_boost
  */
 function theme_ucsf_get_main_scss_content(theme_config $theme): string {
     global $CFG;
@@ -109,100 +110,4 @@ function theme_ucsf_before_footer(): void {
     $PAGE->requires->js('/theme/ucsf/js/datepicker.js');
     $PAGE->requires->js('/theme/ucsf/js/usereditform.js');
     $PAGE->requires->js('/theme/ucsf/js/banneralerts.js');
-}
-
-/**
- * Returns a list of all ancestral categories of a given category.
- * The first element in that list is the given category itself, followed by its parent, the parent's parent and so on.
- *
- * @param string $id The category id.
- *
- * @return array A list of category ids, will be empty if the given category is bogus.
- * @throws dml_exception
- */
-function _theme_ucsf_get_category_roots(string $id): array
-{
-    global $DB;
-    static $cache = null;
-
-    if (! isset($cache)) {
-        $cache = array();
-    }
-
-    if (! array_key_exists($id, $cache)) {
-        $category = $DB->get_record('course_categories', array('id' => $id));
-        if (false === $category) {
-            return array();
-        }
-        $ids = array_reverse(explode('/',trim( $category->path, '/')));
-        $cache[$id] = $ids;
-        array_shift($ids);
-        // cache category roots of all ancestors in that category hierarchy while at it.
-        for ($i = 0, $n = count($ids); $i < $n; $i++) {
-            $parent_id = $ids[$i];
-            if (array_key_exists($parent_id, $cache)) {
-                break;
-            }
-            $cache[$parent_id] = array_slice($ids, $i);
-        }
-    }
-
-    return $cache[$id];
-}
-
-/**
- * Retrieves the current course category id.
- *
- * @param moodle_page $page   The current page object.
- * @param stdClass $course The current course object.
- *
- * @return string The course category id.
- */
-function _theme_ucsf_get_current_course_category(moodle_page $page, stdClass $course): string
-{
-    // For course category pages, peel the category out of the URL request parameter.
-    // In all other cases, take it from the current course.
-    if ($page->pagelayout == "coursecategory" && isset($_REQUEST["categoryid"])) {
-        return $_REQUEST["categoryid"];
-    }
-
-    return $course->category;
-}
-
-/**
- * Find and returns the first category (from the bottom) in a given category hierarchy
- * that has a customized setting in a given theme.
- *
- * Example:
- *  1. The category hierarchy is (top) id = 1 >> id = 2 >> id = 5 >> id = 7 (bottom).
- *  2. We're searching the theme settings for all entries pertaining to custom labels (all config keys starting with "customlabel").
- *  3. The theme settings contains entries keyed of by 'customlabel1' an 'customlabel5'.
- *  4. This method will return 5, since 'customlabel5' matches the lowest category id = 5 in the hierarchy.
- *
- * @param object $theme_settings     The theme settings.
- * @param array  $category_hierarchy A hierarchy of category ids, sorted bottom to top.
- * @param string $config_key_prefix  Configuration settings key prefix.
- *
- * @return int The first matching category id. 0 if no matching category can be found.
- * @see _theme_ucsf_get_category_roots()
- */
-function _theme_ucsf_find_first_configured_category($theme_settings, array $category_hierarchy, $config_key_prefix)
-{
-    // get a list of all categories that have customizations enabled.
-    $enabled_categories = array();
-    if (! empty($theme_settings->all_categories)) {
-        $enabled_categories = explode(",", $theme_settings->all_categories);
-    }
-
-    // find first matching
-    foreach ($category_hierarchy as $category_id) {
-        if (in_array($category_id, $enabled_categories)) {
-            $config_key = $config_key_prefix . $category_id;
-            if (! empty($theme_settings->$config_key)) {
-                return $category_id;
-            }
-        }
-    }
-
-    return 0;
 }

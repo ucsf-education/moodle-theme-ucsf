@@ -25,6 +25,7 @@ use stdClass;
 use templatable;
 use theme_ucsf\constants;
 use theme_ucsf\utils\config;
+use theme_ucsf\utils\coursecategory;
 
 /**
  * Banner alerts.
@@ -58,7 +59,6 @@ class banneralerts implements renderable, templatable {
      * @throws dml_exception
      */
     public function export_for_template(renderer_base $output): stdClass {
-        global $COURSE;
         $obj = new stdClass();
         $obj->alerts = [];
 
@@ -115,8 +115,8 @@ class banneralerts implements renderable, templatable {
                 default:
                     // check if this alert targets this page's course category or any if its parent categories.
                     // skip if not.
-                    $current_course_category_id = _theme_ucsf_get_current_course_category($this->page, $COURSE);
-                    $category_ids = _theme_ucsf_get_category_roots($current_course_category_id);
+                    $current_course_category_id = coursecategory::get_current_category_id();
+                    $category_ids = coursecategory::get_reverse_category_hierarchy($current_course_category_id);
                     $current_page_is_applicable_target = in_array($alert_target, $category_ids);
                     break;
             }
