@@ -348,6 +348,15 @@ if ($ADMIN->fulltree) {
     // ----------------------------------------------------
     $page = new admin_settingpage('theme_ucsf_category_customizations', get_string('categorycustomizationsheading', 'theme_ucsf'));
 
+    // Switch to enable/disable category customizations
+    $setting = new admin_setting_configcheckbox(
+            'theme_ucsf/enablecustomization',
+            get_string('enablecustomization', 'theme_ucsf'),
+            get_string('enablecustomizationdesc', 'theme_ucsf'),
+            '0'
+    );
+    $page->add($setting);
+
     // With close to a thousand course categories in production, check boxes won't cut it.
     // So let's use a multi-select dropdown instead, at the expense of making selections more finicky.
     // @todo Revisit if/whenever sanity is restored in on this. [ST 2023/01/10]
