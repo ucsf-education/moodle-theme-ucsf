@@ -16,7 +16,7 @@
 
 /**
  * @package theme_ucsf
- * @copyright 2022 The Regents of the University of California
+ * @copyright 2023 The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

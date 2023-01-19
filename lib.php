@@ -19,10 +19,12 @@
  * @copyright 2023 The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 use theme_ucsf\output\helpmenu;
 
 /**
  * Serves any files associated with the theme settings.
+ *
  * @link https://moodledev.io/docs/apis/subsystems/files
  *
  * @param stdClass $course
@@ -34,7 +36,7 @@ use theme_ucsf\output\helpmenu;
  * @param array $options
  * @return bool
  */
-function theme_ucsf_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function theme_ucsf_pluginfile(stdClass $course, stdClass $cm, context $context, string $filearea, array $args, bool $forcedownload, array $options = array()): bool {
     if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'backgroundimage' ||
                     $filearea === 'loginbackgroundimage')) {
         $theme = theme_config::load('ucsf');
@@ -100,9 +102,9 @@ function theme_ucsf_render_navbar_output(renderer_base $renderer): string {
     return $renderer->render(new helpmenu());
 }
 
-
 /**
  * Output callback for injecting custom JS into each page.
+ *
  * @link https://docs.moodle.org/dev/Output_callbacks#before_footer
  */
 function theme_ucsf_before_footer(): void {

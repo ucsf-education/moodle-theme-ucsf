@@ -103,7 +103,7 @@ class admin_setting_timerange extends admin_setting {
     public function write_setting($data): string {
 
         $start_hour = ('' !== trim($data[self::START_HOUR])) ? trim($data[self::START_HOUR]) : '';
-        $start_minute = ('' !== trim($data[self::START_MINUTE])) ? trim($data[self::START_MINUTE]): '';
+        $start_minute = ('' !== trim($data[self::START_MINUTE])) ? trim($data[self::START_MINUTE]) : '';
         $end_hour = ('' !== trim($data[self::END_HOUR])) ? trim($data[self::END_HOUR]) : '';
         $end_minute = ('' !== trim($data[self::END_MINUTE])) ? trim($data[self::END_MINUTE]) : '';
         $validate = $this->validate($start_hour, $start_minute, $end_hour, $end_minute);
@@ -157,11 +157,11 @@ class admin_setting_timerange extends admin_setting {
                 'class' => 'accesshide',
                 'for' => $this->get_id() . '_' . self::START_HOUR,
         ));
-        $return .=  html_writer::span(ucfirst(get_string('hour')) . ':', '', array('aria-hidden' => 'true'));
+        $return .= html_writer::span(ucfirst(get_string('hour')) . ':', '', array('aria-hidden' => 'true'));
         $return .= ' ';
         $return .= html_writer::start_tag('select', array(
                 'class' => 'custom-select',
-                'id' => $this->get_id() .'_' . self::START_HOUR,
+                'id' => $this->get_id() . '_' . self::START_HOUR,
                 'name' => $this->get_full_name() . '[' . self::START_HOUR . ']',
         ));
         for ($i = 0; $i <= 23; $i++) {
@@ -177,7 +177,7 @@ class admin_setting_timerange extends admin_setting {
                 'class' => 'accesshide',
                 'for' => $this->get_id() . '_' . self::START_MINUTE,
         ));
-        $return .=  html_writer::span(ucfirst(get_string('minute')) . ':', '', array('aria-hidden' => 'true'));
+        $return .= html_writer::span(ucfirst(get_string('minute')) . ':', '', array('aria-hidden' => 'true'));
         $return .= ' ';
         $return .= html_writer::start_tag('select', array(
                 'class' => 'custom-select',
@@ -197,7 +197,7 @@ class admin_setting_timerange extends admin_setting {
                 'class' => 'accesshide',
                 'for' => $this->get_id() . '_' . self::END_HOUR,
         ));
-        $return .=  html_writer::span(ucfirst(get_string('hour')) . ':', '', array('aria-hidden' => 'true'));
+        $return .= html_writer::span(ucfirst(get_string('hour')) . ':', '', array('aria-hidden' => 'true'));
         $return .= ' ';
         $return .= html_writer::start_tag('select', array(
                 'class' => 'custom-select',
@@ -217,7 +217,7 @@ class admin_setting_timerange extends admin_setting {
                 'class' => 'accesshide',
                 'for' => $this->get_id() . '_' . self::END_MINUTE,
         ));
-        $return .=  html_writer::span(ucfirst(get_string('minute')) . ':', '', array('aria-hidden' => 'true'));
+        $return .= html_writer::span(ucfirst(get_string('minute')) . ':', '', array('aria-hidden' => 'true'));
         $return .= ' ';
         $return .= html_writer::start_tag('select', array(
                 'class' => 'custom-select',

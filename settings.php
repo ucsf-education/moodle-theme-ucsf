@@ -16,7 +16,7 @@
 
 /**
  * @package theme_ucsf
- * @copyright 2022 The Regents of the University of California
+ * @copyright 2023 The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -288,11 +288,11 @@ if ($ADMIN->fulltree) {
                         array(
                                 constants::BANNERALERT_WEEKDAYS_SUNDAY => new lang_string('sunday', 'calendar'),
                                 constants::BANNERALERT_WEEKDAYS_MONDAY => new lang_string('monday', 'calendar'),
-                                constants::BANNERALERT_WEEKDAYS_TUESDAY => new lang_string('tuesday','calendar'),
-                                constants::BANNERALERT_WEEKDAYS_WEDNESDAY => new lang_string('wednesday','calendar'),
-                                constants::BANNERALERT_WEEKDAYS_THURSDAY => new lang_string('thursday','calendar'),
+                                constants::BANNERALERT_WEEKDAYS_TUESDAY => new lang_string('tuesday', 'calendar'),
+                                constants::BANNERALERT_WEEKDAYS_WEDNESDAY => new lang_string('wednesday', 'calendar'),
+                                constants::BANNERALERT_WEEKDAYS_THURSDAY => new lang_string('thursday', 'calendar'),
                                 constants::BANNERALERT_WEEKDAYS_FRIDAY => new lang_string('friday', 'calendar'),
-                                constants::BANNERALERT_WEEKDAYS_SATURDAY => new lang_string('saturday','calendar')
+                                constants::BANNERALERT_WEEKDAYS_SATURDAY => new lang_string('saturday', 'calendar')
                         )
                 );
                 $setting->set_updatedcallback('theme_reset_all_caches');
@@ -381,7 +381,7 @@ if ($ADMIN->fulltree) {
     }, ARRAY_FILTER_USE_KEY);
 
     // Create a tab for each customizable category
-    foreach($customized_categories as $category_id => $category_name) {
+    foreach ($customized_categories as $category_id => $category_name) {
         $page = new admin_settingpage('theme_ucsf_' . $category_id, $category_name);
 
         $name = 'theme_ucsf/custommenusubsection';

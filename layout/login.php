@@ -20,7 +20,7 @@ defined('MOODLE_INTERNAL') || die();
  * A login page layout for the UCSF theme.
  *
  * @package theme_ucsf
- * @copyright 2022 The Regents of the University of California
+ * @copyright 2023 The Regents of the University of California
  * @copyright based on code from theme_boost by Damyon Wiese
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,9 +28,9 @@ defined('MOODLE_INTERNAL') || die();
 $bodyattributes = $OUTPUT->body_attributes();
 
 $templatecontext = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output' => $OUTPUT,
-    'bodyattributes' => $bodyattributes
+        'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
+        'output' => $OUTPUT,
+        'bodyattributes' => $bodyattributes
 ];
 
 echo $OUTPUT->render_from_template('theme_ucsf/login', $templatecontext);
