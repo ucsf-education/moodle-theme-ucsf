@@ -24,6 +24,7 @@ use theme_ucsf\admin_setting_daterange;
 use theme_ucsf\admin_setting_datetimerange;
 use theme_ucsf\admin_setting_timerange;
 use theme_ucsf\constants;
+use theme_ucsf\utils\config;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -343,7 +344,7 @@ if ($ADMIN->fulltree) {
     $settings->add($page);
 
     // ----------------------------------------------------
-    // Category Customizations
+    // Category Customizations selector
     // ----------------------------------------------------
     $page = new admin_settingpage('theme_ucsf_category_customizations', get_string('categorycustomizationsheading', 'theme_ucsf'));
 
@@ -368,4 +369,34 @@ if ($ADMIN->fulltree) {
     $page->add($setting);
 
     $settings->add($page);
+
+    // ----------------------------------------------------
+    // Category-specific Customizations
+    // ----------------------------------------------------
+
+    // filter all course categories down to the customizable categories
+    $customized_category_ids = array_filter(explode(',', trim(config::get_setting('all_categories', ''))));
+    $customized_categories = array_filter($categories, function($category_id) use ($customized_category_ids) {
+        return in_array($category_id, $customized_category_ids);
+    }, ARRAY_FILTER_USE_KEY);
+
+    // Create a tab for each customizable category
+    foreach($customized_categories as $category_id => $category_name) {
+        $page = new admin_settingpage('theme_ucsf_' . $category_id, $category_name);
+
+        $name = 'theme_ucsf/custommenusubsection';
+        $heading = get_string('custommenusubsectiontitle', 'theme_ucsf');
+        $setting = new admin_setting_heading($name, $heading, '');
+        $page->add($setting);
+
+        //Custom menu
+        $name = 'theme_ucsf/custommenu' . $category_id;
+        $heading = get_string('custommenu', 'theme_ucsf');
+        $information = get_string('custommenudesc', 'theme_ucsf');
+        $default = '';
+        $setting = new admin_setting_configtextarea($name, $heading, $information, $default);
+        $page->add($setting);
+
+        $settings->add($page);
+    }
 }
