@@ -47,3 +47,4 @@ $THEME->usescourseindex = true;
 $THEME->activityheaderconfig = [
         'notitle' => true
 ];
+$THEME->removedprimarynavitems = ['home'];
