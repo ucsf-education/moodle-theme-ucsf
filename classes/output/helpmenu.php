@@ -17,7 +17,6 @@
 namespace theme_ucsf\output;
 
 use dml_exception;
-use moodle_page;
 use renderable;
 use renderer_base;
 use stdClass;
