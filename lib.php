@@ -110,6 +110,5 @@ function theme_ucsf_render_navbar_output(renderer_base $renderer): string {
 function theme_ucsf_before_footer(): void {
     global $PAGE;
     $PAGE->requires->js('/theme/ucsf/js/datepicker.js');
-    $PAGE->requires->js('/theme/ucsf/js/usereditform.js');
     $PAGE->requires->js('/theme/ucsf/js/banneralerts.js');
 }
