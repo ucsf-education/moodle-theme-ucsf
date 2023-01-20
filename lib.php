@@ -35,6 +35,7 @@ use theme_ucsf\output\helpmenu;
  * @param bool $forcedownload
  * @param array $options
  * @return bool
+ * @throws moodle_exception
  */
 function theme_ucsf_pluginfile(stdClass $course, stdClass $cm, context $context, string $filearea, array $args, bool $forcedownload, array $options = array()): bool {
     if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'backgroundimage' ||
