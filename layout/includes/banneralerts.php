@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Boost Union - banner alerts layout include.
+ * Renders and adds our banner alerts to the page template context.
  *
  * @package theme_ucsf
  * @copyright 2023 The Regents of the University of California
