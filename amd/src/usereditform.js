@@ -18,7 +18,7 @@
  * that provide the user with some relevant information as to how/where
  * they can properly update their name information.
  *
- * @module theme_ucsf
+ * @module theme_ucsf/usereditform
  * @copyright 2023 The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
