@@ -24,7 +24,7 @@ import jQuery from 'jquery';
 import Pikaday from 'theme_ucsf/pikaday';
 
 export const init = () => {
-    jQuery('.datepicker').each(function(i, elem) {
+    jQuery('.ucsf-datepicker').each(function(i, elem) {
         new Pikaday({
             field: elem,
             toString: function(date) {

@@ -217,7 +217,7 @@ class admin_setting_datetimerange extends admin_setting {
         $return = html_writer::start_div('form-text defaultsnext');
         $return .= html_writer::empty_tag('input', array(
                 'aria-label' => get_string('startdate', 'theme_ucsf'),
-                'class' => 'form-control text-ltr datepicker',
+                'class' => 'form-control text-ltr ucsf-datepicker',
                 'id' => $this->get_id() . '_' . self::START_DATE,
                 'name' => $this->get_full_name() . '[' . self::START_DATE . ']',
                 'size' => '15',
@@ -266,7 +266,7 @@ class admin_setting_datetimerange extends admin_setting {
         $return .= html_writer::empty_tag('br');
         $return .= html_writer::empty_tag('input', array(
                 'aria-label' => get_string('enddate', 'theme_ucsf'),
-                'class' => 'form-control text-ltr datepicker',
+                'class' => 'form-control text-ltr ucsf-datepicker',
                 'id' => $this->get_id() . '_' . self::END_DATE,
                 'name' => $this->get_full_name() . '[' . self::END_DATE . ']',
                 'size' => '15',
