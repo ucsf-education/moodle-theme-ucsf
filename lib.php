@@ -101,13 +101,3 @@ function theme_ucsf_get_main_scss_content(theme_config $theme): string {
 function theme_ucsf_render_navbar_output(renderer_base $renderer): string {
     return $renderer->render(new helpmenu());
 }
-
-/**
- * Output callback for injecting custom JS into each page.
- *
- * @link https://docs.moodle.org/dev/Output_callbacks#before_footer
- */
-function theme_ucsf_before_footer(): void {
-    global $PAGE;
-    $PAGE->requires->js('/theme/ucsf/js/datepicker.js');
-}
