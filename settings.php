@@ -395,17 +395,20 @@ if ($ADMIN->fulltree) {
     foreach ($customized_categories as $category_id => $category_name) {
         $page = new admin_settingpage('theme_ucsf_' . $category_id, $category_name);
 
-        $name = 'theme_ucsf/custommenusubsection';
-        $heading = get_string('custommenusubsectiontitle', 'theme_ucsf');
-        $setting = new admin_setting_heading($name, $heading, '');
+        $setting = new admin_setting_heading(
+                $name = 'theme_ucsf/custommenusubsection',
+                get_string('custommenusubsectiontitle', 'theme_ucsf'),
+                ''
+        );
         $page->add($setting);
 
         //Custom menu
-        $name = 'theme_ucsf/custommenu' . $category_id;
-        $heading = get_string('custommenu', 'theme_ucsf');
-        $information = get_string('custommenudesc', 'theme_ucsf');
-        $default = '';
-        $setting = new admin_setting_configtextarea($name, $heading, $information, $default);
+        $setting = new admin_setting_configtextarea(
+                'theme_ucsf/custommenu' . $category_id,
+                get_string('custommenu', 'theme_ucsf'),
+                get_string('custommenudesc', 'theme_ucsf'),
+                ''
+        );
         $page->add($setting);
 
         $settings->add($page);
