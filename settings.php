@@ -405,8 +405,8 @@ if ($ADMIN->fulltree) {
         //Custom menu
         $setting = new admin_setting_configtextarea(
                 'theme_ucsf/custommenu' . $category_id,
-                get_string('custommenu', 'theme_ucsf'),
-                get_string('custommenudesc', 'theme_ucsf'),
+                get_string('custommenuitems', 'admin'),
+                get_string('configcustommenuitems', 'admin'),
                 ''
         );
         $page->add($setting);
