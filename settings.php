@@ -389,6 +389,8 @@ if ($ADMIN->fulltree) {
         return in_array($category_id, $customized_category_ids);
     }, ARRAY_FILTER_USE_KEY);
 
+    asort($customized_categories);
+
     // Create a tab for each customizable category
     foreach ($customized_categories as $category_id => $category_name) {
         $page = new admin_settingpage('theme_ucsf_' . $category_id, $category_name);
