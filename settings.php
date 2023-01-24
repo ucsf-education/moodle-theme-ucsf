@@ -128,9 +128,7 @@ if ($ADMIN->fulltree) {
             'theme_ucsf/helpfeedbackenabled',
             get_string('helpfeedbackenabled', 'theme_ucsf'),
             get_string('helpfeedbackenableddesc', 'theme_ucsf'),
-            false,
-            true,
-            false
+            '0',
     );
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
