@@ -17,8 +17,13 @@
 namespace theme_ucsf\output;
 
 use coding_exception;
+use context_system;
+use dml_exception;
 use moodle_exception;
+use moodle_url;
 use theme_boost\output\core_renderer as boost_core_renderer;
+use theme_ucsf\utils\config;
+use theme_ucsf\utils\coursecategory;
 
 /**
  * Theme renderer.
@@ -64,5 +69,18 @@ class core_renderer extends boost_core_renderer {
         $obj->url = $CFG->wwwroot . '/theme/ucsf/banneralerts.php';
 
         return $this->render_from_template('theme_ucsf/banneralerts', $obj);
+    }
+
+    /**
+     * Renders the category branding.
+     * @param branding $branding
+     * @return string
+     */
+    public function render_branding(branding $branding): string {
+        $brand = $branding->export_for_template($this);
+        if (false === $brand) {
+            return '';
+        }
+        return $this->render_from_template('theme_ucsf/branding', $brand);
     }
 }

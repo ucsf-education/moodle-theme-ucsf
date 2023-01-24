@@ -37,9 +37,13 @@ use theme_ucsf\output\helpmenu;
  * @return bool
  * @throws moodle_exception
  */
-function theme_ucsf_pluginfile(stdClass $course, stdClass $cm, context $context, string $filearea, array $args, bool $forcedownload, array $options = array()): bool {
-    if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'backgroundimage' ||
-                    $filearea === 'loginbackgroundimage')) {
+function theme_ucsf_pluginfile($course, $cm, $context, string $filearea, array $args, bool $forcedownload,
+        array $options = array()): bool {
+    if ($context->contextlevel == CONTEXT_SYSTEM && (
+                    $filearea === 'logo'
+                    || preg_match('/headerimage\d+/', $filearea)
+                    || $filearea === 'backgroundimage'
+                    || $filearea === 'loginbackgroundimage')) {
         $theme = theme_config::load('ucsf');
         // By default, theme files must be cache-able by both browsers and proxies.
         if (!array_key_exists('cacheability', $options)) {

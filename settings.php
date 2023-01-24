@@ -393,6 +393,69 @@ if ($ADMIN->fulltree) {
     foreach ($customized_categories as $category_id => $category_name) {
         $page = new admin_settingpage('theme_ucsf_' . $category_id, $category_name);
 
+        // Branding
+        $setting = new admin_setting_heading(
+                'theme_ucsf/headerimagesubsection',
+                get_string('headerimagesubsectiontitle', 'theme_ucsf'),
+                ''
+        );
+        $page->add($setting);
+
+        // Branding - enable custom logo
+        $setting = new admin_setting_configcheckbox(
+                'theme_ucsf/customheaderenabled' . $category_id,
+                get_string('customheaderenabled', 'theme_ucsf'),
+                get_string('customheaderenableddesc', 'theme_ucsf'),
+                '',
+                '1',
+                ''
+        );
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        // Branding - logo
+        $setting = new admin_setting_configstoredfile(
+                'theme_ucsf/headerimage' . $category_id,
+                get_string('headerimage', 'theme_ucsf'),
+                get_string('headerimagedesc', 'theme_ucsf'),
+                'headerimage' . $category_id
+        );
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        // Branding - logo alt text
+        $setting = new admin_setting_configtext(
+                'theme_ucsf/headerimagealt' . $category_id,
+                get_string('headerimagealt', 'theme_ucsf'),
+                get_string('headerimagealtdesc', 'theme_ucsf'),
+                ''
+        );
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        // Branding - logo link
+        $setting = new admin_setting_configtext(
+                'theme_ucsf/headerimagelink' . $category_id,
+                get_string('headerimagelink', 'theme_ucsf'),
+                get_string('headerimagelinkdesc', 'theme_ucsf'),
+                ''
+        );
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        // Branding - logo link target
+        $setting = new admin_setting_configcheckbox(
+                'theme_ucsf/headerimagelinktarget' . $category_id,
+                get_string('headerimagelinktarget', 'theme_ucsf'),
+                get_string('headerimagelinktargetdesc', 'theme_ucsf'),
+                '_self',
+                '_blank',
+                '_self'
+        );
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        // Primary navigation additions
         $setting = new admin_setting_heading(
                 $name = 'theme_ucsf/custommenusubsection',
                 get_string('custommenusubsectiontitle', 'theme_ucsf'),
@@ -400,7 +463,6 @@ if ($ADMIN->fulltree) {
         );
         $page->add($setting);
 
-        //Custom menu
         $setting = new admin_setting_configtextarea(
                 'theme_ucsf/custommenu' . $category_id,
                 get_string('custommenuitems', 'admin'),
