@@ -27,5 +27,4 @@ use theme_ucsf\output\branding;
 defined('MOODLE_INTERNAL') || die();
 
 $branding = new branding();
-$brand = $OUTPUT->render($branding);
 $templatecontext['ucsfbrand'] = $OUTPUT->render($branding);
