@@ -23,10 +23,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['advancedsettings'] = 'Advanced settings';
-$string['alertnumber'] = 'Alert {$a}';
 $string['alert_general'] = 'Announcement';
 $string['alert_info'] = 'Information';
 $string['alert_warning'] = 'Warning';
+$string['alertnumber'] = 'Alert {$a}';
 $string['alertsdesc'] = 'This will display an alert (or multiple) in three different styles to your users on configured target pages. Please remember to disable these when no longer needed.';
 $string['alertsheading'] = 'Banner Alerts';
 $string['alertsheadingsub'] = 'Display important messages to your users as banner alerts on given pages or in given course categories.';
@@ -48,8 +48,8 @@ $string['configtitle'] = 'UCSF';
 $string['customheaderenabled'] = 'Enable branding';
 $string['customheaderenableddesc'] = 'Check this to enable the category-specific branding.';
 $string['custommenusubsectiontitle'] = 'Primary navigation';
-$string['dashboardonly'] = 'Dashboard Only';
 $string['daily'] = 'Daily';
+$string['dashboardonly'] = 'Dashboard Only';
 $string['dismissmessage'] = 'Dismiss this message.';
 $string['emptyenddate'] = 'Could not update the alert! The end date field cannot be empty!';
 $string['emptystartandenddate'] = 'Could not update the alert! The start and end date fields cannot be empty!';
