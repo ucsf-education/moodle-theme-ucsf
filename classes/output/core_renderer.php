@@ -70,17 +70,4 @@ class core_renderer extends boost_core_renderer {
 
         return $this->render_from_template('theme_ucsf/banneralerts', $obj);
     }
-
-    /**
-     * Renders the category branding.
-     * @param branding $branding
-     * @return string
-     */
-    public function render_branding(branding $branding): string {
-        $brand = $branding->export_for_template($this);
-        if (false === $brand) {
-            return '';
-        }
-        return $this->render_from_template('theme_ucsf/branding', $brand);
-    }
 }
