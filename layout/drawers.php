@@ -111,6 +111,7 @@ $templatecontext = [
 ];
 
 require_once(__DIR__ . '/includes/banneralerts.php');
+require_once(__DIR__ . '/includes/courserelatedhints.php');
 require_once(__DIR__ . '/includes/javascript.php');
 
 echo $OUTPUT->render_from_template('theme_ucsf/drawers', $templatecontext);
