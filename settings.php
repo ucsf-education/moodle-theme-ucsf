@@ -114,6 +114,22 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
+    // Feature Flags
+    $setting = new admin_setting_heading(
+        'theme_ucsf/featureflags',
+        get_string('featureflags', 'theme_ucsf'),
+        ''
+    );
+    $page->add($setting);
+
+    $setting = new admin_setting_configcheckbox(
+        'theme_ucsf/enablecoursecatalognavlink',
+        get_string('enablecoursecatalognavlink', 'theme_ucsf'),
+        get_string('enablecoursecatalognavlinkdesc', 'theme_ucsf'),
+        '0',
+    );
+    $page->add($setting);
+
     $settings->add($page);
 
     // course-catgories list
