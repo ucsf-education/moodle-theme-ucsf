@@ -17,6 +17,8 @@
 namespace theme_ucsf\output;
 
 use coding_exception;
+use context_coursecat;
+use context_system;
 use core\navigation\output\primary as core_primary;
 use custom_menu;
 use dml_exception;
@@ -43,32 +45,84 @@ class primary extends core_primary {
      * @global stdClass $PAGE
      */
     protected function get_custom_menu(renderer_base $output): array {
-        // skip altogether if customizations are turned off
-        if ('0' === config::get_setting('enablecustomization', '0')) {
-            return array();
-        }
-
-        $current_category_id = coursecategory::get_current_category_id();
-        $applicable_course_category_id = coursecategory::find_category_id_by_config_setting(
-                $current_category_id,
-                'custommenu',
-        );
-
-        // skip if no custom menu could be found at any level in the category hierarchy
-        if ('' === $applicable_course_category_id) {
-            return array();
-        }
-
-        // get the menu items from the theme settings
-        $custommenuitems = trim(config::get_setting('custommenu' . $applicable_course_category_id, ''));
-
         $nodes = [];
         $currentlang = current_language();
-        $custommenunodes = custom_menu::convert_text_to_menu_nodes($custommenuitems, $currentlang);
 
+        $custommenuitems = trim(
+            $this->get_custom_menu_nodes_for_course_catalog()
+            . PHP_EOL
+            . $this->get_custom_menu_nodes_by_category()
+        );
+
+        $custommenunodes = custom_menu::convert_text_to_menu_nodes($custommenuitems, $currentlang);
         foreach ($custommenunodes as $node) {
             $nodes[] = $node->export_for_template($output);
         }
         return $nodes;
+    }
+
+    protected function get_custom_menu_nodes_by_category(): string {
+        // skip altogether if customizations are turned off
+        if ('0' === config::get_setting('enablecustomization', '0')) {
+            return '';
+        }
+
+        $current_category_id = coursecategory::get_current_category_id();
+        $applicable_course_category_id = coursecategory::find_category_id_by_config_setting(
+            $current_category_id,
+            'custommenu',
+        );
+
+        // skip if no custom menu could be found at any level in the category hierarchy
+        if ('' === $applicable_course_category_id) {
+            return '';
+        }
+
+        // get the menu items from the theme settings
+        return trim(config::get_setting('custommenu' . $applicable_course_category_id, ''));
+    }
+
+    protected function get_custom_menu_nodes_for_course_catalog(): string {
+        global $COURSE, $PAGE;
+
+        // abort early if no global course object exists
+        if (!$COURSE) {
+            return '';
+        }
+
+        // skip altogether if feature flag is turned off
+        if (!config::get_setting('enablecoursecatalognavlink')) {
+            return '';
+        }
+
+        // assemble and return the menu item
+        $label = get_string('coursecatalog', 'theme_ucsf');
+        $link = '/course/index.php?categoryid=' . coursecategory::get_current_category_id();
+        $menuitem = $label . '|' . $link;
+
+        // KLUDGE!!
+        // if we're already on the coursecategory page, then we inject the link regardless.
+        // @todo revisit if that's really what we want here. [ST 2023/05/03]
+        if ('coursecategory' === $PAGE->pagelayout) {
+            return $menuitem;
+        }
+
+        // only users with "category management" permissions in a various contexts
+        // are recognized as Category Managers and will get this nav item.
+        $can_manage_category = false;
+
+        $systemcontext = context_system::instance();
+        // check the system-wide context
+        if (has_capability('moodle/category:manage', $systemcontext)) {
+            $can_manage_category = true;
+        }
+        if (! $can_manage_category) {
+            // check the coursecategory context for the given course
+            $categorycontext = context_coursecat::instance($COURSE->category, IGNORE_MISSING);
+            if ($categorycontext && has_capability('moodle/category:manage', $categorycontext)) {
+                $can_manage_category = true;
+            }
+        }
+        return $can_manage_category ? $menuitem : '';
     }
 }
