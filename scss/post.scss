@@ -39,6 +39,18 @@ body.uses-drawers {
   margin-top: $navbar-height + $ucsf-navbar-height;
 }
 
+/*=======================================
+ * Common elements
+ ======================================*/
+
+/*---------------------------------------
+ * Headings
+ --------------------------------------*/
+
+// Reduce the default font weight for h3-h5
+h3, h4, h5 {
+  font-weight: 500;
+}
 
 /*=======================================
  * Components
