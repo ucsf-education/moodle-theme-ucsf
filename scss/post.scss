@@ -1,45 +1,6 @@
 // Post SCSS for the theme.
 
 /*=======================================
- * Variables
- ======================================*/
-
-$ucsf-brand-primary-color: #052049; // background color for UCSF banner navigation (bannernav) and custom footer
-$ucsf-brand-fonts: "Helvetica Neue", "arial", sans-serif; // UCSF brand fonts
-$ucsf-navbar-height: 40px; // height of UCSF bannernav
-
-/*=======================================
- * Layout
- ======================================*/
-
-// on the login page, add padding to the entire html body on top
-// to prevent overlap from the UCSF bannernav.
-body.pagelayout-login {
-  padding-top: $ucsf-navbar-height;
-}
-
-// in the drawer-layout (the most common layout used throughout Moodle),
-// make some room above the drawer and navbar containers for the UCSF bannernav.
-body.uses-drawers {
-  .drawer,
-  .navbar {
-    margin-top: $ucsf-navbar-height;
-  }
-}
-
-// adjust positioning of drawer toggles for UCSF bannernav
-.drawer-toggles {
-  .drawer-toggler {
-    top: calc(#{$navbar-height + $ucsf-navbar-height} + 0.7rem);
-  }
-}
-
-// give more room for page content on pages that use the drawers layout
-#page.drawers {
-  margin-top: $navbar-height + $ucsf-navbar-height;
-}
-
-/*=======================================
  * Common elements
  ======================================*/
 
@@ -56,7 +17,6 @@ h3, h4, h5 {
  * Components
  ======================================*/
 @import "components/helpmenu";
-@import "components/bannernav";
 
 /*=======================================
  * Settings: Functionality -> Courses.
