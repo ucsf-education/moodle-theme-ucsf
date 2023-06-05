@@ -36,6 +36,7 @@ $string['alerttype'] = 'Level';
 $string['alerttypedesc'] = 'Set the appropriate alert level.';
 $string['backgroundimage'] = 'Background image';
 $string['backgroundimage_desc'] = 'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
+$string['backtotop'] = 'Back to top';
 $string['brandcolor'] = 'Brand color';
 $string['brandcolor_desc'] = 'The accent color.';
 $string['categories_list_alert'] = 'Target';
