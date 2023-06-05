@@ -26,3 +26,4 @@ defined('MOODLE_INTERNAL') || die();
 $PAGE->requires->js_call_amd('theme_ucsf/usereditform', 'init');
 $PAGE->requires->js_call_amd('theme_ucsf/banneralerts', 'init');
 $PAGE->requires->js_call_amd('theme_ucsf/datepicker', 'init');
+$PAGE->requires->js_call_amd('theme_ucsf/backtotopbutton', 'init');
