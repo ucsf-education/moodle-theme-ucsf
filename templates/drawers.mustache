@@ -60,7 +60,7 @@
 
     {{> theme_boost/navbar }}
     {{#courseindex}}
-        {{< theme_boost/drawer }}
+        {{< theme_ucsf/drawer }}
             {{$id}}theme_boost-drawers-courseindex{{/id}}
             {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
             {{$drawercontent}}
@@ -70,10 +70,13 @@
             {{$drawerstate}}show-drawer-left{{/drawerstate}}
             {{$tooltipplacement}}right{{/tooltipplacement}}
             {{$closebuttontext}}{{#str}}closecourseindex, core{{/str}}{{/closebuttontext}}
-        {{/ theme_boost/drawer}}
+            {{$drawercontentcontrols}}
+                {{> theme_ucsf/courseindexdrawercontrols}}
+            {{/drawercontentcontrols}}
+        {{/ theme_ucsf/drawer}}
     {{/courseindex}}
     {{#hasblocks}}
-        {{< theme_boost/drawer }}
+        {{< theme_ucsf/drawer }}
             {{$id}}theme_boost-drawers-blocks{{/id}}
             {{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
             {{$drawercontent}}
@@ -88,7 +91,10 @@
             {{$tooltipplacement}}left{{/tooltipplacement}}
             {{$drawercloseonresize}}1{{/drawercloseonresize}}
             {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
-        {{/ theme_boost/drawer}}
+            {{$drawercontentcontrols}}
+                {{> theme_ucsf/courseindexdrawercontrols}}
+            {{/drawercontentcontrols}}
+        {{/ theme_ucsf/drawer}}
     {{/hasblocks}}
     <div id="page" data-region="mainpage" data-usertour="scroller" class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
         <div id="topofscroll" class="main-inner">
@@ -179,4 +185,10 @@ require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
     Drawer.init();
     M.util.js_complete('theme_boost/loader');
 });
+const courseIndexDrawer = document.getElementById('theme_boost-drawers-courseindex');
+if (courseIndexDrawer) {
+    require(['theme_ucsf/courseindexcontrols'], function(component) {
+        component.init('theme_boost-drawers-courseindex');
+    });
+}
 {{/js}}
