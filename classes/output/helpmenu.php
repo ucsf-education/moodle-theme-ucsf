@@ -56,7 +56,7 @@ class helpmenu implements renderable, templatable {
                 $menu->items[] = array(
                         'url' => $url,
                         'title' => $title,
-                        'target' => $target ? '_self' : '_blank',
+                        'target' => $target ? '_blank' : '_self',
                 );
             }
         }
