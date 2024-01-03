@@ -34,10 +34,10 @@ class admin_setting_timerange extends admin_setting {
     const END_HOUR = 'end_hour';
     const END_MINUTE = 'end_minute';
 
-    public string $start_minute_setting_name;
-    public string $start_hour_setting_name;
-    public string $end_minute_setting_name;
-    public string $end_hour_setting_name;
+    public string $startminutesettingname;
+    public string $starthoursettingname;
+    public string $endminutesettingname;
+    public string $endhoursettingname;
 
     /**
      * @param string $name
@@ -50,17 +50,17 @@ class admin_setting_timerange extends admin_setting {
      */
     public function __construct(
             string $name,
-            string $start_hour_setting_name,
-            string $start_minute_setting_name,
-            string $end_hour_setting_name,
-            string $end_minute_setting_name,
+            string $starthoursettingname,
+            string $startminutesettingname,
+            string $endhoursettingname,
+            string $endminutesettingname,
             string $visiblename,
             string $description
     ) {
-        $this->start_hour_setting_name = $start_hour_setting_name;
-        $this->start_minute_setting_name = $start_minute_setting_name;
-        $this->end_hour_setting_name = $end_hour_setting_name;
-        $this->end_minute_setting_name = $end_minute_setting_name;
+        $this->start_hour_setting_name = $starthoursettingname;
+        $this->start_minute_setting_name = $startminutesettingname;
+        $this->end_hour_setting_name = $endhoursettingname;
+        $this->end_minute_setting_name = $endminutesettingname;
         parent::__construct($name, $visiblename, $description, '');
     }
 
@@ -74,19 +74,19 @@ class admin_setting_timerange extends admin_setting {
      *  ]
      */
     public function get_setting(): ?array {
-        $start_hour = $this->config_read($this->start_hour_setting_name);
-        $start_minute = $this->config_read($this->start_minute_setting_name);
-        $end_hour = $this->config_read($this->end_hour_setting_name);
-        $end_minute = $this->config_read($this->end_minute_setting_name);
-        if (is_null($start_hour) || is_null($start_minute) || is_null($end_hour) || is_null($end_minute)) {
+        $starthour = $this->config_read($this->start_hour_setting_name);
+        $startminute = $this->config_read($this->start_minute_setting_name);
+        $endhour = $this->config_read($this->end_hour_setting_name);
+        $endminute = $this->config_read($this->end_minute_setting_name);
+        if (is_null($starthour) || is_null($startminute) || is_null($endhour) || is_null($endminute)) {
             return null;
         }
-        return array(
-                self::START_HOUR => $start_hour,
-                self::START_MINUTE => $start_minute,
-                self::END_HOUR => $end_hour,
-                self::END_MINUTE => $end_minute
-        );
+        return [
+                self::START_HOUR => $starthour,
+                self::START_MINUTE => $startminute,
+                self::END_HOUR => $endhour,
+                self::END_MINUTE => $endminute,
+        ];
     }
 
     /**
@@ -102,16 +102,16 @@ class admin_setting_timerange extends admin_setting {
      */
     public function write_setting($data): string {
 
-        $start_hour = ('' !== trim($data[self::START_HOUR])) ? trim($data[self::START_HOUR]) : '';
-        $start_minute = ('' !== trim($data[self::START_MINUTE])) ? trim($data[self::START_MINUTE]) : '';
-        $end_hour = ('' !== trim($data[self::END_HOUR])) ? trim($data[self::END_HOUR]) : '';
-        $end_minute = ('' !== trim($data[self::END_MINUTE])) ? trim($data[self::END_MINUTE]) : '';
-        $validate = $this->validate($start_hour, $start_minute, $end_hour, $end_minute);
+        $starthour = ('' !== trim($data[self::START_HOUR])) ? trim($data[self::START_HOUR]) : '';
+        $startminute = ('' !== trim($data[self::START_MINUTE])) ? trim($data[self::START_MINUTE]) : '';
+        $endhour = ('' !== trim($data[self::END_HOUR])) ? trim($data[self::END_HOUR]) : '';
+        $endminute = ('' !== trim($data[self::END_MINUTE])) ? trim($data[self::END_MINUTE]) : '';
+        $validate = $this->validate($starthour, $startminute, $endhour, $endminute);
         if ('' === $validate) {
-            $result = $this->config_write($this->start_hour_setting_name, $start_hour)
-                    && $this->config_write($this->start_minute_setting_name, $start_minute)
-                    && $this->config_write($this->end_hour_setting_name, $end_hour)
-                    && $this->config_write($this->end_minute_setting_name, $end_minute);
+            $result = $this->config_write($this->start_hour_setting_name, $starthour)
+                    && $this->config_write($this->start_minute_setting_name, $startminute)
+                    && $this->config_write($this->end_hour_setting_name, $endhour)
+                    && $this->config_write($this->end_minute_setting_name, $endminute);
             return ($result ? '' : get_string('errorsetting', 'admin'));
         }
         return $validate;
@@ -127,10 +127,10 @@ class admin_setting_timerange extends admin_setting {
      * @return string empty string if ok, string error message otherwise
      * @throws coding_exception
      */
-    protected function validate(string $start_hour, string $start_minute, string $end_hour, string $end_minute): string {
-        $time_start = (int) $start_hour * 3600 + (int) $start_minute * 60;
-        $time_end = (int) $end_hour * 3600 + (int) $end_minute * 60;
-        if ($time_start > $time_end) {
+    protected function validate(string $starthour, string $startminute, string $endhour, string $endminute): string {
+        $timestart = (int) $starthour * 3600 + (int) $startminute * 60;
+        $timeend = (int) $endhour * 3600 + (int) $endminute * 60;
+        if ($timestart > $timeend) {
             return (get_string('startsbeforeitends', 'theme_ucsf'));
         }
         return '';
@@ -170,17 +170,17 @@ class admin_setting_timerange extends admin_setting {
 
         $default = $this->get_defaultsetting();
         $return = html_writer::start_div('form-text defaultsnext');
-        $return .= html_writer::tag('label', get_string('start_hour', 'theme_ucsf'), array(
+        $return .= html_writer::tag('label', get_string('start_hour', 'theme_ucsf'), [
                 'class' => 'accesshide',
                 'for' => $this->get_id() . '_' . self::START_HOUR,
-        ));
-        $return .= html_writer::span(ucfirst(get_string('hour')) . ':', '', array('aria-hidden' => 'true'));
+        ]);
+        $return .= html_writer::span(ucfirst(get_string('hour')) . ':', '', ['aria-hidden' => 'true']);
         $return .= ' ';
-        $return .= html_writer::start_tag('select', array(
+        $return .= html_writer::start_tag('select', [
                 'class' => 'custom-select',
                 'id' => $this->get_id() . '_' . self::START_HOUR,
                 'name' => $this->get_full_name() . '[' . self::START_HOUR . ']',
-        ));
+        ]);
         for ($i = 0; $i <= 23; $i++) {
             $attrs = array('value' => $i);
             if ($i === (int) $starthour) {
@@ -190,17 +190,17 @@ class admin_setting_timerange extends admin_setting {
         }
         $return .= html_writer::end_tag('select');
         $return .= ' ';
-        $return .= html_writer::tag('label', get_string('start_minute', 'theme_ucsf'), array(
+        $return .= html_writer::tag('label', get_string('start_minute', 'theme_ucsf'), [
                 'class' => 'accesshide',
                 'for' => $this->get_id() . '_' . self::START_MINUTE,
-        ));
-        $return .= html_writer::span(ucfirst(get_string('minute')) . ':', '', array('aria-hidden' => 'true'));
+        ]);
+        $return .= html_writer::span(ucfirst(get_string('minute')) . ':', '', ['aria-hidden' => 'true']);
         $return .= ' ';
-        $return .= html_writer::start_tag('select', array(
+        $return .= html_writer::start_tag('select', [
                 'class' => 'custom-select',
                 'id' => $this->get_id() . '_' . self::START_MINUTE,
                 'name' => $this->get_full_name() . '[' . self::START_MINUTE . ']',
-        ));
+        ]);
         for ($i = 0; $i < 60; $i += 5) {
             $attrs = array('value' => $i);
             if ($i === (int) $startminute) {
@@ -210,17 +210,17 @@ class admin_setting_timerange extends admin_setting {
         }
         $return .= html_writer::end_tag('select');
         $return .= html_writer::empty_tag('br');
-        $return .= html_writer::tag('label', get_string('start_hour', 'theme_ucsf'), array(
+        $return .= html_writer::tag('label', get_string('start_hour', 'theme_ucsf'), [
                 'class' => 'accesshide',
                 'for' => $this->get_id() . '_' . self::END_HOUR,
-        ));
-        $return .= html_writer::span(ucfirst(get_string('hour')) . ':', '', array('aria-hidden' => 'true'));
+        ]);
+        $return .= html_writer::span(ucfirst(get_string('hour')) . ':', '', ['aria-hidden' => 'true']);
         $return .= ' ';
-        $return .= html_writer::start_tag('select', array(
+        $return .= html_writer::start_tag('select', [
                 'class' => 'custom-select',
                 'id' => $this->get_id() . '_' . self::END_HOUR,
                 'name' => $this->get_full_name() . '[' . self::END_HOUR . ']',
-        ));
+        ]);
         for ($i = 0; $i <= 23; $i++) {
             $attrs = array('value' => $i);
             if ($i === (int) $endhour) {
@@ -230,17 +230,17 @@ class admin_setting_timerange extends admin_setting {
         }
         $return .= html_writer::end_tag('select');
         $return .= ' ';
-        $return .= html_writer::tag('label', get_string('start_minute', 'theme_ucsf'), array(
+        $return .= html_writer::tag('label', get_string('start_minute', 'theme_ucsf'), [
                 'class' => 'accesshide',
                 'for' => $this->get_id() . '_' . self::END_MINUTE,
-        ));
-        $return .= html_writer::span(ucfirst(get_string('minute')) . ':', '', array('aria-hidden' => 'true'));
+        ]);
+        $return .= html_writer::span(ucfirst(get_string('minute')) . ':', '', ['aria-hidden' => 'true']);
         $return .= ' ';
-        $return .= html_writer::start_tag('select', array(
+        $return .= html_writer::start_tag('select', [
                 'class' => 'custom-select',
                 'id' => $this->get_id() . self::END_MINUTE,
                 'name' => $this->get_full_name() . '[' . self::END_MINUTE . ']',
-        ));
+        ]);
         for ($i = 0; $i < 60; $i += 5) {
             $attrs = array('value' => $i);
             if ($i === $endminute) {

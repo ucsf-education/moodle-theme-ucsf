@@ -45,22 +45,22 @@ class primary extends core_primary {
     protected function get_custom_menu(renderer_base $output): array {
         // skip altogether if customizations are turned off
         if ('0' === config::get_setting('enablecustomization', '0')) {
-            return array();
+            return [];
         }
 
-        $current_category_id = coursecategory::get_current_category_id();
-        $applicable_course_category_id = coursecategory::find_category_id_by_config_setting(
-                $current_category_id,
+        $currentcategoryid = coursecategory::get_current_category_id();
+        $applicablecoursecategoryid = coursecategory::find_category_id_by_config_setting(
+                $currentcategoryid,
                 'custommenu',
         );
 
         // skip if no custom menu could be found at any level in the category hierarchy
-        if ('' === $applicable_course_category_id) {
-            return array();
+        if ('' === $applicablecoursecategoryid) {
+            return [];
         }
 
         // get the menu items from the theme settings
-        $custommenuitems = trim(config::get_setting('custommenu' . $applicable_course_category_id, ''));
+        $custommenuitems = trim(config::get_setting('custommenu' . $applicablecoursecategoryid, ''));
 
         $nodes = [];
         $currentlang = current_language();

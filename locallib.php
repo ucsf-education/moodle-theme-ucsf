@@ -38,7 +38,7 @@ function theme_ucsf_get_course_related_hints() {
             && $COURSE->visible == false) {
 
         // Prepare template context.
-        $templatecontext = array('courseid' => $COURSE->id);
+        $templatecontext = ['courseid' => $COURSE->id];
 
         // If the user has the capability to change the course settings, an additional link to the course settings is shown.
         if (has_capability('moodle/course:update', context_course::instance($COURSE->id))) {
@@ -65,8 +65,8 @@ function theme_ucsf_get_course_related_hints() {
         require_once($CFG->dirroot . '/enrol/self/lib.php');
 
         // Prepare template context.
-        $templatecontext = array('courseid' => $COURSE->id,
-                'role' => role_get_name(get_guest_role()));
+        $templatecontext = ['courseid' => $COURSE->id,
+                'role' => role_get_name(get_guest_role())];
 
         // Search for an available self enrolment link in this course.
         $templatecontext['showselfenrollink'] = false;
@@ -102,14 +102,14 @@ function theme_ucsf_get_course_related_hints() {
 
         // Get the URL to switch back (normal role).
         $url = new moodle_url('/course/switchrole.php',
-                array('id' => $COURSE->id,
+                ['id' => $COURSE->id,
                         'sesskey' => sesskey(),
                         'switchrole' => 0,
-                        'returnurl' => $PAGE->url->out_as_local_url(false)));
+                        'returnurl' => $PAGE->url->out_as_local_url(false)]);
 
         // Prepare template context.
-        $templatecontext = array('role' => $role,
-                'url' => $url->out());
+        $templatecontext = ['role' => $role,
+                'url' => $url->out()];
 
         // Render template and add it to HTML code.
         $html .= $OUTPUT->render_from_template('theme_ucsf/course-hint-switchedrole', $templatecontext);

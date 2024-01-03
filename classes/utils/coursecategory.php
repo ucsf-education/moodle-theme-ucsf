@@ -38,15 +38,14 @@ class coursecategory {
      * @throws coding_exception
      * @global moodle_page $PAGE The current page object
      */
-    public static function get_current_category_id(): string
-    {
+    public static function get_current_category_id(): string {
         global $PAGE;
         // For course category pages, peel the category id out of the HTTP request.
         // In all other cases, take it from the current course.
         if ('coursecategory' === $PAGE->pagelayout) {
-            $category_id = optional_param('categoryid', 0, PARAM_INT);
-            if (0 !== $category_id) {
-                return (string) $category_id; // cast it back to string
+            $categoryid = optional_param('categoryid', 0, PARAM_INT);
+            if (0 !== $categoryid) {
+                return (string) $categoryid; // cast it back to string
             }
         }
         return $PAGE->course->category;
@@ -61,21 +60,20 @@ class coursecategory {
      * @return array A list of category ids, will be empty if the given category cannot be found.
      * @throws dml_exception
      */
-    public static function get_reverse_category_hierarchy(string $id): array
-    {
+    public static function get_reverse_category_hierarchy(string $id): array {
         global $DB;
         static $cache = null;
 
         if (! isset($cache)) {
-            $cache = array();
+            $cache = [];
         }
 
         if (! array_key_exists($id, $cache)) {
-            $category = $DB->get_record('course_categories', array('id' => $id));
+            $category = $DB->get_record('course_categories', ['id' => $id]);
             if (false === $category) {
-                return array();
+                return [];
             }
-            $ids = array_reverse(explode('/',trim( $category->path, '/')));
+            $ids = array_reverse(explode('/', trim( $category->path, '/')));
             $cache[$id] = $ids;
         }
 
@@ -98,30 +96,28 @@ class coursecategory {
      * @see coursecategory::get_reverse_category_hierarchy()
      * @throws dml_exception
      */
-    public static function find_category_id_by_config_setting(string $category_id, string $setting_name_prefix): string
-    {
+    public static function find_category_id_by_config_setting(string $categoryid, string $settingnameprefix): string {
         // get the reverse course category tree for the given category
-        $category_hierarchy = self::get_reverse_category_hierarchy($category_id);
+        $categoryhierarchy = self::get_reverse_category_hierarchy($categoryid);
 
-        if (empty($category_hierarchy)) {
+        if (empty($categoryhierarchy)) {
             return ''; // abort mission if there's no hierarchy, most likely b/c the category itself cannot be found.
         }
 
-
         // Get a list of course category IDs that have been configured for customizations.
         // Note that this isn't the same as *enabled* customizations, it just means that they've been flagged as "customizable".
-        $customized_categories = trim(config::get_setting('all_categories', ''));
-        if ('' === $customized_categories) {
+        $customizedcategories = trim(config::get_setting('all_categories', ''));
+        if ('' === $customizedcategories) {
             return '';
         }
-        $customized_categories = explode(',', $customized_categories);
+        $customizedcategories = explode(',', $customizedcategories);
 
         // find first matching config setting and return the id of the category that it matched with.
-        foreach ($category_hierarchy as $category_id) {
-            if (in_array($category_id, $customized_categories)) {
-                $setting_name = $setting_name_prefix . $category_id;
-                if ('' !== trim(config::get_setting($setting_name, ''))) {
-                    return $category_id;
+        foreach ($categoryhierarchy as $categoryid) {
+            if (in_array($categoryid, $customizedcategories)) {
+                $settingname = $settingnameprefix . $categoryid;
+                if ('' !== trim(config::get_setting($settingname, ''))) {
+                    return $categoryid;
                 }
             }
         }

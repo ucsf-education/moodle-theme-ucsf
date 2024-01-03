@@ -53,11 +53,11 @@ class helpmenu implements renderable, templatable {
             $title = trim(config::get_setting('helpfeedback' . $i . 'linklabel', ''));
             $target = (bool) config::get_setting('helpfeedback' . $i . 'linktarget');
             if ('' !== $url && '' !== $title) {
-                $menu->items[] = array(
+                $menu->items[] = [
                         'url' => $url,
                         'title' => $title,
                         'target' => $target ? '_blank' : '_self',
-                );
+                ];
             }
         }
 

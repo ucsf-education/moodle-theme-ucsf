@@ -107,7 +107,7 @@ $templatecontext = [
         'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
         'overflow' => $overflow,
         'headercontent' => $headercontent,
-        'addblockbutton' => $addblockbutton
+        'addblockbutton' => $addblockbutton,
 ];
 
 require_once(__DIR__ . '/includes/banneralerts.php');

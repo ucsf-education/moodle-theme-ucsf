@@ -38,7 +38,7 @@ use theme_ucsf\output\helpmenu;
  * @throws moodle_exception
  */
 function theme_ucsf_pluginfile($course, $cm, $context, string $filearea, array $args, bool $forcedownload,
-        array $options = array()): bool {
+        array $options = []): bool {
     if ($context->contextlevel == CONTEXT_SYSTEM && (
                     $filearea === 'logo'
                     || preg_match('/headerimage\d+/', $filearea)

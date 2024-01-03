@@ -38,6 +38,6 @@ if (1 > $id || $id > constants::BANNERALERT_ITEMS_COUNT) {
 // flag the alert as "seen" by adding it to the user session.
 // this flag will be checked when alerts are being considered for display, suppressing it until this session is terminated.
 if (!array_key_exists(constants::BANNERALERT_SESSION_KEY, $_SESSION)) {
-    $_SESSION[constants::BANNERALERT_SESSION_KEY] = array();
+    $_SESSION[constants::BANNERALERT_SESSION_KEY] = [];
 }
 $_SESSION[constants::BANNERALERT_SESSION_KEY][$id] = true;

@@ -76,205 +76,205 @@ class banneralerts implements renderable, templatable {
                 continue;
             }
 
-            $alert_message = trim(config::get_setting("alert{$i}text", ''));
+            $alertmessage = trim(config::get_setting("alert{$i}text", ''));
             // skip if the alert has no message
-            if ('' === $alert_message) {
+            if ('' === $alertmessage) {
                 continue;
             }
 
-            $alert_target = config::get_setting('categories_list_alert' . $i, '');
+            $alerttarget = config::get_setting('categories_list_alert' . $i, '');
             // skip if no target is configured
-            if ('' === $alert_target) {
+            if ('' === $alerttarget) {
                 continue;
             }
 
-            $alert_type = config::get_setting('recurring_alert' . $i, '');
+            $alerttype = config::get_setting('recurring_alert' . $i, '');
             // skip if no alert type is configured
-            if ('' === $alert_type) {
+            if ('' === $alerttype) {
                 continue;
             }
 
             // ----------
             // Check if this alert belongs on the current page, based on its target type.
             // ----------
-            $current_page_is_applicable_target = false;
+            $currentpageisapplicabletarget = false;
 
-            switch ($alert_target) {
+            switch ($alerttarget) {
                 // dashboard only alert
                 case constants::BANNERALERT_TARGET_DASHBOARD:
                     // KLUDGE!
                     // check the current page layout.
                     // skip if this alert is targeting the user dashboard, and we're NOT on the dashboard.
-                    $current_page_is_applicable_target = ('mydashboard' === $this->page->pagelayout);
+                    $currentpageisapplicabletarget = ('mydashboard' === $this->page->pagelayout);
                     break;
                 // site-wide alert
                 case constants::BANNERALERT_TARGET_SITEWIDE:
-                    $current_page_is_applicable_target = true; //this alert always targets the current page
+                    $currentpageisapplicabletarget = true; // this alert always targets the current page
                     break;
                 // category specific-alert
                 default:
                     // check if this alert targets this page's course category or any if its parent categories.
                     // skip if not.
-                    $current_course_category_id = coursecategory::get_current_category_id();
-                    $category_ids = coursecategory::get_reverse_category_hierarchy($current_course_category_id);
-                    $current_page_is_applicable_target = in_array($alert_target, $category_ids);
+                    $currentcoursecategoryid = coursecategory::get_current_category_id();
+                    $categoryids = coursecategory::get_reverse_category_hierarchy($currentcoursecategoryid);
+                    $currentpageisapplicabletarget = in_array($alerttarget, $categoryids);
                     break;
             }
 
             // skip if this alert does not belong on the current page
-            if (!$current_page_is_applicable_target) {
+            if (!$currentpageisapplicabletarget) {
                 continue;
             }
 
             // ----------
             // Check if this alert is within its given date/time boundaries
             // ----------
-            $alert_is_within_datetime_boundaries = false;
+            $alertiswithindatetimeboundaries = false;
 
             $now = time();
             $today = strtotime("midnight", $now); // start of today/"today at midnight".
 
-            switch ($alert_type) {
+            switch ($alerttype) {
                 case constants::BANNERALERT_TYPE_UNBOUND:
-                    $alert_is_within_datetime_boundaries = true;
+                    $alertiswithindatetimeboundaries = true;
                     break;
                 case constants::BANNERALERT_TYPE_DATEBOUND:
-                    $date_config = $this->get_date_config($i);
+                    $dateconfig = $this->get_date_config($i);
 
                     // skip if start or end date are missing
-                    if ('' === $date_config['start_date'] || '' === $date_config['end_date']) {
+                    if ('' === $dateconfig['start_date'] || '' === $dateconfig['end_date']) {
                         break;
                     }
 
-                    $start_date = date_create($date_config['start_date']);
-                    $end_date = date_create($date_config['end_date']);
+                    $startdate = date_create($dateconfig['start_date']);
+                    $enddate = date_create($dateconfig['end_date']);
 
                     // skip if configured dates cannot be converted to date objects
-                    if (false === $start_date || false === $end_date) {
+                    if (false === $startdate || false === $enddate) {
                         break;
                     }
 
-                    $start_date->setTime($date_config['start_hour'], $date_config['start_minute']);
-                    $end_date->setTime($date_config['end_hour'], $date_config['end_minute']);
+                    $startdate->setTime($dateconfig['start_hour'], $dateconfig['start_minute']);
+                    $enddate->setTime($dateconfig['end_hour'], $dateconfig['end_minute']);
 
                     // skip if today is not within range
-                    if ($start_date->getTimestamp() > $now || $end_date->getTimestamp() < $now) {
+                    if ($startdate->getTimestamp() > $now || $enddate->getTimestamp() < $now) {
                         break;
                     }
 
-                    $alert_is_within_datetime_boundaries = true;
+                    $alertiswithindatetimeboundaries = true;
                     break;
                 case constants::BANNERALERT_TYPE_RECURRENCE_DAILY:
-                    $date_config = $this->get_date_config($i, '_daily');
+                    $dateconfig = $this->get_date_config($i, '_daily');
 
                     // skip if start or end date are missing
-                    if ('' === $date_config['start_date'] || '' === $date_config['end_date']) {
+                    if ('' === $dateconfig['start_date'] || '' === $dateconfig['end_date']) {
                         break;
                     }
 
-                    $start_date = date_create($date_config['start_date']);
-                    $end_date = date_create($date_config['end_date']);
+                    $startdate = date_create($dateconfig['start_date']);
+                    $enddate = date_create($dateconfig['end_date']);
 
                     // skip if configured dates cannot be converted to date objects
-                    if (false === $start_date || false === $end_date) {
+                    if (false === $startdate || false === $enddate) {
                         break;
                     }
 
                     // check date range first. skip if today's date is out of boundaries.
-                    if ($start_date->getTimestamp() > $today || $end_date->getTimestamp() < $today) {
+                    if ($startdate->getTimestamp() > $today || $enddate->getTimestamp() < $today) {
                         break;
                     }
 
                     // construct a new start and end date, based on today's date, but with the configured times-of-day applied.
-                    $today_start_date = new DateTime();
-                    $today_start_date->setTimestamp($now);
-                    $today_start_date->setTime($date_config['start_hour'], $date_config['start_minute']);
+                    $todaystartdate = new DateTime();
+                    $todaystartdate->setTimestamp($now);
+                    $todaystartdate->setTime($dateconfig['start_hour'], $dateconfig['start_minute']);
 
-                    $today_end_date = new DateTime();
-                    $today_end_date->setTimestamp($now);
-                    $today_end_date->setTime($date_config['end_hour'], $date_config['end_minute']);
+                    $todayenddate = new DateTime();
+                    $todayenddate->setTimestamp($now);
+                    $todayenddate->setTime($dateconfig['end_hour'], $dateconfig['end_minute']);
 
-                    $start_date->setTime($date_config['start_hour'], $date_config['start_minute']);
-                    $end_date->setTime($date_config['end_hour'], $date_config['end_minute']);
+                    $startdate->setTime($dateconfig['start_hour'], $dateconfig['start_minute']);
+                    $enddate->setTime($dateconfig['end_hour'], $dateconfig['end_minute']);
 
                     // check time range next. skip if the current time-of-day is out of boundaries.
-                    if ($today_start_date->getTimestamp() > $now || $today_end_date->getTimestamp() < $now) {
+                    if ($todaystartdate->getTimestamp() > $now || $todayenddate->getTimestamp() < $now) {
                         break;
                     }
 
-                    $alert_is_within_datetime_boundaries = true;
+                    $alertiswithindatetimeboundaries = true;
                     break;
                 case constants::BANNERALERT_TYPE_RECURRENCE_WEEKLY:
-                    $day_of_the_week = config::get_setting('show_week_day' . $i, '');
+                    $dayoftheweek = config::get_setting('show_week_day' . $i, '');
 
                     // skip if no day of week was configured
-                    if ('' === $day_of_the_week) {
+                    if ('' === $dayoftheweek) {
                         break;
                     }
 
                     // skip if the today does not fall on the same day-of-week as the given one.
-                    if ($day_of_the_week !== date('w', $now)) {
+                    if ($dayoftheweek !== date('w', $now)) {
                         break;
                     }
 
-                    $date_config = $this->get_date_config($i, '_weekly');
+                    $dateconfig = $this->get_date_config($i, '_weekly');
 
                     // skip if start or end date are missing
-                    if ('' === $date_config['start_date'] || '' === $date_config['end_date']) {
+                    if ('' === $dateconfig['start_date'] || '' === $dateconfig['end_date']) {
                         break;
                     }
 
-                    $start_date = date_create($date_config['start_date']);
-                    $end_date = date_create($date_config['end_date']);
+                    $startdate = date_create($dateconfig['start_date']);
+                    $enddate = date_create($dateconfig['end_date']);
 
                     // skip if configured dates cannot be converted to date objects
-                    if (false === $start_date || false === $end_date) {
+                    if (false === $startdate || false === $enddate) {
                         break;
                     }
 
                     // check date range first. skip if today's date is out of boundaries.
-                    if ($start_date->getTimestamp() > $today || $end_date->getTimestamp() < $today) {
+                    if ($startdate->getTimestamp() > $today || $enddate->getTimestamp() < $today) {
                         break;
                     }
 
                     // construct a new start and end date, based on today's date, but with the configured times-of-day applied.
-                    $today_start_date = new DateTime();
-                    $today_start_date->setTimestamp($now);
-                    $today_start_date->setTime($date_config['start_hour'], $date_config['start_minute']);
+                    $todaystartdate = new DateTime();
+                    $todaystartdate->setTimestamp($now);
+                    $todaystartdate->setTime($dateconfig['start_hour'], $dateconfig['start_minute']);
 
-                    $today_end_date = new DateTime();
-                    $today_end_date->setTimestamp($now);
-                    $today_end_date->setTime($date_config['end_hour'], $date_config['end_minute']);
+                    $todayenddate = new DateTime();
+                    $todayenddate->setTimestamp($now);
+                    $todayenddate->setTime($dateconfig['end_hour'], $dateconfig['end_minute']);
 
-                    $start_date->setTime($date_config['start_hour'], $date_config['start_minute']);
-                    $end_date->setTime($date_config['end_hour'], $date_config['end_minute']);
+                    $startdate->setTime($dateconfig['start_hour'], $dateconfig['start_minute']);
+                    $enddate->setTime($dateconfig['end_hour'], $dateconfig['end_minute']);
 
                     // check time range next. skip if the current time-of-day is out of boundaries.
-                    if ($today_start_date->getTimestamp() > $now || $today_end_date->getTimestamp() < $now) {
+                    if ($todaystartdate->getTimestamp() > $now || $todayenddate->getTimestamp() < $now) {
                         break;
                     }
 
-                    $alert_is_within_datetime_boundaries = true;
+                    $alertiswithindatetimeboundaries = true;
             }
 
             // skip if this alert is outside its configured date boundaries
-            if (!$alert_is_within_datetime_boundaries) {
+            if (!$alertiswithindatetimeboundaries) {
                 continue;
             }
 
             // ----------
             // This alert should be displayed! Add it to the output.
             // ----------
-            $alert_level = config::get_setting("alert{$i}type", constants::BANNERALERT_LEVEL_INFORMATION);
+            $alertlevel = config::get_setting("alert{$i}type", constants::BANNERALERT_LEVEL_INFORMATION);
 
-            $alert_classes = array_key_exists($alert_level, self::ALERT_LEVEL_CSS_CLASSES_MAP)
-                    ? self::ALERT_LEVEL_CSS_CLASSES_MAP[$alert_level]
+            $alertclasses = array_key_exists($alertlevel, self::ALERT_LEVEL_CSS_CLASSES_MAP)
+                    ? self::ALERT_LEVEL_CSS_CLASSES_MAP[$alertlevel]
                     : self::ALERT_LEVEL_CSS_CLASSES_MAP[constants::BANNERALERT_LEVEL_INFORMATION];
 
             $obj->alerts[] = [
                     'id' => $i,
-                    'classes' => $alert_classes,
-                    'message' => $alert_message,
+                    'classes' => $alertclasses,
+                    'message' => $alertmessage,
             ];
         }
 
@@ -298,13 +298,13 @@ class banneralerts implements renderable, templatable {
      * @throws dml_exception
      */
     protected function get_date_config(int $index, string $suffix = ''): array {
-        return array(
+        return [
                 'start_date' => config::get_setting('start_date' . $suffix . $index, ''),
                 'start_hour' => (int) config::get_setting('start_hour' . $suffix . $index, 0),
                 'start_minute' => (int) config::get_setting('start_minute' . $suffix . $index, 0),
                 'end_date' => config::get_setting('end_date' . $suffix . $index, ''),
                 'end_hour' => (int) config::get_setting('end_hour' . $suffix . $index, 0),
                 'end_minute' => (int) config::get_setting('end_minute' . $suffix . $index, 0),
-        );
+        ];
     }
 }
