@@ -22,21 +22,21 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__ . '/../../config.php'); // ensures that the user session is initialized
+require_once(__DIR__ . '/../../config.php'); // Ensures that the user session is initialized.
 require_once(__DIR__ . '/classes/constants.php');
 
 use theme_ucsf\constants;
 
-// get the alert id from URL parameters.
+// Get the alert id from URL parameters.
 $id = required_param('id', PARAM_INT);
 
-// check if the id is within range.
+// Check if the id is within range.
 if (1 > $id || $id > constants::BANNERALERT_ITEMS_COUNT) {
     exit;
 }
 
-// flag the alert as "seen" by adding it to the user session.
-// this flag will be checked when alerts are being considered for display, suppressing it until this session is terminated.
+// Flag the alert as "seen" by adding it to the user session.
+// This flag will be checked when alerts are being considered for display, suppressing it until this session is terminated.
 if (!array_key_exists(constants::BANNERALERT_SESSION_KEY, $_SESSION)) {
     $_SESSION[constants::BANNERALERT_SESSION_KEY] = [];
 }

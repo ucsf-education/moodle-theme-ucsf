@@ -45,7 +45,7 @@ class coursecategory {
         if ('coursecategory' === $PAGE->pagelayout) {
             $categoryid = optional_param('categoryid', 0, PARAM_INT);
             if (0 !== $categoryid) {
-                return (string) $categoryid; // cast it back to string
+                return (string) $categoryid; // Cast it back to string.
             }
         }
         return $PAGE->course->category;
@@ -53,7 +53,8 @@ class coursecategory {
 
     /**
      * Returns a reversed hierarchy of course categories, starting from the given category going up to the top-level category.
-     * The first element in that list is the given course category id itself, followed by its parent, the parent's parent, and so on.
+     * The first element in that list is the given course category id itself, followed by its parent,
+     * the parent's parent, and so on.
      *
      * @global moodle_database $DB
      * @param string $id The category id.
@@ -86,7 +87,8 @@ class coursecategory {
      *
      * Example:
      *  1. The category hierarchy for the given category (id = "7") is "7" > "6" > "5" > "1". (from bottom- to the top-category).
-     *  2. We're searching the theme settings for all entries pertaining to custom labels (all config settings starting with "customlabel").
+     *  2. We're searching the theme settings for all entries pertaining to custom labels
+     *     (all config settings starting with "customlabel").
      *  3. The theme settings contains entries with the names "customlabel5" and "customlabel1".
      *  4. This method will return "5", since "customlabel5" is the first matching setting from the bottom of the hierarchy.
      *
@@ -97,11 +99,11 @@ class coursecategory {
      * @throws dml_exception
      */
     public static function find_category_id_by_config_setting(string $categoryid, string $settingnameprefix): string {
-        // get the reverse course category tree for the given category
+        // Get the reverse course category tree for the given category.
         $categoryhierarchy = self::get_reverse_category_hierarchy($categoryid);
 
         if (empty($categoryhierarchy)) {
-            return ''; // abort mission if there's no hierarchy, most likely b/c the category itself cannot be found.
+            return ''; // Abort mission if there's no hierarchy, most likely b/c the category itself cannot be found.
         }
 
         // Get a list of course category IDs that have been configured for customizations.
@@ -112,7 +114,7 @@ class coursecategory {
         }
         $customizedcategories = explode(',', $customizedcategories);
 
-        // find first matching config setting and return the id of the category that it matched with.
+        // Find first matching config setting and return the id of the category that it matched with.
         foreach ($categoryhierarchy as $categoryid) {
             if (in_array($categoryid, $customizedcategories)) {
                 $settingname = $settingnameprefix . $categoryid;

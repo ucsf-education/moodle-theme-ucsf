@@ -65,7 +65,7 @@ class core_renderer extends boost_core_renderer {
             return '';
         }
 
-        // bolt the callback URL on to the output object
+        // Bolt the callback URL on to the output object.
         $obj->url = $CFG->wwwroot . '/theme/ucsf/banneralerts.php';
 
         return $this->render_from_template('theme_ucsf/banneralerts', $obj);

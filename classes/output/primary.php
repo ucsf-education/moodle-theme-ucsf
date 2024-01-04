@@ -43,7 +43,7 @@ class primary extends core_primary {
      * @global stdClass $PAGE
      */
     protected function get_custom_menu(renderer_base $output): array {
-        // skip altogether if customizations are turned off
+        // Skip altogether if customizations are turned off.
         if ('0' === config::get_setting('enablecustomization', '0')) {
             return [];
         }
@@ -54,12 +54,12 @@ class primary extends core_primary {
                 'custommenu',
         );
 
-        // skip if no custom menu could be found at any level in the category hierarchy
+        // Skip if no custom menu could be found at any level in the category hierarchy.
         if ('' === $applicablecoursecategoryid) {
             return [];
         }
 
-        // get the menu items from the theme settings
+        // Get the menu items from the theme settings.
         $custommenuitems = trim(config::get_setting('custommenu' . $applicablecoursecategoryid, ''));
 
         $nodes = [];

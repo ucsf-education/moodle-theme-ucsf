@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-require_once($CFG->dirroot . '/theme/ucsf/locallib.php');
-
 /**
  * Adds course-related hints to the page template context.
  *
@@ -23,8 +21,9 @@ require_once($CFG->dirroot . '/theme/ucsf/locallib.php');
  * @copyright 2023 The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
+
+require_once($CFG->dirroot . '/theme/ucsf/locallib.php');
 
 $courserelatedhintshtml = theme_ucsf_get_course_related_hints();
 if ($courserelatedhintshtml) {

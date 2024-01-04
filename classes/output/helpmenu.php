@@ -75,7 +75,7 @@ class helpmenu implements renderable, templatable {
             return false;
         }
 
-        // check if at least one of the menu items actually contains a link
+        // Check if at least one of the menu items actually contains a link.
         for ($i = 1; $i <= constants::HELPMENU_ITEMS_COUNT; $i++) {
             $url = config::get_setting('helpfeedback' . $i . 'link', '');
             if (!empty($url)) {

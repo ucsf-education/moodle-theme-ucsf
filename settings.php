@@ -54,7 +54,7 @@ if ($ADMIN->fulltree) {
     foreach ($files as $file) {
         $choices[$file->get_filename()] = $file->get_filename();
     }
-    // These are the built in presets.
+    // These are the built-in presets.
     $choices['default.scss'] = 'default.scss';
     $choices['plain.scss'] = 'plain.scss';
 
@@ -116,12 +116,10 @@ if ($ADMIN->fulltree) {
 
     $settings->add($page);
 
-    // course-catgories list
+    // Course-catgories list.
     $categories = core_course_category::make_categories_list('', 0, ' | ');
 
-    // ----------------------------------------------------
-    // Helpmenu
-    // ----------------------------------------------------
+    // Helpmenu.
     $page = new admin_settingpage('theme_ucsf_helpmenu', get_string('helpfeedbacksettings', 'theme_ucsf'));
 
     $setting = new admin_setting_configcheckbox(
@@ -171,9 +169,7 @@ if ($ADMIN->fulltree) {
 
     $settings->add($page);
 
-    // ----------------------------------------------------
-    // Banner Alerts
-    // ----------------------------------------------------
+    // Banner Alerts.
     $page = new admin_settingpage('theme_ucsf_alerts', get_string('alertsheading', 'theme_ucsf'));
 
     for ($i = 1; $i <= constants::BANNERALERT_ITEMS_COUNT; $i++) {
@@ -299,7 +295,7 @@ if ($ADMIN->fulltree) {
 
             case constants::BANNERALERT_TYPE_UNBOUND:
             default:
-                // do nothing
+                // Do nothing.
         }
 
         $setting = new admin_setting_configselect(
@@ -341,12 +337,10 @@ if ($ADMIN->fulltree) {
 
     $settings->add($page);
 
-    // ----------------------------------------------------
-    // Category Customizations selector
-    // ----------------------------------------------------
+    // Category Customizations selector.
     $page = new admin_settingpage('theme_ucsf_category_customizations', get_string('categorycustomizationsheading', 'theme_ucsf'));
 
-    // Switch to enable/disable category customizations
+    // Switch to enable/disable category customizations.
     $setting = new admin_setting_configcheckbox(
             'theme_ucsf/enablecustomization',
             get_string('enablecustomization', 'theme_ucsf'),
@@ -357,7 +351,7 @@ if ($ADMIN->fulltree) {
 
     // With close to a thousand course categories in production, check boxes won't cut it.
     // So let's use a multi-select dropdown instead, at the expense of making selections more finicky.
-    // @todo Revisit if/whenever sanity is restored in on this. [ST 2023/01/10]
+    // @todo Revisit if/whenever sanity is restored in on this [ST 2023/01/10].
     $setting = new admin_setting_configmultiselect(
             'theme_ucsf/all_categories',
             get_string('categorycustomizations', 'theme_ucsf'),
@@ -365,23 +359,15 @@ if ($ADMIN->fulltree) {
             [],
             $categories
     );
-    // $setting = new admin_setting_configmulticheckbox(
-    // 'theme_ucsf/all_categories',
-    // get_string('categorycustomizations', 'theme_ucsf'),
-    // get_string('categorycustomizationsdesc', 'theme_ucsf'),
-    // array(),
-    // $categories
-    // );
+
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     $settings->add($page);
 
-    // ----------------------------------------------------
-    // Category-specific Customizations
-    // ----------------------------------------------------
-
-    // filter all course categories down to the customizable categories
+    // Category-specific Customizations.
+    //
+    // Filter all course categories down to the customizable categories.
     $customizedcategoryids = array_filter(explode(',', trim(config::get_setting('all_categories', ''))));
     $customizedcategories = array_filter($categories, function($categoryid) use ($customizedcategoryids) {
         return in_array($categoryid, $customizedcategoryids);
@@ -389,11 +375,11 @@ if ($ADMIN->fulltree) {
 
     asort($customizedcategories);
 
-    // Create a tab for each customizable category
+    // Create a tab for each customizable category.
     foreach ($customizedcategories as $categoryid => $categoryname) {
         $page = new admin_settingpage('theme_ucsf_' . $categoryid, $categoryname);
 
-        // Primary navigation additions
+        // Primary navigation additions.
         $setting = new admin_setting_heading(
                 $name = 'theme_ucsf/custommenusubsection',
                 get_string('custommenusubsectiontitle', 'theme_ucsf'),
