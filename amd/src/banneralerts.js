@@ -25,7 +25,7 @@ import jQuery from 'jquery';
 
 export const init = () => {
     // @link https://getbootstrap.com/docs/4.0/components/alerts/#events
-    jQuery('.ucsf-banneralerts-alert').on('closed.bs.alert', function (event) {
+    jQuery('.ucsf-banneralerts-alert').on('closed.bs.alert', function(event) {
         const $elem = jQuery(event.target);
         const url = $elem.data('ucsf-banneralert-dismiss-callback-url');
         const id = $elem.data('ucsf-banneralerts-alert-id');
