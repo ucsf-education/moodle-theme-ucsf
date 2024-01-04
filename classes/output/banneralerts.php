@@ -61,6 +61,8 @@ class banneralerts implements renderable, templatable {
     public function export_for_template(renderer_base $output): stdClass {
         $obj = new stdClass();
         $obj->alerts = [];
+        // Alerts are only dismissable by logged-in users.
+        $dismissable = isloggedin();
 
         for ($i = 1; $i <= constants::BANNERALERT_ITEMS_COUNT; $i++) {
 
@@ -269,6 +271,7 @@ class banneralerts implements renderable, templatable {
                     'id' => $i,
                     'classes' => $alertclasses,
                     'message' => $alertmessage,
+                    'dismissable' => $dismissable,
             ];
         }
 

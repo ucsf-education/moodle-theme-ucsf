@@ -25,6 +25,8 @@
 require_once(__DIR__ . '/../../config.php'); // Ensures that the user session is initialized.
 require_once(__DIR__ . '/classes/constants.php');
 
+require_login();
+
 use theme_ucsf\constants;
 
 // Get the alert id from URL parameters.
