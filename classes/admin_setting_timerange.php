@@ -23,28 +23,46 @@ use html_writer;
 /**
  * Admin settings form component for selecting a time range (hours and minutes).
  *
+ * @package theme_ucsf
  * @author Dusan Sparavalo <dusan.sparavalo@lambdasolutions.net>
  * @author Stefan Topfstedt <stefan.topfstedt@ucsf.edu>
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_timerange extends admin_setting {
+
+    /** @var string (Partial) start hour form field name. */
     const START_HOUR = 'start_hour';
+
+    /** @var string (Partial) start minute form field name. */
     const START_MINUTE = 'start_minute';
+
+    /** @var string (Partial) end hour form field name. */
     const END_HOUR = 'end_hour';
+
+    /** @var string (Partial) end minute form field name. */
     const END_MINUTE = 'end_minute';
 
+    /** @var string Start minute config setting name. */
     public string $startminutesettingname;
+
+    /** @var string Start hour config setting name. */
     public string $starthoursettingname;
+
+    /** @var string End minute config setting name. */
     public string $endminutesettingname;
+
+    /** @var string End hour config setting name. */
     public string $endhoursettingname;
 
     /**
+     * Class constructor.
+     *
      * @param string $name
-     * @param string $start_hour_setting_name
-     * @param string $start_minute_setting_name
-     * @param string $end_hour_setting_name
-     * @param string $end_minute_setting_name
+     * @param string $starthoursettingname
+     * @param string $startminutesettingname
+     * @param string $endhoursettingname
+     * @param string $endminutesettingname
      * @param string $visiblename
      * @param string $description
      */
@@ -57,14 +75,16 @@ class admin_setting_timerange extends admin_setting {
             string $visiblename,
             string $description
     ) {
-        $this->start_hour_setting_name = $starthoursettingname;
-        $this->start_minute_setting_name = $startminutesettingname;
-        $this->end_hour_setting_name = $endhoursettingname;
-        $this->end_minute_setting_name = $endminutesettingname;
+        $this->starthoursettingname = $starthoursettingname;
+        $this->startminutesettingname = $startminutesettingname;
+        $this->endhoursettingname = $endhoursettingname;
+        $this->endminutesettingname = $endminutesettingname;
         parent::__construct($name, $visiblename, $description, '');
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return array|null $data
      *  $data = [
      *    'start_hour'=> (string) the start hour
@@ -74,10 +94,10 @@ class admin_setting_timerange extends admin_setting {
      *  ]
      */
     public function get_setting(): ?array {
-        $starthour = $this->config_read($this->start_hour_setting_name);
-        $startminute = $this->config_read($this->start_minute_setting_name);
-        $endhour = $this->config_read($this->end_hour_setting_name);
-        $endminute = $this->config_read($this->end_minute_setting_name);
+        $starthour = $this->config_read($this->starthoursettingname);
+        $startminute = $this->config_read($this->startminutesettingname);
+        $endhour = $this->config_read($this->endhoursettingname);
+        $endminute = $this->config_read($this->endminutesettingname);
         if (is_null($starthour) || is_null($startminute) || is_null($endhour) || is_null($endminute)) {
             return null;
         }
@@ -90,6 +110,8 @@ class admin_setting_timerange extends admin_setting {
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param array $data
      *  $data = [
      *    'start_hour'=> (string) the start hour
@@ -108,10 +130,10 @@ class admin_setting_timerange extends admin_setting {
         $endminute = ('' !== trim($data[self::END_MINUTE])) ? trim($data[self::END_MINUTE]) : '';
         $validate = $this->validate($starthour, $startminute, $endhour, $endminute);
         if ('' === $validate) {
-            $result = $this->config_write($this->start_hour_setting_name, $starthour)
-                    && $this->config_write($this->start_minute_setting_name, $startminute)
-                    && $this->config_write($this->end_hour_setting_name, $endhour)
-                    && $this->config_write($this->end_minute_setting_name, $endminute);
+            $result = $this->config_write($this->starthoursettingname, $starthour)
+                    && $this->config_write($this->startminutesettingname, $startminute)
+                    && $this->config_write($this->endhoursettingname, $endhour)
+                    && $this->config_write($this->endminutesettingname, $endminute);
             return ($result ? '' : get_string('errorsetting', 'admin'));
         }
         return $validate;
@@ -120,10 +142,10 @@ class admin_setting_timerange extends admin_setting {
     /**
      * Validate data before storage.
      *
-     * @param string $start_hour
-     * @param string $start_minute
-     * @param string $end_hour
-     * @param string $end_minute
+     * @param string $starthour
+     * @param string $startminute
+     * @param string $endhour
+     * @param string $endminute
      * @return string empty string if ok, string error message otherwise
      * @throws coding_exception
      */

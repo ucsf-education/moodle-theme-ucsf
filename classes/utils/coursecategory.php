@@ -25,7 +25,7 @@ use stdClass;
  * Utility class for handling course-category specific configurations.
  *
  * @package theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class coursecategory {
@@ -36,7 +36,6 @@ class coursecategory {
      *
      * @return string The course category id.
      * @throws coding_exception
-     * @global moodle_page $PAGE The current page object
      */
     public static function get_current_category_id(): string {
         global $PAGE;
@@ -56,7 +55,6 @@ class coursecategory {
      * The first element in that list is the given course category id itself, followed by its parent,
      * the parent's parent, and so on.
      *
-     * @global moodle_database $DB
      * @param string $id The category id.
      * @return array A list of category ids, will be empty if the given category cannot be found.
      * @throws dml_exception
@@ -92,8 +90,8 @@ class coursecategory {
      *  3. The theme settings contains entries with the names "customlabel5" and "customlabel1".
      *  4. This method will return "5", since "customlabel5" is the first matching setting from the bottom of the hierarchy.
      *
-     * @param string $category_id The course category id
-     * @param string $setting_name_prefix Settings name prefix
+     * @param string $categoryid The course category id
+     * @param string $settingnameprefix Settings name prefix
      * @return string The first matching category id, or an empty string if no matching setting could be found.
      * @see coursecategory::get_reverse_category_hierarchy()
      * @throws dml_exception

@@ -31,13 +31,15 @@ use theme_ucsf\utils\coursecategory;
  * Banner alerts.
  *
  * @package theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class banneralerts implements renderable, templatable {
 
+    /** @var moodle_page The current page. */
     protected moodle_page $page;
 
+    /** @var string[] Maps alert levels to CSS classes. */
     const ALERT_LEVEL_CSS_CLASSES_MAP = [
             constants::BANNERALERT_LEVEL_INFORMATION => 'alert-info',
             constants::BANNERALERT_LEVEL_ANNOUNCEMENT => 'alert-warning',
@@ -45,6 +47,8 @@ class banneralerts implements renderable, templatable {
     ];
 
     /**
+     * Class constructor.
+     *
      * @param moodle_page $page
      */
     public function __construct(moodle_page $page) {

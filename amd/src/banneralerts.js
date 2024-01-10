@@ -18,7 +18,7 @@
  * that fires when the alert is dismissed by the user.
  *
  * @module theme_ucsf/banneralerts
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 import jQuery from 'jquery';

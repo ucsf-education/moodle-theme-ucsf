@@ -18,7 +18,7 @@
  * Callback script to flag banner alerts as "seen" in the user session.
  *
  * @package theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

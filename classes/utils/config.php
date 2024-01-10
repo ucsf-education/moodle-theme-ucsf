@@ -22,7 +22,7 @@ use dml_exception;
  * Utility class for accessing theme configuration settings.
  *
  * @package theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class config {

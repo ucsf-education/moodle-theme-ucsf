@@ -23,22 +23,32 @@ use html_writer;
 /**
  * Admin settings form component for selecting a date range. (year, month, and day).
  *
+ * @package theme_ucsf
  * @author Sasa Prsir <sasa.prsir@lambdasolutions.net>
  * @author Stefan Topfstedt <stefan.topfstedt@ucsf.edu>
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_daterange extends admin_setting {
+
+    /** @var string Start date form field name. */
     const START_DATE = 'start_date';
+
+    /** @var string End date form field name. */
     const END_DATE = 'end_date';
 
+    /** @var string Start date config setting name. */
     public string $startdatesettingname;
+
+    /** @var string End date config setting name. */
     public string $enddatesettingname;
 
     /**
+     * Class constructor.
+     *
      * @param string $name
-     * @param string $start_date_setting_name
-     * @param string $end_date_setting_name
+     * @param string $startdatesettingname
+     * @param string $enddatesettingname
      * @param string $visiblename
      * @param string $description
      */
@@ -49,12 +59,14 @@ class admin_setting_daterange extends admin_setting {
             string $visiblename,
             string $description
     ) {
-        $this->start_date_setting_name = $startdatesettingname;
-        $this->end_date_setting_name = $enddatesettingname;
+        $this->startdatesettingname = $startdatesettingname;
+        $this->enddatesettingname = $enddatesettingname;
         parent::__construct($name, $visiblename, $description, '');
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return array|null $data
      *  $data = [
      *    'start_date'=> (string) the start date
@@ -62,8 +74,8 @@ class admin_setting_daterange extends admin_setting {
      *  ]
      */
     public function get_setting(): ?array {
-        $startdate = $this->config_read($this->start_date_setting_name);
-        $enddate = $this->config_read($this->end_date_setting_name);
+        $startdate = $this->config_read($this->startdatesettingname);
+        $enddate = $this->config_read($this->enddatesettingname);
         if (is_null($startdate) || is_null($enddate)) {
             return null;
         }
@@ -74,6 +86,8 @@ class admin_setting_daterange extends admin_setting {
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param array $data
      *  $data = [
      *    'start_date'=> (string) the start date
@@ -87,8 +101,8 @@ class admin_setting_daterange extends admin_setting {
         $enddate = ('' !== trim($data[self::END_DATE])) ? trim($data[self::END_DATE]) : '';
         $validate = $this->validate($startdate, $enddate);
         if ('' === $validate) {
-            $result = $this->config_write($this->start_date_setting_name, $startdate)
-                    && $this->config_write($this->end_date_setting_name, $enddate);
+            $result = $this->config_write($this->startdatesettingname, $startdate)
+                    && $this->config_write($this->enddatesettingname, $enddate);
             return $result ? '' : get_string('errorsetting', 'admin');
         }
         return $validate;
@@ -97,8 +111,8 @@ class admin_setting_daterange extends admin_setting {
     /**
      * Validate data before storage.
      *
-     * @param string $start_date
-     * @param string $end_date
+     * @param string $startdate
+     * @param string $enddate
      * @return string empty string if ok, string error message otherwise
      * @throws coding_exception
      */

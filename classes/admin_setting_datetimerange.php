@@ -23,34 +23,60 @@ use html_writer;
 /**
  * Admin settings form component for selecting a date-time range (year, month, day, hours, and minutes).
  *
+ * @package theme_ucsf
  * @author Sasa Prsir <sasa.prsir@lambdasolutions.net>
  * @author Stefan Topfstedt <stefan.topfstedt@ucsf.edu>
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_datetimerange extends admin_setting {
+
+    /** @var string (Partial) start date form field name. */
     const START_DATE = 'start_date';
+
+    /** @var string (Partial) start hour form field name. */
     const START_HOUR = 'start_hour';
+
+    /** @var string (Partial) start minute form field name. */
     const START_MINUTE = 'start_minute';
+
+    /** @var string (Partial) end date form field name. */
     const END_DATE = 'end_date';
+
+    /** @var string (Partial) end hour form field name. */
     const END_HOUR = 'end_hour';
+
+    /** @var string (Partial) end minute form field name. */
     const END_MINUTE = 'end_minute';
 
+    /** @var string Start date config setting name. */
     public string $startdatesettingname;
+
+    /** @var string Start minute config setting name. */
     public string $startminutesettingname;
+
+    /** @var string Start hour config setting name. */
     public string $starthoursettingname;
+
+    /** @var string End hour config setting name. */
     public string $enddatesettingname;
+
+    /** @var string End minute config setting name. */
     public string $endminutesettingname;
+
+    /** @var string End hour config setting name. */
     public string $endhoursettingname;
 
     /**
+     * Class constructor.
+     *
      * @param string $name
-     * @param string $start_date_setting_name
-     * @param string $start_hour_setting_name
-     * @param string $start_minute_setting_name
-     * @param string $end_date_setting_name
-     * @param string $end_hour_setting_name
-     * @param string $end_minute_setting_name
+     * @param string $startdatesettingname
+     * @param string $starthoursettingname
+     * @param string $startminutesettingname
+     * @param string $enddatesettingname
+     * @param string $endhoursettingname
+     * @param string $endminutesettingname
      * @param string $visiblename
      * @param string $description
      */
@@ -65,16 +91,18 @@ class admin_setting_datetimerange extends admin_setting {
             string $visiblename,
             string $description
     ) {
-        $this->start_date_setting_name = $startdatesettingname;
-        $this->start_hour_setting_name = $starthoursettingname;
-        $this->start_minute_setting_name = $startminutesettingname;
-        $this->end_date_setting_name = $enddatesettingname;
-        $this->end_hour_setting_name = $endhoursettingname;
-        $this->end_minute_setting_name = $endminutesettingname;
+        $this->startdatesettingname = $startdatesettingname;
+        $this->starthoursettingname = $starthoursettingname;
+        $this->startminutesettingname = $startminutesettingname;
+        $this->enddatesettingname = $enddatesettingname;
+        $this->endhoursettingname = $endhoursettingname;
+        $this->endminutesettingname = $endminutesettingname;
         parent::__construct($name, $visiblename, $description, '');
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return array|null $data
      *  $data = [
      *    'start_date' => (string) the start date
@@ -86,12 +114,12 @@ class admin_setting_datetimerange extends admin_setting {
      *  ]
      */
     public function get_setting(): ?array {
-        $startdate = $this->config_read($this->start_date_setting_name);
-        $starthour = $this->config_read($this->start_hour_setting_name);
-        $startminute = $this->config_read($this->start_minute_setting_name);
-        $enddate = $this->config_read($this->end_date_setting_name);
-        $endhour = $this->config_read($this->end_hour_setting_name);
-        $endminute = $this->config_read($this->end_minute_setting_name);
+        $startdate = $this->config_read($this->startdatesettingname);
+        $starthour = $this->config_read($this->starthoursettingname);
+        $startminute = $this->config_read($this->startminutesettingname);
+        $enddate = $this->config_read($this->enddatesettingname);
+        $endhour = $this->config_read($this->endhoursettingname);
+        $endminute = $this->config_read($this->endminutesettingname);
         if (is_null($startdate)
                 || is_null($starthour)
                 || is_null($startminute)
@@ -112,6 +140,8 @@ class admin_setting_datetimerange extends admin_setting {
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param array $data
      *  $data = [
      *    'start_date' => (string) the start date
@@ -134,12 +164,12 @@ class admin_setting_datetimerange extends admin_setting {
         $endminute = ('' !== $data[self::END_MINUTE]) ? $data[self::END_MINUTE] : '';
         $validate = $this->validate($startdate, $starthour, $startminute, $enddate, $endhour, $endminute);
         if ('' === $validate) {
-            $result = $this->config_write($this->start_date_setting_name, $startdate)
-                    && $this->config_write($this->start_hour_setting_name, $starthour)
-                    && $this->config_write($this->start_minute_setting_name, $startminute)
-                    && $this->config_write($this->end_date_setting_name, $enddate)
-                    && $this->config_write($this->end_hour_setting_name, $endhour)
-                    && $this->config_write($this->end_minute_setting_name, $endminute);
+            $result = $this->config_write($this->startdatesettingname, $startdate)
+                    && $this->config_write($this->starthoursettingname, $starthour)
+                    && $this->config_write($this->startminutesettingname, $startminute)
+                    && $this->config_write($this->enddatesettingname, $enddate)
+                    && $this->config_write($this->endhoursettingname, $endhour)
+                    && $this->config_write($this->endminutesettingname, $endminute);
             return ($result ? '' : get_string('errorsetting', 'admin'));
         }
         return $validate;
@@ -148,12 +178,12 @@ class admin_setting_datetimerange extends admin_setting {
     /**
      * Validate data before storage.
      *
-     * @param string $start_date
-     * @param string $start_hour
-     * @param string $start_minute
-     * @param string $end_date
-     * @param string $end_hour
-     * @param string $end_minute
+     * @param string $startdate
+     * @param string $starthour
+     * @param string $startminute
+     * @param string $enddate
+     * @param string $endhour
+     * @param string $endminute
      * @return string empty string if ok, string error message otherwise
      * @throws coding_exception
      */

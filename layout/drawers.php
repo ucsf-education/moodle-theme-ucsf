@@ -20,7 +20,7 @@
  * This layout file is based on theme/boost/layout/drawers.php
  *
  * @package theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @copyright based on code from theme_boost by Bas Brands
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

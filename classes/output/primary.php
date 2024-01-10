@@ -29,7 +29,7 @@ use theme_ucsf\utils\coursecategory;
  * Primary navigation renderable.
  *
  * @package theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class primary extends core_primary {
@@ -40,7 +40,6 @@ class primary extends core_primary {
      * @return array
      * @throws coding_exception
      * @throws dml_exception
-     * @global stdClass $PAGE
      */
     protected function get_custom_menu(renderer_base $output): array {
         // Skip altogether if customizations are turned off.
