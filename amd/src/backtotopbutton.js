@@ -34,6 +34,9 @@ define(['jquery', 'core/str', 'core/notification'], function($, str, Notificatio
    * Initializing.
    */
   function initBackToTop() {
+    // Define the scroll distance after which the button will be shown.
+    const scrolldistance = 220;
+
     // Get the string backtotop from language file.
     let stringsPromise = str.get_string('backtotop', 'theme_ucsf');
 
@@ -45,12 +48,19 @@ define(['jquery', 'core/str', 'core/notification'], function($, str, Notificatio
         'aria-label="' + string + '">' +
         '<i aria-hidden="true" class="fa fa-chevron-up fa-fw "></i></button>');
 
+      // Check directly if the button should be shown.
+      // This is helpful for all cases when this code here runs _after_ the page has been scrolled,
+      // especially by the scrollspy feature or by a simple browser page reload.
+      if ($(window).scrollTop() > scrolldistance) {
+        checkAndShow();
+      } else {
+        checkAndHide();
+      }
+
       // This function fades the button in when the page is scrolled down or fades it out
       // if the user is at the top of the page again.
-      // Please note that Boost in Moodle 4.0 does not scroll the window object / whole body tag anymore,
-      // it scrolls the #page element instead.
-      $('#page').on('scroll', function() {
-        if ($('#page').scrollTop() > 220) {
+      $(window).on('scroll', function() {
+        if ($(window).scrollTop() > scrolldistance) {
           checkAndShow();
         } else {
           checkAndHide();
@@ -60,9 +70,17 @@ define(['jquery', 'core/str', 'core/notification'], function($, str, Notificatio
       // This function scrolls the page to top with a duration of 500ms.
       $('#back-to-top').on('click', function(event) {
         event.preventDefault();
-        $('#page').animate({scrollTop: 0}, 500);
+        $('html, body').animate({scrollTop: 0}, 500);
         $('#back-to-top').blur();
       });
+
+      // This will check if there is a communication button shown on the page already.
+      // If yes, it will add a class to the body tag which will be later used to align the back-to-top button
+      // with the communications button.
+      // This is necessary as the communications button would otherwise be overlaid by the back-to-top button.
+      if ($('#page-footer .btn-footer-communication').length) {
+        $('body').addClass('theme-ucsf-commincourse');
+      }
 
       return true;
     }).fail(Notification.exception);
