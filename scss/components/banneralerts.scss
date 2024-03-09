@@ -1,7 +1,0 @@
-// give the custom banners some horizontal padding on medium and larger screen sizes.
-@include media-breakpoint-up(md) {
-    .ucsf-banneralerts-container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-}
