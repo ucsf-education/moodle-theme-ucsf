@@ -24,9 +24,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'theme_ucsf';
-$plugin->version = 2024030900;
-$plugin->release = 'v4.1';
-$plugin->requires = 2022112800;
-$plugin->supported = [401, 401];
-$plugin->maturity = MATURITY_STABLE;
-$plugin->dependencies = ['theme_boost' => 2022112800];
+$plugin->version = 2024030901;
+$plugin->release = 'v4.3';
+$plugin->requires = 2023100400;
+$plugin->supported = [403, 403];
+$plugin->maturity = MATURITY_BETA;
+$plugin->dependencies = ['theme_boost' => 2023100400];
