@@ -15,8 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Theme functions.
+ *
  * @package theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +40,7 @@ use theme_ucsf\output\helpmenu;
  * @throws moodle_exception
  */
 function theme_ucsf_pluginfile($course, $cm, $context, string $filearea, array $args, bool $forcedownload,
-        array $options = array()): bool {
+        array $options = []): bool {
     if ($context->contextlevel == CONTEXT_SYSTEM && (
                     $filearea === 'logo'
                     || preg_match('/headerimage\d+/', $filearea)

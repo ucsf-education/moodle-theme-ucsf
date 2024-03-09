@@ -17,7 +17,7 @@
  * Attaches a date picker to form input fields.
  *
  * @module theme_ucsf/datepicker
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 import jQuery from 'jquery';

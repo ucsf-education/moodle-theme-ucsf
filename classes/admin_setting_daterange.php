@@ -23,38 +23,50 @@ use html_writer;
 /**
  * Admin settings form component for selecting a date range. (year, month, and day).
  *
+ * @package theme_ucsf
  * @author Sasa Prsir <sasa.prsir@lambdasolutions.net>
  * @author Stefan Topfstedt <stefan.topfstedt@ucsf.edu>
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_daterange extends admin_setting {
+
+    /** @var string Start date form field name. */
     const START_DATE = 'start_date';
+
+    /** @var string End date form field name. */
     const END_DATE = 'end_date';
 
-    public string $start_date_setting_name;
-    public string $end_date_setting_name;
+    /** @var string Start date config setting name. */
+    public string $startdatesettingname;
+
+    /** @var string End date config setting name. */
+    public string $enddatesettingname;
 
     /**
+     * Class constructor.
+     *
      * @param string $name
-     * @param string $start_date_setting_name
-     * @param string $end_date_setting_name
+     * @param string $startdatesettingname
+     * @param string $enddatesettingname
      * @param string $visiblename
      * @param string $description
      */
     public function __construct(
             string $name,
-            string $start_date_setting_name,
-            string $end_date_setting_name,
+            string $startdatesettingname,
+            string $enddatesettingname,
             string $visiblename,
             string $description
     ) {
-        $this->start_date_setting_name = $start_date_setting_name;
-        $this->end_date_setting_name = $end_date_setting_name;
+        $this->startdatesettingname = $startdatesettingname;
+        $this->enddatesettingname = $enddatesettingname;
         parent::__construct($name, $visiblename, $description, '');
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return array|null $data
      *  $data = [
      *    'start_date'=> (string) the start date
@@ -62,18 +74,20 @@ class admin_setting_daterange extends admin_setting {
      *  ]
      */
     public function get_setting(): ?array {
-        $start_date = $this->config_read($this->start_date_setting_name);
-        $end_date = $this->config_read($this->end_date_setting_name);
-        if (is_null($start_date) || is_null($end_date)) {
+        $startdate = $this->config_read($this->startdatesettingname);
+        $enddate = $this->config_read($this->enddatesettingname);
+        if (is_null($startdate) || is_null($enddate)) {
             return null;
         }
-        return array(
-                self::START_DATE => $start_date,
-                self::END_DATE => $end_date
-        );
+        return [
+                self::START_DATE => $startdate,
+                self::END_DATE => $enddate,
+        ];
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param array $data
      *  $data = [
      *    'start_date'=> (string) the start date
@@ -83,12 +97,12 @@ class admin_setting_daterange extends admin_setting {
      * @throws coding_exception
      */
     public function write_setting($data): string {
-        $start_date = ('' !== trim($data[self::START_DATE])) ? trim($data[self::START_DATE]) : '';
-        $end_date = ('' !== trim($data[self::END_DATE])) ? trim($data[self::END_DATE]) : '';
-        $validate = $this->validate($start_date, $end_date);
+        $startdate = ('' !== trim($data[self::START_DATE])) ? trim($data[self::START_DATE]) : '';
+        $enddate = ('' !== trim($data[self::END_DATE])) ? trim($data[self::END_DATE]) : '';
+        $validate = $this->validate($startdate, $enddate);
         if ('' === $validate) {
-            $result = $this->config_write($this->start_date_setting_name, $start_date)
-                    && $this->config_write($this->end_date_setting_name, $end_date);
+            $result = $this->config_write($this->startdatesettingname, $startdate)
+                    && $this->config_write($this->enddatesettingname, $enddate);
             return $result ? '' : get_string('errorsetting', 'admin');
         }
         return $validate;
@@ -97,33 +111,33 @@ class admin_setting_daterange extends admin_setting {
     /**
      * Validate data before storage.
      *
-     * @param string $start_date
-     * @param string $end_date
+     * @param string $startdate
+     * @param string $enddate
      * @return string empty string if ok, string error message otherwise
      * @throws coding_exception
      */
-    protected function validate(string $start_date, string $end_date): string {
-        if ('' === $start_date && '' === $end_date) {
+    protected function validate(string $startdate, string $enddate): string {
+        if ('' === $startdate && '' === $enddate) {
             return get_string('emptystartandenddate', 'theme_ucsf');
         }
-        if ('' === $start_date) {
+        if ('' === $startdate) {
             return get_string('emptystartdate', 'theme_ucsf');
         }
-        if ('' === $end_date) {
+        if ('' === $enddate) {
             return get_string('emptyenddate', 'theme_ucsf');
         }
-        $time_start = strtotime($start_date);
-        $time_end = strtotime($end_date);
-        if (false === $time_start && false === $time_end) {
+        $timestart = strtotime($startdate);
+        $timeend = strtotime($enddate);
+        if (false === $timestart && false === $timeend) {
             return get_string('invalidstartandenddate', 'theme_ucsf');
         }
-        if (false === $time_start) {
+        if (false === $timestart) {
             return get_string('invalidstartdate', 'theme_ucsf');
         }
-        if (false === $time_end) {
+        if (false === $timeend) {
             return get_string('invalidenddate', 'theme_ucsf');
         }
-        if ($time_start > $time_end) {
+        if ($timestart > $timeend) {
             return get_string('startsbeforeitends', 'theme_ucsf');
         }
         return '';
@@ -152,23 +166,23 @@ class admin_setting_daterange extends admin_setting {
 
         $default = $this->get_defaultsetting();
         $return = html_writer::start_div('form-text defaultsnext');
-        $return .= html_writer::empty_tag('input', array(
+        $return .= html_writer::empty_tag('input', [
                 'aria-label' => get_string('startdate', 'theme_ucsf'),
                 'class' => 'form-control text-ltr ucsf-datepicker',
                 'id' => $this->get_id() . '_' . self::START_DATE,
                 'name' => $this->get_full_name() . '[' . self::START_DATE . ']',
                 'size' => '15',
                 'value' => s($startdate),
-        ));
+        ]);
         $return .= html_writer::empty_tag('br');
-        $return .= html_writer::empty_tag('input', array(
+        $return .= html_writer::empty_tag('input', [
                 'aria-label' => get_string('enddate', 'theme_ucsf'),
                 'class' => 'form-control text-ltr ucsf-datepicker',
                 'id' => $this->get_id() . '_' . self::END_DATE,
                 'name' => $this->get_full_name() . '[' . self::END_DATE . ']',
                 'size' => '15',
                 'value' => s($enddate),
-        ));
+        ]);
         $return .= html_writer::end_div();
         return format_admin_setting($this, $this->visiblename, $return, $this->description, false, '', $default, $query);
     }

@@ -15,11 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Version file for the UCSF Moodle theme.
+ *
  * @package theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'theme_ucsf';

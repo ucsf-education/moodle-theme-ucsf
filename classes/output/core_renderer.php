@@ -29,7 +29,7 @@ use theme_ucsf\utils\coursecategory;
  * Theme renderer.
  *
  * @package   theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_renderer extends boost_core_renderer {
@@ -65,7 +65,7 @@ class core_renderer extends boost_core_renderer {
             return '';
         }
 
-        // bolt the callback URL on to the output object
+        // Bolt the callback URL on to the output object.
         $obj->url = $CFG->wwwroot . '/theme/ucsf/banneralerts.php';
 
         return $this->render_from_template('theme_ucsf/banneralerts', $obj);

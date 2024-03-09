@@ -18,14 +18,14 @@
  * that fires when the alert is dismissed by the user.
  *
  * @module theme_ucsf/banneralerts
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 import jQuery from 'jquery';
 
 export const init = () => {
     // @link https://getbootstrap.com/docs/4.0/components/alerts/#events
-    jQuery('.ucsf-banneralerts-alert').on('closed.bs.alert', function (event) {
+    jQuery('.ucsf-banneralerts-alert').on('closed.bs.alert', function(event) {
         const $elem = jQuery(event.target);
         const url = $elem.data('ucsf-banneralert-dismiss-callback-url');
         const id = $elem.data('ucsf-banneralerts-alert-id');

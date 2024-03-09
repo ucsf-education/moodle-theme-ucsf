@@ -14,11 +14,12 @@
     * alerts - The list of alerts.
 
     Example context (json):
+
     {
-        "callbackurl: "http://localhost/theme/ucsf/banneralert.php",
+        "callbackurl": "http://localhost/theme/ucsf/banneralert.php",
         "alerts": [
-            { "id": "1", "classes": "alert-info", "message": "Lorem Ipsum" },
-            { "type": "2": "classes": "alert-warning", "message": "Foo Bar Baz" },
+            { "id": "1", "classes": "alert-info", "message": "Lorem Ipsum", "dismissable": true },
+            { "id": "2", "classes": "alert-warning", "message": "Foo Bar Baz", "dismissable": false }
         ]
     }
 
@@ -31,14 +32,16 @@
                  data-ucsf-banneralerts-alert-id="{{id}}"
                  data-ucsf-banneralert-dismiss-callback-url="{{url}}"
             >
-                <button type="button"
-                        class="close"
-                        data-dismiss="alert"
-                        aria-label="{{#str}}dismissmessage, theme_ucsf{{/str}}"
-                        title="{{#str}}dismissmessage, theme_ucsf{{/str}}"
-                >
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                {{#dismissable}}
+                    <button type="button"
+                            class="close"
+                            data-dismiss="alert"
+                            aria-label="{{#str}}dismissmessage, theme_ucsf{{/str}}"
+                            title="{{#str}}dismissmessage, theme_ucsf{{/str}}"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                {{/dismissable}}
                 {{{message}}}
             </div>
         </div>

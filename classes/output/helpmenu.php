@@ -28,7 +28,7 @@ use theme_ucsf\utils\config;
  * Help menu output component.
  *
  * @package theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class helpmenu implements renderable, templatable {
@@ -53,11 +53,11 @@ class helpmenu implements renderable, templatable {
             $title = trim(config::get_setting('helpfeedback' . $i . 'linklabel', ''));
             $target = (bool) config::get_setting('helpfeedback' . $i . 'linktarget');
             if ('' !== $url && '' !== $title) {
-                $menu->items[] = array(
+                $menu->items[] = [
                         'url' => $url,
                         'title' => $title,
                         'target' => $target ? '_blank' : '_self',
-                );
+                ];
             }
         }
 
@@ -75,7 +75,7 @@ class helpmenu implements renderable, templatable {
             return false;
         }
 
-        // check if at least one of the menu items actually contains a link
+        // Check if at least one of the menu items actually contains a link.
         for ($i = 1; $i <= constants::HELPMENU_ITEMS_COUNT; $i++) {
             $url = config::get_setting('helpfeedback' . $i . 'link', '');
             if (!empty($url)) {

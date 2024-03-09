@@ -15,8 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Settings file for the UCSF theme.
+ *
  * @package theme_ucsf
- * @copyright 2023 The Regents of the University of California
+ * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -54,7 +56,7 @@ if ($ADMIN->fulltree) {
     foreach ($files as $file) {
         $choices[$file->get_filename()] = $file->get_filename();
     }
-    // These are the built in presets.
+    // These are the built-in presets.
     $choices['default.scss'] = 'default.scss';
     $choices['plain.scss'] = 'plain.scss';
 
@@ -68,7 +70,7 @@ if ($ADMIN->fulltree) {
     $description = get_string('presetfiles_desc', 'theme_ucsf');
 
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
-            array('maxfiles' => 20, 'accepted_types' => array('.scss')));
+            ['maxfiles' => 20, 'accepted_types' => ['.scss']]);
     $page->add($setting);
 
     // Background image setting.
@@ -116,12 +118,10 @@ if ($ADMIN->fulltree) {
 
     $settings->add($page);
 
-    // course-catgories list
+    // Course-catgories list.
     $categories = core_course_category::make_categories_list('', 0, ' | ');
 
-    // ----------------------------------------------------
-    // Helpmenu
-    // ----------------------------------------------------
+    // Helpmenu.
     $page = new admin_settingpage('theme_ucsf_helpmenu', get_string('helpfeedbacksettings', 'theme_ucsf'));
 
     $setting = new admin_setting_configcheckbox(
@@ -171,9 +171,7 @@ if ($ADMIN->fulltree) {
 
     $settings->add($page);
 
-    // ----------------------------------------------------
-    // Banner Alerts
-    // ----------------------------------------------------
+    // Banner Alerts.
     $page = new admin_settingpage('theme_ucsf_alerts', get_string('alertsheading', 'theme_ucsf'));
 
     for ($i = 1; $i <= constants::BANNERALERT_ITEMS_COUNT; $i++) {
@@ -198,18 +196,18 @@ if ($ADMIN->fulltree) {
                 get_string('recurring_alert', 'theme_ucsf'),
                 get_string('recurring_alertdesc', 'theme_ucsf'),
                 constants::BANNERALERT_TYPE_UNBOUND,
-                array(
+                [
                         constants::BANNERALERT_TYPE_UNBOUND => get_string('never_end', 'theme_ucsf'),
                         constants::BANNERALERT_TYPE_DATEBOUND => get_string('one_time', 'theme_ucsf'),
                         constants::BANNERALERT_TYPE_RECURRENCE_DAILY => get_string('daily', 'theme_ucsf'),
-                        constants::BANNERALERT_TYPE_RECURRENCE_WEEKLY => get_string('weekly', 'theme_ucsf')
-                )
+                        constants::BANNERALERT_TYPE_RECURRENCE_WEEKLY => get_string('weekly', 'theme_ucsf'),
+                ]
         );
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
-        $alert_type = get_config('theme_ucsf', 'recurring_alert' . $i) ?: '';
-        switch ($alert_type) {
+        $alerttype = get_config('theme_ucsf', 'recurring_alert' . $i) ?: '';
+        switch ($alerttype) {
             case constants::BANNERALERT_TYPE_DATEBOUND:
                 $setting = new admin_setting_datetimerange(
                         'theme_ucsf/datebound_datepicker' . $i,
@@ -230,12 +228,12 @@ if ($ADMIN->fulltree) {
                 $name = 'theme_ucsf/daily_datepicker' . $i;
                 $title = get_string('startenddate', 'theme_ucsf');
                 $description = get_string('startenddatedesc', 'theme_ucsf');
-                $start_date = 'start_date_daily' . $i;
-                $end_date = 'end_date_daily' . $i;
+                $startdate = 'start_date_daily' . $i;
+                $enddate = 'end_date_daily' . $i;
                 $setting = new admin_setting_daterange(
                         $name,
-                        $start_date,
-                        $end_date,
+                        $startdate,
+                        $enddate,
                         get_string('startenddate', 'theme_ucsf'),
                         get_string('startenddatedesc', 'theme_ucsf')
                 );
@@ -283,15 +281,15 @@ if ($ADMIN->fulltree) {
                         get_string('show_week_day', 'theme_ucsf'),
                         get_string('show_week_daydesc', 'theme_ucsf'),
                         constants::BANNERALERT_WEEKDAYS_SUNDAY,
-                        array(
+                        [
                                 constants::BANNERALERT_WEEKDAYS_SUNDAY => new lang_string('sunday', 'calendar'),
                                 constants::BANNERALERT_WEEKDAYS_MONDAY => new lang_string('monday', 'calendar'),
                                 constants::BANNERALERT_WEEKDAYS_TUESDAY => new lang_string('tuesday', 'calendar'),
                                 constants::BANNERALERT_WEEKDAYS_WEDNESDAY => new lang_string('wednesday', 'calendar'),
                                 constants::BANNERALERT_WEEKDAYS_THURSDAY => new lang_string('thursday', 'calendar'),
                                 constants::BANNERALERT_WEEKDAYS_FRIDAY => new lang_string('friday', 'calendar'),
-                                constants::BANNERALERT_WEEKDAYS_SATURDAY => new lang_string('saturday', 'calendar')
-                        )
+                                constants::BANNERALERT_WEEKDAYS_SATURDAY => new lang_string('saturday', 'calendar'),
+                        ]
                 );
                 $setting->set_updatedcallback('theme_reset_all_caches');
                 $page->add($setting);
@@ -299,7 +297,7 @@ if ($ADMIN->fulltree) {
 
             case constants::BANNERALERT_TYPE_UNBOUND:
             default:
-                // do nothing
+                // Do nothing.
         }
 
         $setting = new admin_setting_configselect(
@@ -307,10 +305,10 @@ if ($ADMIN->fulltree) {
                 get_string('categories_list_alert', 'theme_ucsf'),
                 get_string('categories_list_alertdesc', 'theme_ucsf'),
                 constants::BANNERALERT_TARGET_DASHBOARD,
-                array(
+                [
                         constants::BANNERALERT_TARGET_DASHBOARD => get_string('dashboardonly', 'theme_ucsf'),
                         constants::BANNERALERT_TARGET_SITEWIDE => get_string('sitewide', 'theme_ucsf'),
-                ) + $categories
+                ] + $categories
         );
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
@@ -320,11 +318,11 @@ if ($ADMIN->fulltree) {
                 get_string('alerttype', 'theme_ucsf'),
                 get_string('alerttypedesc', 'theme_ucsf'),
                 constants::BANNERALERT_LEVEL_INFORMATION,
-                array(
+                [
                         constants::BANNERALERT_LEVEL_INFORMATION => get_string('alert_info', 'theme_ucsf'),
                         constants::BANNERALERT_LEVEL_WARNING => get_string('alert_warning', 'theme_ucsf'),
                         constants::BANNERALERT_LEVEL_ANNOUNCEMENT => get_string('alert_general', 'theme_ucsf'),
-                )
+                ]
         );
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
@@ -341,12 +339,10 @@ if ($ADMIN->fulltree) {
 
     $settings->add($page);
 
-    // ----------------------------------------------------
-    // Category Customizations selector
-    // ----------------------------------------------------
+    // Category Customizations selector.
     $page = new admin_settingpage('theme_ucsf_category_customizations', get_string('categorycustomizationsheading', 'theme_ucsf'));
 
-    // Switch to enable/disable category customizations
+    // Switch to enable/disable category customizations.
     $setting = new admin_setting_configcheckbox(
             'theme_ucsf/enablecustomization',
             get_string('enablecustomization', 'theme_ucsf'),
@@ -357,43 +353,35 @@ if ($ADMIN->fulltree) {
 
     // With close to a thousand course categories in production, check boxes won't cut it.
     // So let's use a multi-select dropdown instead, at the expense of making selections more finicky.
-    // @todo Revisit if/whenever sanity is restored in on this. [ST 2023/01/10]
+    // @todo Revisit if/whenever sanity is restored in on this [ST 2023/01/10].
     $setting = new admin_setting_configmultiselect(
             'theme_ucsf/all_categories',
             get_string('categorycustomizations', 'theme_ucsf'),
             get_string('categorycustomizationsdesc', 'theme_ucsf'),
-            array(),
+            [],
             $categories
     );
-    //$setting = new admin_setting_configmulticheckbox(
-    //        'theme_ucsf/all_categories',
-    //        get_string('categorycustomizations', 'theme_ucsf'),
-    //        get_string('categorycustomizationsdesc', 'theme_ucsf'),
-    //        array(),
-    //        $categories
-    //);
+
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     $settings->add($page);
 
-    // ----------------------------------------------------
-    // Category-specific Customizations
-    // ----------------------------------------------------
-
-    // filter all course categories down to the customizable categories
-    $customized_category_ids = array_filter(explode(',', trim(config::get_setting('all_categories', ''))));
-    $customized_categories = array_filter($categories, function($category_id) use ($customized_category_ids) {
-        return in_array($category_id, $customized_category_ids);
+    // Category-specific Customizations.
+    //
+    // Filter all course categories down to the customizable categories.
+    $customizedcategoryids = array_filter(explode(',', trim(config::get_setting('all_categories', ''))));
+    $customizedcategories = array_filter($categories, function($categoryid) use ($customizedcategoryids) {
+        return in_array($categoryid, $customizedcategoryids);
     }, ARRAY_FILTER_USE_KEY);
 
-    asort($customized_categories);
+    asort($customizedcategories);
 
-    // Create a tab for each customizable category
-    foreach ($customized_categories as $category_id => $category_name) {
-        $page = new admin_settingpage('theme_ucsf_' . $category_id, $category_name);
+    // Create a tab for each customizable category.
+    foreach ($customizedcategories as $categoryid => $categoryname) {
+        $page = new admin_settingpage('theme_ucsf_' . $categoryid, $categoryname);
 
-        // Primary navigation additions
+        // Primary navigation additions.
         $setting = new admin_setting_heading(
                 $name = 'theme_ucsf/custommenusubsection',
                 get_string('custommenusubsectiontitle', 'theme_ucsf'),
@@ -402,7 +390,7 @@ if ($ADMIN->fulltree) {
         $page->add($setting);
 
         $setting = new admin_setting_configtextarea(
-                'theme_ucsf/custommenu' . $category_id,
+                'theme_ucsf/custommenu' . $categoryid,
                 get_string('custommenuitems', 'admin'),
                 get_string('configcustommenuitems', 'admin'),
                 ''

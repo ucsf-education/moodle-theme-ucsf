@@ -1,12 +1,6 @@
 <?xml version="1.0"?>
 <libraries>
     <library>
-        <location>amd/build/pikaday.min.js</location>
-        <name>Pikaday</name>
-        <license>MIT</license>
-        <version>1.8.0</version>
-    </library>
-    <library>
         <location>amd/src/pikaday.js</location>
         <name>Pikaday</name>
         <license>MIT</license>
