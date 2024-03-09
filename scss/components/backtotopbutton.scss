@@ -1,5 +1,7 @@
 /*---------------------------------------
  * Setting: Back to top button.
+ * Copied and adjusted from Boost Union theme.
+ * @see https://github.com/moodle-an-hochschulen/moodle-theme_boost_union
  --------------------------------------*/
 
 #back-to-top {
@@ -8,36 +10,58 @@
     /* Place the back to top button at a fixed place. */
     position: fixed;
     right: 2rem;
-    /* As a start = on really small screens, the back to top button is shown in the bottom right corner. */
-    bottom: 2rem;
-    /* On larger screens, there is the footer button already in the bottom right corner and
-       the back to top button has to be shown above of the footer button. */
-    @include media-breakpoint-up(sm) {
-        bottom: 5rem;
-    }
+    /* As a start, the back to top button is shown in the bottom right corner. */
+    bottom: 5rem;
     /* Make sure that the back to top button is not covered by anything else. */
     z-index: $zindex-dropdown;
     /* Animate position together with footer button. */
     @include transition(0.2s);
 }
-
+/* If the sticky footer is shown by Moodle core, the back to top button has to have a higher starting position. */
+body.hasstickyfooter #back-to-top {
+    bottom: 10rem;
+}
 #back-to-top i::before {
     /* Move the caret icon slightly up for a nicer look. */
     vertical-align: 0.3rem;
 }
 
-#page.drawers.show-drawer-right #back-to-top {
-    /* Move the back to top button when right drawer is shown. */
-    right: calc(#{$drawer-right-width} + 2rem);
-}
+/* If the communications button is shown, the back to top button has to be moved more upwards.
+   To realize this, our back-to-top JS has added a class to the body tag. */
+body.theme-ucsf-commincourse {
+    /* If we are on a small screen,
+       we do not need to do anything (yet) as the communication button is not shown on small screens (yet). */
 
-/* As soon as the sticky footer is shown (especially in the database activity),
-   the back to top button has to be moved further up.
-   Again, we have to distinguish between really small screens and larger screens
-   (where the fotter button is shown as well). */
-body.hasstickyfooter #back-to-top {
-    bottom: 5rem;
+    /* We have to move the back to top button even more upwards.*/
     @include media-breakpoint-up(sm) {
-        bottom: 9rem;
+        #back-to-top {
+            bottom: 8rem;
+        }
+    }
+
+    /* And if the sticky footer is shown by Moodle core, move the back to top button more upwards. */
+    body.hasstickyfooter {
+        @include media-breakpoint-up(sm) {
+            #back-to-top {
+                bottom: 13rem;
+            }
+        }
     }
 }
+
+/* If the right-hand drawer is opened. */
+#page.drawers.show-drawer-right #back-to-top {
+    /* On larger screens, the drawer opens near the main content.
+       The back to top button can be moved nicely to the left. */
+    @include media-breakpoint-up(lg) {
+        /* Move the back to top button when right drawer is shown. */
+        right: calc(#{$drawer-right-width} + 2rem);
+    }
+    /* On smaller screens, the drawer opens as an overlay over the main content.
+       The back to top button looks misplaced then. */
+    @include media-breakpoint-down(lg) {
+        /* Hide the back to top button when right drawer is shown. */
+        display: none;
+    }
+}
+
