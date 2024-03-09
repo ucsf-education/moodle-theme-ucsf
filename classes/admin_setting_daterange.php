@@ -132,7 +132,7 @@ class admin_setting_daterange extends admin_setting {
     /**
      * Returns the rendered admin setting form elements.
      *
-     * @param array $data
+     * @param array|null $data
      *  $data = [
      *    'start_date'=> (string) the start date
      *    'end_date' => (string) the end date
@@ -141,6 +141,15 @@ class admin_setting_daterange extends admin_setting {
      * @return string
      */
     public function output_html($data, $query = ''): string {
+        $startdate = '';
+        if (is_array($data) && array_key_exists(self::START_DATE, $data)) {
+            $startdate = $data[self::START_DATE];
+        }
+        $enddate = '';
+        if (is_array($data) && array_key_exists(self::END_DATE, $data)) {
+            $enddate = $data[self::END_DATE];
+        }
+
         $default = $this->get_defaultsetting();
         $return = html_writer::start_div('form-text defaultsnext');
         $return .= html_writer::empty_tag('input', array(
@@ -149,7 +158,7 @@ class admin_setting_daterange extends admin_setting {
                 'id' => $this->get_id() . '_' . self::START_DATE,
                 'name' => $this->get_full_name() . '[' . self::START_DATE . ']',
                 'size' => '15',
-                'value' => s($data[self::START_DATE]),
+                'value' => s($startdate),
         ));
         $return .= html_writer::empty_tag('br');
         $return .= html_writer::empty_tag('input', array(
@@ -158,7 +167,7 @@ class admin_setting_daterange extends admin_setting {
                 'id' => $this->get_id() . '_' . self::END_DATE,
                 'name' => $this->get_full_name() . '[' . self::END_DATE . ']',
                 'size' => '15',
-                'value' => s($data[self::END_DATE]),
+                'value' => s($enddate),
         ));
         $return .= html_writer::end_div();
         return format_admin_setting($this, $this->visiblename, $return, $this->description, false, '', $default, $query);

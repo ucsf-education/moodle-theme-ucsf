@@ -199,7 +199,7 @@ class admin_setting_datetimerange extends admin_setting {
     /**
      * Returns the rendered admin setting form elements.
      *
-     * @param array $data
+     * @param array|null $data
      *  $data = [
      *    'start_date'=> (string) the start date
      *    'start_hour'=> (string) the start hour
@@ -213,6 +213,31 @@ class admin_setting_datetimerange extends admin_setting {
      * @throws coding_exception
      */
     public function output_html($data, $query = ''): string {
+        $startdate = '';
+        if (is_array($data) && array_key_exists(self::START_DATE, $data)) {
+            $startdate = $data[self::START_DATE];
+        }
+        $starthour = '0';
+        if (is_array($data) && array_key_exists(self::START_HOUR, $data)) {
+            $starthour = $data[self::START_HOUR];
+        }
+        $startminute = '0';
+        if (is_array($data) && array_key_exists(self::START_MINUTE, $data)) {
+            $startminute = $data[self::START_MINUTE];
+        }
+        $enddate = '';
+        if (is_array($data) && array_key_exists(self::END_DATE, $data)) {
+            $enddate = $data[self::END_DATE];
+        }
+        $endhour = '0';
+        if (is_array($data) && array_key_exists(self::END_HOUR, $data)) {
+            $endhour = $data[self::END_HOUR];
+        }
+        $endminute = '0';
+        if (is_array($data) && array_key_exists(self::END_MINUTE, $data)) {
+            $endminute = $data[self::END_MINUTE];
+        }
+
         $default = $this->get_defaultsetting();
         $return = html_writer::start_div('form-text defaultsnext');
         $return .= html_writer::empty_tag('input', array(
@@ -221,7 +246,7 @@ class admin_setting_datetimerange extends admin_setting {
                 'id' => $this->get_id() . '_' . self::START_DATE,
                 'name' => $this->get_full_name() . '[' . self::START_DATE . ']',
                 'size' => '15',
-                'value' => s($data[self::START_DATE]),
+                'value' => s($startdate),
         ));
         $return .= ' ';
         $return .= html_writer::tag('label', get_string('start_hour', 'theme_ucsf'), array(
@@ -237,7 +262,7 @@ class admin_setting_datetimerange extends admin_setting {
         ));
         for ($i = 0; $i <= 23; $i++) {
             $attrs = array('value' => $i);
-            if ($i === (int) $data[self::START_HOUR]) {
+            if ($i === (int) $starthour) {
                 $attrs['selected'] = 'selected';
             }
             $return .= html_writer::tag('option', str_pad($i, 2, '0', STR_PAD_LEFT), $attrs);
@@ -257,7 +282,7 @@ class admin_setting_datetimerange extends admin_setting {
         ));
         for ($i = 0; $i < 60; $i += 5) {
             $attrs = array('value' => $i);
-            if ($i === (int) $data[self::START_MINUTE]) {
+            if ($i === (int) $startminute) {
                 $attrs['selected'] = 'selected';
             }
             $return .= html_writer::tag('option', str_pad($i, 2, '0', STR_PAD_LEFT), $attrs);
@@ -270,7 +295,7 @@ class admin_setting_datetimerange extends admin_setting {
                 'id' => $this->get_id() . '_' . self::END_DATE,
                 'name' => $this->get_full_name() . '[' . self::END_DATE . ']',
                 'size' => '15',
-                'value' => s($data[self::END_DATE]),
+                'value' => s($enddate),
         ));
         $return .= ' ';
         $return .= html_writer::tag('label', get_string('start_hour', 'theme_ucsf'), array(
@@ -286,7 +311,7 @@ class admin_setting_datetimerange extends admin_setting {
         ));
         for ($i = 0; $i <= 23; $i++) {
             $attrs = array('value' => $i);
-            if ($i === (int) $data[self::END_HOUR]) {
+            if ($i === (int) $endhour) {
                 $attrs['selected'] = 'selected';
             }
             $return .= html_writer::tag('option', str_pad($i, 2, '0', STR_PAD_LEFT), $attrs);
@@ -306,7 +331,7 @@ class admin_setting_datetimerange extends admin_setting {
         ));
         for ($i = 0; $i <= 60; $i += 5) {
             $attrs = array('value' => $i);
-            if ($i === (int) $data[self::END_MINUTE]) {
+            if ($i === (int) $endminute) {
                 $attrs['selected'] = 'selected';
             }
             $return .= html_writer::tag('option', str_pad($i, 2, '0', STR_PAD_LEFT), $attrs);

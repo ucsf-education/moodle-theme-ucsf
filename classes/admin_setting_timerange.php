@@ -139,7 +139,7 @@ class admin_setting_timerange extends admin_setting {
     /**
      * Returns the rendered admin setting form elements.
      *
-     * @param array $data
+     * @param array|null $data
      *  $data = [
      *    'start_hour'=> (string) the start hour
      *    'start_minute' => (string) the start minute
@@ -151,6 +151,23 @@ class admin_setting_timerange extends admin_setting {
      * @throws coding_exception
      */
     public function output_html($data, $query = ''): string {
+        $starthour = '0';
+        if (is_array($data) && array_key_exists(self::START_HOUR, $data)) {
+            $starthour = $data[self::START_HOUR];
+        }
+        $startminute = '0';
+        if (is_array($data) && array_key_exists(self::START_MINUTE, $data)) {
+            $startminute = $data[self::START_MINUTE];
+        }
+        $endhour = '0';
+        if (is_array($data) && array_key_exists(self::END_HOUR, $data)) {
+            $endhour = $data[self::END_HOUR];
+        }
+        $endminute = '0';
+        if (is_array($data) && array_key_exists(self::END_MINUTE, $data)) {
+            $endminute = $data[self::END_MINUTE];
+        }
+
         $default = $this->get_defaultsetting();
         $return = html_writer::start_div('form-text defaultsnext');
         $return .= html_writer::tag('label', get_string('start_hour', 'theme_ucsf'), array(
@@ -166,7 +183,7 @@ class admin_setting_timerange extends admin_setting {
         ));
         for ($i = 0; $i <= 23; $i++) {
             $attrs = array('value' => $i);
-            if ($i === (int) $data[self::START_HOUR]) {
+            if ($i === (int) $starthour) {
                 $attrs['selected'] = 'selected';
             }
             $return .= html_writer::tag('option', str_pad($i, 2, '0', STR_PAD_LEFT), $attrs);
@@ -186,7 +203,7 @@ class admin_setting_timerange extends admin_setting {
         ));
         for ($i = 0; $i < 60; $i += 5) {
             $attrs = array('value' => $i);
-            if ($i === (int) $data[self::START_MINUTE]) {
+            if ($i === (int) $startminute) {
                 $attrs['selected'] = 'selected';
             }
             $return .= html_writer::tag('option', str_pad($i, 2, '0', STR_PAD_LEFT), $attrs);
@@ -206,7 +223,7 @@ class admin_setting_timerange extends admin_setting {
         ));
         for ($i = 0; $i <= 23; $i++) {
             $attrs = array('value' => $i);
-            if ($i === (int) $data[self::END_HOUR]) {
+            if ($i === (int) $endhour) {
                 $attrs['selected'] = 'selected';
             }
             $return .= html_writer::tag('option', str_pad($i, 2, '0', STR_PAD_LEFT), $attrs);
@@ -226,7 +243,7 @@ class admin_setting_timerange extends admin_setting {
         ));
         for ($i = 0; $i < 60; $i += 5) {
             $attrs = array('value' => $i);
-            if ($i === (int) $data[self::END_MINUTE]) {
+            if ($i === $endminute) {
                 $attrs['selected'] = 'selected';
             }
             $return .= html_writer::tag('option', str_pad($i, 2, '0', STR_PAD_LEFT), $attrs);
