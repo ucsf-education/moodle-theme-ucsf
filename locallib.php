@@ -26,11 +26,11 @@
  * Build the course related hints HTML code.
  * This function evaluates and composes all course related hints which may appear on a course page below the course header.
  *
- * @copyright  based on code from theme_ucsf by Alexander Bias, and from theme_boost_campus by Kathrin Osswald.
+ * @copyright  based on code from theme_boost_union by Alexander Bias, and from theme_boost_campus by Kathrin Osswald.
  *
  * @return string
  */
-function theme_ucsf_get_course_related_hints() {
+function theme_ucsf_get_course_related_hints(): string {
     global $CFG, $COURSE, $PAGE, $USER, $OUTPUT;
 
     // Require user library.
@@ -39,8 +39,7 @@ function theme_ucsf_get_course_related_hints() {
     // Initialize HTML code.
     $html = '';
 
-    // If the setting showhintcoursehidden is set and the visibility of the course is hidden and
-    // a hint for the visibility will be shown.
+    // If the visibility of the course is hidden, a hint for the visibility will be shown.
     if ($PAGE->has_set_url()
             && $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)
             && $COURSE->visible == false) {
@@ -59,8 +58,7 @@ function theme_ucsf_get_course_related_hints() {
         $html .= $OUTPUT->render_from_template('theme_ucsf/course-hint-hidden', $templatecontext);
     }
 
-    // If the setting showhintcourseguestaccess is set and the user is accessing the course with guest access,
-    // a hint for users is shown.
+    // If the user is accessing the course with guest access, a hint for users is shown.
     // We also check that the user did not switch the role. This is a special case for roles that can fully access the course
     // without being enrolled. A role switch would show the guest access hint additionally in that case and this is not
     // intended.
@@ -100,8 +98,7 @@ function theme_ucsf_get_course_related_hints() {
         $html .= $OUTPUT->render_from_template('theme_ucsf/course-hint-guestaccess', $templatecontext);
     }
 
-    // If the setting showswitchedroleincourse is set and the user has switched his role,
-    // a hint for the role switch will be shown.
+    // If the user has switched his role, a hint for the role switch will be shown.
     if (is_role_switched($COURSE->id) ) {
 
         // Get the role name switched to.
@@ -113,7 +110,7 @@ function theme_ucsf_get_course_related_hints() {
                 ['id' => $COURSE->id,
                         'sesskey' => sesskey(),
                         'switchrole' => 0,
-                        'returnurl' => $PAGE->url->out_as_local_url(false)]);
+                        'returnurl' => $PAGE->url->out_as_local_url(false), ]);
 
         // Prepare template context.
         $templatecontext = ['role' => $role,
