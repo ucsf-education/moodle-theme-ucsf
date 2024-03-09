@@ -21,7 +21,6 @@ use core\navigation\output\primary as core_primary;
 use custom_menu;
 use dml_exception;
 use renderer_base;
-use stdClass;
 use theme_ucsf\utils\config;
 use theme_ucsf\utils\coursecategory;
 
@@ -61,13 +60,13 @@ class primary extends core_primary {
         // Get the menu items from the theme settings.
         $custommenuitems = trim(config::get_setting('custommenu' . $applicablecoursecategoryid, ''));
 
-        $nodes = [];
         $currentlang = current_language();
         $custommenunodes = custom_menu::convert_text_to_menu_nodes($custommenuitems, $currentlang);
-
+        $nodes = [];
         foreach ($custommenunodes as $node) {
             $nodes[] = $node->export_for_template($output);
         }
+
         return $nodes;
     }
 }
