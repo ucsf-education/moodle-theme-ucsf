@@ -24,6 +24,7 @@
  * @copyright based on code from theme_boost by Bas Brands
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/behat/lib.php');
@@ -31,10 +32,6 @@ require_once($CFG->dirroot . '/course/lib.php');
 
 // Add block button in editing mode.
 $addblockbutton = $OUTPUT->addblockbutton();
-
-user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
-user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
-user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
 
 if (isloggedin()) {
     $courseindexopen = (get_user_preferences('drawer-open-index', true) == true);
@@ -44,7 +41,7 @@ if (isloggedin()) {
     $blockdraweropen = false;
 }
 
-if (defined('BEHAT_SITE_RUNNING')) {
+if (defined('BEHAT_SITE_RUNNING') && get_user_preferences('behat_keep_drawer_closed') != 1) {
     $blockdraweropen = true;
 }
 
@@ -89,25 +86,25 @@ $header = $PAGE->activityheader;
 $headercontent = $header->export_for_template($renderer);
 
 $templatecontext = [
-        'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-        'output' => $OUTPUT,
-        'sidepreblocks' => $blockshtml,
-        'hasblocks' => $hasblocks,
-        'bodyattributes' => $bodyattributes,
-        'courseindexopen' => $courseindexopen,
-        'blockdraweropen' => $blockdraweropen,
-        'courseindex' => $courseindex,
-        'primarymoremenu' => $primarymenu['moremenu'],
-        'secondarymoremenu' => $secondarynavigation ?: false,
-        'mobileprimarynav' => $primarymenu['mobileprimarynav'],
-        'usermenu' => $primarymenu['user'],
-        'langmenu' => $primarymenu['lang'],
-        'forceblockdraweropen' => $forceblockdraweropen,
-        'regionmainsettingsmenu' => $regionmainsettingsmenu,
-        'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-        'overflow' => $overflow,
-        'headercontent' => $headercontent,
-        'addblockbutton' => $addblockbutton,
+    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
+    'output' => $OUTPUT,
+    'sidepreblocks' => $blockshtml,
+    'hasblocks' => $hasblocks,
+    'bodyattributes' => $bodyattributes,
+    'courseindexopen' => $courseindexopen,
+    'blockdraweropen' => $blockdraweropen,
+    'courseindex' => $courseindex,
+    'primarymoremenu' => $primarymenu['moremenu'],
+    'secondarymoremenu' => $secondarynavigation ?: false,
+    'mobileprimarynav' => $primarymenu['mobileprimarynav'],
+    'usermenu' => $primarymenu['user'],
+    'langmenu' => $primarymenu['lang'],
+    'forceblockdraweropen' => $forceblockdraweropen,
+    'regionmainsettingsmenu' => $regionmainsettingsmenu,
+    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+    'overflow' => $overflow,
+    'headercontent' => $headercontent,
+    'addblockbutton' => $addblockbutton
 ];
 
 require_once(__DIR__ . '/includes/banneralerts.php');
