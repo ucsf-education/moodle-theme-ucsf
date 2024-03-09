@@ -15,9 +15,9 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_boost/drawers
+    @template theme_ucsf/drawers
 
-    Boost drawer template.
+    UCSF drawer template.
 
     Context variables required for this template:
     * sitename - The name of the site
@@ -46,7 +46,9 @@
         "blockdraweropen": true,
         "regionmainsettingsmenu": "",
         "hasregionmainsettingsmenu": false,
-        "addblockbutton": ""
+        "addblockbutton": "",
+        "banneralerts": "",
+        "courserelatedhints: ""
     }
 }}
 {{> theme_boost/head }}
@@ -148,6 +150,7 @@
                             <div class="region_main_settings_menu_proxy"></div>
                         {{/hasregionmainsettingsmenu}}
                         {{{ output.course_content_header }}}
+                        {{{ banneralerts }}}
                         {{#headercontent}}
                             {{> core/activity_header }}
                         {{/headercontent}}
@@ -158,6 +161,7 @@
                                 </div>
                             </div>
                         {{/overflow}}
+                        {{{courserelatedhints}}}
                         {{{ output.main_content }}}
                         {{{ output.activity_navigation }}}
                         {{{ output.course_content_footer }}}
