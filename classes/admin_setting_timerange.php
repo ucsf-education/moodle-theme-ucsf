@@ -204,7 +204,7 @@ class admin_setting_timerange extends admin_setting {
                 'name' => $this->get_full_name() . '[' . self::START_HOUR . ']',
         ]);
         for ($i = 0; $i <= 23; $i++) {
-            $attrs = array('value' => $i);
+            $attrs = ['value' => $i];
             if ($i === (int) $starthour) {
                 $attrs['selected'] = 'selected';
             }
@@ -224,7 +224,7 @@ class admin_setting_timerange extends admin_setting {
                 'name' => $this->get_full_name() . '[' . self::START_MINUTE . ']',
         ]);
         for ($i = 0; $i < 60; $i += 5) {
-            $attrs = array('value' => $i);
+            $attrs = ['value' => $i];
             if ($i === (int) $startminute) {
                 $attrs['selected'] = 'selected';
             }
@@ -244,7 +244,7 @@ class admin_setting_timerange extends admin_setting {
                 'name' => $this->get_full_name() . '[' . self::END_HOUR . ']',
         ]);
         for ($i = 0; $i <= 23; $i++) {
-            $attrs = array('value' => $i);
+            $attrs = ['value' => $i];
             if ($i === (int) $endhour) {
                 $attrs['selected'] = 'selected';
             }
@@ -264,7 +264,7 @@ class admin_setting_timerange extends admin_setting {
                 'name' => $this->get_full_name() . '[' . self::END_MINUTE . ']',
         ]);
         for ($i = 0; $i < 60; $i += 5) {
-            $attrs = array('value' => $i);
+            $attrs = ['value' => $i];
             if ($i === $endminute) {
                 $attrs['selected'] = 'selected';
             }
