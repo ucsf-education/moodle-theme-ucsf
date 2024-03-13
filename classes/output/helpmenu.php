@@ -43,8 +43,9 @@ class helpmenu implements renderable, templatable {
     public function export_for_template(renderer_base $output): stdClass {
         $menu = new stdClass();
         $menu->items = [];
+        $menu->showmenu = false;
 
-        if (!$this->show_menu()) {
+        if (!config::get_setting('helpfeedbackenabled')) {
             return $menu;
         }
 
@@ -60,29 +61,7 @@ class helpmenu implements renderable, templatable {
                 ];
             }
         }
-
+        $menu->showmenu = !empty($menu->items);
         return $menu;
-    }
-
-    /**
-     * Determine if the help menu should be shown.
-     *
-     * @return bool
-     * @throws dml_exception
-     */
-    protected function show_menu(): bool {
-        if (!config::get_setting('helpfeedbackenabled')) {
-            return false;
-        }
-
-        // Check if at least one of the menu items actually contains a link.
-        for ($i = 1; $i <= constants::HELPMENU_ITEMS_COUNT; $i++) {
-            $url = config::get_setting('helpfeedback' . $i . 'link', '');
-            if (!empty($url)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

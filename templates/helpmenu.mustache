@@ -32,24 +32,27 @@
                 "title": "Foo Bar",
                 "target": "_blank"
             }
-        ]
+        ],
+        "showmenu": true
     }
 }}
-<div class="ucsf-helpmenu dropdown">
-    <span class="dropdown-toggle nav-link"
-       tabindex="0"
-       id="ucsf-helpmenu-dropdown-toggle"
-       data-toggle="dropdown"
-       aria-haspopup="true"
-       aria-expanded="false"
-       aria-label="{{#str}}togglehelpmenu, theme_ucsf{{/str}}"
-       role="button"
-    >
-        {{#pix}}e/help{{/pix}}
-    </span>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ucsf-helpmenu-dropdown-toggle" role="menu">
-        {{#items}}
-            <a class="dropdown-item" href="{{url}}" role="menuitem" tabindex="-1" target="{{target}}">{{title}}</a>
-        {{/items}}
+{{#showmenu}}
+    <div class="ucsf-helpmenu dropdown">
+        <span class="dropdown-toggle nav-link"
+           tabindex="0"
+           id="ucsf-helpmenu-dropdown-toggle"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false"
+           aria-label="{{#str}}togglehelpmenu, theme_ucsf{{/str}}"
+           role="button"
+        >
+            {{#pix}}e/help{{/pix}}
+        </span>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ucsf-helpmenu-dropdown-toggle" role="menu">
+            {{#items}}
+                <a class="dropdown-item" href="{{url}}" role="menuitem" tabindex="-1" target="{{target}}">{{title}}</a>
+            {{/items}}
+        </div>
     </div>
-</div>
+{{/showmenu}}
