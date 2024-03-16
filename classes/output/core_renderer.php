@@ -17,13 +17,8 @@
 namespace theme_ucsf\output;
 
 use coding_exception;
-use context_system;
-use dml_exception;
 use moodle_exception;
-use moodle_url;
 use theme_boost\output\core_renderer as boost_core_renderer;
-use theme_ucsf\utils\config;
-use theme_ucsf\utils\coursecategory;
 
 /**
  * Theme renderer.
@@ -33,22 +28,6 @@ use theme_ucsf\utils\coursecategory;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_renderer extends boost_core_renderer {
-
-    /**
-     * Renders the given help menu.
-     *
-     * @param helpmenu $menu
-     * @return string The help menu HTML, or a blank string if the given menu is empty.
-     * @throws coding_exception
-     * @throws moodle_exception
-     */
-    public function render_helpmenu(helpmenu $menu): string {
-        $obj = $menu->export_for_template($this);
-        if (empty($obj->items)) {
-            return '';
-        }
-        return $this->render_from_template('theme_ucsf/helpmenu', $obj);
-    }
 
     /**
      * Renders the given help menu.
