@@ -89,7 +89,7 @@ jobs:
         run: moodle-plugin-ci savepoints
 
       - name: Mustache Lint
-        continue-on-error: true
+        continue-on-error: false
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci mustache
 
