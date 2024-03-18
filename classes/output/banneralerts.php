@@ -63,9 +63,12 @@ class banneralerts implements renderable, templatable {
      * @throws dml_exception
      */
     public function export_for_template(renderer_base $output): stdClass {
+        global $CFG;
         $obj = new stdClass();
         $obj->alerts = [];
         $obj->showalerts = false;
+        $obj->url = $CFG->wwwroot . '/theme/ucsf/banneralerts.php';
+
         // Alerts are only dismissable by logged-in users.
         $dismissable = isloggedin();
 
