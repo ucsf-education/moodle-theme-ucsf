@@ -10,14 +10,14 @@
     * All data attributes are required
 
     Context variables required for this template:
-    * callbackurl - The URL to the server-side callback script for clearing alerts from the user session.
+    * url - The URL to the server-side callback script for clearing alerts from the user session.
     * alerts - The list of alerts.
     * showalerts - If FALSE then don't render any markup here at all.
 
     Example context (json):
 
     {
-        "callbackurl": "http://localhost/theme/ucsf/banneralert.php",
+        "url": "http://localhost/theme/ucsf/banneralert.php",
         "alerts": [
             { "id": "1", "classes": "alert-info", "message": "Lorem Ipsum", "dismissable": true },
             { "id": "2", "classes": "alert-warning", "message": "Foo Bar Baz", "dismissable": false }
