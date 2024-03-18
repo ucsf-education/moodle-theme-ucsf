@@ -2,7 +2,7 @@ A Moodle theme for UCSF's [Collaborative Learning Environment](https://courses.u
 
 ## Attribution
 
-Some features and improvements were inspired, or straight up taken, from the [Boost Union](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union) theme.
+Some features and improvements were inspired by, if not straight up taken from, the [Boost Union](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union) theme.
 
 ## Copyright
 
