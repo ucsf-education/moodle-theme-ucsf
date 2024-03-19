@@ -2,7 +2,7 @@
 Feature: Course hints
   In order to get a more complete picture about a given course
   As a moodle user
-  I need to see additional information
+  I need to be able to see additional information
 
   Background:
     Given the following "users" exist:
