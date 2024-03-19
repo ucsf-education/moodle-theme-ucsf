@@ -26,13 +26,13 @@ require_once(__DIR__.'/../../../../lib/behat/behat_base.php');
 
 
 /**
- * Class behat_theme_ucsf_base_general
+ * Steps definitions base class for the UCSF theme.
  *
  * @package theme_ucsf
  * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class behat_theme_ucsf_base_general extends behat_base {
+class behat_theme_ucsf_behat_base extends behat_base {
 
     /**
      * Purges theme cache and reloads the theme
