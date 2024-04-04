@@ -106,14 +106,14 @@ $string['rawscsspre_desc'] = 'In this field you can provide initialising SCSS co
 $string['recurring_alert'] = 'Type';
 $string['recurring_alertdesc'] = 'Select which type of alert to use.<br><em>Important:</em> After changing your selection, you must save this form before you can set the date- and time-specific parameters that are corresponding with your selection.';
 $string['region-side-pre'] = 'Right';
-$string['showhintcourseguestaccessgeneral'] = 'You are currently viewing this course as <strong>{$a->role}</strong>.';
-$string['showhintcourseguestaccesslink'] = 'To have full access to the course, you can <a href="{$a->url}">self enrol into this course</a>.';
-$string['showhintcoursehiddengeneral'] = 'This course is currently <strong>hidden</strong>. Only enrolled teachers can access this course when hidden.';
-$string['showhintcoursehiddensettingslink'] = 'You can change the visibility in the <a href="{$a->url}">course settings</a>.';
 $string['show_month'] = 'Set month';
 $string['show_monthdesc'] = 'Set month that you want your alert to show.';
 $string['show_week_day'] = 'Set day';
 $string['show_week_daydesc'] = 'Set day in a week when you want your alert to show.';
+$string['showhintcourseguestaccessgeneral'] = 'You are currently viewing this course as <strong>{$a->role}</strong>.';
+$string['showhintcourseguestaccesslink'] = 'To have full access to the course, you can <a href="{$a->url}">self enrol into this course</a>.';
+$string['showhintcoursehiddengeneral'] = 'This course is currently <strong>hidden</strong>. Only enrolled teachers can access this course when hidden.';
+$string['showhintcoursehiddensettingslink'] = 'You can change the visibility in the <a href="{$a->url}">course settings</a>.';
 $string['sitewide'] = 'Site-wide';
 $string['start_date_monthly'] = 'Set monthly alert';
 $string['start_date_weekly'] = 'Start date';
