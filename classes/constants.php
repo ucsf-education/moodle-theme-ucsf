@@ -24,10 +24,6 @@ namespace theme_ucsf;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 interface constants {
-
-    /** @var int The maximum number of help menu items. */
-    const HELPMENU_ITEMS_COUNT = 10;
-
     /** @var int The maximum number of banner alerts. */
     const BANNERALERT_ITEMS_COUNT = 10;
 
