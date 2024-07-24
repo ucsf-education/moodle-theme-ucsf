@@ -121,56 +121,6 @@ if ($ADMIN->fulltree) {
     // Course-catgories list.
     $categories = core_course_category::make_categories_list('', 0, ' | ');
 
-    // Helpmenu.
-    $page = new admin_settingpage('theme_ucsf_helpmenu', get_string('helpfeedbacksettings', 'theme_ucsf'));
-
-    $setting = new admin_setting_configcheckbox(
-            'theme_ucsf/helpfeedbackenabled',
-            get_string('helpfeedbackenabled', 'theme_ucsf'),
-            get_string('helpfeedbackenableddesc', 'theme_ucsf'),
-            '0',
-    );
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
-
-    for ($i = 1; $i <= constants::HELPMENU_ITEMS_COUNT; $i++) {
-        $heading = get_string('helpfeedbackno', 'theme_ucsf', $i);
-        $setting = new admin_setting_heading(
-                'theme_ucsf/helpfeedback' . $i . 'heading',
-                get_string('helpfeedbackno', 'theme_ucsf', $i),
-                ''
-        );
-        $page->add($setting);
-
-        $setting = new admin_setting_configtext(
-                'theme_ucsf/helpfeedback' . $i . 'link',
-                get_string('helpfeedbacklink', 'theme_ucsf'),
-                get_string('helpfeedbacklinkdesc', 'theme_ucsf'),
-                '');
-        $setting->set_updatedcallback('theme_reset_all_caches');
-        $page->add($setting);
-
-        $setting = new admin_setting_configtext(
-                'theme_ucsf/helpfeedback' . $i . 'linklabel',
-                get_string('helpfeedbacklinklabel', 'theme_ucsf'),
-                get_string('helpfeedbacklinklabeldesc', 'theme_ucsf'),
-                ''
-        );
-        $setting->set_updatedcallback('theme_reset_all_caches');
-        $page->add($setting);
-
-        $setting = new admin_setting_configcheckbox(
-                'theme_ucsf/helpfeedback' . $i . 'linktarget',
-                get_string('helpfeedbacklinktarget', 'theme_ucsf'),
-                get_string('helpfeedbacklinktargetdesc', 'theme_ucsf'),
-                '0',
-        );
-        $setting->set_updatedcallback('theme_reset_all_caches');
-        $page->add($setting);
-    }
-
-    $settings->add($page);
-
     // Banner Alerts.
     $page = new admin_settingpage('theme_ucsf_alerts', get_string('alertsheading', 'theme_ucsf'));
 

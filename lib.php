@@ -22,8 +22,6 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use theme_ucsf\output\helpmenu;
-
 /**
  * Serves any files associated with the theme settings.
  *
@@ -95,16 +93,4 @@ function theme_ucsf_get_main_scss_content(theme_config $theme): string {
 
     // Combine them together.
     return $pre . "\n" . $scss . "\n" . $post;
-}
-
-/**
- * Output callback for injecting our help menu into the nav bar.
- *
- * @link https://docs.moodle.org/dev/Output_callbacks#render_navbar_output
- * @param renderer_base $renderer
- * @return string
- * @throws coding_exception
- */
-function theme_ucsf_render_navbar_output(renderer_base $renderer): string {
-    return $renderer->render(new helpmenu());
 }
