@@ -30,8 +30,9 @@
     <div class="ucsf-banneralerts-container row pt-3">
         {{#alerts}}
             <div class="col-12">
-                <div class="alert alert-dismissible ucsf-banneralerts-alert {{classes}}"
+                <div class="alert alert-block fade in alert-dismissible ucsf-banneralerts-alert {{classes}}"
                      role="alert"
+                     data-aria-autofocus="true"
                      data-ucsf-banneralerts-alert-id="{{id}}"
                      data-ucsf-banneralert-dismiss-callback-url="{{url}}"
                 >
