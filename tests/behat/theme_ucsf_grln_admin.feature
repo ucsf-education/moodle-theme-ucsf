@@ -11,8 +11,11 @@ Feature: Name information links are in the edit user profile admin form
 
   @javascript
   Scenario: Update name information links are present in a user's admin profile form
-    When I log in as "admin"
-    And I navigate to "Users > Accounts > Browse list of users" in site administration
+    Given I log in as "admin"
+    And I am on site homepage
+    When I click on "Site administration" "link"
+    And I click on "Users" "link"
+    And I click on "Browse list of users" "link"
     And I click on "Clem Chowder" "link"
     And I click on "Edit profile" "link"
     And I expand all fieldsets
