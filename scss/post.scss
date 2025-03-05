@@ -35,3 +35,13 @@ h5 {
     margin-right: 15px;
 }
 
+/*------------------------------------------------------------------------------
+ * Setting: Enhance box borders for selected items in the grading rubric.
+ -----------------------------------------------------------------------------*/
+.gradingform_rubric.evaluate .criterion .levels .level:hover,
+.gradingform_rubric.evaluate .criterion .levels .level.checked {
+    outline: 2px solid #000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    border-radius: 10px;
+}
