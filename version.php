@@ -24,8 +24,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'theme_ucsf';
-$plugin->version = 2024121001;
-$plugin->release = 'v4.4.1';
+$plugin->version = 2024121002;
+$plugin->release = 'v4.4.2';
 $plugin->requires = 2024041600;
 $plugin->supported = [404, 404];
 $plugin->maturity = MATURITY_STABLE;
