@@ -30,7 +30,6 @@ use stdClass;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class coursecategory {
-
     /**
      * Retrieves the current course category id from either the current page, the current course, or the HTTP request.
      * This is hinky AF. [ST, since 2016]
@@ -73,7 +72,7 @@ class coursecategory {
             if (false === $category) {
                 return [];
             }
-            $ids = array_reverse(explode('/', trim( $category->path, '/')));
+            $ids = array_reverse(explode('/', trim($category->path, '/')));
             $cache[$id] = $ids;
         }
 

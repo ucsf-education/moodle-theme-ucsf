@@ -22,7 +22,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__.'/../../../../lib/behat/behat_base.php');
+require_once(__DIR__ . '/../../../../lib/behat/behat_base.php');
 
 
 /**
@@ -33,7 +33,6 @@ require_once(__DIR__.'/../../../../lib/behat/behat_base.php');
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class behat_theme_ucsf_behat_base extends behat_base {
-
     /**
      * Purges theme cache and reloads the theme
      * @copyright 2022 Alexander Bias, lern.link GmbH <alexander.bias@lernlink.de>

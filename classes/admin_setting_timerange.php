@@ -30,7 +30,6 @@ use html_writer;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_timerange extends admin_setting {
-
     /** @var string (Partial) start hour form field name. */
     const START_HOUR = 'start_hour';
 
@@ -67,13 +66,13 @@ class admin_setting_timerange extends admin_setting {
      * @param string $description
      */
     public function __construct(
-            string $name,
-            string $starthoursettingname,
-            string $startminutesettingname,
-            string $endhoursettingname,
-            string $endminutesettingname,
-            string $visiblename,
-            string $description
+        string $name,
+        string $starthoursettingname,
+        string $startminutesettingname,
+        string $endhoursettingname,
+        string $endminutesettingname,
+        string $visiblename,
+        string $description
     ) {
         $this->starthoursettingname = $starthoursettingname;
         $this->startminutesettingname = $startminutesettingname;

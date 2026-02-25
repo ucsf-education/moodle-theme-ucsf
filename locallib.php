@@ -34,16 +34,17 @@ function theme_ucsf_get_course_related_hints(): string {
     global $CFG, $COURSE, $PAGE, $USER, $OUTPUT;
 
     // Require user library.
-    require_once($CFG->dirroot.'/user/lib.php');
+    require_once($CFG->dirroot . '/user/lib.php');
 
     // Initialize HTML code.
     $html = '';
 
     // If the visibility of the course is hidden, a hint for the visibility will be shown.
-    if ($PAGE->has_set_url()
+    if (
+        $PAGE->has_set_url()
             && $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)
-            && $COURSE->visible == false) {
-
+            && $COURSE->visible == false
+    ) {
         // Prepare template context.
         $templatecontext = ['courseid' => $COURSE->id];
 
@@ -62,11 +63,12 @@ function theme_ucsf_get_course_related_hints(): string {
     // We also check that the user did not switch the role. This is a special case for roles that can fully access the course
     // without being enrolled. A role switch would show the guest access hint additionally in that case and this is not
     // intended.
-    if (is_guest(\context_course::instance($COURSE->id), $USER->id)
+    if (
+        is_guest(\context_course::instance($COURSE->id), $USER->id)
             && $PAGE->has_set_url()
             && $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)
-            && !is_role_switched($COURSE->id)) {
-
+            && !is_role_switched($COURSE->id)
+    ) {
         // Require self enrolment library.
         require_once($CFG->dirroot . '/enrol/self/lib.php');
 
@@ -99,18 +101,20 @@ function theme_ucsf_get_course_related_hints(): string {
     }
 
     // If the user has switched his role, a hint for the role switch will be shown.
-    if (is_role_switched($COURSE->id) ) {
-
+    if (is_role_switched($COURSE->id)) {
         // Get the role name switched to.
         $opts = \user_get_user_navigation_info($USER, $PAGE);
         $role = $opts->metadata['rolename'];
 
         // Get the URL to switch back (normal role).
-        $url = new moodle_url('/course/switchrole.php',
-                ['id' => $COURSE->id,
+        $url = new moodle_url(
+            '/course/switchrole.php',
+            ['id' => $COURSE->id,
                         'sesskey' => sesskey(),
                         'switchrole' => 0,
-                        'returnurl' => $PAGE->url->out_as_local_url(false), ]);
+            'returnurl' => $PAGE->url->out_as_local_url(false),
+            ]
+        );
 
         // Prepare template context.
         $templatecontext = ['role' => $role,
