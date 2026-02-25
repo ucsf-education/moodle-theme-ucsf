@@ -48,8 +48,8 @@ class primary extends core_primary {
 
         $currentcategoryid = coursecategory::get_current_category_id();
         $applicablecoursecategoryid = coursecategory::find_category_id_by_config_setting(
-                $currentcategoryid,
-                'custommenu',
+            $currentcategoryid,
+            'custommenu',
         );
 
         // Skip if no custom menu could be found at any level in the category hierarchy.

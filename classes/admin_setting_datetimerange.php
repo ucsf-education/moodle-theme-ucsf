@@ -30,7 +30,6 @@ use html_writer;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_datetimerange extends admin_setting {
-
     /** @var string (Partial) start date form field name. */
     const START_DATE = 'start_date';
 
@@ -81,15 +80,15 @@ class admin_setting_datetimerange extends admin_setting {
      * @param string $description
      */
     public function __construct(
-            string $name,
-            string $startdatesettingname,
-            string $starthoursettingname,
-            string $startminutesettingname,
-            string $enddatesettingname,
-            string $endhoursettingname,
-            string $endminutesettingname,
-            string $visiblename,
-            string $description
+        string $name,
+        string $startdatesettingname,
+        string $starthoursettingname,
+        string $startminutesettingname,
+        string $enddatesettingname,
+        string $endhoursettingname,
+        string $endminutesettingname,
+        string $visiblename,
+        string $description
     ) {
         $this->startdatesettingname = $startdatesettingname;
         $this->starthoursettingname = $starthoursettingname;
@@ -120,7 +119,8 @@ class admin_setting_datetimerange extends admin_setting {
         $enddate = $this->config_read($this->enddatesettingname);
         $endhour = $this->config_read($this->endhoursettingname);
         $endminute = $this->config_read($this->endminutesettingname);
-        if (is_null($startdate)
+        if (
+            is_null($startdate)
                 || is_null($starthour)
                 || is_null($startminute)
                 || is_null($enddate)
@@ -188,12 +188,12 @@ class admin_setting_datetimerange extends admin_setting {
      * @throws coding_exception
      */
     protected function validate(
-            string $startdate,
-            string $starthour,
-            string $startminute,
-            string $enddate,
-            string $endhour,
-            string $endminute
+        string $startdate,
+        string $starthour,
+        string $startminute,
+        string $enddate,
+        string $endhour,
+        string $endminute
     ): string {
         if ('' === $startdate && '' === $enddate) {
             return get_string('emptystartandenddate', 'theme_ucsf');

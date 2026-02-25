@@ -37,13 +37,22 @@
  * @return bool
  * @throws moodle_exception
  */
-function theme_ucsf_pluginfile($course, $cm, $context, string $filearea, array $args, bool $forcedownload,
-        array $options = []): bool {
-    if ($context->contextlevel == CONTEXT_SYSTEM && (
+function theme_ucsf_pluginfile(
+    $course,
+    $cm,
+    $context,
+    string $filearea,
+    array $args,
+    bool $forcedownload,
+    array $options = []
+): bool {
+    if (
+        $context->contextlevel == CONTEXT_SYSTEM && (
                     $filearea === 'logo'
                     || preg_match('/headerimage\d+/', $filearea)
                     || $filearea === 'backgroundimage'
-                    || $filearea === 'loginbackgroundimage')) {
+                    || $filearea === 'loginbackgroundimage')
+    ) {
         $theme = theme_config::load('ucsf');
         // By default, theme files must be cache-able by both browsers and proxies.
         if (!array_key_exists('cacheability', $options)) {
@@ -77,7 +86,6 @@ function theme_ucsf_get_main_scss_content(theme_config $theme): string {
     } else if ($filename == 'plain.scss') {
         // We still load the default preset files directly from the boost theme. No sense in duplicating them.
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/plain.scss');
-
     } else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_photo', 'preset', 0, '/', $filename))) {
         // This preset file was fetched from the file area for theme_photo and not theme_boost (see the line above).
         $scss .= $presetfile->get_content();

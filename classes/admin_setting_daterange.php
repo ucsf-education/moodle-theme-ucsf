@@ -30,7 +30,6 @@ use html_writer;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_daterange extends admin_setting {
-
     /** @var string Start date form field name. */
     const START_DATE = 'start_date';
 
@@ -53,11 +52,11 @@ class admin_setting_daterange extends admin_setting {
      * @param string $description
      */
     public function __construct(
-            string $name,
-            string $startdatesettingname,
-            string $enddatesettingname,
-            string $visiblename,
-            string $description
+        string $name,
+        string $startdatesettingname,
+        string $enddatesettingname,
+        string $visiblename,
+        string $description
     ) {
         $this->startdatesettingname = $startdatesettingname;
         $this->enddatesettingname = $enddatesettingname;

@@ -35,7 +35,6 @@ use theme_ucsf\utils\coursecategory;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class banneralerts implements renderable, templatable {
-
     /** @var moodle_page The current page. */
     protected moodle_page $page;
 
@@ -73,11 +72,12 @@ class banneralerts implements renderable, templatable {
         $dismissable = isloggedin();
 
         for ($i = 1; $i <= constants::BANNERALERT_ITEMS_COUNT; $i++) {
-
             // Skip if alert has already been flagged as seen in this user's session.
-            if (array_key_exists(constants::BANNERALERT_SESSION_KEY, $_SESSION)
+            if (
+                array_key_exists(constants::BANNERALERT_SESSION_KEY, $_SESSION)
                     && array_key_exists($i, $_SESSION[constants::BANNERALERT_SESSION_KEY])
-                    && $_SESSION[constants::BANNERALERT_SESSION_KEY][$i]) {
+                    && $_SESSION[constants::BANNERALERT_SESSION_KEY][$i]
+            ) {
                 continue;
             }
 
