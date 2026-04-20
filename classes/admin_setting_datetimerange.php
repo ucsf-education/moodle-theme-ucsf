@@ -280,13 +280,13 @@ class admin_setting_datetimerange extends admin_setting {
         ]);
         $return .= ' ';
         $return .= html_writer::tag('label', get_string('start_hour', 'theme_ucsf'), [
-                'class' => 'accesshide',
+                'class' => 'form-label accesshide',
                 'for' => $this->get_id() . '_' . self::START_HOUR,
         ]);
         $return .= html_writer::span(ucfirst(get_string('hour')) . ':', '', ['aria-hidden' => 'true']);
         $return .= ' ';
         $return .= html_writer::start_tag('select', [
-                'class' => 'custom-select',
+                'class' => 'form-select',
                 'id' => $this->get_id() . '_' . self::START_HOUR,
                 'name' => $this->get_full_name() . '[' . self::START_HOUR . ']',
         ]);
@@ -300,13 +300,13 @@ class admin_setting_datetimerange extends admin_setting {
         $return .= html_writer::end_tag('select');
         $return .= ' ';
         $return .= html_writer::tag('label', get_string('start_minute', 'theme_ucsf'), [
-                'class' => 'accesshide',
+                'class' => 'form-label accesshide',
                 'for' => $this->get_id() . '_' . self::START_MINUTE,
         ]);
         $return .= html_writer::span(ucfirst(get_string('minute')) . ':', '', ['aria-hidden' => 'true']);
         $return .= ' ';
         $return .= html_writer::start_tag('select', [
-                'class' => 'custom-select',
+                'class' => 'form-select',
                 'id' => $this->get_id() . '_' . self::START_MINUTE,
                 'name' => $this->get_full_name() . '[' . self::START_MINUTE . ']',
         ]);
@@ -329,13 +329,13 @@ class admin_setting_datetimerange extends admin_setting {
         ]);
         $return .= ' ';
         $return .= html_writer::tag('label', get_string('start_hour', 'theme_ucsf'), [
-                'class' => 'accesshide',
+                'class' => 'form-label accesshide',
                 'for' => $this->get_id() . '_' . self::END_HOUR,
         ]);
         $return .= html_writer::span(ucfirst(get_string('hour')) . ':', '', ['aria-hidden' => 'true']);
         $return .= ' ';
         $return .= html_writer::start_tag('select', [
-                'class' => 'custom-select',
+                'class' => 'form-select',
                 'id' => $this->get_id() . '_' . self::END_HOUR,
                 'name' => $this->get_full_name() . '[' . self::END_HOUR . ']',
         ]);
@@ -349,13 +349,13 @@ class admin_setting_datetimerange extends admin_setting {
         $return .= html_writer::end_tag('select');
         $return .= ' ';
         $return .= html_writer::tag('label', get_string('start_minute', 'theme_ucsf'), [
-                'class' => 'accesshide',
+                'class' => 'form-label accesshide',
                 'for' => $this->get_id() . '_' . self::END_MINUTE,
         ]);
         $return .= html_writer::span(ucfirst(get_string('minute')) . ':', '', ['aria-hidden' => 'true']);
         $return .= ' ';
         $return .= html_writer::start_tag('select', [
-                'class' => 'custom-select',
+                'class' => 'form-select',
                 'id' => $this->get_id() . self::END_MINUTE,
                 'name' => $this->get_full_name() . '[' . self::END_MINUTE . ']',
         ]);
