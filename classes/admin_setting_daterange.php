@@ -171,11 +171,12 @@ class admin_setting_daterange extends admin_setting {
         );
         $return .= html_writer::start_div('col-sm-11');
         $return .= html_writer::empty_tag('input', [
-                'class' => 'form-control text-ltr ucsf-datepicker',
+                'class' => 'form-control text-ltr',
                 'id' => $this->get_id() . '_' . self::START_DATE,
                 'name' => $this->get_full_name() . '[' . self::START_DATE . ']',
                 'size' => '15',
                 'value' => s($startdate),
+                'type' => 'date',
         ]);
         $return .= html_writer::end_div();
         $return .= html_writer::end_div();
@@ -188,11 +189,12 @@ class admin_setting_daterange extends admin_setting {
         );
         $return .= html_writer::start_div('col-sm-11');
         $return .= html_writer::empty_tag('input', [
-                'class' => 'form-control text-ltr ucsf-datepicker',
+                'class' => 'form-control text-ltr',
                 'id' => $this->get_id() . '_' . self::END_DATE,
                 'name' => $this->get_full_name() . '[' . self::END_DATE . ']',
                 'size' => '15',
                 'value' => s($enddate),
+                'type' => 'date',
         ]);
         $return .= html_writer::end_div();
         $return .= html_writer::end_div();
