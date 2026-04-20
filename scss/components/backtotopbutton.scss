@@ -21,10 +21,6 @@
 body.hasstickyfooter #back-to-top {
     bottom: 10rem;
 }
-#back-to-top i::before {
-    /* Move the caret icon slightly up for a nicer look. */
-    vertical-align: 0.3rem;
-}
 
 /* If the communications button is shown, the back to top button has to be moved more upwards.
    To realize this, our back-to-top JS has added a class to the body tag. */

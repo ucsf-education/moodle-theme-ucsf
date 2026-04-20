@@ -163,26 +163,41 @@ class admin_setting_daterange extends admin_setting {
             $enddate = $data[self::END_DATE];
         }
 
-        $default = $this->get_defaultsetting();
-        $return = html_writer::start_div('form-text defaultsnext');
+        $return = html_writer::start_div('row mb-1');
+        $return .= html_writer::label(
+            get_string('startdate', 'theme_ucsf'),
+            $this->get_id() . '_' . self::START_DATE,
+            attributes: ['class' => 'col-form-label text-sm-end col-sm-1'],
+        );
+        $return .= html_writer::start_div('col-sm-11');
         $return .= html_writer::empty_tag('input', [
-                'aria-label' => get_string('startdate', 'theme_ucsf'),
-                'class' => 'form-control text-ltr ucsf-datepicker',
+                'class' => 'form-control text-ltr',
                 'id' => $this->get_id() . '_' . self::START_DATE,
                 'name' => $this->get_full_name() . '[' . self::START_DATE . ']',
                 'size' => '15',
                 'value' => s($startdate),
+                'type' => 'date',
         ]);
-        $return .= html_writer::empty_tag('br');
+        $return .= html_writer::end_div();
+        $return .= html_writer::end_div();
+
+        $return .= html_writer::start_div('row');
+        $return .= html_writer::label(
+            get_string('enddate', 'theme_ucsf'),
+            $this->get_id() . '_' . self::END_DATE,
+            attributes: ['class' => 'col-form-label text-sm-end col-sm-1'],
+        );
+        $return .= html_writer::start_div('col-sm-11');
         $return .= html_writer::empty_tag('input', [
-                'aria-label' => get_string('enddate', 'theme_ucsf'),
-                'class' => 'form-control text-ltr ucsf-datepicker',
+                'class' => 'form-control text-ltr',
                 'id' => $this->get_id() . '_' . self::END_DATE,
                 'name' => $this->get_full_name() . '[' . self::END_DATE . ']',
                 'size' => '15',
                 'value' => s($enddate),
+                'type' => 'date',
         ]);
         $return .= html_writer::end_div();
-        return format_admin_setting($this, $this->visiblename, $return, $this->description, false, '', $default, $query);
+        $return .= html_writer::end_div();
+        return format_admin_setting($this, $this->visiblename, $return, $this->description, false, '', null, $query);
     }
 }

@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $THEME->name = 'ucsf';
-$THEME->sheets = ['pikaday'];
+$THEME->sheets = [];
 $THEME->editor_sheets = [];
 $THEME->editor_scss = ['editor'];
 $THEME->usefallback = true;
