@@ -20,7 +20,7 @@ Feature: Course hints
     And I am on "Course 1" course homepage
     And I follow "Switch role to..." in the user menu
     And I click on "Student" "button"
-    Then I should see "You are viewing this course currently with the role:" in the ".course-hint-switchedrole" "css_element"
+    Then I should see "You are viewing this course currently with the role: Student" in the ".course-hint-switchedrole" "css_element"
     When I click on "Return to my normal role" "link" in the ".course-hint-switchedrole" "css_element"
     Then I should not see "You are viewing this course currently with the role:"
     And ".course-hint-switchedrole" "css_element" should not exist
