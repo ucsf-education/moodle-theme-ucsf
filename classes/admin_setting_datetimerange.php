@@ -328,7 +328,7 @@ class admin_setting_datetimerange extends admin_setting {
                 'value' => s($enddate),
         ]);
         $return .= ' ';
-        $return .= html_writer::tag('label', get_string('start_hour', 'theme_ucsf'), [
+        $return .= html_writer::tag('label', get_string('end_hour', 'theme_ucsf'), [
                 'class' => 'form-label accesshide',
                 'for' => $this->get_id() . '_' . self::END_HOUR,
         ]);
@@ -348,7 +348,7 @@ class admin_setting_datetimerange extends admin_setting {
         }
         $return .= html_writer::end_tag('select');
         $return .= ' ';
-        $return .= html_writer::tag('label', get_string('start_minute', 'theme_ucsf'), [
+        $return .= html_writer::tag('label', get_string('end_minute', 'theme_ucsf'), [
                 'class' => 'form-label accesshide',
                 'for' => $this->get_id() . '_' . self::END_MINUTE,
         ]);
