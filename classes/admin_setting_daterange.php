@@ -163,36 +163,34 @@ class admin_setting_daterange extends admin_setting {
             $enddate = $data[self::END_DATE];
         }
 
-        $return = html_writer::start_div('row mb-1');
+        $return = html_writer::start_div('row justify-column-start mb-1');
         $return .= html_writer::label(
             get_string('startdate', 'theme_ucsf'),
             $this->get_id() . '_' . self::START_DATE,
-            attributes: ['class' => 'col-form-label text-sm-end col-sm-1'],
+            attributes: ['class' => 'col-form-label col-md-1 text-md-end'],
         );
-        $return .= html_writer::start_div('col-sm-11');
+        $return .= html_writer::start_div('col-md-6 col-lg-4');
         $return .= html_writer::empty_tag('input', [
                 'class' => 'form-control text-ltr',
                 'id' => $this->get_id() . '_' . self::START_DATE,
                 'name' => $this->get_full_name() . '[' . self::START_DATE . ']',
-                'size' => '15',
                 'value' => s($startdate),
                 'type' => 'date',
         ]);
         $return .= html_writer::end_div();
         $return .= html_writer::end_div();
 
-        $return .= html_writer::start_div('row');
+        $return .= html_writer::start_div('row justify-content-start');
         $return .= html_writer::label(
             get_string('enddate', 'theme_ucsf'),
             $this->get_id() . '_' . self::END_DATE,
-            attributes: ['class' => 'col-form-label text-sm-end col-sm-1'],
+            attributes: ['class' => 'col-form-label col-md-1 text-md-end'],
         );
-        $return .= html_writer::start_div('col-sm-11');
+        $return .= html_writer::start_div('col-md-6 col-lg-4');
         $return .= html_writer::empty_tag('input', [
                 'class' => 'form-control text-ltr',
                 'id' => $this->get_id() . '_' . self::END_DATE,
                 'name' => $this->get_full_name() . '[' . self::END_DATE . ']',
-                'size' => '15',
                 'value' => s($enddate),
                 'type' => 'date',
         ]);
