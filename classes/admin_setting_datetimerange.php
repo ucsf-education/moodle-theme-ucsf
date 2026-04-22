@@ -268,19 +268,18 @@ class admin_setting_datetimerange extends admin_setting {
             $endminute = $data[self::END_MINUTE];
         }
 
-        $return = html_writer::start_div('row mb-1');
+        $return = html_writer::start_div('row justify-column-start mb-1');
         $return .= html_writer::label(
             get_string('startdate', 'theme_ucsf'),
             $this->get_id() . '_' . self::START_DATE,
-            attributes: ['class' => 'col-form-label text-sm-end col-sm-1'],
+            attributes: ['class' => 'col-form-label col-lg-1 text-lg-end'],
         );
-        $return .= html_writer::start_div('col-sm-2');
+        $return .= html_writer::start_div('col-lg-4');
         $return .= html_writer::empty_tag('input', [
                 'aria-label' => get_string('startdate', 'theme_ucsf'),
                 'class' => 'form-control text-ltr',
                 'id' => $this->get_id() . '_' . self::START_DATE,
                 'name' => $this->get_full_name() . '[' . self::START_DATE . ']',
-                'size' => '15',
                 'value' => s($startdate),
                 'type' => 'date',
         ]);
@@ -288,9 +287,9 @@ class admin_setting_datetimerange extends admin_setting {
         $return .= html_writer::label(
             get_string('start_hour', 'theme_ucsf'),
             $this->get_id() . '_' . self::START_HOUR,
-            attributes: ['class' => 'col-form-label text-sm-end col-sm-1'],
+            attributes: ['class' => 'col-form-label col-lg-1 text-lg-end'],
         );
-        $return .= html_writer::start_div('col-sm-1');
+        $return .= html_writer::start_div('col-lg-2');
         $return .= html_writer::start_tag('select', [
                 'class' => 'form-select',
                 'id' => $this->get_id() . '_' . self::START_HOUR,
@@ -308,9 +307,9 @@ class admin_setting_datetimerange extends admin_setting {
         $return .= html_writer::label(
             get_string('start_minute', 'theme_ucsf'),
             $this->get_id() . '_' . self::START_MINUTE,
-            attributes: ['class' => 'col-form-label text-sm-end col-sm-2'],
+            attributes: ['class' => 'col-form-label col-lg-1 text-lg-end'],
         );
-        $return .= html_writer::start_div('col-sm-5');
+        $return .= html_writer::start_div('col-lg-2');
         $return .= html_writer::start_tag('select', [
                 'class' => 'form-select',
                 'id' => $this->get_id() . '_' . self::START_MINUTE,
@@ -327,18 +326,17 @@ class admin_setting_datetimerange extends admin_setting {
         $return .= html_writer::end_div();
         $return .= html_writer::end_div();
 
-        $return .= html_writer::start_div('row');
+        $return .= html_writer::start_div('row justify-column-start');
         $return .= html_writer::label(
             get_string('enddate', 'theme_ucsf'),
             $this->get_id() . '_' . self::END_DATE,
-            attributes: ['class' => 'col-form-label text-sm-end col-sm-1'],
+            attributes: ['class' => 'col-form-label col-lg-1 text-lg-end'],
         );
-        $return .= html_writer::start_div('col-sm-2');
+        $return .= html_writer::start_div('col-lg-4');
         $return .= html_writer::empty_tag('input', [
                 'class' => 'form-control text-ltr',
                 'id' => $this->get_id() . '_' . self::END_DATE,
                 'name' => $this->get_full_name() . '[' . self::END_DATE . ']',
-                'size' => '15',
                 'value' => s($enddate),
                 'type' => 'date',
         ]);
@@ -346,9 +344,9 @@ class admin_setting_datetimerange extends admin_setting {
         $return .= html_writer::label(
             get_string('end_hour', 'theme_ucsf'),
             $this->get_id() . '_' . self::END_HOUR,
-            attributes: ['class' => 'col-form-label text-sm-end col-sm-1'],
+            attributes: ['class' => 'col-form-label col-lg-1 text-lg-end'],
         );
-        $return .= html_writer::start_div('col-sm-1');
+        $return .= html_writer::start_div('col-lg-2');
         $return .= html_writer::start_tag('select', [
                 'class' => 'form-select',
                 'id' => $this->get_id() . '_' . self::END_HOUR,
@@ -366,9 +364,9 @@ class admin_setting_datetimerange extends admin_setting {
         $return .= html_writer::label(
             get_string('end_minute', 'theme_ucsf'),
             $this->get_id() . '_' . self::END_MINUTE,
-            attributes: ['class' => 'col-form-label text-sm-end col-sm-2'],
+            attributes: ['class' => 'col-form-label col-lg-1 text-lg-end'],
         );
-        $return .= html_writer::start_div('col-sm-1');
+        $return .= html_writer::start_div('col-lg-2');
         $return .= html_writer::start_tag('select', [
                 'class' => 'form-select',
                 'id' => $this->get_id() .  '_' . self::END_MINUTE,
