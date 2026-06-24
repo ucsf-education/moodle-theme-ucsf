@@ -1,4 +1,18 @@
 // Post SCSS for the theme.
+/*=======================================
+ * Frontpage
+ ======================================*/
+.pagelayout-frontpage {
+    .troubleshooting {
+        color: $text-muted;
+
+        &:active,
+        &:focus,
+        &:hover {
+            color: $link-color;
+        }
+    }
+}
 
 /*=======================================
  * Common elements

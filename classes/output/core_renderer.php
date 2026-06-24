@@ -14,19 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace theme_ucsf\output;
+
 /**
- * Version file for the UCSF Moodle theme.
+ * Core renderer for the UCSF theme.
  *
  * @package theme_ucsf
  * @copyright The Regents of the University of California
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->component = 'theme_ucsf';
-$plugin->version = 2026041704;
-$plugin->release = 'v5.1.4';
-$plugin->requires = 2025092600;
-$plugin->supported = [501, 501];
-$plugin->maturity = MATURITY_STABLE;
-$plugin->dependencies = ['theme_boost' => 2025100600];
+class core_renderer extends \theme_boost\output\core_renderer {
+    /**
+     * {@inheritDoc}
+     */
+    public function main_content() {
+        if ('frontpage' === $this->page->pagelayout) {
+            $context = [
+                'frontpagehero' => $this->image_url('frontpage-hero', 'theme_ucsf'),
+            ];
+            $contents = $this->render_from_template('theme_ucsf/frontpage-main', $context);
+            return '<div role="main">' . $this->unique_main_content_token . $contents . '</div>';
+        }
+        return parent::main_content();
+    }
+}

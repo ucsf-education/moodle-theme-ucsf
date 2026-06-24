@@ -50,3 +50,9 @@ $THEME->activityheaderconfig = [
         'notitle' => true,
 ];
 $THEME->removedprimarynavitems = ['home'];
+$THEME->layouts = [
+    'frontpage' => [
+        'file' => 'frontpage.php',
+        'regions' => [],
+    ],
+];
