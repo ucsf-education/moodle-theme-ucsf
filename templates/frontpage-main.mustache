@@ -27,21 +27,24 @@
 
     Context variables required for this template:
     * frontpagehero - The URL to the frontpage hero image.
+    * frontpageherosmall - The URL to the frontpage hero image for smaller/mobile screen sizes.
 
     Example context (json):
     {
-        "frontpagehero": "https://courses.ucsf.edu/theme/image.php/ucsf/theme_ucsf/..."
+        "frontpagehero": "http://imagurl",
+        "frontpageherosmall": "http://imageurl"
     }
 }}
-<div class="row align-items-center">
-    <div class="col-12 col-lg-6 d-none d-sm-block text-center">
-        <img src="{{{frontpagehero}}}" class="img-fluid" alt="">
+<div class="row align-items-center frontpage-main-content">
+    <div class="col-12 col-lg-5 text-center">
+        <img src="{{{frontpageherosmall}}}" class="d-md-none img-fluid float-start" alt="">
+        <img src="{{{frontpagehero}}}" class="d-none d-md-inline img-fluid float-start" alt="">
     </div>
-    <div class="col-12 col-lg-6 mt-sm-6">
-        <h1><span>Collaborative</span> <span class="text-nowrap">Learning Environment</span></h1>
+    <div class="col-12 col-lg-7 mt-4 mt-lg-0">
+        <h1>Collaborative<br>Learning Environment</h1>
         <p class="lead">UCSF's platform for online teaching and learning.</p>
         <div class="mt-2">
-            <a class="btn btn-outline-primary btn-lg" href="/login/index.php">
+            <a class="btn btn-outline-primary btn-lg cta" href="/login/index.php">
                 Sign in with UCSF SSO
                 <span class="fa fa-arrow-right fa-sm"></span>
             </a>
