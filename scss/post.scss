@@ -3,8 +3,54 @@
 /*=======================================
  * Frontpage
  ======================================*/
-.frontpage-main-content {
 
+// ACHTUNG!
+// What follows is a series of very selective core style overrides that will
+// set the main contents area maxwidth to the Boost defaults for the frontpage ONLY.
+// This is essentially an override of an override, the latter to be found in `scss/pre.scss` in this theme.
+//
+// Naturally, this makes things quite brittle.
+//
+// A note to my future self (or whoever ends up inheriting this mess):
+// When updating the theme for the next Moodle version,
+// grep the Boost theme for all usages of the `$course-content-maxwidth` variable
+// and apply overrides here.
+//
+// ST [2026/07/02]
+
+// Re-declaring `$course-content-maxwidth` under a different name,
+// see `/public/theme/boost/scss/moodle/variables.scss` for its value.
+$frontpage-content-maxwidth: 830px !default;
+
+@include media-breakpoint-up(md) {
+    body.pagelayout-frontpage {
+        #page.drawers {
+            .main-inner {
+                max-width: $frontpage-content-maxwidth;
+            }
+            .footer-popover {
+                max-width: $frontpage-content-maxwidth;
+            }
+        }
+    }
+    .header-maxwidth {
+        max-width: $frontpage-content-maxwidth;
+    }
+}
+
+.stickyfooter {
+    .sticky-footer-content {
+        overflow: hidden;
+        @include media-breakpoint-up(md) {
+            body.pagelayout-frontpage {
+                max-width: $frontpage-content-maxwidth;
+            }
+        }
+    }
+}
+
+// Styles for the frontend main contents.
+.frontpage-main-content {
     color: #616161;
 
     h1 {
