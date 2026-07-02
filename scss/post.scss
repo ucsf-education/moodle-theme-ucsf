@@ -18,9 +18,8 @@
 //
 // ST [2026/07/02]
 
-// Re-declaring `$course-content-maxwidth` under a different name,
-// see `/public/theme/boost/scss/moodle/variables.scss` for its value.
-$frontpage-content-maxwidth: 830px;
+// On the frontpage, the max width of the main content area is 1200px.
+$frontpage-content-maxwidth: 1200px !default;
 
 @include media-breakpoint-up(md) {
     body.pagelayout-frontpage {
