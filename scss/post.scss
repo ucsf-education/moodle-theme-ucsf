@@ -39,7 +39,6 @@ $frontpage-content-maxwidth: 1200px !default;
 
 .stickyfooter {
     .sticky-footer-content {
-        overflow: hidden;
         @include media-breakpoint-up(md) {
             body.pagelayout-frontpage {
                 max-width: $frontpage-content-maxwidth;
