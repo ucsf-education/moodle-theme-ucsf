@@ -5,8 +5,9 @@
  ======================================*/
 
 // ACHTUNG!
+//
 // What follows is a series of very selective core style overrides that will
-// set the main contents area maxwidth to the Boost defaults for the frontpage ONLY.
+// set the main contents area maxwidth to a fixed, custom value that's neither 100% nor the Boost default.
 // This is essentially an override of an override, the latter to be found in `scss/pre.scss` in this theme.
 //
 // Naturally, this makes things quite brittle.
@@ -18,7 +19,7 @@
 //
 // ST [2026/07/02]
 
-// On the frontpage, the max width of the main content area is 1200px.
+// Max width of the main content area on the frontpage.
 $frontpage-content-maxwidth: 1200px !default;
 
 @include media-breakpoint-up(md) {
