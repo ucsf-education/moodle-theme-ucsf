@@ -20,7 +20,7 @@
 
 // Re-declaring `$course-content-maxwidth` under a different name,
 // see `/public/theme/boost/scss/moodle/variables.scss` for its value.
-$frontpage-content-maxwidth: 830px !default;
+$frontpage-content-maxwidth: 830px;
 
 @include media-breakpoint-up(md) {
     body.pagelayout-frontpage {

@@ -30,8 +30,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
     public function main_content() {
         if ('frontpage' === $this->page->pagelayout) {
             $context = [
-                'frontpagehero' => $this->image_url('frontpage-hero', 'theme_ucsf'),
-                'frontpageherosmall' => $this->image_url('frontpage-hero-small', 'theme_ucsf'),
+                'frontpageherodesktop' => $this->image_url('frontpage-hero-desktop', 'theme_ucsf'),
+                'frontpageheromobile' => $this->image_url('frontpage-hero-mobile', 'theme_ucsf'),
+                'frontpageherotablet' => $this->image_url('frontpage-hero-tablet', 'theme_ucsf'),
             ];
             $contents = $this->render_from_template('theme_ucsf/frontpage-main', $context);
             return '<div role="main">' . $this->unique_main_content_token . $contents . '</div>';

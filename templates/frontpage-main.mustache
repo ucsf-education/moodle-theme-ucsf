@@ -26,19 +26,22 @@
     * none
 
     Context variables required for this template:
-    * frontpagehero - The URL to the frontpage hero image.
-    * frontpageherosmall - The URL to the frontpage hero image for smaller/mobile screen sizes.
+    * frontpageherodesktop - The URL to the frontpage hero image on desktop-size viewports.
+    * frontpageheromobile - The URL to the frontpage hero image on mobile-size viewports.
+    * frontpageherotablet - The URL to the frontpage hero image on tablet-size viewports.
 
     Example context (json):
     {
-        "frontpagehero": "http://imagurl",
-        "frontpageherosmall": "http://imageurl"
+        "frontpageherodesktop": "http://imagurl",
+        "frontpageheromobile": "http://imagurl",
+        "frontpageherotablet": "http://imageurl"
     }
 }}
 <div class="row align-items-center frontpage-main-content">
     <div class="col-12 col-lg-5 text-center">
-        <img src="{{{frontpageherosmall}}}" class="d-md-none img-fluid float-start" alt="">
-        <img src="{{{frontpagehero}}}" class="d-none d-md-inline img-fluid float-start" alt="">
+        <img src="{{{frontpageheromobile}}}" class="d-md-none img-fluid float-start" alt="">
+        <img src="{{{frontpageherotablet}}}" class="d-none d-md-inline d-lg-none img-fluid float-start" alt="">
+        <img src="{{{frontpageherodesktop}}}" class="d-none d-lg-inline img-fluid float-start" alt="">
     </div>
     <div class="col-12 col-lg-7 mt-4 mt-lg-0">
         <h1>Collaborative<br>Learning Environment</h1>
