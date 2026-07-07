@@ -1,0 +1,61 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_ucsf/frontpage-main
+
+    This is the main content template for the frontpage.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * frontpageherodesktop - The URL to the frontpage hero image on desktop-size viewports.
+    * frontpageheromobile - The URL to the frontpage hero image on mobile-size viewports.
+    * frontpageherotablet - The URL to the frontpage hero image on tablet-size viewports.
+
+    Example context (json):
+    {
+        "frontpageherodesktop": "http://imagurl",
+        "frontpageheromobile": "http://imagurl",
+        "frontpageherotablet": "http://imageurl"
+    }
+}}
+<div class="row align-items-center frontpage-main-content gx-lg-6 px-3 px-md-0">
+    <div class="col-12 col-lg-7 text-center">
+        <picture>
+            <source media="(min-width: 992px)" srcset="{{{frontpageherodesktop}}}">
+            <source media="(min-width: 768px)" srcset="{{{frontpageherotablet}}}">
+            <img src="{{{frontpageheromobile}}}" class="img-fluid float-start" alt="">
+        </picture>
+    </div>
+    <div class="col-12 col-lg-5 mt-4 mt-lg-0">
+        <h1 class="mb-4">Collaborative<br>Learning Environment</h1>
+        <p class="lead mb-4">UCSF's platform for <span class="text-nowrap">online teaching and learning.</span></p>
+        <div class="cta-container">
+            <a class="btn btn-outline-primary btn-lg cta" href="/login/index.php">
+                Sign in with UCSF SSO
+                <span class="fa fa-arrow-right fa-sm"></span>
+            </a>
+        </div>
+        <div>
+            <a href="https://tiny.ucsf.edu/educationithelp" class="troubleshooting">Trouble signing in?</a>
+        </div>
+    </div>
+</div>
