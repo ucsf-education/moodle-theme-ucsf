@@ -68,8 +68,8 @@ class banneralerts implements renderable, templatable {
         $obj->showalerts = false;
         $obj->url = $CFG->wwwroot . '/theme/ucsf/banneralerts.php';
 
-        // Alerts are only dismissable by logged-in users.
-        $dismissable = isloggedin();
+        // Alerts are only dismissible by logged-in users.
+        $dismissible = isloggedin();
 
         for ($i = 1; $i <= constants::BANNERALERT_ITEMS_COUNT; $i++) {
             // Skip if alert has already been flagged as seen in this user's session.
@@ -279,7 +279,7 @@ class banneralerts implements renderable, templatable {
                     'id' => $i,
                     'classes' => $alertclasses,
                     'message' => $alertmessage,
-                    'dismissable' => $dismissable,
+                    'dismissible' => $dismissible,
             ];
         }
         $obj->showalerts = !empty($obj->alerts);
