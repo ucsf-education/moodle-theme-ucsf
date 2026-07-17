@@ -22,9 +22,13 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\clock;
+use core\di;
 use theme_ucsf\output\banneralerts;
 
 defined('MOODLE_INTERNAL') || die();
 
-$banneralerts = new banneralerts($PAGE);
+$clock = di::get(clock::class);
+$banneralerts = new banneralerts($PAGE, $clock);
+
 $templatecontext['banneralerts'] = $OUTPUT->render($banneralerts);
