@@ -88,6 +88,135 @@ Feature: Banner Alerts display
       | 2026-07-01 10:16 |
       | 2026-07-02 10:00 |
 
+  Scenario Outline: Daily alert is visible within its scheduled time window
+    # The banner is scheduled to be visible between 9:45am and 10:15am
+    # every day between on July 1st and July 3rd 2026.
+    Given the following config values are set as admin:
+      | enable1alert           | 1          | theme_ucsf |
+      | recurring_alert1       | 3          | theme_ucsf |
+      | start_date_daily1      | 2026-07-01 | theme_ucsf |
+      | start_hour_daily1      | 9          | theme_ucsf |
+      | start_minute_daily1    | 45         | theme_ucsf |
+      | end_date_daily1        | 2026-07-03 | theme_ucsf |
+      | end_hour_daily1        | 10         | theme_ucsf |
+      | end_minute_daily1      | 15         | theme_ucsf |
+      | categories_list_alert1 | 0          | theme_ucsf |
+      | alert1type             | info       | theme_ucsf |
+      | alert1text             | eins       | theme_ucsf |
+    When the time is frozen at "<date>"
+    And I am on site homepage
+    Then I should see the non-dismissible "eins" info banner
+
+    Examples:
+      | date             |
+      | 2026-07-01 09:45 |
+      | 2026-07-01 10:00 |
+      | 2026-07-01 10:15 |
+      | 2026-07-02 09:45 |
+      | 2026-07-02 10:00 |
+      | 2026-07-02 10:15 |
+      | 2026-07-03 09:45 |
+      | 2026-07-03 10:00 |
+      | 2026-07-03 10:15 |
+
+  Scenario Outline: Daily alert is not visible outside its scheduled time window
+    # The banner is scheduled to be visible between 9:45am and 10:15am on July 1st 2026.
+    Given the following config values are set as admin:
+      | enable1alert           | 1          | theme_ucsf |
+      | recurring_alert1       | 2          | theme_ucsf |
+      | start_date1            | 2026-07-01 | theme_ucsf |
+      | start_hour1            | 9          | theme_ucsf |
+      | start_minute1          | 45         | theme_ucsf |
+      | end_date1              | 2026-07-01 | theme_ucsf |
+      | end_hour1              | 10         | theme_ucsf |
+      | end_minute1            | 15         | theme_ucsf |
+      | categories_list_alert1 | 0          | theme_ucsf |
+      | alert1type             | info       | theme_ucsf |
+      | alert1text             | eins       | theme_ucsf |
+    When the time is frozen at "<date>"
+    And I am on site homepage
+    Then I shouldn't see the non-dismissible "eins" info banner
+
+    Examples:
+      | date             |
+      | 2026-06-30 10:00 |
+      | 2026-07-01 09:44 |
+      | 2026-07-01 10:16 |
+      | 2026-07-02 09:44 |
+      | 2026-07-02 10:16 |
+      | 2026-07-03 09:44 |
+      | 2026-07-03 10:16 |
+      | 2026-07-04 10:00 |
+
+  Scenario Outline: Weekly alert is visible within its scheduled time window
+    # The banner is scheduled to be visible between 9:45am and 10:15am
+    # every Tuesday between on July 1st and July 10th 2026.
+    # Those Tuesdays are July 2nd and 9th.
+    Given the following config values are set as admin:
+      | enable1alert           | 1          | theme_ucsf |
+      | recurring_alert1       | 4          | theme_ucsf |
+      | start_date_weekly1     | 2026-07-01 | theme_ucsf |
+      | start_hour_weekly1     | 9          | theme_ucsf |
+      | start_minute_weekly1   | 45         | theme_ucsf |
+      | end_date_weekly1       | 2026-07-10 | theme_ucsf |
+      | end_hour_weekly1       | 10         | theme_ucsf |
+      | end_minute_weekly1     | 15         | theme_ucsf |
+      | show_week_day1         | 4          | theme_ucsf |
+      | categories_list_alert1 | 0          | theme_ucsf |
+      | alert1type             | info       | theme_ucsf |
+      | alert1text             | eins       | theme_ucsf |
+    When the time is frozen at "<date>"
+    And I am on site homepage
+    Then I should see the non-dismissible "eins" info banner
+
+    Examples:
+      | date             |
+      | 2026-07-02 09:45 |
+      | 2026-07-02 10:00 |
+      | 2026-07-02 10:15 |
+      | 2026-07-09 09:45 |
+      | 2026-07-09 10:00 |
+      | 2026-07-09 10:15 |
+
+  Scenario Outline: Weekly alert is not visible outside its scheduled time window
+    # The banner is scheduled to be visible between 9:45am and 10:15am
+    # every Tuesday between on July 1st and July 10th 2026.
+    # Those Tuesdays are July 2nd and 9th.
+    Given the following config values are set as admin:
+      | enable1alert           | 1          | theme_ucsf |
+      | recurring_alert1       | 4          | theme_ucsf |
+      | start_date_weekly1     | 2026-07-01 | theme_ucsf |
+      | start_hour_weekly1     | 9          | theme_ucsf |
+      | start_minute_weekly1   | 45         | theme_ucsf |
+      | end_date_weekly1       | 2026-07-10 | theme_ucsf |
+      | end_hour_weekly1       | 10         | theme_ucsf |
+      | end_minute_weekly1     | 15         | theme_ucsf |
+      | show_week_day1         | 4          | theme_ucsf |
+      | categories_list_alert1 | 0          | theme_ucsf |
+      | alert1type             | info       | theme_ucsf |
+      | alert1text             | eins       | theme_ucsf |
+    When the time is frozen at "<date>"
+    And I am on site homepage
+    Then I shouldn't see the non-dismissible "eins" info banner
+
+    Examples:
+      | date             |
+      | 2026-06-25 10:00 |
+      | 2026-07-01 10:00 |
+      | 2026-07-02 09:44 |
+      | 2026-07-02 10:16 |
+      | 2026-07-03 10:00 |
+      | 2026-07-04 10:00 |
+      | 2026-07-05 10:00 |
+      | 2026-07-06 10:00 |
+      | 2026-07-07 10:00 |
+      | 2026-07-08 10:00 |
+      | 2026-07-09 09:44 |
+      | 2026-07-09 10:16 |
+      | 2026-07-10 10:00 |
+      | 2026-07-11 10:00 |
+      | 2026-07-17 10:00 |
+
   @javascript
   # A quick note on that `@javascript` tag.
   # This scenario must be run in javascript mode.
