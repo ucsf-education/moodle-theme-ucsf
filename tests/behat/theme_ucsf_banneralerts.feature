@@ -39,7 +39,7 @@ Feature: Banner Alerts display
     When I log in as "admin"
     Then I should see the dismissible "eins" info banner
 
-  Scenario: Date-bound alert is only visible within its scheduled time window
+  Scenario Outline: Date-bound alert is visible within its scheduled time window
     # The banner is scheduled to be visible between 9:45am and 10:15am on July 1st 2026.
     Given the following config values are set as admin:
       | enable1alert           | 1          | theme_ucsf |
@@ -53,18 +53,40 @@ Feature: Banner Alerts display
       | categories_list_alert1 | 0          | theme_ucsf |
       | alert1type             | info       | theme_ucsf |
       | alert1text             | eins       | theme_ucsf |
-    When I am on site homepage
-    # We're outside the time window, a minute early - no banner on the page.
-    And the time is frozen at "2026-07-01 09:44:00"
-    Then I shouldn't see the non-dismissible "eins" info banner
-    # We're within the time window - the banner is on page.
-    And the time is frozen at "2026-07-01 10:00:00"
-    When I reload the page
+    When the time is frozen at "<date>"
+    And I am on site homepage
     Then I should see the non-dismissible "eins" info banner
-    # We're outside the time window again, this time a minute late - no banner on the page.
-    When the time is frozen at "2026-07-01 10:16:00"
-    When I reload the page
+
+    Examples:
+      | date             |
+      | 2026-07-01 09:45 |
+      | 2026-07-01 10:00 |
+      | 2026-07-01 10:15 |
+
+  Scenario Outline: Date-bound alert is not visible outside its scheduled time window
+    # The banner is scheduled to be visible between 9:45am and 10:15am on July 1st 2026.
+    Given the following config values are set as admin:
+      | enable1alert           | 1          | theme_ucsf |
+      | recurring_alert1       | 2          | theme_ucsf |
+      | start_date1            | 2026-07-01 | theme_ucsf |
+      | start_hour1            | 9          | theme_ucsf |
+      | start_minute1          | 45         | theme_ucsf |
+      | end_date1              | 2026-07-01 | theme_ucsf |
+      | end_hour1              | 10         | theme_ucsf |
+      | end_minute1            | 15         | theme_ucsf |
+      | categories_list_alert1 | 0          | theme_ucsf |
+      | alert1type             | info       | theme_ucsf |
+      | alert1text             | eins       | theme_ucsf |
+    When the time is frozen at "<date>"
+    And I am on site homepage
     Then I shouldn't see the non-dismissible "eins" info banner
+
+    Examples:
+      | date             |
+      | 2026-06-30 10:00 |
+      | 2026-07-01 09:44 |
+      | 2026-07-01 10:16 |
+      | 2026-07-02 10:00 |
 
   @javascript
   # A quick note on that `@javascript` tag.
