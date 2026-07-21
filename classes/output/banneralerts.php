@@ -16,6 +16,7 @@
 
 namespace theme_ucsf\output;
 
+use core\clock;
 use DateTime;
 use dml_exception;
 use moodle_page;
@@ -38,6 +39,9 @@ class banneralerts implements renderable, templatable {
     /** @var moodle_page The current page. */
     protected moodle_page $page;
 
+    /** @var clock $clock Moodle's internal clock. */
+    protected clock $clock;
+
     /** @var string[] Maps alert levels to CSS classes. */
     const ALERT_LEVEL_CSS_CLASSES_MAP = [
             constants::BANNERALERT_LEVEL_INFORMATION => 'alert-info',
@@ -45,13 +49,21 @@ class banneralerts implements renderable, templatable {
             constants::BANNERALERT_LEVEL_WARNING => 'alert-danger',
     ];
 
+    /* @var moodle_page $page The current page. */
+
     /**
      * Class constructor.
      *
-     * @param moodle_page $page
+     * @param moodle_page $page The current page.
+     * @param clock $clock Moodle's internal clock.
+     * @var moodle_page $page The current page.
      */
-    public function __construct(moodle_page $page) {
+    public function __construct(
+        moodle_page $page,
+        clock $clock
+    ) {
         $this->page = $page;
+        $this->clock = $clock;
     }
 
     /**
@@ -68,8 +80,8 @@ class banneralerts implements renderable, templatable {
         $obj->showalerts = false;
         $obj->url = $CFG->wwwroot . '/theme/ucsf/banneralerts.php';
 
-        // Alerts are only dismissable by logged-in users.
-        $dismissable = isloggedin();
+        // Alerts are only dismissible by logged-in users.
+        $dismissible = isloggedin();
 
         for ($i = 1; $i <= constants::BANNERALERT_ITEMS_COUNT; $i++) {
             // Skip if alert has already been flagged as seen in this user's session.
@@ -137,7 +149,7 @@ class banneralerts implements renderable, templatable {
             // Check if this alert is within its given date/time boundaries.
             $alertiswithindatetimeboundaries = false;
 
-            $now = time();
+            $now = $this->clock->time();
             $today = strtotime("midnight", $now); // Start of today/"today at midnight".
 
             switch ($alerttype) {
@@ -279,7 +291,7 @@ class banneralerts implements renderable, templatable {
                     'id' => $i,
                     'classes' => $alertclasses,
                     'message' => $alertmessage,
-                    'dismissable' => $dismissable,
+                    'dismissible' => $dismissible,
             ];
         }
         $obj->showalerts = !empty($obj->alerts);
