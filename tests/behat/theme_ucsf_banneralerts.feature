@@ -27,28 +27,28 @@ Feature: Banner Alerts display
       | alert1text             | eins | theme_ucsf |
 
     # Start on the frontpage.
-    Given I am on site homepage
+    When I am on site homepage
     Then I should see the non-dismissible "eins" info banner
     When I log in as "admin"
     # We're on the dashboard after logging in.
     Then I should see the dismissible "eins" info banner
     # Visit course pages and confirm that the banner is there.
-    Given I am on the "c1" "course" page
+    When I am on the "c1" "course" page
     Then I should see the dismissible "eins" info banner
-    Given I am on the "c2" "course" page
+    When I am on the "c2" "course" page
     Then I should see the dismissible "eins" info banner
-    Given I am on the "c3" "course" page
+    When I am on the "c3" "course" page
     Then I should see the dismissible "eins" info banner
-    Given I am on the "c4" "course" page
+    When I am on the "c4" "course" page
     Then I should see the dismissible "eins" info banner
     # Visit course category pages and confirm that the banner is there as well.
-    Given I am on the "cat2" "category" page
+    When I am on the "cat2" "category" page
     Then I should see the dismissible "eins" info banner
-    Given I am on the "subcat2.1" "category" page
+    When I am on the "subcat2.1" "category" page
     Then I should see the dismissible "eins" info banner
-    Given I am on the "cat3" "category" page
+    When I am on the "cat3" "category" page
     Then I should see the dismissible "eins" info banner
-    Given I am on the "subcat3.1" "category" page
+    When I am on the "subcat3.1" "category" page
     Then I should see the dismissible "eins" info banner
 
   Scenario: Dashboard-only banner
@@ -59,25 +59,25 @@ Feature: Banner Alerts display
       | alert1type             | info      | theme_ucsf |
       | alert1text             | eins      | theme_ucsf |
 
-    Given I am on site homepage
+    When I am on site homepage
     Then I shouldn't see the non-dismissible "eins" info banner
     When I log in as "admin"
     Then I should see the dismissible "eins" info banner
-    Given I am on the "c1" "course" page
+    When I am on the "c1" "course" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "c2" "course" page
+    When I am on the "c2" "course" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "c3" "course" page
+    When I am on the "c3" "course" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "c4" "course" page
+    When I am on the "c4" "course" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "cat2" "category" page
+    When I am on the "cat2" "category" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "subcat2.1" "category" page
+    When I am on the "subcat2.1" "category" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "cat3" "category" page
+    When I am on the "cat3" "category" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "subcat3.1" "category" page
+    When I am on the "subcat3.1" "category" page
     Then I shouldn't see the dismissible "eins" info banner
 
   Scenario: Course category banner
@@ -86,26 +86,26 @@ Feature: Banner Alerts display
       | recurring_alert1       | 1         | theme_ucsf |
       | alert1type             | info      | theme_ucsf |
       | alert1text             | eins      | theme_ucsf |
-    Given alert 1 targets course category "cat3"
-    When I am on site homepage
+    When alert 1 targets course category "cat3"
+    And I am on site homepage
     Then I shouldn't see the non-dismissible "eins" info banner
     When I log in as "admin"
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "c1" "course" page
+    When I am on the "c1" "course" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "c2" "course" page
+    When I am on the "c2" "course" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "c3" "course" page
+    When I am on the "c3" "course" page
     Then I should see the dismissible "eins" info banner
-    Given I am on the "c4" "course" page
+    When I am on the "c4" "course" page
     Then I should see the dismissible "eins" info banner
-    Given I am on the "cat2" "category" page
+    When I am on the "cat2" "category" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "subcat2.1" "category" page
+    When I am on the "subcat2.1" "category" page
     Then I shouldn't see the dismissible "eins" info banner
-    Given I am on the "cat3" "category" page
+    When I am on the "cat3" "category" page
     Then I should see the dismissible "eins" info banner
-    Given I am on the "subcat3.1" "category" page
+    When I am on the "subcat3.1" "category" page
     Then I should see the dismissible "eins" info banner
 
   Scenario: Alert levels are applied correctly
@@ -126,7 +126,7 @@ Feature: Banner Alerts display
       | alert3type             | error   | theme_ucsf |
       | alert3text             | drei    | theme_ucsf |
 
-    Given I am on site homepage
+    When I am on site homepage
     Then I should see the non-dismissible "eins" info banner
     And I should see the non-dismissible "zwei" announcement banner
     And I should see the non-dismissible "drei" warning banner
@@ -138,7 +138,7 @@ Feature: Banner Alerts display
       | categories_list_alert1 | 0    | theme_ucsf |
       | alert1type             | info | theme_ucsf |
       | alert1text             | eins | theme_ucsf |
-    Given I am on site homepage
+    When I am on site homepage
     Then I should see the non-dismissible "eins" info banner
     When I log in as "admin"
     Then I should see the dismissible "eins" info banner
@@ -333,7 +333,7 @@ Feature: Banner Alerts display
       | categories_list_alert1 | 0    | theme_ucsf |
       | alert1type             | info | theme_ucsf |
       | alert1text             | eins | theme_ucsf |
-    Given I log in as "admin"
+    When I log in as "admin"
     Then I should see the dismissible "eins" info banner
     When I dismiss the "eins" banner
     Then I shouldn't see the dismissible "eins" info banner
