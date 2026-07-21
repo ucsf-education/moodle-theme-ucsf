@@ -80,6 +80,34 @@ Feature: Banner Alerts display
     Given I am on the "subcat3.1" "category" page
     Then I shouldn't see the dismissible "eins" info banner
 
+  Scenario: Course category banner
+    Given the following config values are set as admin:
+      | enable1alert           | 1         | theme_ucsf |
+      | recurring_alert1       | 1         | theme_ucsf |
+      | alert1type             | info      | theme_ucsf |
+      | alert1text             | eins      | theme_ucsf |
+    Given alert 1 targets course category "cat3"
+    When I am on site homepage
+    Then I shouldn't see the non-dismissible "eins" info banner
+    When I log in as "admin"
+    Then I shouldn't see the dismissible "eins" info banner
+    Given I am on the "c1" "course" page
+    Then I shouldn't see the dismissible "eins" info banner
+    Given I am on the "c2" "course" page
+    Then I shouldn't see the dismissible "eins" info banner
+    Given I am on the "c3" "course" page
+    Then I should see the dismissible "eins" info banner
+    Given I am on the "c4" "course" page
+    Then I should see the dismissible "eins" info banner
+    Given I am on the "cat2" "category" page
+    Then I shouldn't see the dismissible "eins" info banner
+    Given I am on the "subcat2.1" "category" page
+    Then I shouldn't see the dismissible "eins" info banner
+    Given I am on the "cat3" "category" page
+    Then I should see the dismissible "eins" info banner
+    Given I am on the "subcat3.1" "category" page
+    Then I should see the dismissible "eins" info banner
+
   Scenario: Alert levels are applied correctly
     Given the following config values are set as admin:
       | enable1alert           | 1       | theme_ucsf |

@@ -89,6 +89,20 @@ class behat_theme_ucsf_behat_banneralerts extends behat_base {
     }
 
     /**
+     * Sets the target of a given banner alert to the given course category.
+     * @param string $alertid The banner alert id.
+     * @param string $categoryidnumber The course category id number.
+     */
+    #[Then('/^alert ([1-9]|10) targets course category "([^"]+)"$/')]
+    public function alert_x_targets_course_category_y(string $alertid, string $categoryidnumber): void {
+        $categoryid = $this->get_category_id($categoryidnumber);
+        if (!$categoryid) {
+            throw new Exception("Course category with idnumber '{$categoryidnumber}' does not exist.");
+        }
+        set_config("categories_list_alert{$alertid}", (string) $categoryid, 'theme_ucsf');
+    }
+
+    /**
      * Dismisses a banner alert with the given text.
      * @param string $text The alert text.
      */
