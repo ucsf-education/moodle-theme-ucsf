@@ -5,7 +5,10 @@ Feature: Frontpage
   I need to travail our super duper frontpage first
 
   Background:
-    Given I am on site homepage
+    Given the following config values are set as admin:
+      | forcelogin | 0 |
+      | enablemyhome | 1 |
+    And I am on site homepage
 
   Scenario: Login link is present in the primary navigation
     Then I should see "Log in" in the ".usermenu" "css_element"
