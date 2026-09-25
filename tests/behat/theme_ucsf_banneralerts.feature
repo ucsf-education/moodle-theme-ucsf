@@ -5,7 +5,10 @@ Feature: Banner Alerts display
   I should receive banner alert messages on pages
 
   Background:
-    Given the following "categories" exist:
+    Given the following config values are set as admin:
+      | forcelogin | 0 |
+      | enablemyhome | 1 |
+    And the following "categories" exist:
       | name                 | category | idnumber  | visible |
       | Test Category 2      | 0        | cat2      | 1       |
       | Test Subcategory 2.1 | cat2     | subcat2.1 | 1       |
