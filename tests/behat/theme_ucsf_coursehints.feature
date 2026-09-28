@@ -58,7 +58,7 @@ Feature: Course hints
     And I log out
     And I log in as "teacher1"
     And I am on the "Course 1" "enrolment methods" page
-    And I click on "Enable" "link" in the "Self enrolment (Student)" "table_row"
+    And I click on "Enable" "link" in the "Self enrolment as 'Student'" "table_row"
     And I log out
     When I log in as "student2"
     And I am on "Course 1" course homepage
